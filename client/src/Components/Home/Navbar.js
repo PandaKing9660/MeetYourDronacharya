@@ -20,8 +20,11 @@ const NavBar = () => {
         <Link to="/timeline">
           Time Line
         </Link>
-        <Link to="/user-info">
-          User Info{' '}
+        <Link to="/dashboard">
+          Dashboard
+        </Link>
+        <Link to="/find-myself">
+          Find You passion
         </Link>
         <Link to="/about-us">
           About us

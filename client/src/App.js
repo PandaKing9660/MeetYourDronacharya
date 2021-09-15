@@ -9,7 +9,14 @@ import AskSomething from './Components/AskSomething/AskSomething';
 import Experience from './Components/Experience/Experience';
 import StudyMaterial from './Components/Materials/StudyMaterial';
 import TimeLine from './Components/TimeLine/TimeLine';
-import UserInfo from './Components/UserPage/UserInfo';
+import Dashboard from './Components/UserPage/Dashboard';
+import FindMyself from './Components/FindMyself/FindMyself';
+
+/**
+ * @brief added all other routers
+ * 
+ * @returns Main app component
+ */
 
 function App () {
   return (
@@ -33,13 +40,15 @@ function App () {
         <Route exact path="/timeline">
           <TimeLine />
         </Route>
-        <Route exact path="/user-info">
-          <UserInfo />
+        <Route exact path="/dashboard">
+          <Dashboard />
         </Route>
         <Route exact path="/about-us">
           <AboutUs />
         </Route>
-
+        <Route exact path="/find-myself">
+          <FindMyself />
+        </Route>
         <Route path="/*">
           <GoToHome />
         </Route>
