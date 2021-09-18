@@ -9,7 +9,7 @@ import AskSomething from './Components/AskSomething/AskSomething';
 import Experience from './Components/Experience/Experience';
 import StudyMaterial from './Components/Materials/StudyMaterial';
 import TimeLine from './Components/TimeLine/TimeLine';
-import Dashboard from './Components/UserPage/Dashboard';
+import Dashboard from './Components/Dashboard/Dashboard';
 import FindMyself from './Components/FindMyself/FindMyself';
 
 /**
