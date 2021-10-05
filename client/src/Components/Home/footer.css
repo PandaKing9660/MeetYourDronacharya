@@ -1,8 +1,28 @@
-.footer{
-  background-color: aqua;
+.footer {
+    /* background-color: aqua; */
 }
 
-.footerLinks{
-  display: flex;
-  justify-content: space-evenly;
+.footerLinks {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.containerBox_footer {
+    color: yellowgreen;
+    background-color: rgb(212, 209, 209);
+    display: block;
+    width: 100%;
+    min-width: 260;
+    float: inline-end;
+}
+.head_footer{
+ 
+    text-align: left
+}
+
+.copyright_footer {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
