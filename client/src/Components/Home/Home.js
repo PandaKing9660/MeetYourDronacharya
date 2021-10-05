@@ -9,7 +9,7 @@ const Home = () => {
     <div>
       {/* <h1 className="head_home">MEET YOUR DRONACHARYA</h1> */}
       <h1 className="head_home">Meet Your Dronacharya</h1>
-      
+    
       <div>
       <button onClick= {() =>history.push('/ask-something')} style={{backgroundColor:"#e91e63", width: "350px", height:"75px",fontSize:20,color:'white',borderRadius:15,marginRight:width-720,marginTop:height-550}}>Ask something</button>
       <button onClick= {() =>history.push('/experience')} style={{backgroundColor:"#212121", width: "350px", height:"75px",fontSize:20,color:'white',borderRadius:15}}>Experience</button>
