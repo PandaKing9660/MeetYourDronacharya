@@ -31,7 +31,11 @@ export default function Footer() {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Typography color="text.secondary" variant="body2">
+                <Typography
+                    color="text.secondary"
+                    variant="body2"
+                    sx={{ fontStyle: 'italic' }}
+                >
                     Find a career path of YOUR choice and not Sharma Ji's son.
                 </Typography>
             </Box>

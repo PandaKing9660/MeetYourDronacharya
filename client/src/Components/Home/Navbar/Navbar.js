@@ -9,7 +9,6 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
@@ -21,7 +20,6 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ExploreIcon from '@mui/icons-material/Explore';
 import PeopleIcon from '@mui/icons-material/People';
-
 
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
@@ -92,12 +90,9 @@ export default function NavBar() {
         { linkName: 'About Us', linkTo: 'about-us', iconProp: PeopleIcon },
     ]);
 
-    const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
-    const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
@@ -135,9 +130,15 @@ export default function NavBar() {
     );
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                {/* <NavbarLinks title="Testing" iconProp={HomeIcon} /> */}
+        <Box
+            sx={{
+                flexGrow: 1,
+                position: 'sticky',
+                display: 'block',
+                margin: '5em',
+            }}
+        >
+            <AppBar sx={{}}>
                 <Toolbar>
                     <IconButton
                         size="large"
