@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './NavBar.css';
+import './navbar.css';
 
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
@@ -280,7 +280,7 @@ export default function NavBar() {
                         </Link>
 
                         <Link to="/find-myself">
-                            Find You passion
+                            Find Your Passion
                             <IconButton
                                 size="large"
                                 edge="end"
