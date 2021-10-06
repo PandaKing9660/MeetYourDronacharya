@@ -1,0 +1,188 @@
+{
+    "questions": [
+        {
+            "id": "t1",
+            "name": "Science vs Commerce vs Arts",
+            "questionset": [
+                {
+                    "id": "q1",
+                    "que": "Rate your Logical Reasoning."
+                },
+                {
+                    "id": "q2",
+                    "que": "Rate your Mathematical Skills."
+                },
+                {
+                    "id": "q3",
+                    "que": "Rate your knowledge on medicines."
+                },
+                {
+                    "id": "q4",
+                    "que": "Rate your formula derivation skills."
+                },
+                {
+                    "id": "q5",
+                    "que": "Rate your business tactics."
+                },
+                {
+                    "id": "q6",
+                    "que": "Rate your mind reading skills."
+                },
+                {
+                    "id": "q7",
+                    "que": "Rate your speaking skills."
+                },
+                {
+                    "id": "q8",
+                    "que": "Rate your emotional attachment."
+                },
+                {
+                    "id": "q9",
+                    "que": "Rate your memory."
+                },
+                {
+                    "id": "q10",
+                    "que": "Rate your working nature."
+                }
+            ]
+        },
+        {
+            "id": "t2",
+            "name": "After Science",
+            "questionset": [
+                {
+                    "id": "q1",
+                    "que": "Rate your Logical Reasoning."
+                },
+                {
+                    "id": "q2",
+                    "que": "Rate your Mathematical Skills."
+                },
+                {
+                    "id": "q3",
+                    "que": "Rate your knowledge on medicines."
+                },
+                {
+                    "id": "q4",
+                    "que": "Rate your formula derivation skills."
+                },
+                {
+                    "id": "q5",
+                    "que": "Rate your business tactics."
+                },
+                {
+                    "id": "q6",
+                    "que": "Rate your mind reading skills."
+                },
+                {
+                    "id": "q7",
+                    "que": "Rate your speaking skills."
+                },
+                {
+                    "id": "q8",
+                    "que": "Rate your emotional attachment."
+                },
+                {
+                    "id": "q9",
+                    "que": "Rate your memory."
+                },
+                {
+                    "id": "q10",
+                    "que": "Rate your working nature."
+                }
+            ]
+        },
+        {
+            "id": "t3",
+            "name": "After Commerce",
+            "questionset": [
+                {
+                    "id": "q1",
+                    "que": "Rate your Logical Reasoning."
+                },
+                {
+                    "id": "q2",
+                    "que": "Rate your Mathematical Skills."
+                },
+                {
+                    "id": "q3",
+                    "que": "Rate your knowledge on medicines."
+                },
+                {
+                    "id": "q4",
+                    "que": "Rate your formula derivation skills."
+                },
+                {
+                    "id": "q5",
+                    "que": "Rate your business tactics."
+                },
+                {
+                    "id": "q6",
+                    "que": "Rate your mind reading skills."
+                },
+                {
+                    "id": "q7",
+                    "que": "Rate your speaking skills."
+                },
+                {
+                    "id": "q8",
+                    "que": "Rate your emotional attachment."
+                },
+                {
+                    "id": "q9",
+                    "que": "Rate your memory."
+                },
+                {
+                    "id": "q10",
+                    "que": "Rate your working nature."
+                }
+            ]
+        },
+        {
+            "id": "t4",
+            "name": "After Arts",
+            "questionset": [
+                {
+                    "id": "q1",
+                    "que": "Rate your Logical Reasoning."
+                },
+                {
+                    "id": "q2",
+                    "que": "Rate your Mathematical Skills."
+                },
+                {
+                    "id": "q3",
+                    "que": "Rate your knowledge on medicines."
+                },
+                {
+                    "id": "q4",
+                    "que": "Rate your formula derivation skills."
+                },
+                {
+                    "id": "q5",
+                    "que": "Rate your business tactics."
+                },
+                {
+                    "id": "q6",
+                    "que": "Rate your mind reading skills."
+                },
+                {
+                    "id": "q7",
+                    "que": "Rate your speaking skills."
+                },
+                {
+                    "id": "q8",
+                    "que": "Rate your emotional attachment."
+                },
+                {
+                    "id": "q9",
+                    "que": "Rate your memory."
+                },
+                {
+                    "id": "q10",
+                    "que": "Rate your working nature."
+                }
+            ]
+        }
+    ]
+}
