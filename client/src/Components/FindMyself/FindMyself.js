@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemText, Grid, Paper, Radio, RadioGroup, FormControl, FormControlLabel, FormLabel } from '@mui/material';
+import { List, ListItem, ListItemText, Grid, Paper, Radio, RadioGroup, FormControl, FormControlLabel, FormLabel, Divider, Pagination } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import "./findMyself.css"
 import { questions } from "./FindMyselfQuestion.json";
@@ -20,7 +20,20 @@ const useStyles = makeStyles({
   },
   paper_findmyself: {
     width: '95%',
+    marginBottom: '20px',
+    background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+    border: 0,
+    borderRadius: 3,
+    color: 'white',
   },
+  formcontrol_findmyself: {
+    width: '90%',
+    marginTop: '10px',
+  },
+  pagination_findmyself: {
+    marginTop: '10px',
+    paddingBottom: '10px',
+  }
 });
 
 const FindMyself = () => {
@@ -47,25 +60,19 @@ const FindMyself = () => {
             {
               questions.filter(queid => queid.id == questionSetId).map (queset => (
                 queset.questionset.map (q => (
-                  <FormControl component="fieldset">
+                  <FormControl className={classes.formcontrol_findmyself} component="fieldset">
                     <FormLabel component="legend">{q.que}</FormLabel>
-                    <RadioGroup row aria-label="gender" name="row-radio-buttons-group">
-                      <FormControlLabel value="female" control={<Radio />} label="Female" />
-                      <FormControlLabel value="male" control={<Radio />} label="Male" />
-                      <FormControlLabel value="other" control={<Radio />} label="Other" />
+                    <RadioGroup row aria-label={q.que} name="row-radio-buttons-group">
+                      <FormControlLabel value="option1" control={<Radio />} label="Low" />
+                      <FormControlLabel value="option2" control={<Radio />} label="Medium" />
+                      <FormControlLabel value="option3" control={<Radio />} label="High" />
                     </RadioGroup>
+                    <Divider />
                   </FormControl>
                 ))
               ))
             }
-            {/* <FormControl component="fieldset">
-              <FormLabel component="legend">Gender</FormLabel>
-              <RadioGroup row aria-label="gender" name="row-radio-buttons-group">
-                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                <FormControlLabel value="male" control={<Radio />} label="Male" />
-                <FormControlLabel value="other" control={<Radio />} label="Other" />
-              </RadioGroup>
-            </FormControl> */}
+            <Pagination className={classes.pagination_findmyself} count={5} color="primary" />
           </Paper>
         </Grid>
       </Grid>
