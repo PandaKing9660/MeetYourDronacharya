@@ -41,7 +41,7 @@ const FindMyself = () => {
   const [questionSetId, setQuestionSetId] = useState("t0");
   return (
     <div>
-      <h1>Find Myself</h1>
+      <h1 className="h1_findmyself">Find My Passion</h1>
       <Grid container>
         {/* Left part: Showing list of topics */}
         <Grid item sm={6}>
