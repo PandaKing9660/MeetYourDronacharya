@@ -39,12 +39,14 @@ const ExamCard = ({ cardData }) => {
     };
 
     return (
+
         <Card sx={{ minWidth: 300 }}>
             <CardHeader
                 title={cardData.name}
                 subheader={cardData.events[0].date}
             />
             <CardMedia>
+
                 <img
                     src={cardData.imgLink}
                     alt="exam thumbnail"
@@ -80,7 +82,9 @@ const ExamCard = ({ cardData }) => {
                 </ExpandMore>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
+
                 <CardContent sx={{ padding: '1px' }}>
+
                     <Typography paragraph>Timeline:</Typography>
                     <EventsInExam eventsData={cardData.events} />
                 </CardContent>

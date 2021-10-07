@@ -37,7 +37,9 @@ const TimeLine = () => {
             imgLink:
                 'https://images.unsplash.com/photo-1629218079827-3b28e2466725?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80',
             events: [
+
                 { date: '01/01/2021', info: 'Exam Date', extra: 'All the very best for this things' },
+
                 { date: '21/02/2021', info: 'Result Date', extra: '' },
             ],
         },
