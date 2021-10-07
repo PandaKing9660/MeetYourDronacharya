@@ -29,15 +29,22 @@ const ExpandMore = styled((props) => {
 
 const ExamCard = ({ cardData }) => {
     const [expanded, setExpanded] = useState(false);
+    const [isHeartLiked, setIsHeartLiked] = useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+    const handleHeartClick = () => {
+        setIsHeartLiked(!isHeartLiked);
+    };
 
     return (
-        <Card sx={{ minWidth: 100 }}>
-            <CardHeader title={cardData.name} subheader="September 14, 2016" />
-            <CardMedia height="100">
+        <Card sx={{ minWidth: 300 }}>
+            <CardHeader
+                title={cardData.name}
+                subheader={cardData.events[0].date}
+            />
+            <CardMedia>
                 <img
                     src={cardData.imgLink}
                     alt="exam thumbnail"
@@ -50,8 +57,15 @@ const ExamCard = ({ cardData }) => {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
+                <IconButton
+                    aria-label="add to favorites"
+                    onClick={handleHeartClick}
+                >
+                    {isHeartLiked ? (
+                        <FavoriteIcon />
+                    ) : (
+                        <FavoriteIcon style={{ color: 'red' }} />
+                    )}
                 </IconButton>
                 <IconButton aria-label="share">
                     <ShareIcon />
@@ -66,7 +80,7 @@ const ExamCard = ({ cardData }) => {
                 </ExpandMore>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent>
+                <CardContent sx={{ padding: '1px' }}>
                     <Typography paragraph>Timeline:</Typography>
                     <EventsInExam eventsData={cardData.events} />
                 </CardContent>
