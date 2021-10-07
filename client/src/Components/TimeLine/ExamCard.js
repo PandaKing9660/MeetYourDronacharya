@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -7,14 +7,14 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
+
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+
+import EventsInExam from './EventsInExam';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -37,8 +37,12 @@ const ExamCard = ({ cardData }) => {
     return (
         <Card sx={{ minWidth: 100 }}>
             <CardHeader title={cardData.name} subheader="September 14, 2016" />
-            <CardMedia height="194">
-                <img src={cardData.imgLink} alt="exam thumbnail" />
+            <CardMedia height="100">
+                <img
+                    src={cardData.imgLink}
+                    alt="exam thumbnail"
+                    style={{ width: '100%', height: '20em' }}
+                />
             </CardMedia>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
@@ -61,19 +65,10 @@ const ExamCard = ({ cardData }) => {
                     <ExpandMoreIcon />
                 </ExpandMore>
             </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit >
-                <CardContent >
-                    <Typography paragraph>Method:</Typography>
-                    <Typography paragraph>
-                        Heat 1/2 cup of the broth in a pot until simmering, add
-                        saffron and set aside for 10 minutes.
-                    </Typography>
-                    
-                    TIMELINE
-                    <Typography>
-                        Set aside off of the heat to let rest for 10 minutes,
-                        and then serve.
-                    </Typography>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <CardContent>
+                    <Typography paragraph>Timeline:</Typography>
+                    <EventsInExam eventsData={cardData.events} />
                 </CardContent>
             </Collapse>
         </Card>
