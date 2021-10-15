@@ -1,5 +1,34 @@
-h1 {
-    text-align: center; 
-    color: rgb(5, 5, 71);
-    text-decoration: underline;
- }
+@import url('https://fonts.googleapis.com/css?family=Monoton');
+ 
+.h1_findmyself {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Monoton", Helvetica, sans-serif;
+    background: #3210c9;
+    letter-spacing: 5px;
+    display: inline;
+    text-transform: uppercase;
+    color: #0c9fda;
+}
+
+.message_findmyself>h1 {
+    padding-top: 3%;
+}
+.message_findmyself>p {
+    text-align: justify;
+    padding: 3%;
+}
+
+.message_findmyself>img {
+    width: 90%;
+}
+
+ @supports (-webkit-background-clip: text) {
+    .h1_findmyself {
+         color: transparent;
+         background: linear-gradient(7deg, #0c9fda 50%, #3210c9 0);
+         -webkit-background-clip: text;
+     }
+}
+

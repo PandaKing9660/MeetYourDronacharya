@@ -1,8 +1,10 @@
-import { List, ListItem, ListItemText, Grid, Paper, Radio, RadioGroup, FormControl, FormControlLabel, FormLabel, Divider, Pagination } from '@mui/material';
+import { List, ListItem, ListItemText, Grid, Paper, Radio, RadioGroup, FormControl, FormControlLabel, FormLabel, Divider, Pagination, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import "./findMyself.css"
 import { questions } from "./FindMyselfQuestion.json";
 import React, { useState } from 'react';
+import findyourpassion from './findyourpassion.png';
+import { flexbox } from '@mui/system';
 
 const useStyles = makeStyles({
   listitem_findmyself: {
@@ -39,9 +41,28 @@ const useStyles = makeStyles({
 const FindMyself = () => {
   const classes = useStyles();
   const [questionSetId, setQuestionSetId] = useState("t0");
+  var totalscore = 0;
+
+  const optionSelect = (event) => {
+    switch (event.target.value) {
+      case "option1":
+        totalscore += 1;
+        break;
+      case "option2":
+        totalscore += 2;
+        break;
+      case "option3":
+        totalscore += 3;
+        break;
+      default:
+        window.alert("Select every options");
+    }
+    console.log(totalscore);
+  }
+
   return (
     <div>
-      <h1>Find Myself</h1>
+      <h1 className="h1_findmyself">Find My Passion</h1>
       <Grid container>
         {/* Left part: Showing list of topics */}
         <Grid item sm={6}>
@@ -54,11 +75,12 @@ const FindMyself = () => {
               ))}
           </List>
         </Grid>
-        {/* Right Par: showing questions for that list */}
+        {/* Right Part: showing questions for that list */}
         <Grid item sm={6}>
+        {questionSetId !== "t0" ? (
           <Paper className={classes.paper_findmyself} variant="outlined" square elevation={24} >
             {
-              questions.filter(queid => queid.id == questionSetId).map (queset => (
+              questions.filter(queid => queid.id === questionSetId).map (queset => (
                 queset.questionset.map (q => (
                   <FormControl className={classes.formcontrol_findmyself} component="fieldset">
                     <FormLabel component="legend">{q.que}</FormLabel>
@@ -73,7 +95,27 @@ const FindMyself = () => {
               ))
             }
             <Pagination className={classes.pagination_findmyself} count={5} color="primary" />
+            <Button variant="outlined" onChange={optionSelect}>Submit</Button>
           </Paper>
+        ) : (
+          <Paper className={classes.paper_findmyself} variant="outlined" square elevation={24} >
+            <div className="message_findmyself">
+              <h1><u><b>WELCOME</b></u></h1>
+              <p>Hey, its me Anand and welcome to the page "Find your Passion" to know one of the most difficult
+                and equally important question of student life "What should be our career???"<br/><br/>
+                Select a domain from the left and start answering to the questions asked by thinking from mind 
+                and answering through your heart.
+              </p>
+              <img src={findyourpassion} alt="FIND YOUR PASSION"/>
+              <p>
+                The career shown by us will be calculated according to the given score for each options.
+                We strongly advice you to talk to you known ones, explore this website and googles and 
+                then select a career which really suits you. Don't go with flow by thinking everyone is
+                doing this or that, it must be awesome. Everyone is different and possess unique talents.
+              </p>
+            </div>
+          </ Paper>
+        )}
         </Grid>
       </Grid>
     </div>
