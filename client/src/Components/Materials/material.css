@@ -1,0 +1,23 @@
+.division {
+  display: flex;
+  background-color: #28334aff;
+}
+
+.info {
+  margin-bottom: 1%;
+  margin-top: 1%;
+  margin-left: 1%;
+  background-color: #f65058ff;
+  text-align: center;
+  width: 35%;
+  padding: 1%;
+}
+
+.materials {
+  margin-bottom: 1%;
+  margin-top: 1%;
+  margin-right: 1%;
+  padding: 1%;
+  width: 100%;
+  background-color: #fbde44ff;
+}
