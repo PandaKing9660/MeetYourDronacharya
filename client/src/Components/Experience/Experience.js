@@ -5,15 +5,27 @@ import Grid from '@mui/material/Grid';
 import CardExperience from './CardExperience';
 
 const Experience = () => {
+    // dummy data for experience posts
     const [experiences, setExperiences] = useState([
         {
             title: 'Cat is very imp',
-            author: 'amit kes',
+            author: 'Aditya Sharma ',
             date: '10/20/2021',
             description:
                 'lorem ipsumLorem ipsum dolor Lorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elit sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elit',
 
             link: 'www.google.com',
+            rating: 3,
+        },
+        {
+            title: 'Cat is very imp',
+            author: 'Sowmya',
+            date: '10/20/2021',
+            description:
+                'lorem ipsumLorem ipsum dolor Lorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elit sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elit',
+
+            link: 'www.google.com',
+            rating: 4,
         },
         {
             title: 'Jee is hard',
@@ -22,6 +34,7 @@ const Experience = () => {
             description:
                 'lorem ipsum Lorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elit',
             link: 'www.google.com',
+            rating: 3.5,
         },
     ]);
 
@@ -35,17 +48,21 @@ const Experience = () => {
                 justifyContent="center"
                 // alignItems="center"
             >
+                {/* loop over experiences array and pass data to CardExperience component for rendering children */}
                 <Grid item xs={12} sm={7} md={8}>
                     <Box sx={{ minWidth: 275 }}>
                         {experiences.map((experience, index) => {
                             return (
-                                // <Card variant="outlined">
-                                <CardExperience expData={experience} key={index}/>
-                                // </Card>
+                                <CardExperience
+                                    expData={experience}
+                                    key={index}
+                                />
                             );
                         })}
                     </Box>
                 </Grid>
+
+                {/* right side grid division for navigation or news */}
                 <Grid item xs={10} sm={4} lg={3}>
                     <Box sx={{ minWidth: 205, border: 4, height: 800 }}>
                         RIGHT SIDE NAV

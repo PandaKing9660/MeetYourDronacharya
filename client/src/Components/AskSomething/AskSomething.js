@@ -7,19 +7,28 @@ import dompurify from 'dompurify';
 import LoadingButton from '@mui/lab/LoadingButton';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import Stack from '@mui/material/Stack';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const AskSomething = () => {
+    // sanitize HTML code from XSS issues
     const sanitizer = dompurify.sanitize;
+
+    // for editor state saving
     const editorRef = useRef(null);
     const [editorPrev, setEditorPrev] = useState('');
+
     const [loadingEditor, setLoadingEditor] = useState();
 
+    // previews the input text
     const handlePreview = () => {
         if (editorRef.current) {
             console.log('Prev', editorRef.current.getContent());
             setEditorPrev(editorRef.current.getContent());
         }
     };
+
+    // submits the data and send for display in list
     const handleSubmit = () => {
         if (editorRef.current) {
             console.log('SUbmit', editorRef.current.getContent());
@@ -42,9 +51,22 @@ const AskSomething = () => {
                 justifyContent="center"
                 // alignItems="center"
             >
-                {!loadingEditor && <h1>Loading...</h1>}
+                {/* At loading time */}
+                {!loadingEditor && (
+                    <Stack
+                        sx={{ width: '100%', color: 'grey.500' }}
+                        spacing={2}
+                    >
+                        <LinearProgress color="secondary" />
+                        <LinearProgress color="success" />
+                        <LinearProgress color="inherit" />
+                    </Stack>
+                )}
+
+                {/* After loading display the editor */}
                 <Grid item xs={12} sm={7} md={8}>
                     <Box sx={{ minWidth: 205, marginBottom: '0.4em' }}>
+                        {/* TinyMCE editor and its options. Return input data as HTML for rendering */}
                         <Editor
                             apiKey="t94r79b77u1fhubu2v7ah3fvhpid2gcapixv4d6ijkgg78o7"
                             onInit={(evt, editor) => {
@@ -99,12 +121,18 @@ const AskSomething = () => {
                         </div>
                     )}
                 </Grid>
-                <Grid item xs={10} sm={4} lg={3}>
-                    <Box sx={{ minWidth: 205, border: 2, height: 600 }}>
-                        RIGHT SIDE NAV
-                    </Box>
-                </Grid>
+
+                {/* Right hand side display for some navigation */}
+                {loadingEditor && (
+                    <Grid item xs={10} sm={4} lg={3}>
+                        <Box sx={{ minWidth: 205, border: 2, height: 600 }}>
+                            RIGHT SIDE NAV
+                        </Box>
+                    </Grid>
+                )}
             </Grid>
+
+            {/* Preview box for the input text, for checking look before posting */}
             <Box
                 sx={{
                     minWidth: 205,
@@ -115,7 +143,6 @@ const AskSomething = () => {
                 height={{ xs: '50vw', md: '30vw' }}
             >
                 <h3>Preview:</h3>
-                {/* <div>{!editorPrev ? 'empty' : editorPrev}</div> */}
                 <div
                     dangerouslySetInnerHTML={{ __html: sanitizer(editorPrev) }}
                 />

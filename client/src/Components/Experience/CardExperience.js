@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CardHeader from '@mui/material/CardHeader';
 
 import Paper from '@mui/material/Paper';
@@ -8,7 +8,12 @@ import Avatar from '@mui/material/Avatar';
 
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+import Rating from '@mui/material/Rating';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
+// Generates color depending on the initials of the author for the avatar
 function stringToColor(string) {
     let hash = 0;
     let i;
@@ -29,16 +34,43 @@ function stringToColor(string) {
     return color;
 }
 
+// Process and takes out initials from the name of the author
 function stringAvatar(name) {
+    let avatarName = '';
+
+    // Check if name has spaces etc. Also check if there is last name or not
+    if (name.trim().split(' ').length > 1) {
+        avatarName = `${name.trim().split(' ')[0][0]}${
+            name.trim().split(' ')[1][0]
+        }`;
+    } else {
+        avatarName = `${name.trim().split(' ')[0][0]}`;
+    }
+    // console.log("LENGTH",name.trim().split(' ').length );
     return {
         sx: {
             bgcolor: stringToColor(name),
         },
-        children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+        children: avatarName,
     };
 }
 
+const StyledRating = styled(Rating)({
+    '& .MuiRating-iconFilled': {
+        color: '#ff6d75',
+    },
+    '& .MuiRating-iconHover': {
+        color: '#ff3d47',
+    },
+});
+
 const CardExperience = ({ expData }) => {
+    // set dummy rating
+    const [rating, setRating] = useState(0);
+
+    const handleRatingChange = (e) => {
+        setRating(e.target.value);
+    };
     return (
         <Paper sx={{ p: 0, margin: '1em', minWidth: 300, flexGrow: 1 }}>
             <Box
@@ -74,9 +106,11 @@ const CardExperience = ({ expData }) => {
                             item
                             xs={4}
                             md={2.7}
+                            // Warning may come for non integer value of md, but runs good
                             sx={{ textTransform: 'uppercase' }}
                             align="left"
                         >
+                            {/* right floating avatar and name of author */}
                             <CardHeader
                                 avatar={
                                     <Avatar
@@ -95,13 +129,39 @@ const CardExperience = ({ expData }) => {
                         </Grid>
                     </Grid>
 
-                    <Typography variant="body2">
+                    <Typography variant="body2" align="justify">
                         {expData.description}
                     </Typography>
                 </CardContent>
-                {/* <CardActions>
-                <Button size="small">{expData.link}</Button>
-            </CardActions> */}
+
+                {/* Rating of the experience out of 5 */}
+                <Box
+                    sx={{
+                        '& > legend': { mt: 2 },
+                        marginLeft: '1em',
+                    }}
+                >
+                    <Typography component="legend" align="left" variant="body2">
+                        Exp Meter : {!rating ? expData.rating : rating}
+                    </Typography>
+                    <StyledRating
+                        name="customized-color"
+                        defaultValue={expData.rating}
+                        getLabelText={(value) =>
+                            `${value} Heart${value !== 1 ? 's' : ''}`
+                        }
+                        precision={0.5}
+                        icon={<FavoriteIcon fontSize="inherit" />}
+                        emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+                        sx={{
+                            display: 'flex',
+                            align: 'left',
+                            width: '5em',
+                        }}
+                        onChange={handleRatingChange}
+                        size="small"
+                    />
+                </Box>
             </Box>
         </Paper>
     );
