@@ -137,7 +137,7 @@ export default function NavBar() {
                 position: 'sticky',
                 display: 'block',
                 margin: '5em',
-                zIndex: '1',
+                zIndex: '5',
             }}
         >
             <AppBar sx={{}}>
