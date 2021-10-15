@@ -5,43 +5,43 @@
             "name": "Science vs Commerce vs Arts",
             "questionset": [
                 {
-                    "id": "q1",
+                    "id": "t1q1",
                     "que": "Rate your Logical Reasoning."
                 },
                 {
-                    "id": "q2",
+                    "id": "t1q2",
                     "que": "Rate your Mathematical Skills."
                 },
                 {
-                    "id": "q3",
+                    "id": "t1q3",
                     "que": "Rate your knowledge on medicines."
                 },
                 {
-                    "id": "q4",
+                    "id": "t1q4",
                     "que": "Rate your formula derivation skills."
                 },
                 {
-                    "id": "q5",
+                    "id": "t1q5",
                     "que": "Rate your business tactics."
                 },
                 {
-                    "id": "q6",
+                    "id": "t1q6",
                     "que": "Rate your mind reading skills."
                 },
                 {
-                    "id": "q7",
+                    "id": "t1q7",
                     "que": "Rate your speaking skills."
                 },
                 {
-                    "id": "q8",
+                    "id": "t1q8",
                     "que": "Rate your emotional attachment."
                 },
                 {
-                    "id": "q9",
+                    "id": "t1q9",
                     "que": "Rate your memory."
                 },
                 {
-                    "id": "q10",
+                    "id": "t1q10",
                     "que": "Rate your working nature."
                 }
             ]
@@ -51,43 +51,43 @@
             "name": "After Science",
             "questionset": [
                 {
-                    "id": "q1",
+                    "id": "t2q1",
                     "que": "Rate your Logical Reasoning."
                 },
                 {
-                    "id": "q2",
+                    "id": "t2q2",
                     "que": "Rate your Mathematical Skills."
                 },
                 {
-                    "id": "q3",
+                    "id": "t2q3",
                     "que": "Rate your knowledge on medicines."
                 },
                 {
-                    "id": "q4",
+                    "id": "t2q4",
                     "que": "Rate your formula derivation skills."
                 },
                 {
-                    "id": "q5",
+                    "id": "t2q5",
                     "que": "Rate your business tactics."
                 },
                 {
-                    "id": "q6",
+                    "id": "t2q6",
                     "que": "Rate your mind reading skills."
                 },
                 {
-                    "id": "q7",
+                    "id": "t2q7",
                     "que": "Rate your speaking skills."
                 },
                 {
-                    "id": "q8",
+                    "id": "t2q8",
                     "que": "Rate your emotional attachment."
                 },
                 {
-                    "id": "q9",
+                    "id": "t2q9",
                     "que": "Rate your memory."
                 },
                 {
-                    "id": "q10",
+                    "id": "t2q10",
                     "que": "Rate your working nature."
                 }
             ]
@@ -97,7 +97,7 @@
             "name": "After Commerce",
             "questionset": [
                 {
-                    "id": "q1",
+                    "id": "t3q1",
                     "que": "Rate your Logical Reasoning."
                 },
                 {

@@ -1,8 +1,9 @@
-import { List, ListItem, ListItemText, Grid, Paper, Radio, RadioGroup, FormControl, FormControlLabel, FormLabel, Divider, Pagination } from '@mui/material';
+import { List, ListItem, ListItemText, Grid, Paper, Radio, RadioGroup, FormControl, FormControlLabel, FormLabel, Divider, Pagination, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import "./findMyself.css"
 import { questions } from "./FindMyselfQuestion.json";
 import React, { useState } from 'react';
+import { flexbox } from '@mui/system';
 
 const useStyles = makeStyles({
   listitem_findmyself: {
@@ -39,6 +40,25 @@ const useStyles = makeStyles({
 const FindMyself = () => {
   const classes = useStyles();
   const [questionSetId, setQuestionSetId] = useState("t0");
+  var totalscore = 0;
+
+  const optionSelect = (event) => {
+    switch (event.target.value) {
+      case "option1":
+        totalscore += 1;
+        break;
+      case "option2":
+        totalscore += 2;
+        break;
+      case "option3":
+        totalscore += 3;
+        break;
+      default:
+        window.alert("Select every options");
+    }
+    console.log(totalscore);
+  }
+
   return (
     <div>
       <h1 className="h1_findmyself">Find My Passion</h1>
@@ -73,6 +93,7 @@ const FindMyself = () => {
               ))
             }
             <Pagination className={classes.pagination_findmyself} count={5} color="primary" />
+            <Button variant="outlined" onChange={optionSelect}>Submit</Button>
           </Paper>
         </Grid>
       </Grid>
