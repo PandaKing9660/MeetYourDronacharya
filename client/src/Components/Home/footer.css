@@ -1,4 +1,3 @@
-
 .containerBox_footer {
     color: yellowgreen;
     background: rgb(229, 229, 241);
@@ -13,15 +12,21 @@
 .head_footer {
     text-align: left;
 }
-.footer {
+
+.footerLinkContainer {
     /* background-color: aqua; */
-    
+
 }
 
 .footerLinks {
     display: flex;
     justify-content: space-evenly;
 }
+
+.footerLinks > * {
+    text-decoration: none;
+}
+
 
 .copyright_footer {
     color: black;

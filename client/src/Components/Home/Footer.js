@@ -41,9 +41,9 @@ export default function Footer() {
             <Divider variant="middle" />
             <Box sx={{ my: 1 }}>
                 {/* <Button>Add to cart</Button> */}
-                <div className="footer">
+                <div className="footerLinkContainer">
                     <div className="footerLinks">
-                        <Link to="/">Home</Link>
+                        <Link to="/" >Home</Link>
                         <Link to="/ask-something">Ask Something</Link>
                         <Link to="/experience">Experience</Link>
                         <Link to="/study-material">Study Material</Link>

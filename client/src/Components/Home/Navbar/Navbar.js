@@ -1,4 +1,6 @@
-import React, { useState} from 'react';
+
+import React, { useState } from 'react';
+
 import './navbar.css';
 
 import { styled, alpha } from '@mui/material/styles';
@@ -135,6 +137,7 @@ export default function NavBar() {
                 position: 'sticky',
                 display: 'block',
                 margin: '5em',
+                zIndex: '1',
             }}
         >
             <AppBar sx={{}}>
@@ -152,11 +155,11 @@ export default function NavBar() {
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
+                        sx={{ display: { xs: 'inline-block', sm: 'block' } }}
                     >
                         Meet Your Dronacharya
                     </Typography>
-                    <Search>
+                    <Search sx={{ display: { xs: 'none', sm: 'block' } }}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
