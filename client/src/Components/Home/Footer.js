@@ -33,7 +33,7 @@ export default function Footer() {
                     <Grid item>
                         <Typography gutterBottom variant="h6" component="div">
                             <Stack direction="row" spacing={1}>
-                                {socialLinks.map((socialLink) => {
+                                {socialLinks.map((socialLink, index) => {
                                     return (
                                         <Chip
                                             color={socialLink.color}
@@ -45,6 +45,7 @@ export default function Footer() {
                                             clickable
                                             variant="outlined"
                                             icon={socialLink.icon}
+                                            key={index}
                                         ></Chip>
                                     );
                                 })}
