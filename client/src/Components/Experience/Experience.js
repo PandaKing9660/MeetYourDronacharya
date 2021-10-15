@@ -47,7 +47,7 @@ const Experience = () => {
                     </Box>
                 </Grid>
                 <Grid item xs={10} sm={4} lg={3}>
-                    <Box sx={{ minWidth: 205, border: 4, height: 1000 }}>
+                    <Box sx={{ minWidth: 205, border: 4, height: 800 }}>
                         RIGHT SIDE NAV
                     </Box>
                 </Grid>

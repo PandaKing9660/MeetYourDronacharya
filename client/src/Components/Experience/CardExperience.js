@@ -2,6 +2,7 @@ import React from 'react';
 import CardHeader from '@mui/material/CardHeader';
 
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
 
@@ -32,7 +33,6 @@ function stringAvatar(name) {
     return {
         sx: {
             bgcolor: stringToColor(name),
-            
         },
         children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
@@ -40,57 +40,69 @@ function stringAvatar(name) {
 
 const CardExperience = ({ expData }) => {
     return (
-        <Paper sx={{ p: 2, margin:"1em", minWidth: 300, flexGrow: 1 }}>
-            
-            <CardContent>
-                <Grid
-                    container
-                    rowSpacing={1}
-                    columnSpacing={{ xs: 1, sm: 2, md: 4 }}
-                    justifyContent="space-between"
-                    alignItems="center"
-                >
-                    <Grid item xs={7} align="left">
-                        <Typography variant="h5" component="div" sx={{ textDecoration: 'underline' }}>
-                            {expData.title}
-                        </Typography>
-                        <Typography
-                            sx={{ mb: 1.5, fontSize: '0.91rem' }}
-                            color="text.secondary"
-                        >
-                            {expData.date}
-                        </Typography>
-                    </Grid>
+        <Paper sx={{ p: 0, margin: '1em', minWidth: 300, flexGrow: 1 }}>
+            <Box
+                p={3}
+                // color={{ xs: 'red', sm: 'blue', md: 'green' }}
+                marginY={{ xs: '1em', md: '0.2em' }}
+                //  This will change margin on `sm` and `md`
+            >
+                <CardContent>
                     <Grid
-                        item
-                        xs={4}
-                        md={2.7}
-                        sx={{ textTransform: 'uppercase' }}
-                        align="left"
+                        container
+                        rowSpacing={1}
+                        columnSpacing={{ xs: 1, sm: 2, md: 4 }}
+                        justifyContent="space-between"
+                        alignItems="center"
                     >
-                        <CardHeader
-                            avatar={
-                                <Avatar
-                                    aria-label="recipe"
-                                    {...stringAvatar(expData.author)}
-                                ></Avatar>
-                            }
-                            titleTypographyProps={{
-                                variant: 'body2',
-                                color: 'green',
-                                align:"right"
-                            }}
-                            title={expData.author}
-                            // subheader="September 14, 2016"
-                        />
+                        <Grid item xs={7} align="left">
+                            <Typography
+                                variant="h5"
+                                component="div"
+                                sx={{ textDecoration: 'underline' }}
+                            >
+                                {expData.title}
+                            </Typography>
+                            <Typography
+                                sx={{ mb: 1.5, fontSize: '0.91rem' }}
+                                color="text.secondary"
+                            >
+                                {expData.date}
+                            </Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            xs={4}
+                            md={2.7}
+                            sx={{ textTransform: 'uppercase' }}
+                            align="left"
+                        >
+                            <CardHeader
+                                avatar={
+                                    <Avatar
+                                        aria-label="recipe"
+                                        {...stringAvatar(expData.author)}
+                                    ></Avatar>
+                                }
+                                titleTypographyProps={{
+                                    variant: 'body2',
+                                    color: 'green',
+                                    align: 'right',
+                                }}
+                                title={expData.author}
+                                // subheader="September 14, 2016"
+                            />
+                        </Grid>
                     </Grid>
-                </Grid>
 
-                <Typography variant="body2">{expData.description}</Typography>
-            </CardContent>
-            {/* <CardActions>
+                    <Typography variant="body2">
+                        {expData.description}
+                    </Typography>
+                </CardContent>
+                {/* <CardActions>
                 <Button size="small">{expData.link}</Button>
             </CardActions> */}
+            </Box>
         </Paper>
     );
 };
