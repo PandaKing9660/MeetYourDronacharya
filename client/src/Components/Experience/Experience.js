@@ -1,41 +1,47 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
+
 import Grid from '@mui/material/Grid';
 import CardExperience from './CardExperience';
 
-const bull = (
-    <Box
-        component="span"
-        sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-    >
-        •
-    </Box>
-);
-
 const Experience = () => {
     const [experiences, setExperiences] = useState([
-        { title: 'cat is very imp', author: 'amit', description: 'lorem ipsum' },
-        { title: 'jee is hard', author: 'amit', description: 'lorem ipsum' },
+        {
+            title: 'Cat is very imp',
+            author: 'amit kes',
+            date: '10/20/2021',
+            description:
+                'lorem ipsumLorem ipsum dolor Lorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elit sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elit',
+
+            link: 'www.google.com',
+        },
+        {
+            title: 'Jee is hard',
+            author: 'amit kesari ',
+            date: '3/4/2091',
+            description:
+                'lorem ipsum Lorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elit',
+            link: 'www.google.com',
+        },
     ]);
 
     return (
         <div>
-            Experience
+            <h2>Experience</h2>
             <Grid
                 container
                 rowSpacing={1}
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                 justifyContent="center"
-                alignItems="center"
+                // alignItems="center"
             >
                 <Grid item xs={12} sm={7} md={8}>
                     <Box sx={{ minWidth: 275 }}>
                         {experiences.map((experience, index) => {
                             return (
-                                <Card variant="outlined">
-                                    <CardExperience expData={experience} />
-                                </Card>
+                                // <Card variant="outlined">
+                                <CardExperience expData={experience} key={index}/>
+                                // </Card>
                             );
                         })}
                     </Box>

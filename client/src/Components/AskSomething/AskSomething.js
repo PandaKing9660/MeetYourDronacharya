@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import Grid from '@mui/material/Grid';
 
@@ -9,6 +9,7 @@ const AskSomething = () => {
             console.log(editorRef.current.getContent());
         }
     };
+    const [loadingEditor, setLoadingEditor] = useState(0);
     return (
         <div>
             Ask Something
@@ -19,10 +20,15 @@ const AskSomething = () => {
                 justifyContent="center"
                 alignItems="center"
             >
+                {!loadingEditor && <h1>Loading...</h1>}
                 <Grid item xs={12} sm={7} md={8}>
                     <Editor
                         apiKey="t94r79b77u1fhubu2v7ah3fvhpid2gcapixv4d6ijkgg78o7"
-                        onInit={(evt, editor) => (editorRef.current = editor)}
+                        onInit={(evt, editor) => {
+                            editorRef.current = editor;
+                            setLoadingEditor(1);
+                            console.log('hiii');
+                        }}
                         initialValue="<p>This is the initial content of the question.</p>"
                         init={{
                             height: 500,
@@ -43,7 +49,9 @@ const AskSomething = () => {
                                 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
                         }}
                     />
-                    <button onClick={log}>Log editor content</button>
+                    {loadingEditor && (
+                        <button onClick={log}>Log editor content</button>
+                    )}
                 </Grid>
             </Grid>
         </div>
