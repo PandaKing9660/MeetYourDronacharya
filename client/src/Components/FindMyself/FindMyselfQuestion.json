@@ -3,52 +3,66 @@
         {
             "id": "t1",
             "name": "Science vs Commerce vs Arts",
+            "options": [
+                {
+                    "option1": "Science",
+                    "option2": "Commerce",
+                    "option3": "Arts"
+                }
+            ],
             "questionset": [
                 {
-                    "id": "t1q1",
+                    "id": "t1q01",
                     "que": "Rate your Logical Reasoning."
                 },
                 {
-                    "id": "t1q2",
+                    "id": "t1q02",
                     "que": "Rate your Mathematical Skills."
                 },
                 {
-                    "id": "t1q3",
+                    "id": "t1q03",
                     "que": "Rate your knowledge on medicines."
                 },
                 {
-                    "id": "t1q4",
+                    "id": "t1q04",
                     "que": "Rate your formula derivation skills."
                 },
                 {
-                    "id": "t1q5",
+                    "id": "t1q05",
                     "que": "Rate your business tactics."
                 },
                 {
-                    "id": "t1q6",
+                    "id": "t1q06",
                     "que": "Rate your mind reading skills."
                 },
                 {
-                    "id": "t1q7",
+                    "id": "t1q07",
                     "que": "Rate your speaking skills."
                 },
                 {
-                    "id": "t1q8",
+                    "id": "t1q08",
                     "que": "Rate your emotional attachment."
                 },
                 {
-                    "id": "t1q9",
+                    "id": "t1q09",
                     "que": "Rate your memory."
                 },
                 {
                     "id": "t1q10",
-                    "que": "Rate your working nature."
+                    "que": "Rate your teamwork performance."
                 }
             ]
         },
         {
             "id": "t2",
             "name": "After Science",
+            "options": [
+                {
+                    "option1": "Engineering",
+                    "option2": "Medical",
+                    "option3": "Others"
+                }
+            ],
             "questionset": [
                 {
                     "id": "t2q1",
@@ -95,6 +109,12 @@
         {
             "id": "t3",
             "name": "After Commerce",
+            "options": [
+                {
+                    "option1": "BBA",
+                    "option2": "Other"
+                }
+            ],
             "questionset": [
                 {
                     "id": "t3q1",
@@ -141,6 +161,13 @@
         {
             "id": "t4",
             "name": "After Arts",
+            "options": [
+                {
+                    "option1": "LAW",
+                    "option2": "BANK",
+                    "option3": "Others"
+                }
+            ],
             "questionset": [
                 {
                     "id": "q1",

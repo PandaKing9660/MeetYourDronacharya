@@ -4,7 +4,11 @@ import "./findMyself.css"
 import { questions } from "./FindMyselfQuestion.json";
 import React, { useState } from 'react';
 import findyourpassion from './findyourpassion.png';
-import { flexbox } from '@mui/system';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Typography from '@mui/material/Typography';
 
 const useStyles = makeStyles({
   listitem_findmyself: {
@@ -35,29 +39,81 @@ const useStyles = makeStyles({
   pagination_findmyself: {
     marginTop: '10px',
     paddingBottom: '10px',
+    justifyContent:'center',
+    display:'flex',
+  },
+  result_modal: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    background: 'white',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  },
+  submitbutton_findmyself: {
+    marginBottom: '2%',
+    background: 'white',
+    color: 'black',
   }
 });
 
 const FindMyself = () => {
   const classes = useStyles();
   const [questionSetId, setQuestionSetId] = useState("t0");
-  var totalscore = 0;
+  const [resultDisplay, setResultModalOpen] = React.useState(false);
+  const resultModalOpen = () => setResultModalOpen(true);
+  const resultModalClose = () => setResultModalOpen(false);
+
+  var score = {};
+  var careeroptions;
+  var result = 0;
+  var careerchoice;
+
+  const loadQuestion = (id) => {
+    setQuestionSetId(id);
+    questions.filter(queid => queid.id === id).map( queset => (
+      careeroptions = queset.options[0],
+      queset.questionset.map( q => (
+        score[q.id] = -1
+        // options = Object.keys(queset.options[0]).length,
+      ))
+    ))
+    console.log(careeroptions);
+  }
 
   const optionSelect = (event) => {
-    switch (event.target.value) {
+    const id = event.target.value
+    const quesid = id.substring(0,5);
+    const optionid = id.substring(5, id.length);
+    switch (optionid) {
       case "option1":
-        totalscore += 1;
+        score[quesid] = 1;
         break;
       case "option2":
-        totalscore += 2;
+        score[quesid] = 2;
         break;
       case "option3":
-        totalscore += 3;
+        score[quesid] = 3;
         break;
       default:
         window.alert("Select every options");
     }
-    console.log(totalscore);
+    console.log(careeroptions)
+  }
+
+  const resultPreparation = () => {
+    if (careeroptions === undefined) careeroptions = {'option1': 'Science', 'option2': 'Commerce', 'option3': 'Arts'};
+    for (const [id, option] in score.entries) {
+      result += option;
+    }
+    if (result>25) careerchoice = careeroptions['option1'];
+    else if (result>15) careerchoice = careeroptions['option2'];
+    else careerchoice = careeroptions['option3'];
+    console.log(careerchoice);
+    resultModalOpen();
   }
 
   return (
@@ -69,7 +125,7 @@ const FindMyself = () => {
           <List className={classes.list_findmyself} component="nav" aria-label="mailbox folders">
             {
               questions.map(m => (
-                <ListItem className={classes.listitem_findmyself} button divider onClick = {() => setQuestionSetId(m.id)}>
+                <ListItem className={classes.listitem_findmyself} button divider onClick = {() => loadQuestion(m.id)}>
                   <ListItemText primary={m.name} />
                 </ListItem>
               ))}
@@ -79,23 +135,25 @@ const FindMyself = () => {
         <Grid item sm={6}>
         {questionSetId !== "t0" ? (
           <Paper className={classes.paper_findmyself} variant="outlined" square elevation={24} >
+            <h1><u>Question Set</u></h1>
+            <p align='left'>: : : Choose the most suitable options:</p>
             {
               questions.filter(queid => queid.id === questionSetId).map (queset => (
                 queset.questionset.map (q => (
                   <FormControl className={classes.formcontrol_findmyself} component="fieldset">
                     <FormLabel component="legend">{q.que}</FormLabel>
-                    <RadioGroup row aria-label={q.que} name="row-radio-buttons-group">
-                      <FormControlLabel value="option1" control={<Radio />} label="Low" />
-                      <FormControlLabel value="option2" control={<Radio />} label="Medium" />
-                      <FormControlLabel value="option3" control={<Radio />} label="High" />
+                    <RadioGroup row aria-label={q.que} name="row-radio-buttons-group" onChange={optionSelect}>
+                      <FormControlLabel value={q.id + "option1"} control={<Radio />} label="Low" />
+                      <FormControlLabel value={q.id + "option2"}  control={<Radio />} label="Medium" />
+                      <FormControlLabel value={q.id + "option3"}  control={<Radio />} label="High" />
                     </RadioGroup>
                     <Divider />
                   </FormControl>
                 ))
               ))
             }
-            <Pagination className={classes.pagination_findmyself} count={5} color="primary" />
-            <Button variant="outlined" onChange={optionSelect}>Submit</Button>
+            <Pagination className={classes.pagination_findmyself} count={1} color="primary" />
+            <Button className={classes.submitbutton_findmyself} variant="outlined" onClick={resultPreparation}>Submit</Button>
           </Paper>
         ) : (
           <Paper className={classes.paper_findmyself} variant="outlined" square elevation={24} >
@@ -118,6 +176,29 @@ const FindMyself = () => {
         )}
         </Grid>
       </Grid>
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={resultDisplay}
+        onClose={resultModalClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={resultDisplay}>
+          <Box className={classes.result_modal}>
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              Suggested career Option:
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              Science
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
     </div>
   );
 };
