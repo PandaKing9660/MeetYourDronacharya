@@ -63,9 +63,9 @@ const TimeLine = () => {
                 columns={{ xs: 2, sm: 8, md: 12 }}
                 padding={{ xs: 1 }}
             >
-                {examCards.map((examCard) => {
+                {examCards.map((examCard, index) => {
                     return (
-                        <Grid item xs={4} sm={4} md={4} key={Math.random()}>
+                        <Grid item xs={4} sm={4} md={4} key={index}>
                             <ExamCard cardData={examCard} />
                         </Grid>
                     );
