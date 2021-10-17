@@ -1,30 +1,60 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import "./home.css"
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { textAlign } from '@mui/system';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+
+
+
+const top100Films = [
+  { label: 'The Shawshank Redemption', year: 1994 },
+  { label: 'The Godfather', year: 1972 },
+  { label: 'The Godfather: Part II', year: 1974 },
+  { label: 'The Dark Knight', year: 2008 },
+  { label: '12 Angry Men', year: 1957 },
+  { label: "Schindler's List", year: 1993 },
+  { label: 'Pulp Fiction', year: 1994 },
+];
 
 const Home = () => {
   const { height, width } = useWindowDimensions();
   let history = useHistory();
   return (
-    <div>
+    <div className="home">
       {/* <h1 className="head_home">MEET YOUR DRONACHARYA</h1> */}
+      <Stack direction="row" spacing={0}>
+        <Button variant="outlined" href="#outlined-buttons"  sx={{ marginLeft:160*width/1500}}>
+          Sign up/Login
+        </Button>
+      </Stack>
       <h1 className="head_home">Meet Your Dronacharya</h1>
-    
+      <div className="remaining">
+      <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={top100Films}
+      sx={{ width: 500 ,marginLeft:width*60/1500 ,border:5,borderRadius:4,background:'white'}}
+      renderInput={(params) => <TextField {...params} label="Search" />}
+      />
       <div>
-      <button onClick= {() =>history.push('/ask-something')} style={{backgroundColor:"#e91e63", width: "350px", height:"75px",fontSize:20,color:'white',borderRadius:15,marginRight:width-720,marginTop:height-550}}>Ask something</button>
-      <button onClick= {() =>history.push('/experience')} style={{backgroundColor:"#212121", width: "350px", height:"75px",fontSize:20,color:'white',borderRadius:15}}>Experience</button>
+      <button className="button1" onClick= {() =>history.push('/ask-something')} style={{ width: "350px", height:"75px",fontSize:20,color:'white',borderRadius:15,marginRight:width-720,marginTop:100}}>Ask something</button>
+      <button className="button2" onClick= {() =>history.push('/experience')} style={{ width: "350px", height:"75px",fontSize:20,color:'white',borderRadius:15}}>Experience</button>
       </div>
       <div>
-      <button onClick= {() =>history.push('/study-material')} style={{backgroundColor:"#32064A", width: "400px", height:"75px",fontSize:20,color:'white', marginRight:width-820,borderRadius:15}}>Study material</button>
-      <button onClick= {() =>history.push('/timeline')} style={{backgroundColor:"#424242", width: "400px", height:"75px",fontSize:20,color:'white',borderRadius:15}}>Timeline</button>
+      <button className="button3" onClick= {() =>history.push('/study-material')} style={{ width: "400px", height:"75px",fontSize:20,color:'white', marginRight:width-820,borderRadius:15}}>Study material</button>
+      <button className="button4" onClick= {() =>history.push('/timeline')} style={{width: "400px", height:"75px",fontSize:20,color:'white',borderRadius:15}}>Timeline</button>
       </div>
       <div>
-      <button onClick= {() =>history.push('/dashboard')} style={{backgroundColor:'green', width: "450px", height:"75px",fontSize:20,marginRight:width-920,borderRadius:15}}>Dashboard</button>
-      <button onClick= {() =>history.push('/find-myself')} style={{backgroundColor:"#616161", width: "450px", height:"75px",fontSize:20,borderRadius:15,color:'white'}}>Find your passion</button>
+      <button className="button5" onClick= {() =>history.push('/dashboard')} style={{ width: "450px", height:"75px",fontSize:20,marginRight:width-920,borderRadius:15}}>Dashboard</button>
+      <button className="button6" onClick= {() =>history.push('/find-myself')} style={{width: "450px", height:"75px",fontSize:20,borderRadius:15,color:'white'}}>Find your passion</button>
       </div>
       <div>
-      <button onClick= {() =>history.push('/about-us')} style={{backgroundColor:'yellow', width: "500px", height:"75px",fontSize:20,marginBottom:100,borderRadius:15,marginRight:width-1020}}>About us</button>
-      <button onClick= {() =>history.push('/')} style={{backgroundColor:"#757575", width: "500px", height:"75px",fontSize:20,borderRadius:15,color:'white'}}>Extra</button>
+      <button className="button7" onClick= {() =>history.push('/about-us')} style={{ width: "500px", height:"75px",fontSize:20,marginBottom:10,borderRadius:15,marginRight:width-1020}}>About us</button>
+      <button className="button8"onClick= {() =>history.push('/')} style={{ width: "500px", height:"75px",fontSize:20,borderRadius:15,color:'white'}}>Extra</button>
+      </div>
       </div>
     </div>
   );

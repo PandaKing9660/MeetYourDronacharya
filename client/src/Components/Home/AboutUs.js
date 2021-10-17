@@ -4,7 +4,7 @@ import adi from './Photos/adi.png'
 import amit from './Photos/amit.png'
 import anu from './Photos/anu.png'
 import sow from './Photos/sow.png'
-
+import NavBar from './Navbar/Navbar';
 
 function ActionAreaCard(props) {
   return (
@@ -26,6 +26,7 @@ const Aboutwebsite = () => {
 const Names = () => {
   return(
         <div className  = "names">
+          <NavBar />
           <h2 style={{color:"white"}}> DEVELOPERS </h2>
           <ActionAreaCard photo={adi} text="Adiya Sharma" roll="CS19B001"/>
           <ActionAreaCard photo={amit} text="Amit Kesari" roll="CS19B003"/>
