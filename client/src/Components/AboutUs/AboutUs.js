@@ -59,9 +59,9 @@ const Aboutwebsite = () => {
 
 const AboutTeam = () => {
   return (
-    <div className="names">
+    <div className="team_AboutUs">
       <h2> DEVELOPERS </h2>
-      <Grid container justifyContent="flex-start" alignItems="center">
+      <Grid className="teampic_AboutUs" container justifyContent="flex-start" alignItems="center">
         <Grid item xs={12} sm={6}>
           <ActionAreaCard
             photo={adi}
