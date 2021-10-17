@@ -21,9 +21,6 @@ import FindMyself from './Components/FindMyself/FindMyself';
 function App () {
   return (
     <Router>
-      <Route>
-        <NavBar />
-      </Route>
       <Switch>
         <Route exact path="/">
           <Home />

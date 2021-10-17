@@ -3,6 +3,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import dompurify from 'dompurify';
+import NavBar from '../Home/Navbar/Navbar';
 
 import LoadingButton from '@mui/lab/LoadingButton';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
@@ -43,6 +44,7 @@ const AskSomething = () => {
 
     return (
         <div>
+            <NavBar />
             <h2>Ask Something</h2>
             <Grid
                 container

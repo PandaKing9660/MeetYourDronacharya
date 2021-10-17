@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
+import NavBar from '../Home/Navbar/Navbar';
 
 const useStyles = makeStyles({
   listitem_findmyself: {
@@ -116,6 +117,7 @@ const FindMyself = () => {
 
   return (
     <div>
+      <NavBar />
       <h1 className="h1_findmyself">Find My Passion</h1>
       <Grid container>
         {/* Left part: Showing list of topics */}

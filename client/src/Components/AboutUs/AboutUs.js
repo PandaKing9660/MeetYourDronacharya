@@ -1,6 +1,7 @@
 import "./aboutus.css";
 import * as React from "react";
 import { Grid, Divider } from "@mui/material";
+import NavBar from '../Home/Navbar/Navbar';
 
 import adi from "./Photos/adi.png";
 import amit from "./Photos/amit.png";
@@ -59,45 +60,51 @@ const Aboutwebsite = () => {
 
 const AboutTeam = () => {
   return (
-    <div className="team_AboutUs">
-      <h2> DEVELOPERS </h2>
-      <Grid className="teampic_AboutUs" container justifyContent="flex-start" alignItems="center">
-        <Grid item xs={12} sm={6}>
-          <ActionAreaCard
-            photo={adi}
-            name="Aditya Sharma"
-            roll="CS19B001"
-            text="Panda Panda"
-          />
-          <ActionAreaCard
-            photo={amit}
-            name="Amit Kesari"
-            roll="CS19B003"
-            text="Robot"
-          />
+    <div className="aboutteam_AboutUs">
+      <div className="team_AboutUs">
+        <h1 className="mess_AboutUs">Contribute to spread experience!!!</h1>
+        <Grid className="teampic_AboutUs" container justifyContent="flex-start" alignItems="center">
+          <Grid item sm={12}>
+            <h2> DEVELOPERS </h2>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <ActionAreaCard
+              photo={adi}
+              name="Aditya Sharma"
+              roll="CS19B001"
+              text="Panda Panda"
+            />
+            <ActionAreaCard
+              photo={amit}
+              name="Amit Kesari"
+              roll="CS19B003"
+              text="Robot"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <ActionAreaCard
+              photo={anu}
+              name="Anu Anand Annu"
+              roll="CS19B044"
+              text="Hero"
+            />
+            <ActionAreaCard
+              photo={sow}
+              name="Emani Sowmya"
+              roll="CS19B045"
+              text="Somu Sowya"
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <ActionAreaCard
-            photo={anu}
-            name="Anu Anand Annu"
-            roll="CS19B044"
-            text="Hero"
-          />
-          <ActionAreaCard
-            photo={sow}
-            name="Emani Sowmya"
-            roll="CS19B045"
-            text="Somu Sowya"
-          />
-        </Grid>
-      </Grid>
+      </div>
     </div>
   );
 };
 
 const AboutUs = () => {
   return (
-    <div className="main">
+    <div className="aboutus_AboutUs">
+      <NavBar />
       <Grid container spacing={2}>
         <Grid item sx={12} md={7}>
           <Aboutwebsite />
