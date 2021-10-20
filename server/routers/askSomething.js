@@ -5,9 +5,14 @@ const askSomethingQuestion = require ('../models/askSomethingQuestion');
 router.use (express.json ());
 
 router.get ('/', (req, res) => {
-  res.send("hello");
+  console.log(req.body);
+  res.send ('hello');
 });
 
+router.post ('/', (req, res) => {
+  console.log (req.body);
+  res.send ('hello');
+});
 
 
 module.exports = router;
