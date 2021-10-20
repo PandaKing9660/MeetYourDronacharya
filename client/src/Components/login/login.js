@@ -10,9 +10,22 @@ import {
   Toolbar,
   Link,
 } from '@material-ui/core';
+import {GoogleLogin} from 'react-google-login';
+import Icon from './icon';
 
 import axios from 'axios';
 import './login.css';
+
+const googleSuccess = async res => {
+  const userData = res?.profileObj;
+  console.log (userData);
+
+  localStorage.setItem('profile', JSON.stringify({...userData, socialMedia: []}));
+  console.log(JSON.parse(localStorage.getItem('profile')));
+};
+
+const googleError = () =>
+  alert ('Google Sign In was unsuccessful. Try again later');
 
 const Login = () => {
   const [email, setEmail] = useState ('');
@@ -105,6 +118,26 @@ const Login = () => {
                       >
                         Submit
                       </Button>
+                    </Grid>
+                    <Grid item>
+                      <GoogleLogin
+                        clientId="509042475407-tbckpsecdrm3tpqpe9hbusmef2t7vr3c.apps.googleusercontent.com"
+                        render={renderProps => (
+                          <Button
+                            color="primary"
+                            fullWidth
+                            onClick={renderProps.onClick}
+                            disabled={renderProps.disabled}
+                            startIcon={<Icon />}
+                            variant="contained"
+                          >
+                            Google Sign In
+                          </Button>
+                        )}
+                        onSuccess={googleSuccess}
+                        onFailure={googleError}
+                        cookiePolicy="single_host_origin"
+                      />
                     </Grid>
                   </Grid>
                 </form>

@@ -36,10 +36,11 @@ app.post ('/signup', async (req, res) => {
     const cryptPassword = await bcrypt.hash (password, 10);
 
     const newUser = await new User ({
-      emailId: email,
+      email: email,
       name: name,
       password: cryptPassword,
       socialMedia: [],
+      imageUrl: `https://robohash.org/${name}`,
     });
     console.log (newUser);
 
@@ -59,7 +60,7 @@ app.post ('/login', async (req, res) => {
     const {email, password} = req.body;
     console.log ('search start');
     const user = await User.find ({
-      emailId: email,
+      email: email,
     });
     if (user.length) {
       if (await bcrypt.compare (password, user[0].password)) {
@@ -69,8 +70,9 @@ app.post ('/login', async (req, res) => {
           user: {
             name: user[0].name,
             _id: user[0]._id,
-            emailId: user[0].emailId,
+            email: user[0].email,
             socialMedia: user[0].socialMedia,
+            imageUrl: user[0].imageUrl,
           },
         });
       } else {
