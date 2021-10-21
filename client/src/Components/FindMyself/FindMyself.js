@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
+import NavBar from '../Home/Navbar/Navbar';
 
 const useStyles = makeStyles({
   listitem_findmyself: {
@@ -27,10 +28,9 @@ const useStyles = makeStyles({
   paper_findmyself: {
     width: '95%',
     marginBottom: '20px',
-    background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
-    border: 0,
-    borderRadius: 3,
-    color: 'white',
+    boxShadow: '5px 10px 8px 10px #888888',
+    backgroundColor: '#fffafa',
+    color: 'black',
   },
   formcontrol_findmyself: {
     width: '90%',
@@ -78,7 +78,6 @@ const FindMyself = () => {
       careeroptions = queset.options[0],
       queset.questionset.map( q => (
         score[q.id] = -1
-        // options = Object.keys(queset.options[0]).length,
       ))
     ))
     console.log(careeroptions);
@@ -118,6 +117,7 @@ const FindMyself = () => {
 
   return (
     <div>
+      <NavBar />
       <h1 className="h1_findmyself">Find My Passion</h1>
       <Grid container>
         {/* Left part: Showing list of topics */}
@@ -134,7 +134,7 @@ const FindMyself = () => {
         {/* Right Part: showing questions for that list */}
         <Grid item sm={6}>
         {questionSetId !== "t0" ? (
-          <Paper className={classes.paper_findmyself} variant="outlined" square elevation={24} >
+          <Paper className={classes.paper_findmyself} variant="outlined" square elevation={24}>
             <h1><u>Question Set</u></h1>
             <p align='left'>: : : Choose the most suitable options:</p>
             {
@@ -194,7 +194,7 @@ const FindMyself = () => {
               Suggested career Option:
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Science
+              {careerchoice}
             </Typography>
           </Box>
         </Fade>
