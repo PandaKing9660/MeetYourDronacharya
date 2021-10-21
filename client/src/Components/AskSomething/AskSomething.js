@@ -4,12 +4,15 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import dompurify from 'dompurify';
 import NavBar from '../Home/Navbar/Navbar';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 
 import LoadingButton from '@mui/lab/LoadingButton';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Stack from '@mui/material/Stack';
 import LinearProgress from '@mui/material/LinearProgress';
+import QuestionsList from './QuestionsList';
 
 const AskSomething = () => {
     // sanitize HTML code from XSS issues
@@ -45,13 +48,15 @@ const AskSomething = () => {
     return (
         <div>
             <NavBar />
-            <h2>Ask Something</h2>
+            <Typography variant="h3" component="h3" mb={2} >
+                Ask Something
+            </Typography>
+
             <Grid
                 container
-                rowSpacing={1}
-                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                justifyContent="center"
-                // alignItems="center"
+                // columnSpacing={{ xs: 1 }}
+                justifyContent="space-around"
+                alignItems="center"
             >
                 {/* At loading time */}
                 {!loadingEditor && (
@@ -59,6 +64,7 @@ const AskSomething = () => {
                         sx={{ width: '100%', color: 'grey.500' }}
                         spacing={2}
                     >
+                        <h4>Editor Loading...</h4>
                         <LinearProgress color="secondary" />
                         <LinearProgress color="success" />
                         <LinearProgress color="inherit" />
@@ -66,8 +72,21 @@ const AskSomething = () => {
                 )}
 
                 {/* After loading display the editor */}
-                <Grid item xs={12} sm={7} md={8}>
-                    <Box sx={{ minWidth: 205, marginBottom: '0.4em' }}>
+                <Grid item xs={12} sm={7} md={7}>
+                    <TextField
+                        label="What's your question?"
+                        color="info"
+                        // focused
+                        fullWidth
+                        required
+                    />
+                    <Box
+                        sx={{
+                            minWidth: 205,
+                            marginBottom: '0.4em',
+                            marginTop: '0.4em',
+                        }}
+                    >
                         {/* TinyMCE editor and its options. Return input data as HTML for rendering */}
                         <Editor
                             apiKey="t94r79b77u1fhubu2v7ah3fvhpid2gcapixv4d6ijkgg78o7"
@@ -75,9 +94,9 @@ const AskSomething = () => {
                                 editorRef.current = editor;
                                 setLoadingEditor(1);
                             }}
-                            initialValue="<p>This is the initial content of the question.</p>"
+                            // initialValue="<p>Some initial text.</p>"
                             init={{
-                                height: 500,
+                                height: 440,
                                 menubar: true,
                                 // true for more options
                                 plugins: [
@@ -94,6 +113,8 @@ const AskSomething = () => {
 
                                 content_style:
                                     'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                                placeholder:
+                                    'Please provide all the information experts would need to answer your question here...',
                             }}
                             onEditorChange={handleEditorChange}
                         />
@@ -126,29 +147,41 @@ const AskSomething = () => {
 
                 {/* Right hand side display for some navigation */}
                 {loadingEditor && (
-                    <Grid item xs={10} sm={4} lg={3}>
-                        <Box sx={{ minWidth: 205, border: 2, height: 600 }}>
-                            RIGHT SIDE NAV
+                    <Grid item xs={10} sm={4}>
+                        {/* Preview box for the input text, for checking look before posting */}
+                        <Box
+                            sx={{
+                                minWidth: 205,
+                                // maxWidth: 600,
+                                border: '1px solid #bdc1c5',
+                                marginBottom: '12px',
+                                overflow: 'auto',
+                            }}
+                            height={{ xs: '50vw', md: 545 }}
+                        >
+                            <Typography
+                                variant="h5"
+                                sx={{
+                                    borderBottom: '1px solid #bdc1c5',
+                                    paddingTop: '3px',
+                                    paddingBottom: '4px',
+                                }}
+                            >
+                                {' '}
+                                Preview:{' '}
+                            </Typography>
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: sanitizer(editorPrev),
+                                }}
+                                style={{ padding: '1%' }}
+                            />
                         </Box>
                     </Grid>
                 )}
             </Grid>
 
-            {/* Preview box for the input text, for checking look before posting */}
-            <Box
-                sx={{
-                    minWidth: 205,
-                    border: 2,
-                    margin: '2em',
-                    overflow: 'auto',
-                }}
-                height={{ xs: '50vw', md: '30vw' }}
-            >
-                <h3>Preview:</h3>
-                <div
-                    dangerouslySetInnerHTML={{ __html: sanitizer(editorPrev) }}
-                />
-            </Box>
+            <QuestionsList />
         </div>
     );
 };

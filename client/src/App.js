@@ -11,6 +11,9 @@ import StudyMaterial from './Components/Materials/StudyMaterial';
 import TimeLine from './Components/TimeLine/TimeLine';
 import Dashboard from './Components/Dashboard/Dashboard';
 import FindMyself from './Components/FindMyself/FindMyself';
+import Login from './Components/login/login';
+import Signup from './Components/login/signup';
+
 
 /**
  * @brief added all other routers
@@ -46,6 +49,13 @@ function App () {
         <Route exact path="/find-myself">
           <FindMyself />
         </Route>
+        <Route exact path="/login">
+          <Login/>
+        </Route>
+        <Route exact path="/signup" >
+<Signup/>
+        </Route>
+
         <Route path="/*">
           <GoToHome />
         </Route>

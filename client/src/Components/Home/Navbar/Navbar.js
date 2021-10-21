@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 import './navbar.css';
@@ -12,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 import HomeIcon from '@mui/icons-material/Home';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
@@ -147,18 +148,28 @@ export default function NavBar() {
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        sx={{ mr: 2 }}
+                        sx={{ mr: 1 }}
                     >
-                        {/* <MenuIcon /> */}
+                        
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'inline-block', sm: 'block' } }}
-                    >
-                        Meet Your Dronacharya
-                    </Typography>
+
+                    <Button component={Link} to={'/'}>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{
+                                display: {
+                                    xs: 'inline-block',
+                                    sm: 'block',
+                                },
+                                color: '#551a8b',
+                            }}
+                        >
+                            Meet Your Dronacharya
+                        </Typography>
+                    </Button>
+
                     <Search sx={{ display: { xs: 'none', sm: 'block' } }}>
                         <SearchIconWrapper>
                             <SearchIcon />
