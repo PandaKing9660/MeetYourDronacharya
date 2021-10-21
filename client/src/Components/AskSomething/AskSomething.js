@@ -1,185 +1,55 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Editor } from '@tinymce/tinymce-react';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import dompurify from 'dompurify';
+import React from 'react';
+
 import NavBar from '../Home/Navbar/Navbar';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
-import LoadingButton from '@mui/lab/LoadingButton';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import Stack from '@mui/material/Stack';
-import LinearProgress from '@mui/material/LinearProgress';
 import QuestionsList from './QuestionsList';
+import EditorAndPreview from './EditorAndPreview';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '90%',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 const AskSomething = () => {
-    // sanitize HTML code from XSS issues
-    const sanitizer = dompurify.sanitize;
-
-    // for editor state saving
-    const editorRef = useRef(null);
-    const [editorPrev, setEditorPrev] = useState('');
-
-    const [loadingEditor, setLoadingEditor] = useState();
-
-    // previews the input text
-    const handlePreview = () => {
-        if (editorRef.current) {
-            console.log('Prev', editorRef.current.getContent());
-            setEditorPrev(editorRef.current.getContent());
-        }
-    };
-
-    // submits the data and send for display in list
-    const handleSubmit = () => {
-        if (editorRef.current) {
-            console.log('SUbmit', editorRef.current.getContent());
-        }
-    };
-
-    const handleEditorChange = (content) => {
-        console.log('changes', content);
-    };
-
-    useEffect(() => {});
-
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     return (
         <div>
             <NavBar />
-            <Typography variant="h3" component="h3" mb={2} >
+            <Typography variant="h3" component="h3" mb={2}>
                 Ask Something
             </Typography>
 
-            <Grid
-                container
-                // columnSpacing={{ xs: 1 }}
-                justifyContent="space-around"
-                alignItems="center"
+            <Button
+                onClick={handleOpen}
+                variant="outlined"
+                color="warning"
+                sx={{ float: 'right', marginRight: '10%' }}
             >
-                {/* At loading time */}
-                {!loadingEditor && (
-                    <Stack
-                        sx={{ width: '100%', color: 'grey.500' }}
-                        spacing={2}
-                    >
-                        <h4>Editor Loading...</h4>
-                        <LinearProgress color="secondary" />
-                        <LinearProgress color="success" />
-                        <LinearProgress color="inherit" />
-                    </Stack>
-                )}
-
-                {/* After loading display the editor */}
-                <Grid item xs={12} sm={7} md={7}>
-                    <TextField
-                        label="What's your question?"
-                        color="info"
-                        // focused
-                        fullWidth
-                        required
-                    />
-                    <Box
-                        sx={{
-                            minWidth: 205,
-                            marginBottom: '0.4em',
-                            marginTop: '0.4em',
-                        }}
-                    >
-                        {/* TinyMCE editor and its options. Return input data as HTML for rendering */}
-                        <Editor
-                            apiKey="t94r79b77u1fhubu2v7ah3fvhpid2gcapixv4d6ijkgg78o7"
-                            onInit={(evt, editor) => {
-                                editorRef.current = editor;
-                                setLoadingEditor(1);
-                            }}
-                            // initialValue="<p>Some initial text.</p>"
-                            init={{
-                                height: 440,
-                                menubar: true,
-                                // true for more options
-                                plugins: [
-                                    'advlist autolink lists link image charmap print preview anchor',
-                                    'searchreplace visualblocks code fullscreen',
-                                    'insertdatetime media table paste code help wordcount',
-                                    'image code',
-                                ],
-                                toolbar:
-                                    'undo redo | formatselect | ' +
-                                    'bold italic backcolor | alignleft aligncenter ' +
-                                    'alignright alignjustify | bullist numlist outdent indent | ' +
-                                    'removeformat | help | image | code',
-
-                                content_style:
-                                    'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-                                placeholder:
-                                    'Please provide all the information experts would need to answer your question here...',
-                            }}
-                            onEditorChange={handleEditorChange}
-                        />
-                    </Box>
-                    {loadingEditor && (
-                        <div>
-                            <LoadingButton
-                                color="secondary"
-                                onClick={handlePreview}
-                                loadingPosition="start"
-                                startIcon={<RemoveRedEyeIcon />}
-                                variant="outlined"
-                                sx={{ margin: '0.5em' }}
-                            >
-                                Preview
-                            </LoadingButton>
-                            <LoadingButton
-                                color="info"
-                                onClick={handleSubmit}
-                                loadingPosition="start"
-                                endIcon={<DoneAllIcon />}
-                                variant="contained"
-                                sx={{ margin: '0.5em' }}
-                            >
-                                Submit
-                            </LoadingButton>
-                        </div>
-                    )}
-                </Grid>
-
-                {/* Right hand side display for some navigation */}
-                {loadingEditor && (
-                    <Grid item xs={10} sm={4}>
-                        {/* Preview box for the input text, for checking look before posting */}
-                        <Box
-                            sx={{
-                                minWidth: 205,
-                                // maxWidth: 600,
-                                border: '1px solid #bdc1c5',
-                                marginBottom: '12px',
-                                overflow: 'auto',
-                            }}
-                            height={{ xs: '50vw', md: 545 }}
-                        >
-                            <Typography
-                                variant="h5"
-                                sx={{
-                                    borderBottom: '1px solid #bdc1c5',
-                                    paddingTop: '3px',
-                                    paddingBottom: '4px',
-                                }}
-                            >
-                                {' '}
-                                Preview:{' '}
-                            </Typography>
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html: sanitizer(editorPrev),
-                                }}
-                                style={{ padding: '1%' }}
-                            />
-                        </Box>
-                    </Grid>
-                )}
-            </Grid>
+                Ask a Doubt
+            </Button>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <EditorAndPreview />
+                </Box>
+            </Modal>
 
             <QuestionsList />
         </div>

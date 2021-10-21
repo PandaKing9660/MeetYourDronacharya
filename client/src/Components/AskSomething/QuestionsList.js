@@ -43,7 +43,7 @@ const QuestionsList = () => {
     return (
         <Box sx={{ flexGrow: 1 }} m={1} p={1} mt={2}>
             <Typography variant="h4" component="h2" align="left" ml={2}>
-                Questions:
+                Top Questions:
             </Typography>
 
             {/* loop over experiences array and pass data to CardExperience component for rendering children */}

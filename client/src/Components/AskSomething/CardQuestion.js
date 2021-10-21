@@ -10,8 +10,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Button, CardActionArea, CardActions } from '@mui/material';
 
 // Generates color depending on the initials of the author for the avatar
 function stringToColor(string) {
@@ -134,6 +133,12 @@ const CardQuestion = ({ quesData }) => {
                         {quesData.description}
                     </Typography>
                 </CardContent>
+
+                <CardActions sx={{ justifyContent: 'flex-end' }}>
+                    <Button size="small" color="primary" variant="outlined">
+                        Answer
+                    </Button>
+                </CardActions>
             </Box>
         </Paper>
     );
