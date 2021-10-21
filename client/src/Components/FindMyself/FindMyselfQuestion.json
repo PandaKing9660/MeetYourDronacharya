@@ -13,43 +13,73 @@
             "questionset": [
                 {
                     "id": "t1q01",
-                    "que": "Rate your Logical Reasoning."
+                    "que": "Rate your Logical Reasoning.",
+                    "science": "1.0",
+                    "commerce": "0.7",
+                    "arts": "0.8"
                 },
                 {
                     "id": "t1q02",
-                    "que": "Rate your Mathematical Skills."
+                    "que": "Rate your Mathematical Skills.",
+                    "science": "1.0",
+                    "commerce": "0.7",
+                    "arts": "0.2"
                 },
                 {
                     "id": "t1q03",
-                    "que": "Rate your knowledge on medicines."
+                    "que": "Rate your creativity.",
+                    "science": "0.2",
+                    "commerce": "0.6",
+                    "arts": "1.0"
                 },
                 {
                     "id": "t1q04",
-                    "que": "Rate your formula derivation skills."
+                    "que": "Rate your formula derivation skills.",
+                    "science": "1.0",
+                    "commerce": "0.4",
+                    "arts": "0.1"
                 },
                 {
                     "id": "t1q05",
-                    "que": "Rate your business tactics."
+                    "que": "Rate your business tactics.",
+                    "science": "0.1",
+                    "commerce": "1.0",
+                    "arts": "0.6"
                 },
                 {
                     "id": "t1q06",
-                    "que": "Rate your mind reading skills."
+                    "que": "Rate your mind reading skills.",
+                    "science": "0.1",
+                    "commerce": "0.6",
+                    "arts": "1.0"
                 },
                 {
                     "id": "t1q07",
-                    "que": "Rate your speaking skills."
+                    "que": "Rate your speaking skills.",
+                    "science": "0.4",
+                    "commerce": "1.0",
+                    "arts": "1.0"
                 },
                 {
                     "id": "t1q08",
-                    "que": "Rate your emotional attachment."
+                    "que": "Rate your love for computers.",
+                    "science": "1.0",
+                    "commerce": "0.4",
+                    "arts": "0.3"
                 },
                 {
                     "id": "t1q09",
-                    "que": "Rate your memory."
+                    "que": "Rate your memory.",
+                    "science": "0.6",
+                    "commerce": "0.8",
+                    "arts": "0.7"
                 },
                 {
                     "id": "t1q10",
-                    "que": "Rate your teamwork performance."
+                    "que": "Rate your teamwork performance.",
+                    "science": "0.8",
+                    "commerce": "0.9",
+                    "arts": "1.0"
                 }
             ]
         },
