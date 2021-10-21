@@ -116,6 +116,7 @@ const Home = () => {
               fontSize: 20,
               marginRight: width - 920,
               borderRadius: 15,
+              color: 'white',
             }}
           >
             Dashboard
@@ -145,6 +146,7 @@ const Home = () => {
               marginBottom: 10,
               borderRadius: 15,
               marginRight: width - 1020,
+              color: 'white',
             }}
           >
             About us

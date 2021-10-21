@@ -20,35 +20,43 @@ body {
 }
 
 .button1 {
-  background: #e91e629f;
+  background: #212121c5;
+  font-weight: bold;
 }
 
 .button2 {
-  background: #212121a4;
+  background: #212121be;
+  font-weight: bold;
 }
 
 .button3 {
-  background: #32064a9c;
+  background: #424242ce;
+  font-weight: bold;
 }
 
 .button4 {
-  background: #424242be;
+  background: #424242ce;
+  font-weight: bold;
 }
 
 .button5 {
-  background: rgba(0, 128, 0, 0.493);
+  background: #616161cb;
+  font-weight: bold;
 }
 
 .button6 {
-  background: #616161a2;
+  background: #616161be;
+  font-weight: bold;
 }
 
 .button7 {
-  background: rgba(255, 255, 0, 0.507);
+  background: rgba(33, 33, 33, 0.712);
+  font-weight: bold;
 }
 
 .button8 {
-  background: rgba(33, 33, 33, 0.555);
+  background: rgba(33, 33, 33, 0.733);
+  font-weight: bold;
 }
 
 .head_home {
