@@ -12,16 +12,51 @@ import {
 } from '@material-ui/core';
 import {GoogleLogin} from 'react-google-login';
 import Icon from './icon';
-
 import axios from 'axios';
 import './login.css';
 
 const googleSuccess = async res => {
-  const userData = res?.profileObj;
+  const userData = res.profileObj;
   console.log (userData);
 
-  localStorage.setItem('profile', JSON.stringify({...userData, socialMedia: []}));
-  console.log(JSON.parse(localStorage.getItem('profile')));
+  const email = userData.email;
+  const password = userData.googleId;
+
+  axios.post ('http://localhost:3001/login', {email, password}).then (res => {
+    if (res.data.found === true) {
+      console.log (res.data.user);
+      localStorage.setItem ('profile', JSON.stringify ({...res.data.user}));
+      window.location = 'http://localhost:3000';
+    } else {
+      const {name, email, imageUrl} = userData;
+
+      const password = userData.googleId;
+
+      axios
+        .post ('http://localhost:3001/signup', {
+          name,
+          email,
+          password,
+          imageUrl,
+        })
+        .then (res => {
+          console.log ('hello');
+          if (res.data.msg === 'done') {
+            console.log ('Registered');
+            localStorage.setItem (
+              'profile',
+              JSON.stringify ({...res.data.user})
+            );
+            window.location = 'http://localhost:3000';
+          } else {
+            alert ('something wrong');
+          }
+        })
+        .catch (err => {
+          console.log (err);
+        });
+    }
+  });
 };
 
 const googleError = () =>
@@ -42,11 +77,11 @@ const Login = () => {
         .post ('http://localhost:3001/login', {email, password})
         .then (res => {
           if (res.data.found === true) {
-            // TODO: to improve this
             console.log (res.data.user);
-            sessionStorage.setItem ('user', JSON.stringify (res.data.user));
+            localStorage.setItem ('profile', JSON.stringify ({...res.data.user}));
+            window.location = 'http://localhost:3000';
           } else {
-            console.log ('something wrong');
+            alert (res.data.msg);
           }
         });
     }

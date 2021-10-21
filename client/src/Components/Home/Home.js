@@ -6,6 +6,9 @@ import Autocomplete from '@mui/material/Autocomplete';
 import {textAlign} from '@mui/system';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import NavbarLinks from './Navbar/NavbarLinks';
+import MenuItem from '@mui/material/MenuItem';
 
 const top100Films = [
   {label: 'The Shawshank Redemption', year: 1994},
@@ -24,13 +27,23 @@ const Home = () => {
     <div className="home">
       {/* <h1 className="head_home">MEET YOUR DRONACHARYA</h1> */}
       <Stack direction="row" spacing={0}>
-        <Button
-          variant="outlined"
-          href="/login"
-          sx={{marginLeft: 160 * width / 1500}}
-        >
-          Sign up/Login
-        </Button>
+        {!JSON.parse (localStorage.getItem ('profile'))
+          ? <Button
+              variant="outlined"
+              href="/login"
+              sx={{marginLeft: 160 * width / 1500}}
+            >
+              Sign up/Login
+            </Button>
+          : <MenuItem sx={{marginLeft: 160 * width / 1500}}>
+              <NavbarLinks
+                linkSingle={{
+                  linkName: 'Dashboard',
+                  linkTo: 'dashboard',
+                  iconProp: AccountCircle,
+                }}
+              />
+            </MenuItem>}
       </Stack>
       <h1 className="head_home">Meet Your Dronacharya</h1>
       <div className="remaining">
