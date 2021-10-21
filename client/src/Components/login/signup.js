@@ -17,12 +17,28 @@ import axios from 'axios';
 import './login.css';
 
 const googleSuccess = async res => {
-  const userData = res?.profileObj;
+  const userData = res.profileObj;
   console.log (userData);
 
-  localStorage.setItem ('profile',JSON.stringify ({...userData, socialMedia: []}));
+  const {name, email, imageUrl} = userData;
 
-  console.log(JSON.parse(localStorage.getItem('profile')));
+  const password = userData.googleId;
+
+  axios
+    .post ('http://localhost:3001/signup', {name, email, password, imageUrl})
+    .then (res => {
+      console.log ('hello');
+      if (res.data.msg === 'done') {
+        console.log ('Registered');
+        localStorage.setItem ('profile', JSON.stringify ({...res.data.user}));
+        window.location = 'http://localhost:3000';
+      } else {
+        alert ('something wrong');
+      }
+    })
+    .catch (err => {
+      console.log (err);
+    });
 };
 
 const googleError = () =>
@@ -36,7 +52,7 @@ const Signup = () => {
 
   const handleSubmit = event => {
     event.preventDefault ();
-
+    const imageUrl = false;
     console.log (name, password, email);
     if (password !== confirmPassword) {
       // inform to fill form
@@ -44,11 +60,22 @@ const Signup = () => {
     } else {
       // backend call
       axios
-        .post ('http://localhost:3001/signup', {name, email, password})
+        .post ('http://localhost:3001/signup', {
+          name,
+          email,
+          password,
+          imageUrl,
+        })
         .then (res => {
           console.log ('hello');
-          if (res.data === 'done') console.log ('Registered');
-          else {
+          if (res.data.msg === 'done') {
+            console.log ('Registered');
+            localStorage.setItem (
+              'profile',
+              JSON.stringify ({...res.data.user})
+            );
+            window.location = 'http://localhost:3000';
+          } else {
             alert ('something wrong');
           }
         })
