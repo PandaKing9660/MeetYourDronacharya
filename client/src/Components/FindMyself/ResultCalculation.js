@@ -2,7 +2,6 @@ import { questions } from "./FindMyselfQuestion.json";
 
 const ResultCalculation = (id, score, careeroptions) => {
   const scivscomvsarts = (id, score, careeroptions) => {
-    console.log(score);
 
     let questionset;
     let result_science = 0;
@@ -14,7 +13,6 @@ const ResultCalculation = (id, score, careeroptions) => {
       console.log(questions[queset]);
       if (questions[queset].id === id) {
         questionset = questions[queset].questionset;
-        console.log("questionset", questionset);
         break;
       }
     }
@@ -32,9 +30,6 @@ const ResultCalculation = (id, score, careeroptions) => {
       result_arts +=
         parseFloat(questionset[quesetID[i]].arts) * score[scoreID[i]];
     }
-    console.log("Science: ", result_science);
-    console.log("Science: ", result_commerce);
-    console.log("Arts: ", result_arts);
 
     if (result_science >= result_commerce) {
         if (result_science >= result_arts){
@@ -64,7 +59,7 @@ const ResultCalculation = (id, score, careeroptions) => {
             result["Arts"] = (result_arts/result_arts)*100;
         }
     }
-
+    console.log(result);
     return result;
   };
 
