@@ -82,7 +82,8 @@ const FindMyself = () => {
   const [resultDisplay, setResultModalOpen] = useState(false);
   const [score, setScore] = useState({});
   const [careeroptions, setCareerOptions] = useState({});
-  const [careerchoice, setCareerChoice] = useState();
+  // const [careerchoice, setCareerChoice] = useState();
+  const [resultCareer, setResultCareer] = useState({});
 
   const resultModalOpen = () => setResultModalOpen(true);
   const resultModalClose = () => setResultModalOpen(false);
@@ -120,20 +121,8 @@ const FindMyself = () => {
   };
 
   const resultPreparation = () => {
-    // console.log(score);
-    // let res = 0;
-    // for (var id of Object.keys(score)) {
-    //   res += score[id];
-    //   console.log(id, score[id], res);
-    // }
-    // setResult(res);
-    // console.log(result)
-    // if (result>25) setCareerChoice(careeroptions['option1']);
-    // else if (result>15) setCareerChoice(careeroptions['option2']);
-    // else setCareerChoice(careeroptions['option3']);
-    // console.log(careerchoice);
-
-    setCareerChoice(ResultCalculation(questionSetId, score, careeroptions));
+    setResultCareer(ResultCalculation(questionSetId, score, careeroptions));
+    // setCareerChoice(resultCareer["careerchoice"]);
     setScore({});
     resultModalOpen();
   };
@@ -278,7 +267,11 @@ const FindMyself = () => {
               Suggested career Option:
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              {careerchoice}
+              <h1>{resultCareer["careerchoice"]}</h1>
+              <p>Percentage of options as compaired to maximum: </p>
+              <h3>Science = {resultCareer["Science"]}%</h3>
+              <h3>Commerce = {resultCareer["Commerce"]}%</h3>
+              <h3>Arts = {resultCareer["Arts"]}%</h3>
             </Typography>
           </Box>
         </Fade>

@@ -2,7 +2,6 @@ import { questions } from "./FindMyselfQuestion.json";
 
 const ResultCalculation = (id, score, careeroptions) => {
   const scivscomvsarts = (id, score, careeroptions) => {
-    console.log(score);
 
     let questionset;
     let result_science = 0;
@@ -14,7 +13,6 @@ const ResultCalculation = (id, score, careeroptions) => {
       console.log(questions[queset]);
       if (questions[queset].id === id) {
         questionset = questions[queset].questionset;
-        console.log("questionset", questionset);
         break;
       }
     }
@@ -32,15 +30,36 @@ const ResultCalculation = (id, score, careeroptions) => {
       result_arts +=
         parseFloat(questionset[quesetID[i]].arts) * score[scoreID[i]];
     }
-    console.log("Science: ", result_science);
-    console.log("Science: ", result_commerce);
-    console.log("Arts: ", result_arts);
- 
-    // if (result_science>25) careerchoice = careeroptions['option1'];
-    // else if (result_science>15) careerchoice = careeroptions['option2'];
-    // else careerchoice = careeroptions['option3'];
-    // console.log(careerchoice);
 
+    if (result_science >= result_commerce) {
+        if (result_science >= result_arts){
+            result["Career Choice"] = "Science";
+            result["Science"] = (result_science/result_science)*100;
+            result["Commerce"] = (result_commerce/result_science)*100;
+            result["Arts"] = (result_arts/result_science)*100;
+        }
+        else{
+            result["careerchoice"] = "Arts";
+            result["Science"] = (result_science/result_arts)*100;
+            result["Commerce"] = (result_commerce/result_arts)*100;
+            result["Arts"] = (result_arts/result_arts)*100;
+        }
+    }
+    else {
+        if (result_commerce >= result_arts) {
+            result["careerchoice"] = "Commerce";
+            result["Science"] = (result_science/result_commerce)*100;
+            result["Commerce"] = (result_commerce/result_commerce)*100;
+            result["Arts"] = (result_arts/result_commerce)*100;
+        }
+        else {
+            result["careerchoice"] = "Arts";
+            result["Science"] = (result_science/result_arts)*100;
+            result["Commerce"] = (result_commerce/result_arts)*100;
+            result["Arts"] = (result_arts/result_arts)*100;
+        }
+    }
+    console.log(result);
     return result;
   };
 
@@ -49,7 +68,7 @@ const ResultCalculation = (id, score, careeroptions) => {
       return scivscomvsarts(id, score, careeroptions);
     default:
       window.alert("In Development");
-      return scivscomvsarts();
+      return;
   }
 };
 
