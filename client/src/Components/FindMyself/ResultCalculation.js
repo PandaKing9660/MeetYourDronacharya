@@ -35,11 +35,35 @@ const ResultCalculation = (id, score, careeroptions) => {
     console.log("Science: ", result_science);
     console.log("Science: ", result_commerce);
     console.log("Arts: ", result_arts);
- 
-    // if (result_science>25) careerchoice = careeroptions['option1'];
-    // else if (result_science>15) careerchoice = careeroptions['option2'];
-    // else careerchoice = careeroptions['option3'];
-    // console.log(careerchoice);
+
+    if (result_science >= result_commerce) {
+        if (result_science >= result_arts){
+            result["Career Choice"] = "Science";
+            result["Science"] = (result_science/result_science)*100;
+            result["Commerce"] = (result_commerce/result_science)*100;
+            result["Arts"] = (result_arts/result_science)*100;
+        }
+        else{
+            result["careerchoice"] = "Arts";
+            result["Science"] = (result_science/result_arts)*100;
+            result["Commerce"] = (result_commerce/result_arts)*100;
+            result["Arts"] = (result_arts/result_arts)*100;
+        }
+    }
+    else {
+        if (result_commerce >= result_arts) {
+            result["careerchoice"] = "Commerce";
+            result["Science"] = (result_science/result_commerce)*100;
+            result["Commerce"] = (result_commerce/result_commerce)*100;
+            result["Arts"] = (result_arts/result_commerce)*100;
+        }
+        else {
+            result["careerchoice"] = "Arts";
+            result["Science"] = (result_science/result_arts)*100;
+            result["Commerce"] = (result_commerce/result_arts)*100;
+            result["Arts"] = (result_arts/result_arts)*100;
+        }
+    }
 
     return result;
   };
@@ -49,7 +73,7 @@ const ResultCalculation = (id, score, careeroptions) => {
       return scivscomvsarts(id, score, careeroptions);
     default:
       window.alert("In Development");
-      return scivscomvsarts();
+      return;
   }
 };
 
