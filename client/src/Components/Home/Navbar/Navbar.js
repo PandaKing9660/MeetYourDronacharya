@@ -149,9 +149,7 @@ export default function NavBar() {
                         color="inherit"
                         aria-label="open drawer"
                         sx={{ mr: 1 }}
-                    >
-                        
-                    </IconButton>
+                    ></IconButton>
 
                     <Button component={Link} to={'/'}>
                         <Typography

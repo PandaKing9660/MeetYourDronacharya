@@ -17,6 +17,7 @@ import TableRow from '@mui/material/TableRow';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import NavBar from '../Home/Navbar/Navbar';
+import { Divider } from '@mui/material';
 
 // COntains the s and their respective timelines
 // Timeline.js -> ExamCard.js -> EventsInExam.js
@@ -62,6 +63,9 @@ export default function VerticalTabs() {
   };
 
   return (
+    <div>
+      <NavBar />
+       <h2>Timeline</h2>
     <Box
       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}
     >
@@ -71,18 +75,19 @@ export default function VerticalTabs() {
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
+        sx={{borderColor: 'divider', marginTop:20}}
       >
-        <Tab label="Separate" {...a11yProps(0)} />
-        <Tab label="Combined" {...a11yProps(1)} />
+        <Tab label="  Separate  " {...a11yProps(0)} />
+        <Tab label="  Combined  " {...a11yProps(1)} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <TimeLine />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <StickyHeadTable />
+        <StickyHeadTable  sx={{width:'100%' }}/>
       </TabPanel>
     </Box>
+       </div>
   );
 }
 const TimeLine = () => {
@@ -137,13 +142,11 @@ const TimeLine = () => {
     ]);
     return (
       <div>
-        <NavBar />
-        <h2>Timeline</h2>
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 2, sm: 8, md: 12 }}
-          padding={{ xs: 1 }}
+          padding={{ xs: 0 }}
         >
           {examCards.map((examCard, index) => {
             return (
@@ -245,7 +248,7 @@ const StickyHeadTable = ()  =>{
   };
 
   return (
-    <Paper sx={{ width:'100%', overflow: 'hidden' }}>
+    <Paper sx={{overflowX: 'hidden' ,width:"100%"}}>
       <TableContainer sx={{ maxHeight: 500 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
