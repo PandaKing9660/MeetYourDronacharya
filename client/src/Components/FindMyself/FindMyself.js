@@ -264,14 +264,17 @@ const FindMyself = () => {
         <Fade in={resultDisplay}>
           <Box className={classes.result_modal}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              Suggested career Option:
+              <u>Result Page</u>
             </Typography>
+            <Divider />
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              <h1>{resultCareer["careerchoice"]}</h1>
-              <p>Percentage of options as compaired to maximum: </p>
-              <h3>Science = {resultCareer["Science"]}%</h3>
-              <h3>Commerce = {resultCareer["Commerce"]}%</h3>
-              <h3>Arts = {resultCareer["Arts"]}%</h3>
+              <h5 className="suggestion_findmyself"> Suggested Career Option: </h5>
+              <h1 className="careerchoice_findmyself">{resultCareer["careerchoice"]}</h1>
+              <p className="otheroptions_findmyself">Science = {resultCareer["Science"]}% <br />
+                Commerce = {resultCareer["Commerce"]}% <br />
+                Arts = {resultCareer["Arts"]}%</p>
+              <Divider />
+              <p className="note_findmyself">Note: Percentage calculated is with respect to the suggested career option</p>
             </Typography>
           </Box>
         </Fade>

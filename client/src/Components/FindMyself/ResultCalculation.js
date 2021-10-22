@@ -19,8 +19,8 @@ const ResultCalculation = (id, score, careeroptions) => {
 
     let quesetID = Object.keys(questionset);
     let scoreID = Object.keys(score);
-
-    var no_of_ques = Object.keys(score).length;
+    let no_of_ques = Object.keys(score).length;
+    let normalising_var;
 
     for (let i = 0; i < no_of_ques; i++) {
       result_science +=
@@ -34,31 +34,28 @@ const ResultCalculation = (id, score, careeroptions) => {
     if (result_science >= result_commerce) {
         if (result_science >= result_arts){
             result["Career Choice"] = "Science";
-            result["Science"] = (result_science/result_science)*100;
-            result["Commerce"] = (result_commerce/result_science)*100;
-            result["Arts"] = (result_arts/result_science)*100;
+            normalising_var = result_science;
         }
         else{
             result["careerchoice"] = "Arts";
-            result["Science"] = (result_science/result_arts)*100;
-            result["Commerce"] = (result_commerce/result_arts)*100;
-            result["Arts"] = (result_arts/result_arts)*100;
+            normalising_var = result_arts;
         }
     }
     else {
         if (result_commerce >= result_arts) {
             result["careerchoice"] = "Commerce";
-            result["Science"] = (result_science/result_commerce)*100;
-            result["Commerce"] = (result_commerce/result_commerce)*100;
-            result["Arts"] = (result_arts/result_commerce)*100;
+            normalising_var = result_commerce;
         }
         else {
             result["careerchoice"] = "Arts";
-            result["Science"] = (result_science/result_arts)*100;
-            result["Commerce"] = (result_commerce/result_arts)*100;
-            result["Arts"] = (result_arts/result_arts)*100;
+            normalising_var = result_arts;
         }
     }
+
+    result["Science"] = ((result_science/normalising_var)*100).toFixed(2);
+    result["Commerce"] = ((result_commerce/normalising_var)*100).toFixed(2);
+    result["Arts"] = ((result_arts/normalising_var)*100).toFixed(2);
+
     console.log(result);
     return result;
   };
