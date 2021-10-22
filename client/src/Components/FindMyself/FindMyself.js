@@ -16,8 +16,17 @@ import {
   Backdrop,
   Box,
   Fade,
-  Typography,
+  Typography
 } from "@mui/material";
+
+import {
+  Chart,
+  PieSeries,
+  Title,
+  Legend
+} from '@devexpress/dx-react-chart-material-ui';
+import { Animation } from '@devexpress/dx-react-chart';
+  
 import { makeStyles } from "@mui/styles";
 import "./findMyself.css";
 import { questions } from "./FindMyselfQuestion.json";
@@ -83,7 +92,7 @@ const FindMyself = () => {
   const [score, setScore] = useState({});
   const [careeroptions, setCareerOptions] = useState({});
   // const [careerchoice, setCareerChoice] = useState();
-  const [resultCareer, setResultCareer] = useState({});
+  const [resultCareer, setResultCareer] = useState({careerchoice: "", options: ""});
 
   const resultModalOpen = () => setResultModalOpen(true);
   const resultModalClose = () => setResultModalOpen(false);
@@ -270,11 +279,25 @@ const FindMyself = () => {
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
               <h5 className="suggestion_findmyself"> Suggested Career Option: </h5>
               <h1 className="careerchoice_findmyself">{resultCareer["careerchoice"]}</h1>
-              <p className="otheroptions_findmyself">Science = {resultCareer["Science"]}% <br />
-                Commerce = {resultCareer["Commerce"]}% <br />
-                Arts = {resultCareer["Arts"]}%</p>
-              <Divider />
-              <p className="note_findmyself">Note: Percentage calculated is with respect to the suggested career option</p>
+              {/* <Grid container>
+                <Grid item sm={6}>
+                  <p className="otheroptions_findmyself">Science = {resultCareer.options["Science"]}% <br />
+                    Commerce = {resultCareer.options["Commerce"]}% <br />
+                    Arts = {resultCareer.options["Arts"]}%
+                  </p>
+                </Grid>
+                <Grid item> */}
+              <Chart data={resultCareer.options}>
+                <Title text="Scores"/>
+                <PieSeries valueField="option" argumentField="score" />
+                <Animation />
+                <Legend/>
+              </Chart>
+                {/* </Grid>
+              </Grid> */}
+              {/* <p className="note_findmyself">
+                Note: Percentage calculated is with respect to the suggested career option
+              </p> */}
             </Typography>
           </Box>
         </Fade>
