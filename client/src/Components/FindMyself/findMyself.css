@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Monoton');
  
+.findmyself_FindMyself {
+    margin: 100px 0;
+}
+
 .h1_findmyself {
     display: flex;
     justify-content: center;

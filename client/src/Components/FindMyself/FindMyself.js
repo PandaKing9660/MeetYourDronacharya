@@ -100,7 +100,6 @@ const FindMyself = () => {
           queset.questionset.map((q) => (score[q.id] = -1))
         )
       );
-    console.log(careeroptions);
   };
 
   const optionSelect = (event) => {
@@ -118,22 +117,19 @@ const FindMyself = () => {
         score[quesid] = 3;
         break;
       default:
-        window.alert("Select every options");
+        window.alert("In Development");
     }
   };
 
   const resultPreparation = async () => {
+
     var result = ResultCalculation(questionSetId, score, careeroptions);
 
     for(let i=1;i<result.options.length;i++)
     {
       result.options[i][1] = parseFloat(result.options[i][1]);
     }
-    
     setResultCareer(result);
-
-    console.log('1', result);
-    console.log('2', resultCareer);
     resultModalOpen();
     setScore({});
   };
@@ -141,162 +137,164 @@ const FindMyself = () => {
   return (
     <div>
       <NavBar />
-      <h1 className="h1_findmyself">Find My Passion</h1>
-      <Grid container>
-        {/* Left part: Showing list of topics */}
-        <Grid item sm={6}>
-          <List
-            className={classes.list_findmyself}
-            component="nav"
-            aria-label="mailbox folders"
-          >
-            {questions.map((m) => (
-              <ListItem
-                className={classes.listitem_findmyself}
-                button
-                divider
-                onClick={() => loadQuestion(m.id)}
-              >
-                <ListItemText primary={m.name} />
-              </ListItem>
-            ))}
-          </List>
-        </Grid>
-        {/* Right Part: showing questions for that list */}
-        <Grid item sm={6}>
-          {questionSetId !== "t0" ? (
-            <Paper
-              className={classes.paper_findmyself}
-              variant="outlined"
-              square
-              elevation={24}
+      <div className="findmyself_FindMyself">
+        <h1 className="h1_findmyself">Find My Passion</h1>
+        <Grid container>
+          {/* Left part: Showing list of topics */}
+          <Grid item sm={6}>
+            <List
+              className={classes.list_findmyself}
+              component="nav"
+              aria-label="mailbox folders"
             >
-              <h1>
-                <u>Question Set</u>
-              </h1>
-              <p align="left">: : : Choose the most suitable options:</p>
-              {questions
-                .filter((queid) => queid.id === questionSetId)
-                .map((queset) =>
-                  queset.questionset.map((q) => (
-                    <FormControl
-                      className={classes.formcontrol_findmyself}
-                      component="fieldset"
-                    >
-                      <FormLabel component="legend">{q.que}</FormLabel>
-                      <RadioGroup
-                        row
-                        aria-label={q.que}
-                        name="row-radio-buttons-group"
-                        onChange={optionSelect}
-                      >
-                        <FormControlLabel
-                          value={q.id + "option1"}
-                          control={<Radio />}
-                          label="Low"
-                        />
-                        <FormControlLabel
-                          value={q.id + "option2"}
-                          control={<Radio />}
-                          label="Medium"
-                        />
-                        <FormControlLabel
-                          value={q.id + "option3"}
-                          control={<Radio />}
-                          label="High"
-                        />
-                      </RadioGroup>
-                      <Divider />
-                    </FormControl>
-                  ))
-                )}
-              <Pagination
-                className={classes.pagination_findmyself}
-                count={1}
-                color="primary"
-              />
-              <Button
-                className={classes.submitbutton_findmyself}
+              {questions.map((m) => (
+                <ListItem
+                  className={classes.listitem_findmyself}
+                  button
+                  divider
+                  onClick={() => loadQuestion(m.id)}
+                >
+                  <ListItemText primary={m.name} />
+                </ListItem>
+              ))}
+            </List>
+          </Grid>
+          {/* Right Part: showing questions for that list */}
+          <Grid item sm={6}>
+            {questionSetId !== "t0" ? (
+              <Paper
+                className={classes.paper_findmyself}
                 variant="outlined"
-                onClick={resultPreparation}
+                square
+                elevation={24}
               >
-                Submit
-              </Button>
-            </Paper>
-          ) : (
-            <Paper
-              className={classes.paper_findmyself}
-              variant="outlined"
-              square
-              elevation={24}
-            >
-              <div className="message_findmyself">
                 <h1>
-                  <u>
-                    <b>WELCOME</b>
-                  </u>
+                  <u>Question Set</u>
                 </h1>
-                <p>
-                  Hey, its me Anand and welcome to the page "Find your Passion"
-                  to know one of the most difficult and equally important
-                  question of student life "What should be our career???"
-                  <br />
-                  <br />
-                  Select a domain from the left and start answering to the
-                  questions asked by thinking from mind and answering through
-                  your heart.
-                </p>
-                <img src={findyourpassion} alt="FIND YOUR PASSION" />
-                <p>
-                  The career shown by us will be calculated according to the
-                  given score for each options. We strongly advice you to talk
-                  to you known ones, explore this website and googles and then
-                  select a career which really suits you. Don't go with flow by
-                  thinking everyone is doing this or that, it must be awesome.
-                  Everyone is different and possess unique talents.
-                </p>
-              </div>
-            </Paper>
-          )}
+                <p align="left">: : : Choose the most suitable options:</p>
+                {questions
+                  .filter((queid) => queid.id === questionSetId)
+                  .map((queset) =>
+                    queset.questionset.map((q) => (
+                      <FormControl
+                        className={classes.formcontrol_findmyself}
+                        component="fieldset"
+                      >
+                        <FormLabel component="legend">{q.que}</FormLabel>
+                        <RadioGroup
+                          row
+                          aria-label={q.que}
+                          name="row-radio-buttons-group"
+                          onChange={optionSelect}
+                        >
+                          <FormControlLabel
+                            value={q.id + "option1"}
+                            control={<Radio />}
+                            label="Low"
+                          />
+                          <FormControlLabel
+                            value={q.id + "option2"}
+                            control={<Radio />}
+                            label="Medium"
+                          />
+                          <FormControlLabel
+                            value={q.id + "option3"}
+                            control={<Radio />}
+                            label="High"
+                          />
+                        </RadioGroup>
+                        <Divider />
+                      </FormControl>
+                    ))
+                  )}
+                <Pagination
+                  className={classes.pagination_findmyself}
+                  count={1}
+                  color="primary"
+                />
+                <Button
+                  className={classes.submitbutton_findmyself}
+                  variant="outlined"
+                  onClick={resultPreparation}
+                >
+                  Submit
+                </Button>
+              </Paper>
+            ) : (
+              <Paper
+                className={classes.paper_findmyself}
+                variant="outlined"
+                square
+                elevation={24}
+              >
+                <div className="message_findmyself">
+                  <h1>
+                    <u>
+                      <b>WELCOME</b>
+                    </u>
+                  </h1>
+                  <p>
+                    Hey, its me Anand and welcome to the page "Find your Passion"
+                    to know one of the most difficult and equally important
+                    question of student life "What should be our career???"
+                    <br />
+                    <br />
+                    Select a domain from the left and start answering to the
+                    questions asked by thinking from mind and answering through
+                    your heart.
+                  </p>
+                  <img src={findyourpassion} alt="FIND YOUR PASSION" />
+                  <p>
+                    The career shown by us will be calculated according to the
+                    given score for each options. We strongly advice you to talk
+                    to you known ones, explore this website and googles and then
+                    select a career which really suits you. Don't go with flow by
+                    thinking everyone is doing this or that, it must be awesome.
+                    Everyone is different and possess unique talents.
+                  </p>
+                </div>
+              </Paper>
+            )}
+          </Grid>
         </Grid>
-      </Grid>
 
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={resultDisplay}
-        onClose={resultModalClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={resultDisplay}>
-          <Box className={classes.result_modal}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              <u>Result Page</u>
-            </Typography>
-            <Divider />
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              <h5 className="suggestion_findmyself"> Suggested Career Option: </h5>
-              <h1 className="careerchoice_findmyself">{resultCareer["careerchoice"]}</h1>
-              <Chart
-                chartType="PieChart"
-                loader={<CircularProgress color="secondary" />}
-                data={resultCareer['options']}
-                options={{
-                  title: 'Comparision with other choices: ',
-                }}
-                rootProps={{ 'data-testid': '1' }}
-              />
-              <p className="note_findmyself">
-                Note: Percentage calculated is with respect to the suggested career option
-              </p>
-            </Typography>
-          </Box>
-        </Fade>
-      </Modal>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={resultDisplay}
+          onClose={resultModalClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={resultDisplay}>
+            <Box className={classes.result_modal}>
+              <Typography id="transition-modal-title" variant="h6" component="h2">
+                <u>Result Page</u>
+              </Typography>
+              <Divider />
+              <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                <h5 className="suggestion_findmyself"> Suggested Career Option: </h5>
+                <h1 className="careerchoice_findmyself">{resultCareer["careerchoice"]}</h1>
+                <Chart
+                  chartType="PieChart"
+                  loader={<CircularProgress color="secondary" />}
+                  data={resultCareer['options']}
+                  options={{
+                    title: 'Comparision with other choices: ',
+                  }}
+                  rootProps={{ 'data-testid': '1' }}
+                />
+                <p className="note_findmyself">
+                  Note: Percentage calculated is with respect to the suggested career option
+                </p>
+              </Typography>
+            </Box>
+          </Fade>
+        </Modal>
+      </div>
     </div>
   );
 };
