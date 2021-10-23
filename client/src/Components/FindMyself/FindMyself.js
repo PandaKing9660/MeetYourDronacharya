@@ -16,17 +16,11 @@ import {
   Backdrop,
   Box,
   Fade,
-  Typography
+  Typography,
+  CircularProgress
 } from "@mui/material";
 
-import {
-  Chart,
-  PieSeries,
-  Title,
-  Legend
-} from '@devexpress/dx-react-chart-material-ui';
-import { Animation } from '@devexpress/dx-react-chart';
-  
+import { Chart } from "react-google-charts";
 import { makeStyles } from "@mui/styles";
 import "./findMyself.css";
 import { questions } from "./FindMyselfQuestion.json";
@@ -91,8 +85,7 @@ const FindMyself = () => {
   const [resultDisplay, setResultModalOpen] = useState(false);
   const [score, setScore] = useState({});
   const [careeroptions, setCareerOptions] = useState({});
-  // const [careerchoice, setCareerChoice] = useState();
-  const [resultCareer, setResultCareer] = useState({careerchoice: "", options: ""});
+  const [resultCareer, setResultCareer] = useState({});
 
   const resultModalOpen = () => setResultModalOpen(true);
   const resultModalClose = () => setResultModalOpen(false);
@@ -129,11 +122,16 @@ const FindMyself = () => {
     }
   };
 
-  const resultPreparation = () => {
-    setResultCareer(ResultCalculation(questionSetId, score, careeroptions));
-    // setCareerChoice(resultCareer["careerchoice"]);
-    setScore({});
+  const resultPreparation = async () => {
+    var result = ResultCalculation(questionSetId, score, careeroptions);
+    setResultCareer(result);
+
+    if(resultCareer === {}) setResultCareer(result);
+
+    console.log('1', result);
+    console.log('2', resultCareer);
     resultModalOpen();
+    setScore({});
   };
 
   return (
@@ -279,25 +277,18 @@ const FindMyself = () => {
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
               <h5 className="suggestion_findmyself"> Suggested Career Option: </h5>
               <h1 className="careerchoice_findmyself">{resultCareer["careerchoice"]}</h1>
-              {/* <Grid container>
-                <Grid item sm={6}>
-                  <p className="otheroptions_findmyself">Science = {resultCareer.options["Science"]}% <br />
-                    Commerce = {resultCareer.options["Commerce"]}% <br />
-                    Arts = {resultCareer.options["Arts"]}%
-                  </p>
-                </Grid>
-                <Grid item> */}
-              <Chart data={resultCareer.options}>
-                <Title text="Scores"/>
-                <PieSeries valueField="option" argumentField="score" />
-                <Animation />
-                <Legend/>
-              </Chart>
-                {/* </Grid>
-              </Grid> */}
-              {/* <p className="note_findmyself">
+              <Chart
+                chartType="PieChart"
+                loader={<CircularProgress color="secondary" />}
+                data={resultCareer['options']}
+                options={{
+                  title: 'Comparision with other choices: ',
+                }}
+                rootProps={{ 'data-testid': '1' }}
+              />
+              <p className="note_findmyself">
                 Note: Percentage calculated is with respect to the suggested career option
-              </p> */}
+              </p>
             </Typography>
           </Box>
         </Fade>

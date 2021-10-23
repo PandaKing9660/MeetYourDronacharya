@@ -33,7 +33,7 @@ const ResultCalculation = (id, score, careeroptions) => {
 
     if (result_science >= result_commerce) {
         if (result_science >= result_arts){
-            result["Career Choice"] = "Science";
+            result["careerchoice"] = "Science";
         }
         else{
             result["careerchoice"] = "Arts";
@@ -51,20 +51,17 @@ const ResultCalculation = (id, score, careeroptions) => {
     let options = {};
 
     normalising_var = result_science + result_commerce + result_arts;
-    
+
     let score_sci = ((result_science/normalising_var)*100).toFixed(2);
     let score_com = ((result_commerce/normalising_var)*100).toFixed(2);
     let score_art = ((result_arts/normalising_var)*100).toFixed(2);
 
-    // options["Science"] = score_sci;
-    // options["Commerce"] = score_com;
-    // options["Arts"] = score_art;
-
     options = [
-        {option: 'Science', score: score_sci},
-        {option: 'Commerce', score: score_com},
-        {option: 'Arts', score: score_art}
-    ]
+      ['Options', 'values'],
+      ['Science', score_sci],
+      ['Commerce', score_com],
+      ['Arts', score_art]
+    ];
 
     result["options"] = options;
 
