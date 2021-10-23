@@ -124,9 +124,13 @@ const FindMyself = () => {
 
   const resultPreparation = async () => {
     var result = ResultCalculation(questionSetId, score, careeroptions);
-    setResultCareer(result);
 
-    if(resultCareer === {}) setResultCareer(result);
+    for(let i=1;i<result.options.length;i++)
+    {
+      result.options[i][1] = parseFloat(result.options[i][1]);
+    }
+    
+    setResultCareer(result);
 
     console.log('1', result);
     console.log('2', resultCareer);
