@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useState } from 'react';
 import NavBar from '../Home/Navbar/Navbar';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -22,8 +22,9 @@ const style = {
 };
 
 const AskSomething = () => {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
+    const user = JSON.parse (localStorage.getItem ('profile'));
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => user ? setOpen(true) : alert('Login to ask question');
     const handleClose = () => setOpen(false);
     return (
         <div>

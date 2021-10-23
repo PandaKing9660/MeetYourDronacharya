@@ -23,10 +23,13 @@ const googleSuccess = async res => {
   const password = userData.googleId;
 
   axios.post ('http://localhost:3001/login', {email, password}).then (res => {
+    console.log (res.data);
     if (res.data.found === true) {
       console.log (res.data.user);
       localStorage.setItem ('profile', JSON.stringify ({...res.data.user}));
       window.location = 'http://localhost:3000';
+    } else if (res.data.msg === 'Wrong Password') {
+      alert ('User with this email already exist with different credentials');
     } else {
       const {name, email, imageUrl} = userData;
 
@@ -78,7 +81,10 @@ const Login = () => {
         .then (res => {
           if (res.data.found === true) {
             console.log (res.data.user);
-            localStorage.setItem ('profile', JSON.stringify ({...res.data.user}));
+            localStorage.setItem (
+              'profile',
+              JSON.stringify ({...res.data.user})
+            );
             window.location = 'http://localhost:3000';
           } else {
             alert (res.data.msg);

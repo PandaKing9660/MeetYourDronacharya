@@ -78,7 +78,7 @@ const AboutTeam = () => {
               photo={adi}
               name="Aditya Sharma"
               roll="CS19B001"
-              text="Panda Panda"
+              text="Panda Sharma"
             />
             <ActionAreaCard
               photo={amit}
@@ -92,13 +92,13 @@ const AboutTeam = () => {
               photo={anu}
               name="Anu Anand Annu"
               roll="CS19B044"
-              text="Hero"
+              text="Billa"
             />
             <ActionAreaCard
               photo={sow}
               name="Emani Sowmya"
               roll="CS19B045"
-              text="Somu Sowya"
+              text="Somu Sowmya"
             />
           </Grid>
         </Grid>
