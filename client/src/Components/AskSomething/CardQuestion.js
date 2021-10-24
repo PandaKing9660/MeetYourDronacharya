@@ -38,7 +38,7 @@ const CardQuestion = ({quesData}) => {
 
   const [userStatus, setUserStatus] = useState ('');
 
-  const [numAnswers, setNumAnswers] = useState (0);
+  const [numAnswers, setNumAnswers] = useState (quesData.answers.length);
 
   const [open, setOpen] = useState (false);
   const handleOpen = () =>

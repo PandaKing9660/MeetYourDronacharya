@@ -1,170 +1,209 @@
-import React, { useState } from 'react';
-import CardHeader from '@mui/material/CardHeader';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import dompurify from 'dompurify';
 
+import CardHeader from '@mui/material/CardHeader';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
-
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
-import Rating from '@mui/material/Rating';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-// Generates color depending on the initials of the author for the avatar
-function stringToColor(string) {
-    let hash = 0;
-    let i;
+import {Button, CardActions} from '@mui/material';
 
-    /* eslint-disable no-bitwise */
-    for (i = 0; i < string.length; i += 1) {
-        hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
+const CardExperience = ({expData}) => {
+  const sanitizer = dompurify.sanitize;
 
-    let color = '#';
+  const user = JSON.parse (localStorage.getItem ('profile'));
+  const [likes, setLike] = useState (expData.liked.length);
+  const [dislikes, setDislike] = useState (expData.disliked.length);
 
-    for (i = 0; i < 3; i += 1) {
-        const value = (hash >> (i * 8)) & 0xff;
-        color += `00${value.toString(16)}`.substr(-2);
-    }
-    /* eslint-enable no-bitwise */
+  const [userStatus, setUserStatus] = useState ('');
 
-    return color;
-}
+  useEffect (
+    () => {
+      if (!user) {
+        return;
+      }
 
-// Process and takes out initials from the name of the author
-function stringAvatar(name) {
-    let avatarName = '';
-
-    // Check if name has spaces etc. Also check if there is last name or not
-    if (name.trim().split(' ').length > 1) {
-        avatarName = `${name.trim().split(' ')[0][0]}${
-            name.trim().split(' ')[1][0]
-        }`;
-    } else {
-        avatarName = `${name.trim().split(' ')[0][0]}`;
-    }
-    // console.log("LENGTH",name.trim().split(' ').length );
-    return {
-        sx: {
-            bgcolor: stringToColor(name),
-        },
-        children: avatarName,
-    };
-}
-
-const StyledRating = styled(Rating)({
-    '& .MuiRating-iconFilled': {
-        color: '#ff6d75',
+      axios
+        .post (`http://localhost:3001/experience/check`, {
+          userId: user._id,
+          experienceId: expData._id,
+        })
+        .then (res => {
+          setUserStatus (res.data);
+        })
+        .catch (err => console.log (err));
     },
-    '& .MuiRating-iconHover': {
-        color: '#ff3d47',
-    },
-});
+    [expData._id]
+  );
 
-const CardExperience = ({ expData }) => {
-    // set dummy rating
-    const [rating, setRating] = useState(0);
+  const AddLikes = (userId, experienceId) => {
+    if (!user) {
+      alert ('Please login to like this question');
+      return;
+    }
+    console.log (experienceId);
+    if (userStatus === 'liked') {
+      return;
+    }
+    axios
+      .put ('http://localhost:3001/experience/addLike', {
+        userId,
+        experienceId,
+      })
+      .then (res => {
+        setLike (likes + 1);
+        if (userStatus === 'disliked') {
+          setDislike (dislikes - 1);
+        }
+        setUserStatus ('liked');
+      });
+  };
+  const AddDislikes = (userId, experienceId) => {
+    if (!user) {
+      alert ('Please login to like this question');
+      return;
+    }
 
-    const handleRatingChange = (e) => {
-        setRating(e.target.value);
-    };
-    return (
-        <Paper sx={{ p: 0, margin: '1em', minWidth: 300, flexGrow: 1 }}>
-            <Box
-                p={3}
-                // color={{ xs: 'red', sm: 'blue', md: 'green' }}
-                marginY={{ xs: '1em', md: '0.2em' }}
-                //  This will change margin on `sm` and `md`
+    if (userStatus === 'disliked') {
+      return;
+    }
+    axios
+      .put ('http://localhost:3001/experience/addDislike', {
+        userId,
+        experienceId,
+      })
+      .then (res => {
+        setDislike (dislikes + 1);
+        if (userStatus === 'liked') {
+          setLike (likes - 1);
+        }
+        setUserStatus ('disliked');
+      });
+  };
+
+  return (
+    <div>
+      <Paper sx={{p: 0, margin: '1em', minWidth: 300, flexGrow: 1}}>
+        <Box
+          p={3}
+          // color={{ xs: 'red', sm: 'blue', md: 'green' }}
+          marginY={{xs: '1em', md: '0.2em'}}
+          //  This will change margin on `sm` and `md`
+        >
+          <CardContent>
+            <Grid
+              container
+              rowSpacing={1}
+              // columnSpacing={{ xs: 1, sm: 2, md: 4 }}
+              justifyContent="space-between"
+              alignItems="center"
             >
-                <CardContent>
-                    <Grid
-                        container
-                        rowSpacing={1}
-                        columnSpacing={{ xs: 1, sm: 2, md: 4 }}
-                        justifyContent="space-between"
-                        alignItems="center"
-                    >
-                        <Grid item xs={7} align="left">
-                            <Typography
-                                variant="h5"
-                                component="div"
-                                sx={{ textDecoration: 'underline' }}
-                            >
-                                {expData.title}
-                            </Typography>
-                            <Typography
-                                sx={{ mb: 1.5, fontSize: '0.91rem' }}
-                                color="text.secondary"
-                            >
-                                {expData.date}
-                            </Typography>
-                        </Grid>
-                        <Grid
-                            item
-                            xs={4}
-                            md={2.7}
-                            // Warning may come for non integer value of md, but runs good
-                            sx={{ textTransform: 'uppercase' }}
-                            align="left"
-                        >
-                            {/* right floating avatar and name of author */}
-                            <CardHeader
-                                avatar={
-                                    <Avatar
-                                        aria-label="recipe"
-                                        {...stringAvatar(expData.author)}
-                                    ></Avatar>
-                                }
-                                titleTypographyProps={{
-                                    variant: 'body2',
-                                    color: 'green',
-                                    align: 'right',
-                                }}
-                                title={expData.author}
-                                // subheader="September 14, 2016"
-                            />
-                        </Grid>
-                    </Grid>
-
-                    <Typography variant="body2" align="justify">
-                        {expData.description}
-                    </Typography>
-                </CardContent>
-
-                {/* Rating of the experience out of 5 */}
-                <Box
-                    sx={{
-                        '& > legend': { mt: 2 },
-                        marginLeft: '1em',
-                    }}
+              <Grid item xs={6} sm={4.6} md={8} align="left">
+                <Typography
+                  variant="h5"
+                  component="div"
+                  sx={{textDecoration: 'underline'}}
                 >
-                    <Typography component="legend" align="left" variant="body2">
-                        Exp Meter : {!rating ? expData.rating : rating}
-                    </Typography>
-                    <StyledRating
-                        name="customized-color"
-                        defaultValue={expData.rating}
-                        getLabelText={(value) =>
-                            `${value} Heart${value !== 1 ? 's' : ''}`
-                        }
-                        precision={0.5}
-                        icon={<FavoriteIcon fontSize="inherit" />}
-                        emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
-                        sx={{
-                            display: 'flex',
-                            align: 'left',
-                            width: '5em',
-                        }}
-                        onChange={handleRatingChange}
-                        size="small"
+                  {expData.title}
+                </Typography>
+                <Typography
+                  sx={{mb: 1.5, fontSize: '0.91rem'}}
+                  color="text.secondary"
+                >
+                  {expData.date}
+                </Typography>
+              </Grid>
+
+              <Grid
+                item
+                xs={6}
+                sm={3}
+                md={4}
+                lg={3}
+                sx={{textTransform: 'uppercase', display: 'flex'}}
+                align="left"
+              >
+                {/* right floating avatar and name of author */}
+                <CardHeader
+                  avatar={
+                    <Avatar
+                      alt={`${expData.userName}`}
+                      src={`${expData.userImage}`}
                     />
-                </Box>
-            </Box>
-        </Paper>
-    );
+                  }
+                  titleTypographyProps={{
+                    variant: 'body2',
+                    color: 'green',
+                    align: 'right',
+                  }}
+                  title={expData.userName}
+                  // subheader="September 14, 2016"
+                />
+              </Grid>
+            </Grid>
+
+            <Typography variant="body2" align="justify">
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: sanitizer (expData.experience),
+                }}
+                style={{padding: '1%'}}
+              />
+
+            </Typography>
+          </CardContent>
+
+          <CardActions sx={{justifyContent: 'flex-end'}}>
+
+            <Button
+              variant="outlined"
+              color="success"
+              title="Liked it"
+              onClick={() => {
+                AddLikes (user ? user._id : 0, expData._id);
+              }}
+            >
+              {likes}
+              {userStatus === 'none'
+                ? <ThumbUpOffAltIcon />
+                : userStatus === 'disliked'
+                    ? <ThumbUpOffAltIcon />
+                    : <ThumbUpIcon />}
+
+            </Button>
+            <Button
+              variant="outlined"
+              color="error"
+              title="Disliked it"
+              onClick={() => {
+                AddDislikes (user ? user._id : 0, expData._id);
+              }}
+            >
+              {userStatus === 'none'
+                ? <ThumbDownOffAltIcon />
+                : userStatus === 'liked'
+                    ? <ThumbDownOffAltIcon />
+                    : <ThumbDownIcon />}
+
+              {dislikes}
+            </Button>
+
+          </CardActions>
+
+        </Box>
+
+      </Paper>
+
+    </div>
+  );
 };
 
 export default CardExperience;
