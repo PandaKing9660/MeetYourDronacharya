@@ -5,7 +5,7 @@ import NavBar from '../Home/Navbar/Navbar';
 
 import adi from "./Photos/adi.png";
 import amit from "./Photos/amit.png";
-import anu from "./Photos/anu.png";
+import anu from "./Photos/anu.jpg";
 import sow from "./Photos/sow.png";
 
 function ActionAreaCard(props) {

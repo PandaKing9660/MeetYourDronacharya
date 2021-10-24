@@ -39,46 +39,47 @@ const EditorAndPreview = ({ option, question_id }) => {
             setEditorPrev(editorRef.current.getContent());
         }
     };
+  // submits the data and send for display in list
+  const handleSubmit = () => {
+    console.log (option);
+    if (editorRef.current && editorRef.current.getContent ()) {
+      if (option === 'question') {
+        axios
+          .post ('http://localhost:3001/ask-something/question/add', {
+            by: user._id,
+            title: title,
+            question: editorRef.current.getContent (),
+          })
+          .then (res => {
+            console.log (res.data);
+          })
+          .catch (err => console.log (err));
+      } else if (option === 'answer') {
+        axios
+          .post ('http://localhost:3001/ask-something/answer/add', {
+            by: user._id,
+            title: title,
+            to: question_id,
+            answer: editorRef.current.getContent (),
+          })
+          .then (res => {
+            console.log (res.data);
+          })
+          .catch (err => console.log (err));
+      } else if (option === 'experience') {
+        axios
+          .post ('http://localhost:3001/experience/add', {
+            by: user._id,
+            title: title,
+            experience: editorRef.current.getContent (),
+          })
+          .then (res => console.log (res.data))
+          .catch (err => console.log (err));
+      }
+    }
+  };
 
-    // submits the data and send for display in list
-    const handleSubmit = () => {
-        console.log(option);
-        if (editorRef.current && editorRef.current.getContent()) {
-            if (option === 'question') {
-                axios
-                    .post('http://localhost:3001/ask-something/question/add', {
-                        by: user._id,
-                        title: title,
-                        question: editorRef.current.getContent(),
-                    })
-                    .then((res) => {
-                        console.log(res.data);
-                    })
-                    .catch((err) => console.log(err));
-            } else if (option === 'answer') {
-                axios
-                    .post('http://localhost:3001/ask-something/answer/add', {
-                        by: user._id,
-                        title: title,
-                        to: question_id,
-                        answer: editorRef.current.getContent(),
-                    })
-                    .then((res) => {
-                        console.log(res.data);
-                    })
-                    .catch((err) => console.log(err));
-            } else if (option === 'experience') {
-                axios
-                    .post('http://localhost:3001/ask-something/question/add', {
-                        by: user._id,
-                        title: title,
-                        question: editorRef.current.getContent(),
-                    })
-                    .then((res) => console.log(res.data))
-                    .catch((err) => console.log(err));
-            }
-        }
-    };
+
 
     const findLabel = () => {
         if (option === 'question') {
@@ -89,16 +90,32 @@ const EditorAndPreview = ({ option, question_id }) => {
             return 'Title for your experience';
         }
     };
+  const findPlaceholder = () => {
+    if (option === 'question') {
+      return 'Please provide all the information experts would need to answer your question here...';
+    } else if (option === 'answer') {
+      return 'Please explain your answer in detail';
+    } else if (option === 'experience') {
+      return 'Please mention your experience here';
+    }
+  };
+  return (
+    <Grid
+      container
+      // columnSpacing={{ xs: 1 }}
+      justifyContent="space-around"
+      alignItems="center"
+    >
+      {/* At loading time */}
+      {!loadingEditor &&
+        <Stack sx={{width: '100%', color: 'grey.500'}} spacing={2}>
+          <h4>Editor Loading...</h4>
+          <LinearProgress color="secondary" />
+          <LinearProgress color="success" />
+          <LinearProgress color="inherit" />
+        </Stack>}
 
-    const findPlaceholder = () => {
-        if (option === 'question') {
-            return 'Please provide all the information experts would need to answer your question here...';
-        } else if (option === 'answer') {
-            return 'Please explain your answer in detail';
-        } else if (option === 'experience') {
-            return 'Please mention your experience here';
-        }
-    };
+
     return (
         <Grid
             container
