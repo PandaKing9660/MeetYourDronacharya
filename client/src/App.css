@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'AnandaNamasteRegular';
+    src: local('AnandaNamasteRegular'), url(./fonts/AnandaNamasteRegular.ttf) format('truetype ');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
+
+@font-face {
+    font-family: 'ZenKurenaido-Regular';
+    src: local('ZenKurenaido-Regular'), url(./fonts/ZenKurenaido-Regular.ttf) format('truetype ');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
