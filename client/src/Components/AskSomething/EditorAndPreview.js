@@ -60,10 +60,10 @@ const EditorAndPreview = ({option, question_id}) => {
           .catch (err => console.log (err));
       } else if (option === 'experience') {
         axios
-          .post ('http://localhost:3001/ask-something/question/add', {
+          .post ('http://localhost:3001/experience/add', {
             by: user._id,
             title: title,
-            question: editorRef.current.getContent (),
+            experience: editorRef.current.getContent (),
           })
           .then (res => console.log (res.data))
           .catch (err => console.log (err));
@@ -84,7 +84,7 @@ const EditorAndPreview = ({option, question_id}) => {
   const findPlaceholder = () => {
     if (option === 'question') {
       return 'Please provide all the information experts would need to answer your question here...';
-    }else if (option === 'answer') {
+    } else if (option === 'answer') {
       return 'Please explain your answer in detail';
     } else if (option === 'experience') {
       return 'Please mention your experience here';
