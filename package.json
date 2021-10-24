@@ -18,7 +18,6 @@
     },
     "homepage": "https://github.com/PandaKing9660/MeetYourDronacharya#readme",
     "dependencies": {
-        "@material-ui/icons": "^4.11.2",
         "concurrently": "^6.3.0",
         "material-ui-dropzone": "^3.5.0",
         "react-dnd": "^14.0.4",
