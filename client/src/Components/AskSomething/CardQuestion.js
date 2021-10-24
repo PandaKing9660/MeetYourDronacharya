@@ -1,28 +1,56 @@
 import React, {useState, useEffect} from 'react';
-import CardHeader from '@mui/material/CardHeader';
 import axios from 'axios';
+import dompurify from 'dompurify';
+
+import CardHeader from '@mui/material/CardHeader';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-
+import EditorAndPreview from './EditorAndPreview';
+import Modal from '@mui/material/Modal';
 import {Button, CardActions} from '@mui/material';
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '90%',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 const CardQuestion = ({quesData}) => {
+  const sanitizer = dompurify.sanitize;
+
   const user = JSON.parse (localStorage.getItem ('profile'));
   const [likes, setLike] = useState (quesData.liked.length);
-
   const [dislikes, setDislike] = useState (quesData.disliked.length);
+
   const [userStatus, setUserStatus] = useState ('');
+
+  const [numAnswers, setNumAnswers] = useState (0);
+
+  const [open, setOpen] = useState (false);
+  const handleOpen = () =>
+    user ? setOpen (true) : alert ('Login to ask question');
+  const handleClose = () => setOpen (false);
 
   useEffect (
     () => {
+      if (!user) {
+        return;
+      }
+
       axios
         .post (`http://localhost:3001/ask-something/question/check`, {
           userId: user._id,
@@ -33,11 +61,16 @@ const CardQuestion = ({quesData}) => {
         })
         .catch (err => console.log (err));
     },
-    [user._id, quesData._id]
+    [quesData._id]
   );
 
   const AddLikes = (userId, questionId) => {
-    if (userStatus === 'success') {
+    if (!user) {
+      alert ('Please login to like this question');
+      return;
+    }
+
+    if (userStatus === 'liked') {
       return;
     }
     axios
@@ -47,14 +80,19 @@ const CardQuestion = ({quesData}) => {
       })
       .then (res => {
         setLike (likes + 1);
-        if (userStatus === 'danger') {
+        if (userStatus === 'disliked') {
           setDislike (dislikes - 1);
         }
-        setUserStatus ('success');
+        setUserStatus ('liked');
       });
   };
   const AddDislikes = (userId, questionId) => {
-    if (userStatus === 'danger') {
+    if (!user) {
+      alert ('Please login to like this question');
+      return;
+    }
+
+    if (userStatus === 'disliked') {
       return;
     }
     axios
@@ -64,108 +102,153 @@ const CardQuestion = ({quesData}) => {
       })
       .then (res => {
         setDislike (dislikes + 1);
-        if (userStatus === 'success') {
+        if (userStatus === 'liked') {
           setLike (likes - 1);
         }
-        setUserStatus ('danger');
+        setUserStatus ('disliked');
       });
   };
 
   return (
-    <Paper sx={{p: 0, margin: '1em', minWidth: 300, flexGrow: 1}}>
-      <Box
-        p={3}
-        // color={{ xs: 'red', sm: 'blue', md: 'green' }}
-        marginY={{xs: '1em', md: '0.2em'}}
-        //  This will change margin on `sm` and `md`
-      >
-        <CardContent>
-          <Grid
-            container
-            rowSpacing={1}
-            // columnSpacing={{ xs: 1, sm: 2, md: 4 }}
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Grid item xs={6} sm={4.6} md={8} align="left">
-              <Typography
-                variant="h5"
-                component="div"
-                sx={{textDecoration: 'underline'}}
-              >
-                {quesData.title}
-              </Typography>
-              <Typography
-                sx={{mb: 1.5, fontSize: '0.91rem'}}
-                color="text.secondary"
-              >
-                {quesData.date}
-              </Typography>
-            </Grid>
+    <div>
+      <Paper sx={{p: 0, margin: '1em', minWidth: 300, flexGrow: 1}}>
+        <Box
+          p={3}
+          // color={{ xs: 'red', sm: 'blue', md: 'green' }}
+          marginY={{xs: '1em', md: '0.2em'}}
+          //  This will change margin on `sm` and `md`
+        >
+          <CardContent>
             <Grid
-              item
-              xs={6}
-              sm={3}
-              md={4}
-              lg={3}
-              sx={{textTransform: 'uppercase'}}
-              align="left"
+              container
+              rowSpacing={1}
+              // columnSpacing={{ xs: 1, sm: 2, md: 4 }}
+              justifyContent="space-between"
+              alignItems="center"
             >
-              {/* right floating avatar and name of author */}
-              <CardHeader
-                avatar={
-                  <Avatar
-                    alt={`${quesData.userName}`}
-                    src={`${quesData.userImage}`}
-                  />
-                }
-                titleTypographyProps={{
-                  variant: 'body2',
-                  color: 'green',
-                  align: 'right',
-                }}
-                title={quesData.userName}
-                // subheader="September 14, 2016"
-              />
+              <Grid item xs={6} sm={4.6} md={8} align="left">
+                <Typography
+                  variant="h5"
+                  component="div"
+                  sx={{textDecoration: 'underline'}}
+                >
+                  {quesData.title}
+                </Typography>
+                <Typography
+                  sx={{mb: 1.5, fontSize: '0.91rem'}}
+                  color="text.secondary"
+                >
+                  {quesData.date}
+                </Typography>
+              </Grid>
+
+              <Grid
+                item
+                xs={6}
+                sm={3}
+                md={4}
+                lg={3}
+                sx={{textTransform: 'uppercase', display: 'flex'}}
+                align="left"
+              >
+                {/* right floating avatar and name of author */}
+                <CardHeader
+                  avatar={
+                    <Avatar
+                      alt={`${quesData.userName}`}
+                      src={`${quesData.userImage}`}
+                    />
+                  }
+                  titleTypographyProps={{
+                    variant: 'body2',
+                    color: 'green',
+                    align: 'right',
+                  }}
+                  title={quesData.userName}
+                  // subheader="September 14, 2016"
+                />
+              </Grid>
             </Grid>
-          </Grid>
 
-          <Typography variant="body2" align="justify">
-            {quesData.question}
-          </Typography>
-        </CardContent>
+            <Typography variant="body2" align="justify">
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: sanitizer (quesData.question),
+                }}
+                style={{padding: '1%'}}
+              />
 
-        <CardActions sx={{justifyContent: 'flex-end'}}>
+            </Typography>
+          </CardContent>
 
-          <Button
-            variant="outlined"
-            color="success"
-            onClick={() => {
-              AddLikes (user._id, quesData._id);
-            }}
-          >
-            {likes}
-            <ThumbUpOffAltIcon />
-          </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={() => {
-              AddDislikes (user._id, quesData._id);
-            }}
-          >
+          <CardActions sx={{justifyContent: 'flex-end'}}>
 
-            <ThumbDownOffAltIcon />
-            {dislikes}
-          </Button>
+            <Button variant="outlined" color="primary" title="Check answers">
+              {numAnswers + '  '}
+              Answers
+            </Button>
+            <Button
+              variant="outlined"
+              color="success"
+              title="Liked it"
+              onClick={() => {
+                AddLikes (user ? user._id : 0, quesData._id);
+              }}
+            >
+              {likes}
+              {userStatus === 'none'
+                ? <ThumbUpOffAltIcon />
+                : userStatus === 'disliked'
+                    ? <ThumbUpOffAltIcon />
+                    : <ThumbUpIcon />}
 
-          <Button size="small" color="primary" variant="outlined">
-            Answer
-          </Button>
-        </CardActions>
+            </Button>
+            <Button
+              variant="outlined"
+              color="error"
+              title="Disliked it"
+              onClick={() => {
+                AddDislikes (user ? user._id : 0, quesData._id);
+              }}
+            >
 
-      </Box>
-    </Paper>
+              {userStatus === 'none'
+                ? <ThumbDownOffAltIcon />
+                : userStatus === 'liked'
+                    ? <ThumbDownOffAltIcon />
+                    : <ThumbDownIcon />}
+
+              {dislikes}
+            </Button>
+
+            <Button
+              onClick={handleOpen}
+              variant="outlined"
+              color="primary"
+              title="Answer the question"
+              sx={{float: 'right', marginRight: '10%'}}
+            >
+              Answer
+            </Button>
+
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <EditorAndPreview option="answer" question_id={quesData._id} />
+              </Box>
+            </Modal>
+
+          </CardActions>
+
+        </Box>
+
+      </Paper>
+
+    </div>
   );
 };
 

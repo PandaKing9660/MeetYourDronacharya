@@ -48,7 +48,7 @@ const AskSomething = () => {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <EditorAndPreview />
+                    <EditorAndPreview option='question' />
                 </Box>
             </Modal>
 
