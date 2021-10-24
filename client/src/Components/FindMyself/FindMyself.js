@@ -132,7 +132,6 @@ const FindMyself = () => {
       result.options[i][1] = parseFloat(result.options[i][1]);
     }
     setResultCareer(result);
-    console.log(222, result);
     resultModalOpen();
     setScore({});
   };
