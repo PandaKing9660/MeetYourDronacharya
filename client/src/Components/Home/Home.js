@@ -32,7 +32,7 @@ const Home = () => {
       <Stack direction="row" spacing={0}>
         {!JSON.parse (localStorage.getItem ('profile'))
           ? <Button
-              variant="outlined"
+              variant="contained"
               color="warning"
               href="/login"
               // sx={{ marginLeft: (160 * width) / 1500 }}
@@ -62,7 +62,6 @@ const Home = () => {
               </MenuItem>
             </div>}
       </Stack>
-
 
       <Grid
         className="home"

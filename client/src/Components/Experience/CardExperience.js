@@ -23,7 +23,7 @@ const CardExperience = ({expData}) => {
   const [likes, setLike] = useState (expData.liked.length);
   const [dislikes, setDislike] = useState (expData.disliked.length);
 
-  const [userStatus, setUserStatus] = useState ('');
+  const [userStatus, setUserStatus] = useState ('none');
 
   useEffect (
     () => {
