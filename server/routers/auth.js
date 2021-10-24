@@ -55,6 +55,7 @@ router.post ('/login', async (req, res) => {
     const user = await User.find ({
       email: email,
     });
+
     if (user.length) {
       if (await bcrypt.compare (password, user[0].password)) {
         res.send ({
@@ -69,6 +70,7 @@ router.post ('/login', async (req, res) => {
           },
         });
       } else {
+        console.log('hello')
         res.send ({
           msg: 'Wrong Password',
           found: false,

@@ -81,6 +81,13 @@ export default function StudyMaterial() {
     <div className = "material_StudyMaterial">
       <NavBar />
       <div className = "division">
+        <div className = "info">
+              <h1 align="center"><u>STUDY MATERIAL</u></h1>
+              <div>
+                Books are undeniably a blessing to humankind. And books being useful for us in many ways have earned the title of our best friend. Libraries are the storehouse of books of several genres where interested readers can spend time reading in silence or can borrow books by being a member of that library. Through this practice of reading, we humans also display a greater sense of being civilized.
+  There are individuals like myself who like to collect books, especially storybooks or novels. And this habit of mine has turned my house into a small library in itself. I know many other readers who share this same obsession with reading books and collecting them. My conversions with them mostly revolve around the plot, the character development, the writing style of the authors, and other aspects of books.
+              </div>
+        </div>
         <div className="materials">
           <Box sx={{ width: '100%', typography: 'body1' }}>
             <TabContext value={value}>
@@ -91,22 +98,8 @@ export default function StudyMaterial() {
                 </TabList>
               </Box>
               <TabPanel value="1">
-                <Box sx={{transform: 'translateZ(0px)', flexGrow: 1 }}>
-                    <Search>
-                      <SearchIconWrapper>
-                        <SearchIcon />
-                      </SearchIconWrapper>
-                      <StyledInputBase
-                        placeholder="Search…"
-                        inputProps={{ "aria-label": "search" }}
-                      />
-                    </Search>
-                    <MaterialCard />
-                </Box>
-              </TabPanel>
-              <TabPanel value="2">
-                 <Box sx={{ height: 360, transform: 'translateZ(0px)', flexGrow: 1 }}>
-                    <Search>
+                <Box sx={{ height: 360, transform: 'translateZ(0px)', flexGrow: 1 }}>
+                    <Search sx={{ backgroundColor: 'white' }}>
                       <SearchIconWrapper>
                         <SearchIcon />
                       </SearchIconWrapper>

@@ -1,4 +1,4 @@
-# MeetYourDronacharya
+# MeetYourDronacharya [Web-site link](https://meetyourdronacharya.netlify.app/)
 Our nation has many great minds, yet most of the people are not happy with what they do, the reason being the lack of knowledge of career options. Many students take engineering just because they don’t know what they should do after 12th, due to this many students who are actually interested in engineering don’t get a chance to do it. We heard a famous quote “In India career is chosen after the B.Tech.”, which is mostly true since most of the engineering students don’t really make a career in it. Also, many who want to gain more knowledge are not able to do it due to lack of exposure and rural background. 
 
 Our project deals with such issues, now students and parents don’t have to search 100 places to find one career goal, now they can just visit one website and find a career according to their needs, capability, and interest. Though the information is available on many platforms, it is not very user-friendly and synchronized. Our project focuses on reducing user efforts and increasing user experience.

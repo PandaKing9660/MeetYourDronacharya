@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Monoton');
  
+.findmyself_FindMyself {
+    margin: 100px 0;
+}
+
 .h1_findmyself {
     display: flex;
     justify-content: center;
@@ -30,5 +34,28 @@
          background: linear-gradient(7deg, #0c9fda 50%, #3210c9 0);
          -webkit-background-clip: text;
      }
+}
+
+.suggestion_findmyself {
+    color: grey;
+    font-size: smaller;
+}
+
+.careerchoice_findmyself {
+    color: black;
+    font-size: 70px;
+}
+
+.otheroptions_findmyself {
+    color: rgb(36, 34, 34);
+    font-size: medium;
+    text-align: left;
+    padding: 2%;
+    margin: 2%;
+}
+
+.note_findmyself {
+    color: grey;
+    font-size: x-small;
 }
 

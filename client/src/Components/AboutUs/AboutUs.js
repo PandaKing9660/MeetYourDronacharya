@@ -25,35 +25,41 @@ const Aboutwebsite = () => {
   return (
     <div className="aboutwebsite_AboutUs">
       <h1>ABOUT WEBSITE</h1>
-      <h3>Idea</h3>
-      <p>
-        Far far away, behind the word mountains, far from the countries Vokalia
-        and Consonantia, there live the blind texts. Separated they live in
-        Bookmarksgrove right at the coast of the Semantics, a large language
-        ocean. A small river named Duden flows by their place and supplies it
-        with the necessary regelialia. It is a paradisematic country, in which
-        roasted parts of sentences fly into your mouth.
-      </p>
+      <div className="idea_AboutUs">
+        <h3>Idea</h3>
+        <p>
+          Far far away, behind the word mountains, far from the countries Vokalia
+          and Consonantia, there live the blind texts. Separated they live in
+          Bookmarksgrove right at the coast of the Semantics, a large language
+          ocean. A small river named Duden flows by their place and supplies it
+          with the necessary regelialia. It is a paradisematic country, in which
+          roasted parts of sentences fly into your mouth.
+        </p>
+      </div>
       <Divider />
-      <h3>How to contribute</h3>
-      <p>
-        Far far away, behind the word mountains, far from the countries Vokalia
-        and Consonantia, there live the blind texts. Separated they live in
-        Bookmarksgrove right at the coast of the Semantics, a large language
-        ocean. A small river named Duden flows by their place and supplies it
-        with the necessary regelialia. It is a paradisematic country, in which
-        roasted parts of sentences fly into your mouth.
-      </p>
+      <div className="how_AboutUs">
+        <h3>How to contribute</h3>
+        <p>
+          Far far away, behind the word mountains, far from the countries Vokalia
+          and Consonantia, there live the blind texts. Separated they live in
+          Bookmarksgrove right at the coast of the Semantics, a large language
+          ocean. A small river named Duden flows by their place and supplies it
+          with the necessary regelialia. It is a paradisematic country, in which
+          roasted parts of sentences fly into your mouth.
+        </p>
+      </div>
       <Divider />
-      <h3>Purpose</h3>
-      <p>
-        Far far away, behind the word mountains, far from the countries Vokalia
-        and Consonantia, there live the blind texts. Separated they live in
-        Bookmarksgrove right at the coast of the Semantics, a large language
-        ocean. A small river named Duden flows by their place and supplies it
-        with the necessary regelialia. It is a paradisematic country, in which
-        roasted parts of sentences fly into your mouth.
-      </p>
+      <div className="purpose_AboutUs">
+        <h3>Purpose</h3>
+        <p>
+          Far far away, behind the word mountains, far from the countries Vokalia
+          and Consonantia, there live the blind texts. Separated they live in
+          Bookmarksgrove right at the coast of the Semantics, a large language
+          ocean. A small river named Duden flows by their place and supplies it
+          with the necessary regelialia. It is a paradisematic country, in which
+          roasted parts of sentences fly into your mouth.
+        </p>
+      </div>
     </div>
   );
 };
@@ -72,7 +78,7 @@ const AboutTeam = () => {
               photo={adi}
               name="Aditya Sharma"
               roll="CS19B001"
-              text="Panda Panda"
+              text="Panda Sharma"
             />
             <ActionAreaCard
               photo={amit}
@@ -86,13 +92,13 @@ const AboutTeam = () => {
               photo={anu}
               name="Anu Anand Annu"
               roll="CS19B044"
-              text="Hero"
+              text="Billa"
             />
             <ActionAreaCard
               photo={sow}
               name="Emani Sowmya"
               roll="CS19B045"
-              text="Somu Sowya"
+              text="Somu Sowmya"
             />
           </Grid>
         </Grid>
