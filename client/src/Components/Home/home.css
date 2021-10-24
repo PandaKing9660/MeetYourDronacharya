@@ -34,10 +34,10 @@ body {
     display: inline-block;
     -webkit-text-stroke: 1px rgb(238, 70, 40);
     font-family: Raleway, Arial, serif;
-    font-size: 75px;
+    font-size: 90px;
     font-weight: 600;
     color: #ff7722;
-    margin: 0.5em;
+    margin: 0.7em 0.5em;
     -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;
     -o-transition: all 1s ease-in-out;

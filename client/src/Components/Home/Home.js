@@ -162,7 +162,7 @@ const Home = () => {
                             fullWidth="bool"
                             onClick={() => history.push('/about-us')}
                         >
-                            Dashboard
+                            About Us
                         </Button>
                     </Grid>
                 </Grid>
