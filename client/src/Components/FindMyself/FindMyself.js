@@ -56,8 +56,6 @@ const useStyles = makeStyles({
   },
   formcontrol_findmyself: {
     width: "90%",
-    margin: "5%",
-    padding: "5%",
   },
   pagination_findmyself: {
     marginTop: "10px",
@@ -70,7 +68,6 @@ const useStyles = makeStyles({
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
     background: "white",
     border: "2px solid #000",
     boxShadow: 24,
@@ -295,6 +292,8 @@ const FindMyself = () => {
                   {resultCareer["careerchoice"]}
                 </h1>
                 <Chart
+                  height="300px"
+                  width="500px"
                   chartType="PieChart"
                   loader={<CircularProgress color="secondary" />}
                   data={resultCareer["options"]}
