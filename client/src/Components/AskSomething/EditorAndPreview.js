@@ -165,6 +165,7 @@ const EditorAndPreview = () => {
                             }}
                             style={{ padding: '1%' }}
                         />
+                        <h2>{editorPrev}</h2>
                     </Box>
                 </Grid>
             )}
