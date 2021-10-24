@@ -13,8 +13,13 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import FindMyself from './Components/FindMyself/FindMyself';
 import Login from './Components/login/login';
 import Signup from './Components/login/signup';
+
 import Logout from './Components/login/logout';
 // import "./app.css";
+
+
+import "./App.css";
+
 
 /**
  * @brief added all other routers

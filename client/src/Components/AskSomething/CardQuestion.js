@@ -1,255 +1,264 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import dompurify from 'dompurify';
 
-import CardHeader from '@mui/material/CardHeader';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import CardContent from '@mui/material/CardContent';
-import Avatar from '@mui/material/Avatar';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
+
 import EditorAndPreview from './EditorAndPreview';
-import Modal from '@mui/material/Modal';
-import {Button, CardActions} from '@mui/material';
+import {
+    Button,
+    CardActions,
+    Modal,
+    Grid,
+    Typography,
+    Avatar,
+    CardContent,
+    CardHeader,
+    Box,
+    Paper,
+} from '@mui/material';
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '90%',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '90%',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
 };
 
-const CardQuestion = ({quesData}) => {
-  const sanitizer = dompurify.sanitize;
+const CardQuestion = ({ quesData }) => {
+    const sanitizer = dompurify.sanitize;
 
-  const user = JSON.parse (localStorage.getItem ('profile'));
-  const [likes, setLike] = useState (quesData.liked.length);
-  const [dislikes, setDislike] = useState (quesData.disliked.length);
+    const user = JSON.parse(localStorage.getItem('profile'));
+    const [likes, setLike] = useState(quesData.liked.length);
+    const [dislikes, setDislike] = useState(quesData.disliked.length);
 
-  const [userStatus, setUserStatus] = useState ('');
+    const [userStatus, setUserStatus] = useState('');
 
-  const [numAnswers, setNumAnswers] = useState (quesData.answers.length);
+    const [numAnswers, setNumAnswers] = useState(quesData.answers.length);
 
-  const [open, setOpen] = useState (false);
-  const handleOpen = () =>
-    user ? setOpen (true) : alert ('Login to ask question');
-  const handleClose = () => setOpen (false);
+    const [open, setOpen] = useState(false);
+    const handleOpen = () =>
+        user ? setOpen(true) : alert('Login to ask question');
+    const handleClose = () => setOpen(false);
 
-  useEffect (
-    () => {
-      if (!user) {
-        return;
-      }
-
-      axios
-        .post (`http://localhost:3001/ask-something/question/check`, {
-          userId: user._id,
-          questionId: quesData._id,
-        })
-        .then (res => {
-          setUserStatus (res.data);
-        })
-        .catch (err => console.log (err));
-    },
-    [quesData._id]
-  );
-
-  const AddLikes = (userId, questionId) => {
-    if (!user) {
-      alert ('Please login to like this question');
-      return;
-    }
-
-    if (userStatus === 'liked') {
-      return;
-    }
-    axios
-      .put ('http://localhost:3001/ask-something/question/addLike', {
-        userId,
-        questionId,
-      })
-      .then (res => {
-        setLike (likes + 1);
-        if (userStatus === 'disliked') {
-          setDislike (dislikes - 1);
+    useEffect(() => {
+        if (!user) {
+            return;
         }
-        setUserStatus ('liked');
-      });
-  };
-  const AddDislikes = (userId, questionId) => {
-    if (!user) {
-      alert ('Please login to like this question');
-      return;
-    }
 
-    if (userStatus === 'disliked') {
-      return;
-    }
-    axios
-      .put ('http://localhost:3001/ask-something/question/addDisLike', {
-        userId,
-        questionId,
-      })
-      .then (res => {
-        setDislike (dislikes + 1);
+        axios
+            .post(`http://localhost:3001/ask-something/question/check`, {
+                userId: user._id,
+                questionId: quesData._id,
+            })
+            .then((res) => {
+                setUserStatus(res.data);
+            })
+            .catch((err) => console.log(err));
+    }, [quesData._id]);
+
+    const AddLikes = (userId, questionId) => {
+        if (!user) {
+            alert('Please login to like this question');
+            return;
+        }
+
         if (userStatus === 'liked') {
-          setLike (likes - 1);
+            return;
         }
-        setUserStatus ('disliked');
-      });
-  };
+        axios
+            .put('http://localhost:3001/ask-something/question/addLike', {
+                userId,
+                questionId,
+            })
+            .then((res) => {
+                setLike(likes + 1);
+                if (userStatus === 'disliked') {
+                    setDislike(dislikes - 1);
+                }
+                setUserStatus('liked');
+            });
+    };
 
-  return (
-    <div>
-      <Paper sx={{p: 0, margin: '1em', minWidth: 300, flexGrow: 1}}>
-        <Box
-          p={3}
-          // color={{ xs: 'red', sm: 'blue', md: 'green' }}
-          marginY={{xs: '1em', md: '0.2em'}}
-          //  This will change margin on `sm` and `md`
-        >
-          <CardContent>
-            <Grid
-              container
-              rowSpacing={1}
-              // columnSpacing={{ xs: 1, sm: 2, md: 4 }}
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Grid item xs={6} sm={4.6} md={8} align="left">
-                <Typography
-                  variant="h5"
-                  component="div"
-                  sx={{textDecoration: 'underline'}}
+    const AddDislikes = (userId, questionId) => {
+        if (!user) {
+            alert('Please login to like this question');
+            return;
+        }
+
+        if (userStatus === 'disliked') {
+            return;
+        }
+        axios
+            .put('http://localhost:3001/ask-something/question/addDisLike', {
+                userId,
+                questionId,
+            })
+            .then((res) => {
+                setDislike(dislikes + 1);
+                if (userStatus === 'liked') {
+                    setLike(likes - 1);
+                }
+                setUserStatus('disliked');
+            });
+    };
+
+    return (
+        <div>
+            <Paper sx={{ p: 0, margin: '1em', minWidth: 300, flexGrow: 1 }}>
+                <Box
+                    p={1}
+                    // color={{ xs: 'red', sm: 'blue', md: 'green' }}
+                    marginY={{ xs: '1em', md: '0.2em' }}
+                    //  This will change margin on `sm` and `md`
                 >
-                  {quesData.title}
-                </Typography>
-                <Typography
-                  sx={{mb: 1.5, fontSize: '0.91rem'}}
-                  color="text.secondary"
-                >
-                  {quesData.date}
-                </Typography>
-              </Grid>
+                    <CardContent>
+                        <Grid
+                            container
+                            // rowSpacing={1}
+                            // columnSpacing={{ xs: 1, sm: 2, md: 4 }}
+                            justifyContent="space-between"
+                            alignItems="center"
+                        >
+                            <Grid item align="left">
+                                <Typography
+                                    variant="h5"
+                                    component="div"
+                                    sx={{ textDecoration: 'underline' }}
+                                >
+                                    {quesData.title}
+                                </Typography>
+                                <Typography
+                                    sx={{ mb: 1.5, fontSize: '0.91rem' }}
+                                    color="text.secondary"
+                                >
+                                    {quesData.time.split('T')[0]}
+                                </Typography>
+                            </Grid>
 
-              <Grid
-                item
-                xs={6}
-                sm={3}
-                md={4}
-                lg={3}
-                sx={{textTransform: 'uppercase', display: 'flex'}}
-                align="left"
-              >
-                {/* right floating avatar and name of author */}
-                <CardHeader
-                  avatar={
-                    <Avatar
-                      alt={`${quesData.userName}`}
-                      src={`${quesData.userImage}`}
-                    />
-                  }
-                  titleTypographyProps={{
-                    variant: 'body2',
-                    color: 'green',
-                    align: 'right',
-                  }}
-                  title={quesData.userName}
-                  // subheader="September 14, 2016"
-                />
-              </Grid>
-            </Grid>
+                            <Grid
+                                item
+                                sx={{
+                                    textTransform: 'uppercase',
+                                    display: 'flex',
+                                }}
+                                align="right"
+                            >
+                                {/* right floating avatar and name of author */}
+                                <CardHeader
+                                    avatar={
+                                        <Avatar
+                                            alt={`${quesData.userName}`}
+                                            src={`${quesData.userImage}`}
+                                        />
+                                    }
+                                    titleTypographyProps={{
+                                        variant: 'body2',
+                                        color: 'green',
+                                        align: 'right',
+                                    }}
+                                    title={quesData.userName}
+                                    // subheader="September 14, 2016"
+                                />
+                            </Grid>
+                        </Grid>
 
-            <Typography variant="body2" align="justify">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: sanitizer (quesData.question),
-                }}
-                style={{padding: '1%'}}
-              />
+                        <Typography variant="body2" align="justify">
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: sanitizer(quesData.question),
+                                }}
+                                style={{ padding: '1%' }}
+                            />
+                        </Typography>
+                    </CardContent>
 
-            </Typography>
-          </CardContent>
+                    <CardActions sx={{ justifyContent: 'flex-end' }}>
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            title="Check answers"
+                            sx={{ textTransform: 'capitalize' }}
+                        >
+                            {numAnswers + '  '}
+                            Answers
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            color="success"
+                            title="Liked it"
+                            onClick={() => {
+                                AddLikes(user ? user._id : 0, quesData._id);
+                            }}
+                        >
+                            {likes}
+                            {userStatus === 'none' ? (
+                                <ThumbUpOffAltIcon />
+                            ) : userStatus === 'disliked' ? (
+                                <ThumbUpOffAltIcon />
+                            ) : (
+                                <ThumbUpIcon />
+                            )}
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            color="error"
+                            title="Disliked it"
+                            onClick={() => {
+                                AddDislikes(user ? user._id : 0, quesData._id);
+                            }}
+                        >
+                            {userStatus === 'none' ? (
+                                <ThumbDownOffAltIcon />
+                            ) : userStatus === 'liked' ? (
+                                <ThumbDownOffAltIcon />
+                            ) : (
+                                <ThumbDownIcon />
+                            )}
 
-          <CardActions sx={{justifyContent: 'flex-end'}}>
+                            {dislikes}
+                        </Button>
 
-            <Button variant="outlined" color="primary" title="Check answers">
-              {numAnswers + '  '}
-              Answers
-            </Button>
-            <Button
-              variant="outlined"
-              color="success"
-              title="Liked it"
-              onClick={() => {
-                AddLikes (user ? user._id : 0, quesData._id);
-              }}
-            >
-              {likes}
-              {userStatus === 'none'
-                ? <ThumbUpOffAltIcon />
-                : userStatus === 'disliked'
-                    ? <ThumbUpOffAltIcon />
-                    : <ThumbUpIcon />}
+                        <Button
+                            onClick={handleOpen}
+                            variant="outlined"
+                            color="primary"
+                            title="Answer the question"
+                            sx={{
+                                float: 'right',
+                                marginRight: '1%',
+                                textTransform: 'capitalize',
+                            }}
+                        >
+                            Answer
+                        </Button>
 
-            </Button>
-            <Button
-              variant="outlined"
-              color="error"
-              title="Disliked it"
-              onClick={() => {
-                AddDislikes (user ? user._id : 0, quesData._id);
-              }}
-            >
-
-              {userStatus === 'none'
-                ? <ThumbDownOffAltIcon />
-                : userStatus === 'liked'
-                    ? <ThumbDownOffAltIcon />
-                    : <ThumbDownIcon />}
-
-              {dislikes}
-            </Button>
-
-            <Button
-              onClick={handleOpen}
-              variant="outlined"
-              color="primary"
-              title="Answer the question"
-              sx={{float: 'right', marginRight: '10%'}}
-            >
-              Answer
-            </Button>
-
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <EditorAndPreview option="answer" question_id={quesData._id} />
-              </Box>
-            </Modal>
-
-          </CardActions>
-
-        </Box>
-
-      </Paper>
-
-    </div>
-  );
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <Box sx={style}>
+                                <EditorAndPreview
+                                    option="answer"
+                                    question_id={quesData._id}
+                                />
+                            </Box>
+                        </Modal>
+                    </CardActions>
+                </Box>
+            </Paper>
+        </div>
+    );
 };
 
 export default CardQuestion;

@@ -6,6 +6,7 @@ body {
     /* background: url("https://www.indica.today/wp-content/uploads/2020/06/f80fcc6366f206d67b48e0f8f5711fbf.jpg"); */
 }
 
+
 .home_container {
     background: url('./dronacharya blurred.png');
     background-repeat: no-repeat;
@@ -26,6 +27,49 @@ body {
     border: 4px solid rgb(255, 255, 255);
     border-radius: 5px;
     background-size: 100% 100vh;
+}
+
+
+.head_home {
+    display: inline-block;
+    -webkit-text-stroke: 1px rgb(238, 70, 40);
+    font-family: Raleway, Arial, serif;
+    font-size: 90px;
+    font-weight: 600;
+    color: #ff7722;
+    margin: 0.7em 0.5em;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+
+    text-shadow: 10px 1px 0 rgba(36, 117, 203, 0.1),
+        13px 23px 0 rgba(36, 117, 203, 0.2), 15px 5px 0 rgba(36, 117, 203, 0.03);
+    /*  17px 7px 0 rgba(36, 117, 203, 0.04), 9px 15px 0 rgba(36, 117, 203, 0.2);
+   -11px -11px 0 rgba(36, 117, 203, 0.06),
+    17px -13px 0 rgba(36, 117, 203, 0.07), 15px 30px 0 rgba(36, 117, 203, 0.1),
+    -20px -17px 0 rgba(36, 117, 203, 0.06),
+    -19px 19px 0 rgba(36, 117, 203, 0.08), 5px 21px 0 rgba(36, 117, 203, 0.02),
+    23px -23px 0 rgba(36, 117, 203, 0.1), 25px 40px 0 rgba(36, 117, 203, 0.2),
+    27px 17px 0 rgba(36, 117, 203, 0.1), -29px -29px 0 rgba(36, 117, 203, 0.1);*/
+}
+
+.head_home:hover {
+    /* -webkit-transform: rotate(1deg) scale(1.02);
+  -moz-transform: rotate(1deg) scale(1.02);
+  -o-transform: rotate(1deg) scale(1.02);
+  -ms-transform: rotate(1deg) scale(1.02); */
+    transform: rotate(-0.3deg) scale(1.02);
+
+    text-shadow: 1px 1px 0 rgba(36, 117, 203, 1),
+        13px 3px 0 rgba(36, 117, 203, 0.9), 5px 5px 0 rgba(36, 117, 203, 0.8);
+    /* 17px 7px 0 rgba(36, 117, 203, 0.7), 9px -15px 0 rgba(36, 117, 203, 0.6);
+   -11px 11px 0 rgba(36, 117, 203, 0.5), 7px -13px 0 rgba(36, 117, 203, 0.4),
+    15px 30px 0 rgba(36, 117, 203, 0.3), -20px 17px 0 rgba(36, 117, 203, 0.2),
+    -19px 19px 0 rgba(36, 117, 203, 0.1), 30px -21px 0 rgba(36, 117, 203, 0.08),
+    23px 23px 0 rgba(36, 117, 203, 0.06), -25px 40px 0 rgba(36, 117, 203, 0.04),
+    27px 27px 0 rgba(36, 117, 203, 0.02), -29px 29px 0 rgba(36, 117, 203, 0);*/
 }
 
 .button1 {
@@ -66,46 +110,4 @@ body {
 .button8 {
     background: rgba(33, 33, 33, 0.733);
     font-weight: bold;
-}
-
-.head_home {
-    display: inline-block;
-    -webkit-text-stroke: 1px rgb(238, 70, 40);
-    font-family: Raleway;
-    font-size: 75px;
-    font-weight: 600;
-    color: #ff7722;
-    margin: 0.5em;
-    -webkit-transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
-    -o-transition: all 1s ease-in-out;
-    -ms-transition: all 1s ease-in-out;
-    transition: all 1s ease-in-out;
-
-    text-shadow: 10px 1px 0 rgba(36, 117, 203, 0.1),
-        13px 23px 0 rgba(36, 117, 203, 0.2), 15px 5px 0 rgba(36, 117, 203, 0.03);
-    /*  17px 7px 0 rgba(36, 117, 203, 0.04), 9px 15px 0 rgba(36, 117, 203, 0.2);
-   -11px -11px 0 rgba(36, 117, 203, 0.06),
-    17px -13px 0 rgba(36, 117, 203, 0.07), 15px 30px 0 rgba(36, 117, 203, 0.1),
-    -20px -17px 0 rgba(36, 117, 203, 0.06),
-    -19px 19px 0 rgba(36, 117, 203, 0.08), 5px 21px 0 rgba(36, 117, 203, 0.02),
-    23px -23px 0 rgba(36, 117, 203, 0.1), 25px 40px 0 rgba(36, 117, 203, 0.2),
-    27px 17px 0 rgba(36, 117, 203, 0.1), -29px -29px 0 rgba(36, 117, 203, 0.1);*/
-}
-
-.head_home:hover {
-    /* -webkit-transform: rotate(1deg) scale(1.02);
-  -moz-transform: rotate(1deg) scale(1.02);
-  -o-transform: rotate(1deg) scale(1.02);
-  -ms-transform: rotate(1deg) scale(1.02); */
-    transform: rotate(-0.3deg) scale(1.02);
-
-    text-shadow: 1px 1px 0 rgba(36, 117, 203, 1),
-        13px 3px 0 rgba(36, 117, 203, 0.9), 5px 5px 0 rgba(36, 117, 203, 0.8);
-    /* 17px 7px 0 rgba(36, 117, 203, 0.7), 9px -15px 0 rgba(36, 117, 203, 0.6);
-   -11px 11px 0 rgba(36, 117, 203, 0.5), 7px -13px 0 rgba(36, 117, 203, 0.4),
-    15px 30px 0 rgba(36, 117, 203, 0.3), -20px 17px 0 rgba(36, 117, 203, 0.2),
-    -19px 19px 0 rgba(36, 117, 203, 0.1), 30px -21px 0 rgba(36, 117, 203, 0.08),
-    23px 23px 0 rgba(36, 117, 203, 0.06), -25px 40px 0 rgba(36, 117, 203, 0.04),
-    27px 27px 0 rgba(36, 117, 203, 0.02), -29px 29px 0 rgba(36, 117, 203, 0);*/
 }

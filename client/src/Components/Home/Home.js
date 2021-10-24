@@ -63,6 +63,7 @@ const Home = () => {
             </div>}
       </Stack>
 
+
       <Grid
         className="home"
         container
@@ -170,6 +171,7 @@ const Home = () => {
           </Grid>
         </Grid>
         {/* <div>
+
                         <button
                             className="button1"
                             onClick={() => history.push('/ask-something')}
