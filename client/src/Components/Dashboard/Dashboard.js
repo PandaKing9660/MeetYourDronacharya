@@ -22,11 +22,11 @@ const Dashboard = () => {
 
 const Profile = () =>{
   return(
-    <div class="card__collection clear-fix" style={{display:'flex'}}>
-      <div class="cards cards--two">
-          <img src={sow} class="img-responsive" alt="Cards Image" />
-          <span class="cards--two__rect"></span>
-          <span class="cards--two__tri"></span>
+    <div className="card__collection clear-fix" style={{display:'flex'}}>
+      <div className="cards cards--two">
+          <img src={sow} className="img-responsive" alt="Cards Image" />
+          <span className="cards--two__rect"></span>
+          <span className="cards--two__tri"></span>
           <p>Sowmya</p>
       </div>
       <div style={{width:'100%',textAlign:'right'}}>
@@ -52,17 +52,17 @@ const Profile = () =>{
 
 const Experience = () =>{
   return(
-      <div class="card-container"> 
-        <div class="card"><a href="worldweb">
-            <div class="card--display"><i class="material-icons">public</i>
+      <div className="card-container"> 
+        <div className="card"><a href="worldweb">
+            <div className="card--display"><i className="material-icons">public</i>
               <h2>Experience</h2>
             </div>
-            <div class="card--hover">
+            <div className="card--hover">
               <h2>Experience</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia. Cras volutpat arcu sit amet elit sodales, nec volutpat velit bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia.  volutpat velit bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia. volutpat velit bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia. Cras volutpat arcu sit amet elit sodales, nec volutpat velit bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia.  volutpat velit bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia. volutpat velit bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia.</p>
-              <p class="link">Click to see project</p>
+              <p className="link">Click to see project</p>
             </div></a>
-          <div class="card--border"></div>
+          <div className="card--border"></div>
         </div>
       </div>
   );
@@ -70,17 +70,17 @@ const Experience = () =>{
 
 const QuestionsAsked = ()=>{
    return(
-       <div class="card-container"> 
-        <div class="card card--dark"><a href="phonesoff">
-            <div class="card--display"><i class="material-icons">ring_volume</i>
+       <div className="card-container"> 
+        <div className="card card--dark"><a href="phonesoff">
+            <div className="card--display"><i className="material-icons">ring_volume</i>
               <h2>Questions asked</h2>
             </div>
-            <div class="card--hover">
+            <div className="card--hover">
               <h2>Questions asked</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia. Cras volutpat arcu sit amet elit sodales, nec volutpat velit bibendum.</p>
-              <p class="link">Click to see project</p>
+              <p className="link">Click to see project</p>
             </div></a>
-          <div class="card--border"></div>
+          <div className="card--border"></div>
         </div>
       </div>
    );
@@ -88,17 +88,17 @@ const QuestionsAsked = ()=>{
 
 const Answered = () =>{
   return(
-      <div class="card-container"> 
-        <div class="card"><a href="worldweb">
-            <div class="card--display"><i class="material-icons">public</i>
+      <div className="card-container"> 
+        <div className="card"><a href="worldweb">
+            <div className="card--display"><i className="material-icons">public</i>
               <h2>Answered</h2>
             </div>
-            <div class="card--hover">
+            <div className="card--hover">
               <h2>Answered</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia. Cras volutpat arcu sit amet elit sodales, nec volutpat velit bibendum.</p>
-              <p class="link">Click to see project</p>
+              <p className="link">Click to see project</p>
             </div></a>
-          <div class="card--border"></div>
+          <div className="card--border"></div>
         </div>
       </div>
   );
