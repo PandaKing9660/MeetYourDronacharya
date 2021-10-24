@@ -14,6 +14,10 @@ import FindMyself from './Components/FindMyself/FindMyself';
 import Login from './Components/login/login';
 import Signup from './Components/login/signup';
 
+import Logout from './Components/login/logout';
+// import "./app.css";
+
+
 import "./App.css";
 
 
@@ -52,10 +56,13 @@ function App () {
           <FindMyself />
         </Route>
         <Route exact path="/login">
-          <Login/>
+          <Login />
         </Route>
-        <Route exact path="/signup" >
-<Signup/>
+        <Route exact path="/logout">
+          <Logout />
+        </Route>
+        <Route exact path="/signup">
+          <Signup />
         </Route>
 
         <Route path="/*">
