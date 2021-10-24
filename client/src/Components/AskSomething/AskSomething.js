@@ -22,14 +22,15 @@ const style = {
 };
 
 const AskSomething = () => {
-    const user = JSON.parse (localStorage.getItem ('profile'));
+    const user = JSON.parse(localStorage.getItem('profile'));
     const [open, setOpen] = useState(false);
-    const handleOpen = () => user ? setOpen(true) : alert('Login to ask question');
+    const handleOpen = () =>
+        user ? setOpen(true) : alert('Login to ask question');
     const handleClose = () => setOpen(false);
     return (
         <div>
             <NavBar />
-            <Typography variant="h3" component="h3" mb={2}>
+            <Typography variant="h3" component="h3" mb={2} textAlign="center">
                 Ask Something
             </Typography>
 
@@ -48,7 +49,7 @@ const AskSomething = () => {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <EditorAndPreview option='question' />
+                    <EditorAndPreview option="question" />
                 </Box>
             </Modal>
 

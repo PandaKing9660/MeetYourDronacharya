@@ -65,7 +65,9 @@ export default function VerticalTabs() {
   return (
     <div>
       <NavBar />
-       <h2>Timeline</h2>
+      <Typography variant="h3" component="h3" mb={2} textAlign="center">
+                Time Line
+       </Typography>
     <Box
       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}
     >

@@ -138,9 +138,16 @@ const FindMyself = () => {
       <NavBar />
       <div className="findmyself_FindMyself">
         <h1 className="h1_findmyself">Find My Passion</h1>
-        <Grid container>
+        <Grid container
+         p={1}
+         direction="row"
+        //  spacing={{ xs: 1}}
+         rowSpacing={{xs: 1}}
+         justifyContent="space-around"
+         alignItems="center"
+         >
           {/* Left part: Showing list of topics */}
-          <Grid item sm={6}>
+          <Grid item xs ={12} sm={6}>
             <List
               className={classes.list_findmyself}
               component="nav"
@@ -159,7 +166,7 @@ const FindMyself = () => {
             </List>
           </Grid>
           {/* Right Part: showing questions for that list */}
-          <Grid item sm={6}>
+          <Grid item xs={12} sm={6}>
             {questionSetId !== "t0" ? (
               <Paper
                 className={classes.paper_findmyself}
@@ -167,11 +174,11 @@ const FindMyself = () => {
                 square
                 elevation={24}
               >
-                <h1>
+                <h1 style={{textAlign:"center"}}>
                   <u>Question Set</u>
                 </h1>
                 <p align="left">Choose the most suitable options:</p>
-                <ol type="i">
+                <ol type="i"  style={{padding:"2%"}}>
                   {questions
                     .filter((queid) => queid.id === questionSetId)
                     .map((queset) =>

@@ -71,7 +71,7 @@ const AboutTeam = () => {
         <h1 className="mess_AboutUs">Contribute to spread experience!!!</h1>
         <Grid className="teampic_AboutUs" container justifyContent="flex-start" alignItems="center">
           <Grid item sm={12}>
-            <h2> DEVELOPERS </h2>
+            <h2 style={{textAlign:"center", display:"block"}}> DEVELOPERS </h2>
           </Grid>
           <Grid item xs={12} sm={6}>
             <ActionAreaCard
@@ -112,10 +112,10 @@ const AboutUs = () => {
     <div className="aboutus_AboutUs">
       <NavBar />
       <Grid container spacing={2}>
-        <Grid item sx={12} md={7}>
+        <Grid item sm={12} md={7}>
           <Aboutwebsite />
         </Grid>
-        <Grid item sx={12} md={5}>
+        <Grid item sm={12} md={5}>
           <AboutTeam />
         </Grid>
       </Grid>
