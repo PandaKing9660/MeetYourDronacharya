@@ -2,11 +2,10 @@ const express = require ('express');
 const router = express.Router ();
 const askSomethingQuestion = require ('../models/askSomethingQuestion');
 const user = require ('../models/user');
-const askSomethingAnswer = require ('../models/askSomethingAnswer');
 
 router.use (express.json ());
 
-router.post ('/question/reverse-time-sort', (req, res) => {
+router.post ('/reverse-time-sort', (req, res) => {
   console.log('reverse sort');
   askSomethingQuestion
     .find ({})
@@ -15,7 +14,7 @@ router.post ('/question/reverse-time-sort', (req, res) => {
     .catch (err => console.log ('from ask-something.js ' + err));
 });
 
-router.post ('/question/user-list', (req, res) => {
+router.post ('/user-list', (req, res) => {
   const {user} = req.body;
 
   askSomethingQuestion
@@ -31,7 +30,7 @@ router.post ('/question/user-list', (req, res) => {
     .catch (err => console.log ('from ask-something.js ' + err));
 });
 
-router.post ('/question/user-likes', (req, res) => {
+router.post ('/user-likes', (req, res) => {
   const {user} = req.body;
 
   askSomethingQuestion
@@ -50,7 +49,7 @@ router.post ('/question/user-likes', (req, res) => {
     .catch (err => console.log ('from ask-something.js ' + err));
 });
 
-router.post ('/question/user-dislikes', (req, res) => {
+router.post ('/user-dislikes', (req, res) => {
   const {user} = req.body;
 
   askSomethingQuestion
@@ -69,7 +68,7 @@ router.post ('/question/user-dislikes', (req, res) => {
     .catch (err => console.log ('from ask-something.js ' + err));
 });
 
-router.post ('/question/time-sort', (req, res) => {
+router.post ('/time-sort', (req, res) => {
   console.log('time sort')
   askSomethingQuestion
     .find ({})
@@ -78,7 +77,7 @@ router.post ('/question/time-sort', (req, res) => {
     .catch (err => console.log ('from ask-something.js ' + err));
 });
 
-router.post ('/question/check', async (req, res) => {
+router.post ('/check', async (req, res) => {
   try {
     const {userId, questionId} = req.body;
 
@@ -110,7 +109,7 @@ router.post ('/question/check', async (req, res) => {
   }
 });
 
-router.post ('/question/add', async (req, res) =>   {
+router.post ('/add', async (req, res) =>   {
   try{
   const question = req.body;
   let user_image = '';
@@ -143,7 +142,7 @@ router.post ('/question/add', async (req, res) =>   {
 }catch{(err) => console.log("outside try" + err);}
 });
 
-router.put ('/question/addLike', async (req, res) => {
+router.put ('/addLike', async (req, res) => {
   try {
     const {userId, questionId} = req.body;
 
@@ -182,7 +181,7 @@ router.put ('/question/addLike', async (req, res) => {
   }
 });
 
-router.put ('/question/addDislike', async (req, res) => {
+router.put ('/addDislike', async (req, res) => {
   try {
     const {userId, questionId} = req.body;
 
