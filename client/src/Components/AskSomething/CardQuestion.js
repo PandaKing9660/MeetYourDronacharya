@@ -33,61 +33,42 @@ const style = {
     p: 4,
 };
 
+const CardQuestion = ({ quesData }) => {
+    const sanitizer = dompurify.sanitize;
 
-const CardQuestion = ({quesData}) => {
-  const sanitizer = dompurify.sanitize;
+    const user = JSON.parse(localStorage.getItem('profile'));
+    const [likes, setLike] = useState(quesData.liked.length);
+    const [dislikes, setDislike] = useState(quesData.disliked.length);
 
-  const user = JSON.parse (localStorage.getItem ('profile'));
-  const [likes, setLike] = useState (quesData.liked.length);
-  const [dislikes, setDislike] = useState (quesData.disliked.length);
+    const [userStatus, setUserStatus] = useState('');
 
-  const [userStatus, setUserStatus] = useState ('');
+    const [numAnswers, setNumAnswers] = useState(quesData.answers.length);
 
-  const [numAnswers, setNumAnswers] = useState (quesData.answers.length);
+    const [open, setOpen] = useState(false);
+    const handleOpen = () =>
+        user ? setOpen(true) : alert('Login to ask question');
+    const handleClose = () => setOpen(false);
 
-  const [open, setOpen] = useState (false);
-  const handleOpen = () =>
-    user ? setOpen (true) : alert ('Login to ask question');
-  const handleClose = () => setOpen (false);
+    useEffect(() => {
+        if (!user) {
+            return;
+        }
 
-  useEffect (
-    () => {
-      if (!user) {
-        return;
-      }
+        axios
+            .post(`http://localhost:3001/ask-something/question/check`, {
+                userId: user._id,
+                questionId: quesData._id,
+            })
+            .then((res) => {
+                setUserStatus(res.data);
+            })
+            .catch((err) => console.log(err));
+    }, [quesData._id]);
 
-      axios
-        .post (`http://localhost:3001/ask-something/question/check`, {
-          userId: user._id,
-          questionId: quesData._id,
-        })
-        .then (res => {
-          setUserStatus (res.data);
-        })
-        .catch (err => console.log (err));
-    },
-    [quesData._id]
-  );
-
-  const AddLikes = (userId, questionId) => {
-    if (!user) {
-      alert ('Please login to like this question');
-      return;
-    }
-
-    if (userStatus === 'liked') {
-      return;
-    }
-    axios
-      .put ('http://localhost:3001/ask-something/question/addLike', {
-        userId,
-        questionId,
-      })
-      .then (res => {
-        setLike (likes + 1);
-        if (userStatus === 'disliked') {
-          setDislike (dislikes - 1);
-
+    const AddLikes = (userId, questionId) => {
+        if (!user) {
+            alert('Please login to like this question');
+            return;
         }
 
         if (userStatus === 'liked') {
@@ -106,6 +87,7 @@ const CardQuestion = ({quesData}) => {
                 setUserStatus('liked');
             });
     };
+
     const AddDislikes = (userId, questionId) => {
         if (!user) {
             alert('Please login to like this question');
