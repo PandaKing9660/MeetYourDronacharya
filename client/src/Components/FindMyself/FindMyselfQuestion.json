@@ -88,51 +88,180 @@
             "name": "After Science",
             "options": [
                 {
-                    "option1": "Engineering",
-                    "option2": "Medical",
-                    "option3": "Others"
+                    "option1": "B.Tech.",
+                    "option2": "MBBS",
+                    "option3": "BArch",
+                    "option4": "BSc.",
+                    "option5": "BCA",
+                    "option6": "Nursing",
+                    "option7": "BPharma"
                 }
             ],
             "questionset": [
                 {
-                    "id": "t2q1",
-                    "que": "Rate your Logical Reasoning."
+                    "id": "t2q01",
+                    "que": "Rate your Mathematical Skills.",
+                    "B.Tech.": "0.9",
+                    "MBBS": "0.2",
+                    "BArch": "0.7",
+                    "BSc.": "1.0",
+                    "BCA": "0.4",
+                    "Nursing": "0.1",
+                    "BPharma": "0.2"
                 },
                 {
-                    "id": "t2q2",
-                    "que": "Rate your Mathematical Skills."
+                    "id": "t2q02",
+                    "que": "Rate your knowledge on medicines.",
+                    "B.Tech.": "0.1",
+                    "MBBS": "0.9",
+                    "BArch": "0.1",
+                    "BSc.": "0.5",
+                    "BCA": "0.1",
+                    "Nursing": "0.9",
+                    "BPharma": "1.0"
                 },
                 {
-                    "id": "t2q3",
-                    "que": "Rate your knowledge on medicines."
+                    "id": "t2q03",
+                    "que": "Rate your technical knowledge on computers.",
+                    "B.Tech.": "0.7",
+                    "MBBS": "0.3",
+                    "BArch": "0.5",
+                    "BSc.": "0.4",
+                    "BCA": "1.0",
+                    "Nursing": "0.2",
+                    "BPharma": "0.1"
                 },
                 {
-                    "id": "t2q4",
-                    "que": "Rate your formula derivation skills."
+                    "id": "t2q04",
+                    "que": "Rate your passion for building's designs.",
+                    "B.Tech.": "0.0",
+                    "MBBS": "0.0",
+                    "BArch": "1.0",
+                    "BSc.": "0.0",
+                    "BCA": "0.0",
+                    "Nursing": "0.0",
+                    "BPharma": "0.0"
                 },
                 {
-                    "id": "t2q5",
-                    "que": "Rate your business tactics."
+                    "id": "t2q05",
+                    "que": "Rate your drawing and creativity skills.",
+                    "B.Tech.": "0.5",
+                    "MBBS": "0.1",
+                    "BArch": "1.0",
+                    "BSc.": "0.2",
+                    "BCA": "0.1",
+                    "Nursing": "0.0",
+                    "BPharma": "0.0"
                 },
                 {
-                    "id": "t2q6",
-                    "que": "Rate your mind reading skills."
+                    "id": "t2q06",
+                    "que": "Rate your love for science.",
+                    "B.Tech.": "0.8",
+                    "MBBS": "0.7",
+                    "BArch": "0.2",
+                    "BSc.": "1.0",
+                    "BCA": "0.2",
+                    "Nursing": "0.5",
+                    "BPharma": "0.4"
                 },
                 {
-                    "id": "t2q7",
-                    "que": "Rate your speaking skills."
+                    "id": "t2q07",
+                    "que": "Rate your programming skills.",
+                    "B.Tech.": "0.7",
+                    "MBBS": "0.1",
+                    "BArch": "0.3",
+                    "BSc.": "0.2",
+                    "BCA": "1.0",
+                    "Nursing": "0.0",
+                    "BPharma": "0.0"
                 },
                 {
-                    "id": "t2q8",
-                    "que": "Rate your emotional attachment."
+                    "id": "t2q08",
+                    "que": "Rate your formula derivation skills.",
+                    "B.Tech.": "0.8",
+                    "MBBS": "0.5",
+                    "BArch": "0.6",
+                    "BSc.": "1.0",
+                    "BCA": "0.2",
+                    "Nursing": "0.0",
+                    "BPharma": "0.0"
                 },
                 {
-                    "id": "t2q9",
-                    "que": "Rate your memory."
+                    "id": "t2q09",
+                    "que": "Rate your memory.",
+                    "B.Tech.": "0.6",
+                    "MBBS": "0.8",
+                    "BArch": "0.3",
+                    "BSc.": "0.9",
+                    "BCA": "0.4",
+                    "Nursing": "0.6",
+                    "BPharma": "1.0"
                 },
                 {
                     "id": "t2q10",
-                    "que": "Rate your working nature."
+                    "que": "Rate your communication skills.",
+                    "B.Tech.": "0.6",
+                    "MBBS": "0.6",
+                    "BArch": "0.4",
+                    "BSc.": "0.4",
+                    "BCA": "0.4",
+                    "Nursing": "1.0",
+                    "BPharma": "1.0"
+                },
+                {
+                    "id": "t2q11",
+                    "que": "Rate your life-saving skills.",
+                    "B.Tech.": "0.2",
+                    "MBBS": "1.0",
+                    "BArch": "0.2",
+                    "BSc.": "0.1",
+                    "BCA": "0.1",
+                    "Nursing": "1.0",
+                    "BPharma": "0.7"
+                },
+                {
+                    "id": "t2q12",
+                    "que": "Rate your convincing skills.",
+                    "B.Tech.": "0.4",
+                    "MBBS": "0.4",
+                    "BArch": "0.4",
+                    "BSc.": "0.3",
+                    "BCA": "0.3",
+                    "Nursing": "0.9",
+                    "BPharma": "1.0"
+                },
+                {
+                    "id": "t2q13",
+                    "que": "Rate your patience.",
+                    "B.Tech.": "0.4",
+                    "MBBS": "0.7",
+                    "BArch": "0.4",
+                    "BSc.": "0.6",
+                    "BCA": "0.4",
+                    "Nursing": "0.8",
+                    "BPharma": "0.9"
+                },
+                {
+                    "id": "t2q14",
+                    "que": "Rate your love to help others.",
+                    "B.Tech.": "0.3",
+                    "MBBS": "0.4",
+                    "BArch": "0.8",
+                    "BSc.": "0.7",
+                    "BCA": "0.8",
+                    "Nursing": "0.9",
+                    "BPharma": "0.4"
+                },
+                {
+                    "id": "t2q15",
+                    "que": "Rate your love to have fixed working routine.",
+                    "B.Tech.": "0.6",
+                    "MBBS": "0.1",
+                    "BArch": "0.7",
+                    "BSc.": "0.5",
+                    "BCA": "0.6",
+                    "Nursing": "0.1",
+                    "BPharma": "0.7"
                 }
             ]
         },

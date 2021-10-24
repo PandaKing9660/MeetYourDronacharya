@@ -17,7 +17,7 @@ import {
   Box,
   Fade,
   Typography,
-  CircularProgress
+  CircularProgress,
 } from "@mui/material";
 
 import { Chart } from "react-google-charts";
@@ -47,13 +47,17 @@ const useStyles = makeStyles({
   paper_findmyself: {
     width: "95%",
     marginBottom: "20px",
+    padding: "2%",
     boxShadow: "5px 10px 8px 10px #888888",
     backgroundColor: "#fffafa",
     color: "black",
+    height: "580px",
+    overflow: "auto",
   },
   formcontrol_findmyself: {
     width: "90%",
-    marginTop: "10px",
+    margin: "5%",
+    padding: "5%",
   },
   pagination_findmyself: {
     marginTop: "10px",
@@ -97,7 +101,7 @@ const FindMyself = () => {
       .map(
         (queset) => (
           setCareerOptions(queset.options[0]),
-          queset.questionset.map((q) => (score[q.id] = -1))
+          queset.questionset.map((q) => (score[q.id] = 0))
         )
       );
   };
@@ -122,14 +126,13 @@ const FindMyself = () => {
   };
 
   const resultPreparation = async () => {
-
     var result = ResultCalculation(questionSetId, score, careeroptions);
 
-    for(let i=1;i<result.options.length;i++)
-    {
+    for (let i = 1; i < result.options.length; i++) {
       result.options[i][1] = parseFloat(result.options[i][1]);
     }
     setResultCareer(result);
+    console.log(222, result);
     resultModalOpen();
     setScore({});
   };
@@ -171,42 +174,46 @@ const FindMyself = () => {
                 <h1>
                   <u>Question Set</u>
                 </h1>
-                <p align="left">: : : Choose the most suitable options:</p>
-                {questions
-                  .filter((queid) => queid.id === questionSetId)
-                  .map((queset) =>
-                    queset.questionset.map((q) => (
-                      <FormControl
-                        className={classes.formcontrol_findmyself}
-                        component="fieldset"
-                      >
-                        <FormLabel component="legend">{q.que}</FormLabel>
-                        <RadioGroup
-                          row
-                          aria-label={q.que}
-                          name="row-radio-buttons-group"
-                          onChange={optionSelect}
-                        >
-                          <FormControlLabel
-                            value={q.id + "option1"}
-                            control={<Radio />}
-                            label="Low"
-                          />
-                          <FormControlLabel
-                            value={q.id + "option2"}
-                            control={<Radio />}
-                            label="Medium"
-                          />
-                          <FormControlLabel
-                            value={q.id + "option3"}
-                            control={<Radio />}
-                            label="High"
-                          />
-                        </RadioGroup>
-                        <Divider />
-                      </FormControl>
-                    ))
-                  )}
+                <p align="left">Choose the most suitable options:</p>
+                <ol type="i">
+                  {questions
+                    .filter((queid) => queid.id === questionSetId)
+                    .map((queset) =>
+                      queset.questionset.map((q) => (
+                        <li>
+                          <FormControl
+                            className={classes.formcontrol_findmyself}
+                            component="fieldset"
+                          >
+                            <FormLabel component="legend"> {q.que}</FormLabel>
+                            <RadioGroup
+                              row
+                              aria-label={q.que}
+                              name="row-radio-buttons-group"
+                              onChange={optionSelect}
+                            >
+                              <FormControlLabel
+                                value={q.id + "option1"}
+                                control={<Radio />}
+                                label="Low"
+                              />
+                              <FormControlLabel
+                                value={q.id + "option2"}
+                                control={<Radio />}
+                                label="Medium"
+                              />
+                              <FormControlLabel
+                                value={q.id + "option3"}
+                                control={<Radio />}
+                                label="High"
+                              />
+                            </RadioGroup>
+                            <Divider padding="2px" />
+                          </FormControl>
+                        </li>
+                      ))
+                    )}
+                </ol>
                 <Pagination
                   className={classes.pagination_findmyself}
                   count={1}
@@ -234,9 +241,10 @@ const FindMyself = () => {
                     </u>
                   </h1>
                   <p>
-                    Hey, its me Anand and welcome to the page "Find your Passion"
-                    to know one of the most difficult and equally important
-                    question of student life "What should be our career???"
+                    Hey, its me Anand and welcome to the page "Find your
+                    Passion" to know one of the most difficult and equally
+                    important question of student life "What should be our
+                    career???"
                     <br />
                     <br />
                     Select a domain from the left and start answering to the
@@ -248,9 +256,9 @@ const FindMyself = () => {
                     The career shown by us will be calculated according to the
                     given score for each options. We strongly advice you to talk
                     to you known ones, explore this website and googles and then
-                    select a career which really suits you. Don't go with flow by
-                    thinking everyone is doing this or that, it must be awesome.
-                    Everyone is different and possess unique talents.
+                    select a career which really suits you. Don't go with flow
+                    by thinking everyone is doing this or that, it must be
+                    awesome. Everyone is different and possess unique talents.
                   </p>
                 </div>
               </Paper>
@@ -271,24 +279,34 @@ const FindMyself = () => {
         >
           <Fade in={resultDisplay}>
             <Box className={classes.result_modal}>
-              <Typography id="transition-modal-title" variant="h6" component="h2">
+              <Typography
+                id="transition-modal-title"
+                variant="h6"
+                component="h2"
+              >
                 <u>Result Page</u>
               </Typography>
               <Divider />
               <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                <h5 className="suggestion_findmyself"> Suggested Career Option: </h5>
-                <h1 className="careerchoice_findmyself">{resultCareer["careerchoice"]}</h1>
+                <h5 className="suggestion_findmyself">
+                  {" "}
+                  Suggested Career Option:{" "}
+                </h5>
+                <h1 className="careerchoice_findmyself">
+                  {resultCareer["careerchoice"]}
+                </h1>
                 <Chart
                   chartType="PieChart"
                   loader={<CircularProgress color="secondary" />}
-                  data={resultCareer['options']}
+                  data={resultCareer["options"]}
                   options={{
-                    title: 'Comparision with other choices: ',
+                    title: "Comparision with other choices: ",
                   }}
-                  rootProps={{ 'data-testid': '1' }}
+                  rootProps={{ "data-testid": "1" }}
                 />
                 <p className="note_findmyself">
-                  Note: Percentage calculated is with respect to the suggested career option
+                  Note: Percentage calculated is with respect to the suggested
+                  career option
                 </p>
               </Typography>
             </Box>
