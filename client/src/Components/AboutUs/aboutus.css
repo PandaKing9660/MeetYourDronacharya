@@ -6,6 +6,7 @@
   text-align: justify;
   padding: 2% 5%;
   box-shadow: 10px 10px 10px rgb(204, 203, 203);
+  border-radius: 4px;
 }
 
 .aboutwebsite_AboutUs h1 {
@@ -34,12 +35,14 @@
 	color: white;
 	height: 500px;
 	box-shadow: 10px 10px 10px rgb(146, 145, 145);
+	border-radius: 4px;
 }
 
 .mess_AboutUs {
 	font-size: 50px;
 	text-decoration: bold;
 	transform: translateY(150px);
+	text-align: center;
 }
 
 .teampic_AboutUs {

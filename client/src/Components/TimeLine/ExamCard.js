@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 
 import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
+
+import {Tooltip, Collapse, CardActions, CardContent, CardMedia, CardHeader, Card, Zoom} from '@mui/material';
 
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -29,13 +26,13 @@ const ExpandMore = styled((props) => {
 
 const ExamCard = ({ cardData }) => {
     const [expanded, setExpanded] = useState(false);
-    const [isHeartLiked, setIsHeartLiked] = useState(false);
+    const [isBookMarked, setisBookMarked] = useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
     const handleHeartClick = () => {
-        setIsHeartLiked(!isHeartLiked);
+        setisBookMarked(!isBookMarked);
     };
 
     return (
@@ -59,16 +56,18 @@ const ExamCard = ({ cardData }) => {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton
+            <Tooltip TransitionComponent={Zoom} title="BookMark" placement="top">
+                  <IconButton
                     aria-label="add to favorites"
                     onClick={handleHeartClick}
                 >
-                    {isHeartLiked ? (
-                        <FavoriteIcon />
+                    {!isBookMarked ? (
+                        <BookmarkIcon />
                     ) : (
-                        <FavoriteIcon style={{ color: 'red' }} />
+                        <BookmarkIcon style={{ color: 'green' }} />
                     )}
                 </IconButton>
+                </Tooltip>
                 <IconButton aria-label="share">
                     <ShareIcon />
                 </IconButton>
