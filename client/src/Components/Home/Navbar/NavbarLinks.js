@@ -19,6 +19,7 @@ const NavbarLinks = ({linkSingle}) => {
             aria-label="show new home"
             edge="end"
             color={color ? 'warning' : 'inherit'}
+            sx={{ color: "blue", background: "white", margin:"0.2em" }}
             // aria-controls={menuId}
             // aria-haspopup="true"
             // onClick={handleProfileMenuOpen}

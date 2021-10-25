@@ -25,13 +25,13 @@ const googleSuccess = async res => {
   const password = userData.googleId;
 
   axios
-    .post ('http://localhost:3001/signup', {name, email, password, imageUrl})
+    .post (`${process.env.REACT_APP_BACKEND_URL}/signup`, {name, email, password, imageUrl})
     .then (res => {
       console.log ('hello');
       if (res.data.msg === 'done') {
         console.log ('Registered');
         localStorage.setItem ('profile', JSON.stringify ({...res.data.user}));
-        window.location = 'http://localhost:3000';
+        window.location = process.env.REACT_APP_FRONTEND_URL;
       } else {
         alert ('something wrong');
       }
@@ -60,7 +60,7 @@ const Signup = () => {
     } else {
       // backend call
       axios
-        .post ('http://localhost:3001/signup', {
+        .post (`${process.env.REACT_APP_BACKEND_URL}/signup`, {
           name,
           email,
           password,
@@ -74,7 +74,7 @@ const Signup = () => {
               'profile',
               JSON.stringify ({...res.data.user})
             );
-            window.location = 'http://localhost:3000';
+            window.location = process.env.REACT_APP_FRONTEND_URL;
           } else {
             alert ('something wrong');
           }
@@ -121,7 +121,7 @@ const Signup = () => {
                     <Grid item>
                       <TextField
                         type="text"
-                        placeholder="First Name"
+                        placeholder="User Name"
                         fullWidth
                         name="Name"
                         variant="outlined"

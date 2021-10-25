@@ -19,7 +19,6 @@ router.post ('/user-list', (req, res) => {
 
   Experience
     .find ({})
-    .sort ({time: -1})
     .then (experiences => {
       const listFromUser = experiences.filter (
         experience => experience.by === user._id

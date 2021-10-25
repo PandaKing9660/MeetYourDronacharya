@@ -8,17 +8,17 @@ const Logout = () => {
   useEffect (() => {
     setTimeout (() => {
       localStorage.removeItem ('profile');
-      window.location.href = 'http://localhost:3000/';
+      window.location.href = process.env.REACT_APP_FRONTEND_URL;
     }, 2000);
   }, []);
 
   return (
     <Box>
-      
+
       <Stack sx={{width: '100%', color: 'grey.500'}} spacing={3} mt={4}>
-      <Typography variant="h4">
-  Signing You out...
-</Typography>
+        <Typography variant="h4">
+          Signing You out...
+        </Typography>
         <LinearProgress color="secondary" />
         <LinearProgress color="success" />
         <LinearProgress color="inherit" />

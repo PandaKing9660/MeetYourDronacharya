@@ -1,26 +1,35 @@
 import NavBar from '../Home/Navbar/Navbar';
 import "./dashboard.scss"
+import { useState } from 'react';
 import sow from "../AboutUs/Photos/sow.png";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import '../Materials/material.css'
 
 const Dashboard = () => {
   return (
     <div>
       <NavBar />
-      <div style={{width:"90%",marginLeft:'auto',marginRight:'auto'}}>
-      <Profile />
+      <h1 className="heading" style={{marginTop:25,marginBottom:10,textAlign:'center'}}>PROFILE</h1>
+      <div style={{width:"90%"}}>
+      <Profile style={{marginLeft:'auto',marginRight:'auto'}}/>
+      <div style={{width:'110%',display:'flex'}}>
       <Experience />
       <QuestionsAsked />
       <Answered />
+      </div>
       </div>
     </div>
   );
 };
 
 const Profile = () =>{
+   const [isFriendAdded, setIsHeartLiked] = useState(true);
+  const handleClick = () => {
+        setIsHeartLiked(!isFriendAdded);
+    };
   return(
     <div className="card__collection clear-fix" style={{display:'flex'}}>
       <div className="cards cards--two">
@@ -30,7 +39,6 @@ const Profile = () =>{
           <p>Sowmya</p>
       </div>
       <div style={{width:'100%',textAlign:'right'}}>
-        <h2>Profile</h2>
         <h3>Name: Sowmya</h3>
         <h3>Email: cs19uwth@gmail.com</h3>
         <h3>Social Media: cs19uwth@gmail.com</h3>
@@ -40,13 +48,40 @@ const Profile = () =>{
           <BasicCard text="Asked questions" number="5" />
           <BasicCard text="Experiences shared" number="9" />
         </div>
-        
-          <Button variant="contained" sx={{marginTop:3}}>ADD FRIEND</Button>
+          <div 
+          onClick={handleClick}
+                >
+                    {isFriendAdded ? 
+                    (<Before />)
+                         :
+                          ( <After />)}
+          </div>
           <div>
           <Button variant="contained" sx={{marginTop:2}}>CHAT</Button>
           </div>
       </div>
     </div>
+  );
+};
+
+const Before = () =>{
+  return(
+       <div style={{marginTop:15}}>
+           <Button variant="contained">ADD FRIEND</Button>
+       </div>
+  );
+};
+
+const After = () =>{
+  return(
+       <div style={{marginTop:15}}>
+           <Button variant="contained" sx={{
+             backgroundColor:"green",
+              '&:hover': {
+                backgroundColor: "green",
+              }
+          }}>Friend ADded</Button>
+       </div>
   );
 };
 
