@@ -11,7 +11,7 @@ import {
   Link,
 } from '@material-ui/core';
 import {GoogleLogin} from 'react-google-login';
-import Icon from './icon';
+import Icon from './Icon';
 
 import axios from 'axios';
 import './login.css';
@@ -24,8 +24,14 @@ const googleSuccess = async res => {
 
   const password = userData.googleId;
 
+  // signing up the user
   axios
-    .post (`${process.env.REACT_APP_BACKEND_URL}/signup`, {name, email, password, imageUrl})
+    .post (`${process.env.REACT_APP_BACKEND_URL}/signup`, {
+      name,
+      email,
+      password,
+      imageUrl,
+    })
     .then (res => {
       console.log ('hello');
       if (res.data.msg === 'done') {
@@ -50,6 +56,7 @@ const Signup = () => {
   const [password, setPassword] = useState ('');
   const [confirmPassword, setConfirmPassword] = useState ('');
 
+  // while submitting
   const handleSubmit = event => {
     event.preventDefault ();
     const imageUrl = false;

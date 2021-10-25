@@ -6,6 +6,7 @@ import {Typography} from '@mui/material';
 
 const Logout = () => {
   useEffect (() => {
+    // loging out the user after some wait
     setTimeout (() => {
       localStorage.removeItem ('profile');
       window.location.href = process.env.REACT_APP_FRONTEND_URL;

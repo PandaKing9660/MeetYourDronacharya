@@ -1,6 +1,7 @@
 import React from 'react';
 
-const icon = () => (
+const Icon = () => (
+  // simple icon for dashboard
   <svg style={{width: '20px', height: '20px'}} viewBox="0 0 24 24">
     <path
       fill="currentColor"
@@ -9,4 +10,4 @@ const icon = () => (
   </svg>
 );
 
-export default icon;
+export default Icon;
