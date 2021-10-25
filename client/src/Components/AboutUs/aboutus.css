@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Monoton");
 
+/* Heading */
 .heading {
   text-align: center;
   font-family: "Monoton", Helvetica, sans-serif;
@@ -15,6 +16,7 @@
   }
 }
 
+/* About Website */
 .aboutus_AboutUs {
   margin: 150px 0;
 }
@@ -46,6 +48,7 @@
   padding: 2%;
 }
 
+/* About developers and message card */
 .team_AboutUs {
   background-color: #2a2a72;
   background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
@@ -56,6 +59,7 @@
   border-radius: 4px;
 }
 
+/* Message Card */
 .mess_AboutUs {
   font-size: 50px;
   text-decoration: bold;
@@ -63,6 +67,7 @@
   text-align: center;
 }
 
+/* Developers */
 .teampic_AboutUs {
   opacity: 0;
   transform: translateY(-150px);

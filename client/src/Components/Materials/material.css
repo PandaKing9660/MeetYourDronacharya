@@ -2,7 +2,7 @@
 
 .division {
   display: flex;
-  margin: 75px 0 75px 0;
+  margin: 75px 25px 75px 25px;
 }
 
 .heading {
@@ -15,7 +15,7 @@
 @supports (-webkit-background-clip: text) {
   .heading {
     color: transparent;
-    background: linear-gradient(7deg, #5a5b5c 50%, #000000 0);
+    background: linear-gradient(7deg, #0c9fda 50%, #3210c9 0);
     -webkit-background-clip: text;
   }
 }

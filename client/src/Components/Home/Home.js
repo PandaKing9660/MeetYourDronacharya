@@ -13,7 +13,7 @@ import {
   Autocomplete,
   TextField,
 } from "@mui/material";
-import { purple, red } from "@mui/material/colors";
+import { red } from "@mui/material/colors";
 import logoutIcon from "@mui/icons-material/Logout";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -41,17 +41,16 @@ const Home = () => {
     variant: "contained",
     color: red[40],
   });
-  let history = useHistory();
+  let history = useHistory(); //Storing history website
   return (
     <Box className="home_container" justifyContent="center">
-      {/* <h1 className="head_home">MEET YOUR DRONACHARYA</h1> */}
+      {/* Shoi=wing signup/signin button according to whether the user is signed in or not */}
       <Stack direction="row" spacing={0}>
         {!JSON.parse (localStorage.getItem ('profile'))
           ? <Button
               variant="contained"
               color="warning"
               href="/login"
-              // sx={{ marginLeft: (160 * width) / 1500 }}
             >
               Signup / Signin
             </Button>
@@ -79,6 +78,7 @@ const Home = () => {
             </div>}
       </Stack>
 
+      {/* Showing Heading */}
       <Grid
         className="home"
         container
@@ -90,14 +90,11 @@ const Home = () => {
           <h1 className="head_home">Meet Your Dronacharya</h1>
         </Grid>
         <Grid item xs={5} lg={4} mb={2}>
-          {/* <div className="remaining"> */}
           <Autocomplete
             disablePortal
             id="combo-box-demo"
             options={top100Films}
             sx={{
-              // width: "100%",
-              // marginLeft: (width * 60) / 1500,
               border: 1,
               borderRadius: 3,
               background: "white",
@@ -106,6 +103,7 @@ const Home = () => {
           />
         </Grid>
 
+        {/* Showing Buttons to navigate to other webpage */}
         <Grid
           container
           rowSpacing={5}
@@ -206,25 +204,6 @@ const Home = () => {
             </Tooltip>
           </Grid>
         </Grid>
-        {/* <div>
-
-                        <button
-                            className="button1"
-                            onClick={() => history.push('/ask-something')}
-                            style={{
-                                width: '350px',
-                                height: '75px',
-                                fontSize: 20,
-                                color: 'white',
-                                borderRadius: 15,
-                                marginRight: width - 720,
-                                marginTop: 100,
-                            }}
-                        >
-                            Ask something
-                        </button>
-                    </div> */}
-        {/* </div> */}
       </Grid>
     </Box>
   );

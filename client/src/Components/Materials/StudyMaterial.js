@@ -11,46 +11,18 @@ import NavBar from "../Home/Navbar/Navbar";
 import "./material.css";
 import MaterialCard from "./materialCard";
 import { useState, useEffect } from "react";
-
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
-
 import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CircularProgress from '@mui/material/CircularProgress';
-
 import { DropzoneArea } from "material-ui-dropzone";
-// import {
-//   AttachFile,
-//   Description,
-//   PictureAsPdf,
-//   Theaters,
-// } from "@material-ui/icons";
-
 import axios from "axios";
 
-// const handlePreviewIcon = (fileObject, classes) => {
-//   const { type } = fileObject.file;
-//   const iconProps = {
-//     className: classes.image,
-//   };
-
-//   if (type.startsWith("video/")) return <Theaters {...iconProps} />;
-
-//   switch (type) {
-//     case "application/msword":
-//     case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-//       return <Description {...iconProps} />;
-//     case "application/pdf":
-//       return <PictureAsPdf {...iconProps} />;
-//     default:
-//       return <AttachFile {...iconProps} />;
-//   }
-// };
-
+// Styles for search
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -91,6 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+// Study Material
 export default function StudyMaterial() {
   const [value, setValue] = React.useState("1");
   const handleChange = (event, newValue) => {
@@ -104,8 +77,10 @@ export default function StudyMaterial() {
   const [loading, setLoading] = useState(false);
   const [materials, setMaterials] = useState ([]);
 
+  // To retrieve user info if logged in
   const user = JSON.parse(localStorage.getItem("profile"));
 
+  // Fetching previously added study materials
   useEffect (
     () => {
       setLoading(true);
@@ -121,6 +96,7 @@ export default function StudyMaterial() {
     }
   ,[]);
 
+  // Save uploaded material
   function onSaveFirstFile(file) {
     setData((prevState) => ({
       ...data,
@@ -129,10 +105,12 @@ export default function StudyMaterial() {
     console.log(111, file);
   }
 
+  // Setting Tags
   const handleTagChange = (event, value) => {
     setTag(value);
   };
 
+  // For uploading Study Materials
   const handleSubmit = () => {
     console.log(title);
     console.log(description);
@@ -156,28 +134,12 @@ export default function StudyMaterial() {
     alert("Thank you for sharing the material!!!");
   };
 
+  // Showing two tabs: for displaying materials, for adding materials
   return (
     <div className="material_StudyMaterial">
       <NavBar />
       <h1 className="heading" style={{marginTop:25,textAlign:'center'}}>STUDY MATERIAL</h1>
       <div className="division">
-        {/* <div className="info">
-          <div>
-            Books are undeniably a blessing to humankind. And books being useful
-            for us in many ways have earned the title of our best friend.
-            Libraries are the storehouse of books of several genres where
-            interested readers can spend time reading in silence or can borrow
-            books by being a member of that library. Through this practice of
-            reading, we humans also display a greater sense of being civilized.
-            There are individuals like myself who like to collect books,
-            especially storybooks or novels. And this habit of mine has turned
-            my house into a small library in itself. I know many other readers
-            who share this same obsession with reading books and collecting
-            them. My conversions with them mostly revolve around the plot, the
-            character development, the writing style of the authors, and other
-            aspects of books.
-          </div>
-        </div> */}
         <div className="materials">
           <Box sx={{ width: "100%", typography: "body1" }}>
             <TabContext value={value}>
@@ -187,7 +149,6 @@ export default function StudyMaterial() {
                   aria-label="lab API tabs example"
                 >
                   <Tab label="Study materials" value="1" />
-                  {/* <Tab label="Liked materials" value="3" /> */}
                   <Tab label="Add material" value="4" />
                 </TabList>
               </Box>
@@ -202,6 +163,7 @@ export default function StudyMaterial() {
                       inputProps={{ "aria-label": "search" }}
                     />
                   </Search>
+                  {/* If materials loaded, showing material otherwise circular progress */}
                   {loading ? (
                     <CircularProgress />
                   ) : (
@@ -216,21 +178,7 @@ export default function StudyMaterial() {
                   )}
                 </Box>
               </TabPanel>
-              {/* <TabPanel value="3" sx={{ color: "black", background: "white" }}>
-                <Box sx={{ transform: "translateZ(0px)", flexGrow: 1 }}>
-                  <Search>
-                    <SearchIconWrapper>
-                      <SearchIcon />
-                    </SearchIconWrapper>
-                    <StyledInputBase
-                      placeholder="Search…"
-                      inputProps={{ "aria-label": "search" }}
-                    />
-                  </Search>
-                  <MaterialCard />
-                  <MaterialCard />
-                </Box>
-              </TabPanel> */}
+              {/* For uploading Material */}
               <TabPanel value="4">
                 <Box sx={{ transform: "translateZ(0px)", flexGrow: 1 }}>
                   <form>
@@ -240,7 +188,6 @@ export default function StudyMaterial() {
                     <input
                       style={{ width: "100%", padding: 15, marginBottom: 40 }}
                       type="text"
-                      // value={title}
                       onChange={(e) => setTitle(e.target.value)}
                     />
                     <h4 style={{ textAlign: "left" }}>
@@ -282,6 +229,7 @@ export default function StudyMaterial() {
                     </div>
 
                     <div style={{ margin: 40 }}>
+                      {/* For droping materials like pdf or images or videos */}
                       <DropzoneArea
                         showPreviews={true}
                         onChange={onSaveFirstFile}
@@ -305,4 +253,4 @@ export default function StudyMaterial() {
   );
 }
 
-const subjects = [{ title: "CAT" }, { title: "physics" }];
+const subjects = [{ title: "CAT" }, { title: "UPSC" }, { title: "JEE" }];

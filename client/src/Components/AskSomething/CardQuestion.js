@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import dompurify from 'dompurify';
-
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
@@ -36,20 +35,17 @@ const style = {
 
 const CardQuestion = ({quesData}) => {
   const sanitizer = dompurify.sanitize;
-
   const user = JSON.parse (localStorage.getItem ('profile'));
   const [likes, setLike] = useState (quesData.liked.length);
   const [dislikes, setDislike] = useState (quesData.disliked.length);
-
   const [userStatus, setUserStatus] = useState ('none');
-
   const [numAnswers, setNumAnswers] = useState (quesData.answers.length);
-
   const [open, setOpen] = useState (false);
   const handleOpen = () =>
     user ? setOpen (true) : alert ('Login to ask question');
   const handleClose = () => setOpen (false);
 
+  // Retrieving Questions from backend
   useEffect (
     () => {
       if (!user) {
@@ -69,6 +65,7 @@ const CardQuestion = ({quesData}) => {
     [quesData._id]
   );
 
+  // Adding like to questions and storing it in backend
   const AddLikes = (userId, questionId) => {
     if (!user) {
       alert ('Please login to like this question');
@@ -92,6 +89,7 @@ const CardQuestion = ({quesData}) => {
       });
   };
 
+  // Adding dislike to questions and storing it in backend
   const AddDislikes = (userId, questionId) => {
     if (!user) {
       alert ('Please login to like this question');
@@ -120,15 +118,12 @@ const CardQuestion = ({quesData}) => {
       <Paper sx={{p: 0, margin: '1em', minWidth: 300, flexGrow: 1}}>
         <Box
           p={1}
-          // color={{ xs: 'red', sm: 'blue', md: 'green' }}
           marginY={{xs: '1em', md: '0.2em'}}
           //  This will change margin on `sm` and `md`
         >
           <CardContent>
             <Grid
               container
-              // rowSpacing={1}
-              // columnSpacing={{ xs: 1, sm: 2, md: 4 }}
               justifyContent="space-between"
               alignItems="center"
             >
