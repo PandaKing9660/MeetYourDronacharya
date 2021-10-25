@@ -1,3 +1,4 @@
+// importing all the needed files
 import React from 'react';
 import {useState} from 'react';
 import {
@@ -11,10 +12,11 @@ import {
   Link,
 } from '@material-ui/core';
 import {GoogleLogin} from 'react-google-login';
-import Icon from './icon';
+import Icon from './Icon';
 import axios from 'axios';
 import './login.css';
 
+// for logging in via google
 const googleSuccess = async res => {
   const userData = res.profileObj;
   console.log (userData);
@@ -22,61 +24,66 @@ const googleSuccess = async res => {
   const email = userData.email;
   const password = userData.googleId;
 
+  // sending request to backend, incase of deployment using netlify else localhost for development
 
-  axios.post (`${process.env.REACT_APP_BACKEND_URL}/login`, {email, password}).then (res => {
-    console.log (res.data);
-    if (res.data.found === true) {
-      console.log (res.data.user);
-      localStorage.setItem ('profile', JSON.stringify ({...res.data.user}));
-      window.location = process.env.REACT_APP_FRONTEND_URL;
-    } else if (res.data.msg === 'Wrong Password') {
-      alert ('User with this email already exist with different credentials');
-    } else {
-      const {name, email, imageUrl} = userData;
+  axios
+    .post (`${process.env.REACT_APP_BACKEND_URL}/login`, {email, password})
+    .then (res => {
+      if (res.data.found === true) {
+        // user found and saved in localStorage
+        localStorage.setItem ('profile', JSON.stringify ({...res.data.user}));
+        window.location = process.env.REACT_APP_FRONTEND_URL;
+      } else if (res.data.msg === 'Wrong Password') {
+        // wrong password
+        alert ('User with this email already exist with different credentials');
+      } else {
+        const {name, email, imageUrl} = userData;
 
-      const password = userData.googleId;
+        const password = userData.googleId;
 
-      axios
-        .post (`${process.env.REACT_APP_BACKEND_URL}/signup`, {
-          name,
-          email,
-          password,
-          imageUrl,
-        })
-        .then (res => {
-          console.log ('hello');
-          if (res.data.msg === 'done') {
-            console.log ('Registered');
-            localStorage.setItem (
-              'profile',
-              JSON.stringify ({...res.data.user})
-            );
-            window.location = process.env.REACT_APP_FRONTEND_URL;
-          } else {
-            alert ('something wrong');
-          }
-        })
-        .catch (err => {
-          console.log (err);
-        });
-    }
-  });
+        // user not found but as google was used we will signup the user and then login
+        axios
+          .post (`${process.env.REACT_APP_BACKEND_URL}/signup`, {
+            name,
+            email,
+            password,
+            imageUrl,
+          })
+          .then (res => {
+            if (res.data.msg === 'done') {
+              localStorage.setItem (
+                'profile',
+                JSON.stringify ({...res.data.user})
+              );
+              window.location = process.env.REACT_APP_FRONTEND_URL;
+            } else {
+              alert ('something wrong');
+            }
+          })
+          .catch (err => {
+            console.log (err);
+          });
+      }
+    });
 };
 
+// incase of error from google
 const googleError = () =>
   alert ('Google Sign In was unsuccessful. Try again later');
 
+// used for login
 const Login = () => {
   const [email, setEmail] = useState ('');
   const [password, setPassword] = useState ('');
 
   const handleSubmit = event => {
     event.preventDefault ();
+
     if (email === '' || password === '') {
       // inform to fill form
       alert ('Please fill all credentials');
     } else {
-      // backend call
+      // backend call and showing replies
       axios
         .post (`${process.env.REACT_APP_BACKEND_URL}/login`, {email, password})
         .then (res => {
@@ -184,11 +191,7 @@ const Login = () => {
                   </Grid>
                 </form>
               </Grid>
-              {/* <Grid item>
-                <Link href="#" variant="body2">
-                  Forgot Password?
-                </Link>
-              </Grid> */}
+
               <Grid item>
                 <Link href="/signup" variant="body2">
                   Sign up
