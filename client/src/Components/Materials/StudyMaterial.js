@@ -10,7 +10,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import NavBar from "../Home/Navbar/Navbar";
 import "./material.css";
 import MaterialCard from "./materialCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -20,6 +20,7 @@ import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { DropzoneArea } from "material-ui-dropzone";
 // import {
@@ -29,7 +30,7 @@ import { DropzoneArea } from "material-ui-dropzone";
 //   Theaters,
 // } from "@material-ui/icons";
 
-import axios from 'axios';
+import axios from "axios";
 
 // const handlePreviewIcon = (fileObject, classes) => {
 //   const { type } = fileObject.file;
@@ -100,8 +101,25 @@ export default function StudyMaterial() {
   const [description, setDescription] = useState("");
   const [tag, setTag] = useState("");
   const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [materials, setMaterials] = useState ([]);
 
-  const user = JSON.parse (localStorage.getItem ('profile'));
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  useEffect (
+    () => {
+      setLoading(true);
+
+      axios
+        .post("http://localhost:3001/study-material/fetch", {user})
+        .then(res => {
+          setMaterials(res.data);
+          setLoading(false);
+          console.log (res.data[0]);
+        })
+        .catch (err => console.log (err));
+    }
+  ,[]);
 
   function onSaveFirstFile(file) {
     setData((prevState) => ({
@@ -120,20 +138,20 @@ export default function StudyMaterial() {
     console.log(description);
     console.log(tag);
     console.log(data);
-    if(description !== "") {
+    if (description !== "") {
       axios
-        .post ('http://localhost:3001/study-material/add', {
+        .post("http://localhost:3001/study-material/add", {
           by: user._id,
           topic: title,
           description: description,
           material: data,
-          tags: tag
+          tags: tag,
         })
-        .then (res => {
-          console.log (res.data);
-          window.location.reload ();
+        .then((res) => {
+          console.log(res.data);
+          window.location.reload();
         })
-        .catch (err => console.log (err));
+        .catch((err) => console.log(err));
     }
     alert("Thank you for sharing the material!!!");
   };
@@ -184,8 +202,18 @@ export default function StudyMaterial() {
                       inputProps={{ "aria-label": "search" }}
                     />
                   </Search>
-                  <MaterialCard />
-                  <MaterialCard />
+                  {loading ? (
+                    <CircularProgress />
+                  ) : (
+                    <div>
+                      {console.log(materials)}
+                      {materials.map((material) => {
+                        return (
+                            <MaterialCard material={material} />
+                        );
+                      })}
+                    </div>
+                  )}
                 </Box>
               </TabPanel>
               {/* <TabPanel value="3" sx={{ color: "black", background: "white" }}>

@@ -9,7 +9,7 @@ router.post ('/fetch', (req, res) => {
   studyMaterial
     .find ({})
     .then (material => res.json (material))
-    .catch (err => console.log ('from material.js ' + err));
+    .catch (err => console.log ('from material.js ' + err)); 
 });
 
 router.post ('/add', async (req, res) => {
