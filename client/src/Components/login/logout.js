@@ -14,11 +14,11 @@ const Logout = () => {
 
   return (
     <Box>
-      
+
       <Stack sx={{width: '100%', color: 'grey.500'}} spacing={3} mt={4}>
-      <Typography variant="h4">
-  Signing You out...
-</Typography>
+        <Typography variant="h4">
+          Signing You out...
+        </Typography>
         <LinearProgress color="secondary" />
         <LinearProgress color="success" />
         <LinearProgress color="inherit" />

@@ -1,6 +1,23 @@
+@import url("https://fonts.googleapis.com/css?family=Monoton");
+
 .division {
   display: flex;
-  margin: 150px 0 150px 0;
+  margin: 75px 0 75px 0;
+}
+
+.heading {
+  text-align: center;
+  font-family: "Monoton", Helvetica, sans-serif;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+@supports (-webkit-background-clip: text) {
+  .heading {
+    color: transparent;
+    background: linear-gradient(7deg, #5a5b5c 50%, #000000 0);
+    -webkit-background-clip: text;
+  }
 }
 
 .info {

@@ -51,28 +51,30 @@ export default function Footer() {
     const [socialLinks, setSocialLinks] = useState([
         {
             name: 'Facebook',
-            link: 'https://www.facebook.com',
+            link: 'https://www.facebook.com/profile.php?id=100071815530465',
             color: 'info',
             icon: <FacebookIcon />,
         },
         {
             name: 'LinkedIn',
-            link: 'https://www.lindein.com',
+            link: 'https://www.linkedin.com/in/meetyour-dronacharya-5ba431224/',
             color: 'primary',
             icon: <LinkedInIcon />,
         },
         {
             name: 'Github',
-            link: 'https://www.github.com',
+            link: 'https://github.com/PandaKing9660/MeetYourDronacharya',
             color: 'secondary',
             icon: <GitHubIcon />,
         },
+        /*
         {
             name: 'Twitter',
             link: 'https://www.twitter.com',
             color: 'info',
             icon: <TwitterIcon />,
         },
+        */
     ]);
     return (
         <Box className="containerBox_footer" sx={{ width: '100%' }}>

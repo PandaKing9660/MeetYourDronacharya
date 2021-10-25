@@ -24,7 +24,7 @@ function ActionAreaCard(props) {
 const Aboutwebsite = () => {
   return (
     <div className="aboutwebsite_AboutUs">
-      <h1>ABOUT WEBSITE</h1>
+      <h1 className="heading">ABOUT WEBSITE</h1>
       <div className="idea_AboutUs">
         <h3>Idea</h3>
         <p>
