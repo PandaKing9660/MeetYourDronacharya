@@ -94,9 +94,18 @@ export default function StudyMaterial () {
     setValue (newValue);
   };
 
-  const [heading, setName] = useState ('');
+  const [title, setTitle] = useState ('');
+  const [description, setDescription] = useState('');
+  const [tag, setTag] = useState('');
+
+  const handleTagChange = (event, value) => {
+    setTag(value)
+  }
 
   const handleSubmit = () => {
+    console.log(title);
+    console.log(description);
+    console.log(tag);
     alert ('Thank you for sharing the material!!!');
   };
 
@@ -156,15 +165,15 @@ export default function StudyMaterial () {
               </TabPanel>
               <TabPanel value="4">
                 <Box sx={{transform: 'translateZ(0px)', flexGrow: 1}}>
-                  <form onSubmit={handleSubmit}>
+                  <form>
                     <label style={{textAlign: 'left'}}>
                       Enter the topic :{' '}
                     </label>
                     <input
                       style={{width: '100%', padding: 15, marginBottom: 40}}
                       type="text"
-                      value={heading}
-                      onChange={e => setName (e.target.value)}
+                      // value={title}
+                      onChange={e => setTitle (e.target.value)}
                     />
                     <h4 style={{textAlign: 'left'}}>
                       Description about the material:
@@ -173,6 +182,8 @@ export default function StudyMaterial () {
                       <ReactQuill
                         theme="snow"
                         sx={{backgroundColor: 'white', margin: 40}}
+                        value = {description}
+                        onChange = {setDescription}
                       />
                     </div>
                     <div>
@@ -180,6 +191,7 @@ export default function StudyMaterial () {
                         multiple
                         id="tags-filled"
                         options={subjects.map (option => option.title)}
+                        onChange={handleTagChange}
                         freeSolo
                         renderTags={(value, getTagProps) =>
                           value.map ((option, index) => (
@@ -201,9 +213,11 @@ export default function StudyMaterial () {
                     </div>
 
                     <div style={{margin: 40}}>
-                      <DropzoneArea getPreviewIcon={handlePreviewIcon} />
+                      <DropzoneArea
+                       getPreviewIcon={handlePreviewIcon} 
+                      />
                     </div>
-                    <Button variant="contained" color="primary">Submit</Button>
+                    <Button variant="contained" color="primary" onClick={handleSubmit}>Submit</Button>
                   </form>
                 </Box>
               </TabPanel>

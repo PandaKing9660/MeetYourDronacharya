@@ -4,7 +4,7 @@ const studyMaterial = require ('../models/studyMaterial');
 
 router.use (express.json ());
 
-router.get ('/', (req, res) => {
+router.post ('/add', (req, res) => {
   res.send ('hello');
 });
 
