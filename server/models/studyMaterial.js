@@ -2,6 +2,7 @@ const mongoose = require ('mongoose');
 
 const Schema = mongoose.Schema;
 
+// creating study material schema
 const studyMaterialSchema = new Schema ({
   by: {type: String, required: true},
   topic: {type: String, required: true},
@@ -13,6 +14,8 @@ const studyMaterialSchema = new Schema ({
   userImage: {type: String, required: true}
 });
 
+// creating model
 const studyMaterial = mongoose.model ('studyMaterial', studyMaterialSchema);
 
+// exporting
 module.exports = studyMaterial;

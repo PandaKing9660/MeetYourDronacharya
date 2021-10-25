@@ -1,3 +1,4 @@
+// importing all files
 const express = require ('express');
 const router = express.Router ();
 const studyMaterial = require ('../models/studyMaterial');
@@ -5,17 +6,18 @@ const user = require ('../models/user');
 
 router.use (express.json ());
 
+// used to send all the study material
 router.post ('/fetch', (req, res) => {
   studyMaterial
     .find ({})
     .then (material => res.json (material))
-    .catch (err => console.log ('from material.js ' + err)); 
+    .catch (err => console.log ('from material.js ' + err));
 });
 
+// adding all the study material
 router.post ('/add', async (req, res) => {
   try {
     const material = req.body;
-    console.log(material);
 
     await user
       .findById (material.by)
@@ -23,7 +25,7 @@ router.post ('/add', async (req, res) => {
         user_image = resp.imageUrl;
         user_name = resp.name;
       })
-      .catch (err => console.log(222, err));
+      .catch (err => console.log (222, err));
 
     const newMaterial = await new studyMaterial ({
       by: material.by,
@@ -32,16 +34,16 @@ router.post ('/add', async (req, res) => {
       material: material.material,
       tags: material.tags,
       userName: user_name,
-      userImage: user_image
+      userImage: user_image,
     });
 
+    // saving the study material
     await newMaterial
-      .save()
+      .save ()
       .then (material => res.json (material))
-      .catch (err => console.log(333, err))
-
+      .catch (err => console.log (333, err));
   } catch (err) {
-    console.log ('outside try ' + err)
+    console.log ('outside try ' + err);
   }
 });
 

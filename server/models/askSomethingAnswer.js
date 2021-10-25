@@ -1,6 +1,7 @@
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
 
+// Schema for answer
 const askSomethingAnswerSchema = new Schema ({
   title: {type: String, require: true},
   answer: {type: String, require: true},
@@ -13,9 +14,11 @@ const askSomethingAnswerSchema = new Schema ({
   userImage: {type: String, required: true},
 });
 
+// creating model
 const askSomethingAnswer = mongoose.model (
   'askSomethingAnswer',
   askSomethingAnswerSchema
 );
 
+// exporting
 module.exports = askSomethingAnswer;

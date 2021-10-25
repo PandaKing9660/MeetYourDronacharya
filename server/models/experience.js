@@ -2,6 +2,8 @@ const mongoose = require ('mongoose');
 
 const Schema = mongoose.Schema;
 
+
+// Creating Experience Schema
 const experienceSchema = new Schema ({
   title: {type: String, require: true},
   experience: {type: String, require: true},
@@ -13,6 +15,9 @@ const experienceSchema = new Schema ({
   userImage: {type: String, required: true},
 });
 
+// creating model
 const experience = mongoose.model ('experience', experienceSchema);
+
+// exporting
 
 module.exports = experience;

@@ -1,5 +1,14 @@
 import React from 'react';
+<<<<<<< HEAD
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+=======
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useParams,
+} from 'react-router-dom';
+>>>>>>> faeaa46b8663fa574f81ad46b55ab481652db50c
 import Home from './Components/Home/Home';
 import AboutUs from './Components/AboutUs/AboutUs';
 import GoToHome from './Components/Home/GoToHome';
@@ -10,12 +19,10 @@ import StudyMaterial from './Components/Materials/StudyMaterial';
 import TimeLine from './Components/TimeLine/TimeLine';
 import Dashboard from './Components/Dashboard/Dashboard';
 import FindMyself from './Components/FindMyself/FindMyself';
-import Login from './Components/login/login';
-import Signup from './Components/login/signup';
+import Login from './Components/Login/Login';
+import Signup from './Components/Login/Signup';
 import AskSomethingAnswer from './Components/AskSomething/AskSomethingAnswer';
-import Logout from './Components/login/logout';
-// import "./app.css";
-
+import Logout from './Components/Login/Logout';
 import './App.css';
 
 /**
