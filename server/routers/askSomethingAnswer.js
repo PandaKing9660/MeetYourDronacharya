@@ -6,74 +6,23 @@ const askSomethingQuestion = require ('../models/askSomethingQuestion');
 
 router.use (express.json ());
 
-router.post ('/reverse-time-sort', (req, res) => {
-  console.log ('reverse sort');
-  askSomethingAnswer
-    .find ({})
-    .sort ({time: -1})
-    .then (answer => res.json (answer))
-    .catch (err => console.log ('from ask-something.js ' + err));
-});
+router.post ('/reverse-time-sort', async (req, res) => {
+  try {
+    const {questionId} = req.body;
 
-router.post ('/user-list', (req, res) => {
-  const {user} = req.body;
-
-  askSomethingAnswer
-    .find ({})
-    .sort ({time: -1})
-    .then (answers => {
-      const listFromUser = answers.filter (answers => answers.by === user._id);
-
-      res.json (listFromUser);
-    })
-    .catch (err => console.log ('from ask-something.js ' + err));
-});
-
-router.post ('/user-likes', (req, res) => {
-  const {user} = req.body;
-
-  askSomethingAnswer
-    .find ({})
-    .sort ({time: -1})
-    .then (answers => {
-      const listFromUser = answers.filter (answer => {
-        const found = answer.liked.find (userIds => userIds === user._id);
-
-        if (found) return true;
-        else return false;
-      });
-
-      res.json (listFromUser);
-    })
-    .catch (err => console.log ('from ask-something.js ' + err));
-});
-
-router.post ('/user-dislikes', (req, res) => {
-  const {user} = req.body;
-
-  askSomethingAnswer
-    .find ({})
-    .sort ({time: -1})
-    .then (answers => {
-      const listFromUser = answers.filter (answer => {
-        const found = answer.disliked.find (userIds => userIds === user._id);
-
-        if (found) return true;
-        else return false;
-      });
-
-      res.json (listFromUser);
-    })
-    .catch (err => console.log ('from ask-something.js ' + err));
-});
-
-router.post ('/time-sort', (req, res) => {
-  console.log ('time sort');
-  askSomethingAnswer
-    .find ({})
-    .sort ({time: 1})
-    .then (answers => res.json (answers))
-    .catch (err => console.log ('from ask-something.js ' + err));
+    console.log (questionId);
+    await askSomethingAnswer
+      .find ({})
+      .sort ({time: -1})
+      .then (answer => {
+        const ans = answer.filter (answer => answer.to === questionId);
+        console.log (ans);
+        res.json (ans);
+      })
+      .catch (err => console.log ('from ask-something.js ' + err));
+  } catch (err) {
+    console.log (err);
+  }
 });
 
 router.post ('/check', async (req, res) => {
