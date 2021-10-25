@@ -1,3 +1,4 @@
+// importing important files for routing and schemas for mongodb
 const express = require ('express');
 const router = express.Router ();
 const Experience = require ('../models/experience');
@@ -5,20 +6,19 @@ const user = require ('../models/user');
 
 router.use (express.json ());
 
+// this request will send the experiences in most recent first order
 router.post ('/reverse-time-sort', (req, res) => {
-  console.log ('reverse sort');
-  Experience
-    .find ({})
+  Experience.find ({})
     .sort ({time: -1})
     .then (experience => res.json (experience))
     .catch (err => console.log ('from ask-something.js ' + err));
 });
 
+// this request will send the experiences which are added by the user who requested this method
 router.post ('/user-list', (req, res) => {
   const {user} = req.body;
 
-  Experience
-    .find ({})
+  Experience.find ({})
     .sort ({time: -1})
     .then (experiences => {
       const listFromUser = experiences.filter (
@@ -30,11 +30,11 @@ router.post ('/user-list', (req, res) => {
     .catch (err => console.log ('from ask-something.js ' + err));
 });
 
+// this request will send the experiences which are liked by the user who requested this method
 router.post ('/user-likes', (req, res) => {
   const {user} = req.body;
 
-  Experience
-    .find ({})
+  Experience.find ({})
     .sort ({time: -1})
     .then (experiences => {
       const listFromUser = experiences.filter (experience => {
@@ -49,11 +49,11 @@ router.post ('/user-likes', (req, res) => {
     .catch (err => console.log ('from ask-something.js ' + err));
 });
 
+// this request will send the experiences which are disliked by the user who requested this method
 router.post ('/user-dislikes', (req, res) => {
   const {user} = req.body;
 
-  Experience
-    .find ({})
+  Experience.find ({})
     .sort ({time: -1})
     .then (experiences => {
       const listFromUser = experiences.filter (experience => {
@@ -70,21 +70,21 @@ router.post ('/user-dislikes', (req, res) => {
     .catch (err => console.log ('from ask-something.js ' + err));
 });
 
+// this request will send the experiences in most recent last order
 router.post ('/time-sort', (req, res) => {
   console.log ('time sort');
-  Experience
-    .find ({})
+  Experience.find ({})
     .sort ({time: 1})
     .then (experiences => res.json (experiences))
     .catch (err => console.log ('from ask-something.js ' + err));
 });
 
+// this method is used to check if the user has already liked the experience or not
 router.post ('/check', async (req, res) => {
   try {
     const {userId, experienceId} = req.body;
 
-    await Experience
-      .findById (experienceId)
+    await Experience.findById (experienceId)
       .then (resp => {
         if (resp) {
           const LikeId = resp.liked.find (likeId => likeId === userId);
@@ -111,13 +111,14 @@ router.post ('/check', async (req, res) => {
   }
 });
 
+// this method is used to post the experience
 router.post ('/add', async (req, res) => {
   try {
     const experience = req.body;
     let user_image = '';
     let user_name = '';
+    // finding the user who added the experience for his information
 
-    console.log (experience);
     await user
       .findById (experience.by)
       .then (resp => {
@@ -125,6 +126,7 @@ router.post ('/add', async (req, res) => {
         user_name = resp.name;
       })
       .catch (err => console.log (err));
+    // creating the experience using its schema
 
     const newExperience = await new Experience ({
       title: experience.title,
@@ -135,6 +137,7 @@ router.post ('/add', async (req, res) => {
       userName: user_name,
       userImage: user_image,
     });
+    // adding the experience into database
 
     await newExperience
       .save ()
@@ -145,23 +148,28 @@ router.post ('/add', async (req, res) => {
   }
 });
 
+// adding the like for the user
 router.put ('/addLike', async (req, res) => {
   try {
     const {userId, experienceId} = req.body;
-    console.log(userId,experienceId);
+    console.log (userId, experienceId);
     let newListLike, newListDislike;
 
-    await Experience
-      .findById (experienceId)
+    // finding the experience which we have to like
+    await Experience.findById (experienceId)
       .then (resp => {
+        // filtering both like and dislike arrays, removing current user from both
+
         newListLike = resp.liked.filter (idd => idd !== userId);
         newListDislike = resp.disliked.filter (idd => idd !== userId);
       })
       .catch (err => console.log (err));
 
+    // adding user to liked array
+
     newListLike.push (userId);
-    console.log (newListLike);
-    console.log (newListDislike);
+
+    // updating the experience, adding liked array
 
     await Experience.findByIdAndUpdate (
       experienceId,
@@ -173,7 +181,7 @@ router.put ('/addLike', async (req, res) => {
         if (err) {
           console.log (err);
         } else {
-          console.log ('updated : ', result);
+          console.log ('updated');
         }
       }
     );
@@ -184,23 +192,29 @@ router.put ('/addLike', async (req, res) => {
   }
 });
 
+// adding the dislike for the user
 router.put ('/addDislike', async (req, res) => {
   try {
     const {userId, experienceId} = req.body;
 
     let newListLike, newListDislike;
 
-    await Experience
-      .findById (experienceId)
+    // finding the experience which we have to dislike
+
+    await Experience.findById (experienceId)
       .then (resp => {
+        // filtering both like and dislike arrays, removing current user from both
+
         newListLike = resp.liked.filter (idd => idd !== userId);
         newListDislike = resp.disliked.filter (idd => idd !== userId);
       })
       .catch (err => console.log (err));
 
+    // adding user to dislike array
+
     newListDislike.push (userId);
-    console.log (newListLike);
-    console.log (newListDislike);
+
+    // updating the experience into database
 
     await Experience.findByIdAndUpdate (
       experienceId,
@@ -213,7 +227,7 @@ router.put ('/addDislike', async (req, res) => {
         if (err) {
           console.log (err);
         } else {
-          console.log ('updated : ', result);
+          console.log ('updated');
         }
       }
     );
