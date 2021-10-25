@@ -32,7 +32,7 @@ const CardExperience = ({expData}) => {
       }
 
       axios
-        .post (`${process.env.BACKEND_URL}/experience/check`, {
+        .post (`${process.env.REACT_APP_BACKEND_URL}/experience/check`, {
           userId: user._id,
           experienceId: expData._id,
         })
@@ -54,7 +54,7 @@ const CardExperience = ({expData}) => {
       return;
     }
     axios
-      .put (`${process.env.BACKEND_URL}/experience/addLike`, {
+      .put (`${process.env.REACT_APP_BACKEND_URL}/experience/addLike`, {
         userId,
         experienceId,
       })
@@ -76,7 +76,7 @@ const CardExperience = ({expData}) => {
       return;
     }
     axios
-      .put (`${process.env.BACKEND_URL}/experience/addDislike`, {
+      .put (`${process.env.REACT_APP_BACKEND_URL}/experience/addDislike`, {
         userId,
         experienceId,
       })
