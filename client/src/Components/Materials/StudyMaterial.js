@@ -103,7 +103,7 @@ export default function StudyMaterial () {
   return (
     <div className="material_StudyMaterial">
       <NavBar />
-      <h2 style={{marginTop:25,textAlign:'center'}}>STUDY MATERIAL</h2>
+      <h1 className="heading" style={{marginTop:25,textAlign:'center'}}>STUDY MATERIAL</h1>
       <div className="division">
         <div className="info">
           <div>
