@@ -1,3 +1,4 @@
+// importing all important files, along with bcrypt for security
 const express = require ('express');
 const router = express.Router ();
 const User = require ('../models/user');
@@ -5,6 +6,7 @@ const bcrypt = require ('bcrypt');
 
 router.use (express.json ());
 
+// for signup
 router.post ('/signup', async (req, res) => {
   try {
     const {email, name, password, imageUrl} = req.body;
@@ -13,8 +15,10 @@ router.post ('/signup', async (req, res) => {
       return res.send ('Fill All the details');
     }
 
+    // using encryption for user's password
     const cryptPassword = await bcrypt.hash (password, 10);
 
+    // creating the user with given information and adding an image if not done already
     const newUser = new User ({
       email: email,
       name: name,
@@ -23,6 +27,7 @@ router.post ('/signup', async (req, res) => {
       imageUrl: imageUrl || `https://robohash.org/${name}`,
     });
 
+    // saving user into database
     const postResult = await newUser
       .save ()
       .then (result =>
@@ -41,22 +46,24 @@ router.post ('/signup', async (req, res) => {
       .catch (err => {
         res.status (403).send ({msg: 'User Already Exists'});
       });
-
-    console.log (newUser);
   } catch (err) {
     console.log ('err', err);
   }
 });
 
+// used for the user login
 router.post ('/login', async (req, res) => {
   try {
     const {email, password} = req.body;
-    console.log ('search start');
+
+    // finding the registered email
     const user = await User.find ({
       email: email,
     });
 
+    // checking is email is found or not
     if (user.length) {
+      // using decryption to check the password and sending appropriate replies
       if (await bcrypt.compare (password, user[0].password)) {
         res.send ({
           msg: 'User Found',
@@ -70,7 +77,6 @@ router.post ('/login', async (req, res) => {
           },
         });
       } else {
-        console.log('hello')
         res.send ({
           msg: 'Wrong Password',
           found: false,

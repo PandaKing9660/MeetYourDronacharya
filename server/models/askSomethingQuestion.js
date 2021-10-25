@@ -2,6 +2,7 @@ const mongoose = require ('mongoose');
 
 const Schema = mongoose.Schema;
 
+// Creating question schema
 const askSomethingQuestionSchema = new Schema ({
   title: {type: String, require: true},
   question: {type: String, require: true},
@@ -12,12 +13,13 @@ const askSomethingQuestionSchema = new Schema ({
   disliked: {type: [String], required: true},
   userName: {type: String, required: true},
   userImage: {type: String, required: true},
-  
 });
 
+// creating model
 const askSomethingQuestion = mongoose.model (
   'askSomethingQuestion',
   askSomethingQuestionSchema
 );
+// exporting
 
 module.exports = askSomethingQuestion;
