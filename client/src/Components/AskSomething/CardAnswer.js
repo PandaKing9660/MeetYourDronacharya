@@ -6,13 +6,10 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import {Link} from 'react-router-dom';
 
-import EditorAndPreview from './EditorAndPreview';
 import {
   Button,
   CardActions,
-  Modal,
   Grid,
   Typography,
   Avatar,
@@ -22,56 +19,37 @@ import {
   Paper,
 } from '@mui/material';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '90%',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
-const CardQuestion = ({quesData}) => {
+const CardAnswer = ({ansData}) => {
   const sanitizer = dompurify.sanitize;
 
   const user = JSON.parse (localStorage.getItem ('profile'));
-  const [likes, setLike] = useState (quesData.liked.length);
-  const [dislikes, setDislike] = useState (quesData.disliked.length);
+  const [likes, setLike] = useState (ansData.liked.length);
+  const [dislikes, setDislike] = useState (ansData.disliked.length);
 
   const [userStatus, setUserStatus] = useState ('none');
-
-  const [numAnswers, setNumAnswers] = useState (quesData.answers.length);
-
-  const [open, setOpen] = useState (false);
-  const handleOpen = () =>
-    user ? setOpen (true) : alert ('Login to ask question');
-  const handleClose = () => setOpen (false);
 
   useEffect (
     () => {
       if (!user) {
         return;
       }
-      console.log (quesData);
+
       axios
-        .post (`http://localhost:3001/ask-something/question/check`, {
+        .post (`http://localhost:3001/ask-something/answer/check`, {
           userId: user._id,
-          questionId: quesData._id,
+          answerId: ansData._id,
         })
         .then (res => {
           setUserStatus (res.data);
         })
         .catch (err => console.log (err));
     },
-    [quesData._id]
+    [ansData._id]
   );
 
-  const AddLikes = (userId, questionId) => {
+  const AddLikes = (userId, answerId) => {
     if (!user) {
-      alert ('Please login to like this question');
+      alert ('Please login to like this answer');
       return;
     }
 
@@ -79,9 +57,9 @@ const CardQuestion = ({quesData}) => {
       return;
     }
     axios
-      .put ('http://localhost:3001/ask-something/question/addLike', {
+      .put ('http://localhost:3001/ask-something/answer/addLike', {
         userId,
-        questionId,
+        answerId,
       })
       .then (res => {
         setLike (likes + 1);
@@ -92,9 +70,9 @@ const CardQuestion = ({quesData}) => {
       });
   };
 
-  const AddDislikes = (userId, questionId) => {
+  const AddDislikes = (userId, answerId) => {
     if (!user) {
-      alert ('Please login to like this question');
+      alert ('Please login to like this answer');
       return;
     }
 
@@ -102,9 +80,9 @@ const CardQuestion = ({quesData}) => {
       return;
     }
     axios
-      .put ('http://localhost:3001/ask-something/question/addDisLike', {
+      .put ('http://localhost:3001/ask-something/answer/addDisLike', {
         userId,
-        questionId,
+        answerId,
       })
       .then (res => {
         setDislike (dislikes + 1);
@@ -138,13 +116,13 @@ const CardQuestion = ({quesData}) => {
                   component="div"
                   sx={{textDecoration: 'underline'}}
                 >
-                  {quesData.title}
+                  {ansData.title}
                 </Typography>
                 <Typography
                   sx={{mb: 1.5, fontSize: '0.91rem'}}
                   color="text.secondary"
                 >
-                  {quesData.time.split ('T')[0]}
+                  {ansData.time.split ('T')[0]}
                 </Typography>
               </Grid>
 
@@ -156,11 +134,12 @@ const CardQuestion = ({quesData}) => {
                 }}
                 align="right"
               >
+                {/* right floating avatar and name of author */}
                 <CardHeader
                   avatar={
                     <Avatar
-                      alt={`${quesData.userName}`}
-                      src={`${quesData.userImage}`}
+                      alt={`${ansData.userName}`}
+                      src={`${ansData.userImage}`}
                     />
                   }
                   titleTypographyProps={{
@@ -168,7 +147,7 @@ const CardQuestion = ({quesData}) => {
                     color: 'green',
                     align: 'right',
                   }}
-                  title={quesData.userName}
+                  title={ansData.userName}
                   // subheader="September 14, 2016"
                 />
               </Grid>
@@ -177,7 +156,7 @@ const CardQuestion = ({quesData}) => {
             <Typography variant="body2" align="justify">
               <div
                 dangerouslySetInnerHTML={{
-                  __html: sanitizer (quesData.question),
+                  __html: sanitizer (ansData.answer),
                 }}
                 style={{padding: '1%'}}
               />
@@ -185,25 +164,13 @@ const CardQuestion = ({quesData}) => {
           </CardContent>
 
           <CardActions sx={{justifyContent: 'flex-end'}}>
-            <Button
-              variant="outlined"
-              color="primary"
-              title="Check answers"
-              sx={{textTransform: 'capitalize'}}
-              onClick={() =>
-                localStorage.setItem ('id', JSON.stringify (quesData._id))}
-            >
-              <Link to={`/answer`}>
-                {numAnswers + '  '}
-                Answers
-              </Link>
-            </Button>
+
             <Button
               variant="outlined"
               color="success"
               title="Liked it"
               onClick={() => {
-                AddLikes (user ? user._id : 0, quesData._id);
+                AddLikes (user ? user._id : 0, ansData._id);
               }}
             >
               {likes}
@@ -218,7 +185,7 @@ const CardQuestion = ({quesData}) => {
               color="error"
               title="Disliked it"
               onClick={() => {
-                AddDislikes (user ? user._id : 0, quesData._id);
+                AddDislikes (user ? user._id : 0, ansData._id);
               }}
             >
               {userStatus === 'none'
@@ -230,30 +197,6 @@ const CardQuestion = ({quesData}) => {
               {dislikes}
             </Button>
 
-            <Button
-              onClick={handleOpen}
-              variant="outlined"
-              color="primary"
-              title="Answer the question"
-              sx={{
-                float: 'right',
-                marginRight: '1%',
-                textTransform: 'capitalize',
-              }}
-            >
-              Answer
-            </Button>
-
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <EditorAndPreview option="answer" question_id={quesData._id} />
-              </Box>
-            </Modal>
           </CardActions>
         </Box>
       </Paper>
@@ -261,4 +204,4 @@ const CardQuestion = ({quesData}) => {
   );
 };
 
-export default CardQuestion;
+export default CardAnswer;
