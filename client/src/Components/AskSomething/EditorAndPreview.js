@@ -45,7 +45,7 @@ const EditorAndPreview = ({option, question_id}) => {
     if (editorRef.current && editorRef.current.getContent ()) {
       if (option === 'question') {
         axios
-          .post ('http://localhost:3001/ask-something/question/add', {
+          .post (`${process.env.BACKEND_URL}/ask-something/question/add`, {
             by: user._id,
             title: title,
             question: editorRef.current.getContent (),
@@ -57,7 +57,7 @@ const EditorAndPreview = ({option, question_id}) => {
           .catch (err => console.log (err));
       } else if (option === 'answer') {
         axios
-          .post ('http://localhost:3001/ask-something/answer/add', {
+          .post (`${process.env.BACKEND_URL}/ask-something/answer/add`, {
             by: user._id,
             title: title,
             to: question_id,
@@ -70,7 +70,7 @@ const EditorAndPreview = ({option, question_id}) => {
           .catch (err => console.log (err));
       } else if (option === 'experience') {
         axios
-          .post ('http://localhost:3001/experience/add', {
+          .post (`${process.env.BACKEND_URL}/experience/add`, {
             by: user._id,
             title: title,
             experience: editorRef.current.getContent (),

@@ -22,7 +22,7 @@ const QuestionsList = () => {
       setLoading (true);
 
       axios
-        .post (`http://localhost:3001/ask-something/question/${order}`, {user})
+        .post (`${process.env.BACKEND_URL}/ask-something/question/${order}`, {user})
         .then (res => {
           setQuestions (res.data);
           setLoading (false);

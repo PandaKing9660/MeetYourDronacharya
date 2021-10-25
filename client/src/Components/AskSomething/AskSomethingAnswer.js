@@ -20,7 +20,7 @@ const AskSomethingAnswer = () => {
     setLoading (true);
 
     axios
-      .post (`http://localhost:3001/ask-something/answer/reverse-time-sort`, {
+      .post (`${process.env.BACKEND_URL}/ask-something/answer/reverse-time-sort`, {
         questionId: '6174fa382428990c19243930',
       })
       .then (res => {
@@ -29,7 +29,7 @@ const AskSomethingAnswer = () => {
       .catch (err => console.log (err));
 
     axios
-      .post ('http://localhost:3001/ask-something/question/find-by-id', {
+      .post (`${process.env.BACKEND_URL}/ask-something/question/find-by-id`, {
         questionId: '6174fa382428990c19243930',
       })
       .then (res => {
