@@ -30,7 +30,8 @@
 }
 
 .team_AboutUs {
-	background-color: #1976d2;
+	background-color: #2a2a72;
+	background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
 	margin-right: 3%;
 	color: white;
 	height: 500px;
@@ -55,6 +56,7 @@
 }
 .team_AboutUs:hover {
 	background-color: white;
+	background-image: linear-gradient(315deg, white 0%, white 64%);
 	margin-right: 3%;
 	transition: all 1.1s;
 }
@@ -78,6 +80,7 @@
 	position:relative;
 	overflow: hidden;
   	background-color: cadetblue;
+	background-image: linear-gradient(315deg, rgb(4, 48, 49) 2%, cadetblue 64%);
 }
 .us_AboutUs .image_AboutUs img{
 	position: absolute;
@@ -108,3 +111,9 @@
 }
 .us_AboutUs .image_AboutUs:hover h3{transform: translateY(43px);}
 .us_AboutUs .image_AboutUs:hover p{transform: translateY(40px);}
+
+@media only screen and (max-width: 600px) {
+	.team_AboutUs {
+		height: auto;
+	}
+}

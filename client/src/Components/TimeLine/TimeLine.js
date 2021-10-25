@@ -77,10 +77,10 @@ export default function VerticalTabs() {
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        sx={{borderColor: 'divider', marginTop:20,marginLeft:2,marginRight:2}}
+        sx={{borderColor:'divider', marginTop:20, marginLeft:2, marginRight:2, width:'150px'}}
       >
-        <Tab label="---Separate ---" {...a11yProps(0)} />
-        <Tab label="---Combined ---" {...a11yProps(1)} />
+        <Tab label="Separate" {...a11yProps(0)} />
+        <Tab label="Combined" {...a11yProps(1)} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <TimeLine />
@@ -250,7 +250,7 @@ const StickyHeadTable = ()  =>{
   };
 
   return (
-    <Paper sx={{overflowX: 'hidden' ,width:"100%"}}>
+    <Paper sx={{overflowX: 'hidden' ,width:"110%"}}>
       <TableContainer sx={{ maxHeight: 500 ,maxWidth: 2000}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

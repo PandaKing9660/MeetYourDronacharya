@@ -52,7 +52,6 @@ const useStyles = makeStyles({
     backgroundColor: "#fffafa",
     color: "black",
     height: "580px",
-    overflow: "auto",
   },
   formcontrol_findmyself: {
     width: "90%",
@@ -77,6 +76,7 @@ const useStyles = makeStyles({
     marginBottom: "2%",
     background: "white",
     color: "black",
+    align: "center"
   },
 });
 
@@ -173,12 +173,13 @@ const FindMyself = () => {
                 variant="outlined"
                 square
                 elevation={24}
+                style={{overflow: "auto"}}
               >
                 <h1 style={{textAlign:"center"}}>
                   <u>Question Set</u>
                 </h1>
                 <p align="left">Choose the most suitable options:</p>
-                <ol type="i"  style={{padding:"2%"}}>
+                <ol type="1"  style={{padding:"2%"}}>
                   {questions
                     .filter((queid) => queid.id === questionSetId)
                     .map((queset) =>

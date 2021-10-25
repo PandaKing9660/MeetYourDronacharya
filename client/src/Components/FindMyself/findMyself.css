@@ -5,20 +5,17 @@
 }
 
 .h1_findmyself {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
     font-family: "Monoton", Helvetica, sans-serif;
     background: #3210c9;
     letter-spacing: 5px;
-    display: inline;
     text-transform: uppercase;
     color: #0c9fda;
-    
 }
 
 .message_findmyself>h1 {
     padding-top: 3%;
+    text-align: center;
 }
 .message_findmyself>p {
     text-align: justify;
