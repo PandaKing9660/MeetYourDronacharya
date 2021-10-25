@@ -11,7 +11,7 @@ router.post ('/reverse-time-sort', (req, res) => {
     .find ({})
     .sort ({time: -1})
     .then (experience => res.json (experience))
-    .catch (err => console.log ('from ask-something.js ' + err));
+    .catch (err => console.log ('from experience.js ' + err));
 });
 
 router.post ('/user-list', (req, res) => {
@@ -27,7 +27,7 @@ router.post ('/user-list', (req, res) => {
 
       res.json (listFromUser);
     })
-    .catch (err => console.log ('from ask-something.js ' + err));
+    .catch (err => console.log ('from experience.js ' + err));
 });
 
 router.post ('/user-likes', (req, res) => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import NavBar from './Components/Home/Navbar/Navbar';
 import Home from './Components/Home/Home';
 import AboutUs from './Components/AboutUs/AboutUs';
 import GoToHome from './Components/Home/GoToHome';
@@ -13,11 +12,7 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import FindMyself from './Components/FindMyself/FindMyself';
 import Login from './Components/login/login';
 import Signup from './Components/login/signup';
-
 import Logout from './Components/login/logout';
-// import "./app.css";
-
-
 import "./App.css";
 
 
