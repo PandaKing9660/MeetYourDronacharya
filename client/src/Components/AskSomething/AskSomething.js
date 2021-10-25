@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 
 import QuestionsList from './QuestionsList';
 import EditorAndPreview from './EditorAndPreview';
+import '../Materials/material.css'
 
 const style = {
     position: 'absolute',
@@ -30,9 +31,7 @@ const AskSomething = () => {
     return (
         <div>
             <NavBar />
-            <Typography variant="h3" component="h3" mb={2} textAlign="center">
-                Ask Something
-            </Typography>
+            <h1 className="heading" style={{marginTop:25,textAlign:'center'}}>ASK SOMETHING</h1>
 
             <Button
                 onClick={handleOpen}

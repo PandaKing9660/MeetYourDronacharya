@@ -6,11 +6,13 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import '../Materials/material.css'
 
 const Dashboard = () => {
   return (
     <div>
       <NavBar />
+      <h1 className="heading" style={{marginTop:25,marginBottom:10,textAlign:'center'}}>PROFILE</h1>
       <div style={{width:"90%"}}>
       <Profile style={{marginLeft:'auto',marginRight:'auto'}}/>
       <div style={{width:'110%',display:'flex'}}>
@@ -37,7 +39,6 @@ const Profile = () =>{
           <p>Sowmya</p>
       </div>
       <div style={{width:'100%',textAlign:'right'}}>
-        <h2>Profile</h2>
         <h3>Name: Sowmya</h3>
         <h3>Email: cs19uwth@gmail.com</h3>
         <h3>Social Media: cs19uwth@gmail.com</h3>

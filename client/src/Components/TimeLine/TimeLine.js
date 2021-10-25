@@ -18,6 +18,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import NavBar from '../Home/Navbar/Navbar';
 import { Divider } from '@mui/material';
+import '../Materials/material.css'
 
 // COntains the s and their respective timelines
 // Timeline.js -> ExamCard.js -> EventsInExam.js
@@ -65,9 +66,7 @@ export default function VerticalTabs() {
   return (
     <div>
       <NavBar />
-      <Typography variant="h4" component="h4" mb={2} textAlign="center">
-                Time Line
-       </Typography>
+      <h1 className="heading" style={{marginTop:25,textAlign:'center'}}>TIMELINE</h1>
     <Box
       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}
     >
