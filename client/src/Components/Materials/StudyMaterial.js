@@ -112,9 +112,9 @@ export default function StudyMaterial () {
   return (
     <div className="material_StudyMaterial">
       <NavBar />
+      <h2 style={{marginTop:25,textAlign:'center'}}>STUDY MATERIAL</h2>
       <div className="division">
         <div className="info">
-          <h2>STUDY MATERIAL</h2>
           <div>
             Books are undeniably a blessing to humankind. And books being useful for us in many ways have earned the title of our best friend. Libraries are the storehouse of books of several genres where interested readers can spend time reading in silence or can borrow books by being a member of that library. Through this practice of reading, we humans also display a greater sense of being civilized.
             There are individuals like myself who like to collect books, especially storybooks or novels. And this habit of mine has turned my house into a small library in itself. I know many other readers who share this same obsession with reading books and collecting them. My conversions with them mostly revolve around the plot, the character development, the writing style of the authors, and other aspects of books.
