@@ -3,6 +3,9 @@ const app = express ();
 const cors = require ('cors');
 const mongoose = require ('mongoose');
 const body_parser = require ('body-parser');
+const dotenv = require ('dotenv');
+
+dotenv.config ();
 
 const PORT = process.env.PORT || 3001;
 
@@ -36,8 +39,6 @@ mongoose
   })
   .then (() => {
     console.log ('connected to mongo_db');
-    app.listen (PORT, () =>
-      console.log (`Server Running on Port: http://localhost:${PORT}`)
-    );
+    app.listen (PORT, () => console.log (`Server Running on Port: ${PORT}`));
   })
   .catch (error => console.log (`${error} did not connect`));
