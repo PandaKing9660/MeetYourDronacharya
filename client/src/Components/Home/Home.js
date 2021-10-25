@@ -117,8 +117,9 @@ const Home = () => {
           <Grid item xs={6} md={1.7}>
             <Tooltip title="Ask Something">
               <IconButton
+                size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{ color: "blue", background: "white"}}
                 fullWidth="bool"
                 onClick={() => history.push("/ask-something")}
               >
@@ -129,6 +130,7 @@ const Home = () => {
           <Grid item xs={6} md={1.7}>
             <Tooltip title="Experience">
               <IconButton
+                size="large"
                 variant={buttonVariant.variant}
                 sx={{ color: "blue", background: "white" }}
                 fullWidth="bool"
@@ -141,6 +143,7 @@ const Home = () => {
           <Grid item xs={6} md={1.7}>
             <Tooltip title="Study Material">
               <IconButton
+                size="large"
                 variant={buttonVariant.variant}
                 sx={{ color: "blue", background: "white" }}
                 fullWidth="bool"
@@ -153,6 +156,7 @@ const Home = () => {
           <Grid item xs={6} md={1.7}>
             <Tooltip title="Timeline">
               <IconButton
+                size="large"
                 variant={buttonVariant.variant}
                 sx={{ color: "blue", background: "white" }}
                 fullWidth="bool"
@@ -165,6 +169,7 @@ const Home = () => {
           <Grid item xs={6} md={1.7}>
             <Tooltip title="Dashboard">
               <IconButton
+                size="large"
                 variant={buttonVariant.variant}
                 sx={{ color: "blue", background: "white" }}
                 fullWidth="bool"
@@ -177,6 +182,7 @@ const Home = () => {
           <Grid item xs={6} md={1.7}>
             <Tooltip title="Find Myself">
               <IconButton
+                size="large"
                 variant={buttonVariant.variant}
                 sx={{ color: "blue", background: "white" }}
                 fullWidth="bool"
@@ -189,6 +195,7 @@ const Home = () => {
           <Grid item xs={11} md={1.8}>
             <Tooltip title="About Us">
               <IconButton
+                size="large"
                 variant={buttonVariant.variant}
                 sx={{ color: "blue", background: "white" }}
                 fullWidth="bool"
