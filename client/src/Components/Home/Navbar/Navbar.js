@@ -57,7 +57,7 @@ const SearchIconWrapper = styled ('div') (({theme}) => ({
 }));
 
 const StyledInputBase = styled (InputBase) (({theme}) => ({
-  color: 'inherit',
+  color: 'white',
   '& .MuiInputBase-input': {
     padding: theme.spacing (1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -169,14 +169,14 @@ export default function NavBar () {
                   xs: 'inline-block',
                   sm: 'block',
                 },
-                color: '#551a8b',
+                color: '#faebefff',
               }}
             >
               Meet Your Dronacharya
             </Typography>
           </Button>
 
-          <Search sx={{display: {xs: 'none', sm: 'block'}}}>
+          <Search sx={{display: {xs: 'none', sm: 'block',color:'white'}}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -200,7 +200,6 @@ export default function NavBar () {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color="inherit"
             >
               <MoreIcon />
             </IconButton>
