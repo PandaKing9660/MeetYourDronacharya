@@ -4,7 +4,6 @@ const cors = require ('cors');
 const mongoose = require ('mongoose');
 const body_parser = require ('body-parser');
 
-
 const PORT = process.env.PORT || 3001;
 
 app.use (body_parser.json ());
@@ -27,12 +26,11 @@ app.use ('/study-material', studyMaterialRouter);
 app.use ('/dashboard', dashboardRouter);
 app.use ('/', authRouter);
 
-const CONNECTION_URL =
-  'mongodb+srv://MeetYourDronacharya:MeetYourDronacharya@cluster0.twf3b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-
+// const CONNECTION_URL =
+//   'mongodb+srv://MeetYourDronacharya:MeetYourDronacharya@cluster0.twf3b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 mongoose
-  .connect (CONNECTION_URL, {
+  .connect (process.env.CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
