@@ -121,7 +121,7 @@ const Signup = () => {
                     <Grid item>
                       <TextField
                         type="text"
-                        placeholder="First Name"
+                        placeholder="User Name"
                         fullWidth
                         name="Name"
                         variant="outlined"
