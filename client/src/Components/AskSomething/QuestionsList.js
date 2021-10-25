@@ -76,9 +76,10 @@ const QuestionsList = () => {
             justifyContent="flex-start"
             alignItems="center"
           >
-            {questions.map ((question) => {
+            {questions.map (question => {
               return (
                 <Grid item xs={12} md={6} key={question._id}>
+                  
                   <CardQuestion quesData={question} />
                 </Grid>
               );

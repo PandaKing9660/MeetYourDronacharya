@@ -1,15 +1,16 @@
 const express = require ('express');
 const router = express.Router ();
 const askSomethingQuestion = require ('../models/askSomethingQuestion');
+const askSomethingAnswer = require ('../models/askSomethingAnswer');
 const user = require ('../models/user');
 
 router.use (express.json ());
 
 router.post ('/reverse-time-sort', (req, res) => {
-  console.log('reverse sort');
+  console.log ('reverse sort');
   askSomethingQuestion
     .find ({})
-    .sort ({"time": -1})
+    .sort ({time: -1})
     .then (question => res.json (question))
     .catch (err => console.log ('from ask-something.js ' + err));
 });
@@ -19,7 +20,7 @@ router.post ('/user-list', (req, res) => {
 
   askSomethingQuestion
     .find ({})
-    .sort ({"time": -1})
+    .sort ({time: -1})
     .then (questions => {
       const listFromUser = questions.filter (
         question => question.by === user._id
@@ -35,7 +36,7 @@ router.post ('/user-likes', (req, res) => {
 
   askSomethingQuestion
     .find ({})
-    .sort ({"time": -1})
+    .sort ({time: -1})
     .then (questions => {
       const listFromUser = questions.filter (question => {
         const found = question.liked.find (userIds => userIds === user._id);
@@ -54,7 +55,7 @@ router.post ('/user-dislikes', (req, res) => {
 
   askSomethingQuestion
     .find ({})
-    .sort ({"time": -1})
+    .sort ({time: -1})
     .then (questions => {
       const listFromUser = questions.filter (question => {
         const found = question.disliked.find (userIds => userIds === user._id);
@@ -69,10 +70,10 @@ router.post ('/user-dislikes', (req, res) => {
 });
 
 router.post ('/time-sort', (req, res) => {
-  console.log('time sort')
+  console.log ('time sort');
   askSomethingQuestion
     .find ({})
-    .sort ({"time": 1})
+    .sort ({time: 1})
     .then (questions => res.json (questions))
     .catch (err => console.log ('from ask-something.js ' + err));
 });
@@ -109,37 +110,56 @@ router.post ('/check', async (req, res) => {
   }
 });
 
-router.post ('/add', async (req, res) =>   {
-  try{
-  const question = req.body;
-  let user_image = '';
-  let user_name = '';
+router.post ('/add', async (req, res) => {
+  try {
+    const question = req.body;
+    let user_image = '';
+    let user_name = '';
 
-  console.log(question);
-  await user
-    .findById (question.by)
-    .then (resp => {
-      user_image = resp.imageUrl;
-      user_name = resp.name;
-    })
-    .catch (err => console.log (err));
+    console.log (question);
+    await user
+      .findById (question.by)
+      .then (resp => {
+        user_image = resp.imageUrl;
+        user_name = resp.name;
+      })
+      .catch (err => console.log (err));
 
-  const newQuestion = await new askSomethingQuestion ({
-    title: question.title,
-    question: question.question,
-    by: question.by,
-    answers: [],
-    liked: [],
-    disliked: [],
-    userName: user_name,
-    userImage: user_image,
-  });
+    const newQuestion = await new askSomethingQuestion ({
+      title: question.title,
+      question: question.question,
+      by: question.by,
+      answers: [],
+      liked: [],
+      disliked: [],
+      userName: user_name,
+      userImage: user_image,
+    });
 
-  await newQuestion
-    .save ()
-    .then (question => res.json (question))
-    .catch (err => console.log (err));
-}catch{(err) => console.log("outside try" + err);}
+    await newQuestion
+      .save ()
+      .then (question => res.json (question))
+      .catch (err => console.log (err));
+  } catch (err) {
+    console.log ('outside try' + err);
+  }
+});
+
+router.post ('/find-by-id', async (req, res) => {
+  try {
+    const {questionId} = req.body;
+    console.log ('questionId');
+    await askSomethingQuestion
+      .find ({})
+      .then (resp => {
+        const ans = resp.filter (question => question._id == questionId);
+        console.log (ans);
+        res.json (ans);
+      })
+      .catch (err => console.log (err));
+  } catch (err) {
+    console.log (err);
+  }
 });
 
 router.put ('/addLike', async (req, res) => {

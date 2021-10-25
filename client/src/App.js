@@ -1,5 +1,10 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useParams,
+} from 'react-router-dom';
 import NavBar from './Components/Home/Navbar/Navbar';
 import Home from './Components/Home/Home';
 import AboutUs from './Components/AboutUs/AboutUs';
@@ -13,13 +18,11 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import FindMyself from './Components/FindMyself/FindMyself';
 import Login from './Components/login/login';
 import Signup from './Components/login/signup';
-
+import AskSomethingAnswer from './Components/AskSomething/AskSomethingAnswer';
 import Logout from './Components/login/logout';
 // import "./app.css";
 
-
-import "./App.css";
-
+import './App.css';
 
 /**
  * @brief added all other routers
@@ -37,6 +40,10 @@ function App () {
         <Route exact path="/ask-something">
           <AskSomething />
         </Route>
+        <Router exact path="/answer">
+
+          <AskSomethingAnswer />
+        </Router>
         <Route exact path="/experience">
           <Experience />
         </Route>
