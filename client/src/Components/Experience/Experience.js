@@ -69,6 +69,7 @@ const Experience = () => {
             <Typography variant="h3" component="h3" mb={2} textAlign="center">
                 Experiences
             </Typography>
+            
             <Box sx={{ flexGrow: 1 }} m={1} p={1}>
                 <Grid
                     container
@@ -97,7 +98,7 @@ const Experience = () => {
 
                     {/* right side grid division for navigation or news */}
                     <Grid item xs={10} sm={4}>
-                        <Box sx={{ flexGrow: 1 }} m={1} p={1} mt={2}>
+                        <Box sx={{ flexGrow: 1 }} m={0} p={0} mt={2}>
                             <Box sx={{ minWidth: 150, textAlign: 'start' }}>
                                 <FormControl style={{ minWidth: 140 }}>
                                     <InputLabel id="demo-simple-select-label">
@@ -133,7 +134,7 @@ const Experience = () => {
                             </Box>
                         </Box>
                         {/* === modal button === */}
-
+                       <div style={{marginTop:10}}>
                         <Button
                             onClick={handleOpen}
                             variant="outlined"
@@ -141,7 +142,7 @@ const Experience = () => {
                         >
                             Add Experience
                         </Button>
-
+                        </div>
                         <Modal
                             open={open}
                             onClose={handleClose}
