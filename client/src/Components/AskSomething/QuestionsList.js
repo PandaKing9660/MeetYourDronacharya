@@ -33,7 +33,7 @@ const QuestionsList = () => {
         setLoading(true);
 
       axios
-        .post (`${process.env.BACKEND_URL}/ask-something/question/${order}`, {user})
+        .post (`${process.env.REACT_APP_BACKEND_URL}/ask-something/question/${order}`, {user})
         .then (res => {
           setQuestions (res.data);
           setLoading (false);

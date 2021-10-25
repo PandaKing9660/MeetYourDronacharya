@@ -29,11 +29,11 @@ app.use ('/study-material', studyMaterialRouter);
 app.use ('/dashboard', dashboardRouter);
 app.use ('/', authRouter);
 
-// const CONNECTION_URL =
-//   'mongodb+srv://MeetYourDronacharya:MeetYourDronacharya@cluster0.twf3b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const CONNECTION_URL =
+  'mongodb+srv://MeetYourDronacharya:MeetYourDronacharya@cluster0.twf3b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 mongoose
-  .connect (process.env.CONNECTION_URL, {
+  .connect (CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
