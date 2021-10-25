@@ -46,39 +46,37 @@ const Home = () => {
     <Box className="home_container" justifyContent="center">
       {/* <h1 className="head_home">MEET YOUR DRONACHARYA</h1> */}
       <Stack direction="row" spacing={0}>
-        {!JSON.parse(localStorage.getItem("profile")) ? (
-          <Button
-            variant="outlined"
-            color="warning"
-            href="/login"
-            // sx={{ marginLeft: (160 * width) / 1500 }}
-          >
-            Signup / Signin
-          </Button>
-        ) : (
-          <div style={{ display: "flex" }}>
-            <MenuItem>
-              <NavbarLinks
-                linkSingle={{
-                  linkName: "Dashboard",
-                  linkTo: "dashboard",
-                  iconProp: AccountCircle,
-                  color: "warning",
-                }}
-              />
-            </MenuItem>
-            <MenuItem>
-              <NavbarLinks
-                linkSingle={{
-                  linkName: "Logout",
-                  linkTo: "logout",
-                  iconProp: logoutIcon,
-                  color: "warning",
-                }}
-              />
-            </MenuItem>
-          </div>
-        )}
+        {!JSON.parse (localStorage.getItem ('profile'))
+          ? <Button
+              variant="contained"
+              color="warning"
+              href="/login"
+              // sx={{ marginLeft: (160 * width) / 1500 }}
+            >
+              Signup / Signin
+            </Button>
+          : <div style={{display: 'flex'}}>
+              <MenuItem>
+                <NavbarLinks
+                  linkSingle={{
+                    linkName: 'Dashboard',
+                    linkTo: 'dashboard',
+                    iconProp: AccountCircle,
+                    color: 'warning',
+                  }}
+                />
+              </MenuItem>
+              <MenuItem>
+                <NavbarLinks
+                  linkSingle={{
+                    linkName: 'Logout',
+                    linkTo: 'logout',
+                    iconProp: logoutIcon,
+                    color: 'warning',
+                  }}
+                />
+              </MenuItem>
+            </div>}
       </Stack>
 
       <Grid
