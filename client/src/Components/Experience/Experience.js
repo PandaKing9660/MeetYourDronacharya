@@ -16,6 +16,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import '../Materials/material.css'
 
 const style = {
     position: 'absolute',
@@ -66,10 +67,8 @@ const Experience = () => {
         <div>
             <NavBar />
 
-            <Typography variant="h3" component="h3" mb={2} textAlign="center">
-                Experiences
-            </Typography>
-            
+            <h1 className="heading" style={{marginTop:25,textAlign:'center'}}>EXPERIENCES</h1>
+
             <Box sx={{ flexGrow: 1 }} m={1} p={1}>
                 <Grid
                     container
