@@ -46,7 +46,7 @@ const Experience = () => {
         setLoading(true);
 
         axios
-            .post(`http://localhost:3001/experience/${order}`, { user })
+            .post(`${process.env.BACKEND_URL}/experience/${order}`, { user })
             .then((res) => {
                 setExperiences(res.data);
                 setLoading(false);

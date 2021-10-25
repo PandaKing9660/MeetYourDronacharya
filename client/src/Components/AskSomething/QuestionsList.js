@@ -32,17 +32,17 @@ const QuestionsList = () => {
     useEffect(() => {
         setLoading(true);
 
-        axios
-            .post(`http://localhost:3001/ask-something/question/${order}`, {
-                user,
-            })
-            .then((res) => {
-                setQuestions(res.data);
-                setLoading(false);
-                console.log(res.data[0]);
-            })
-            .catch((err) => console.log(err));
-    }, [order]);
+      axios
+        .post (`${process.env.BACKEND_URL}/ask-something/question/${order}`, {user})
+        .then (res => {
+          setQuestions (res.data);
+          setLoading (false);
+          console.log (res.data[0]);
+        })
+        .catch (err => console.log (err));
+    },
+    [order]
+  );
 
     const handleChange = (event) => {
         if (event.target.value.includes('user') && !user) {

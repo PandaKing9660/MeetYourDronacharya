@@ -8,7 +8,7 @@ const Logout = () => {
   useEffect (() => {
     setTimeout (() => {
       localStorage.removeItem ('profile');
-      window.location.href = 'http://localhost:3000/';
+      window.location.href = process.env.FRONTEND_URL;
     }, 2000);
   }, []);
 

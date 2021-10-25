@@ -57,7 +57,7 @@ const CardQuestion = ({quesData}) => {
       }
       console.log (quesData);
       axios
-        .post (`http://localhost:3001/ask-something/question/check`, {
+        .post (`${process.env.BACKEND_URL}/ask-something/question/check`, {
           userId: user._id,
           questionId: quesData._id,
         })
@@ -79,7 +79,7 @@ const CardQuestion = ({quesData}) => {
       return;
     }
     axios
-      .put ('http://localhost:3001/ask-something/question/addLike', {
+      .put (`${process.env.BACKEND_URL}/ask-something/question/addLike`, {
         userId,
         questionId,
       })
@@ -102,7 +102,7 @@ const CardQuestion = ({quesData}) => {
       return;
     }
     axios
-      .put ('http://localhost:3001/ask-something/question/addDisLike', {
+      .put (`${process.env.BACKEND_URL}/ask-something/question/addDisLike`, {
         userId,
         questionId,
       })

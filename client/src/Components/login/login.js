@@ -23,12 +23,12 @@ const googleSuccess = async res => {
   const password = userData.googleId;
 
 
-  axios.post ('http://localhost:3001/login', {email, password}).then (res => {
+  axios.post (`${process.env.BACKEND_URL}/login`, {email, password}).then (res => {
     console.log (res.data);
     if (res.data.found === true) {
       console.log (res.data.user);
       localStorage.setItem ('profile', JSON.stringify ({...res.data.user}));
-      window.location = 'http://localhost:3000';
+      window.location = process.env.FRONTEND_URL;
     } else if (res.data.msg === 'Wrong Password') {
       alert ('User with this email already exist with different credentials');
     } else {
@@ -37,7 +37,7 @@ const googleSuccess = async res => {
       const password = userData.googleId;
 
       axios
-        .post ('http://localhost:3001/signup', {
+        .post (`${process.env.BACKEND_URL}/signup`, {
           name,
           email,
           password,
@@ -51,7 +51,7 @@ const googleSuccess = async res => {
               'profile',
               JSON.stringify ({...res.data.user})
             );
-            window.location = 'http://localhost:3000';
+            window.location = process.env.FRONTEND_URL;
           } else {
             alert ('something wrong');
           }
@@ -78,7 +78,7 @@ const Login = () => {
     } else {
       // backend call
       axios
-        .post ('http://localhost:3001/login', {email, password})
+        .post (`${process.env.BACKEND_URL}/login`, {email, password})
         .then (res => {
           if (res.data.found === true) {
             console.log (res.data.user);
@@ -86,7 +86,7 @@ const Login = () => {
               'profile',
               JSON.stringify ({...res.data.user})
             );
-            window.location = 'http://localhost:3000';
+            window.location = process.env.FRONTEND_URL;
           } else {
             alert (res.data.msg);
           }

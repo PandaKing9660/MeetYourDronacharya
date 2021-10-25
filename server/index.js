@@ -3,7 +3,9 @@ const app = express ();
 const cors = require ('cors');
 const mongoose = require ('mongoose');
 const body_parser = require ('body-parser');
+const dotenv = require ('dotenv');
 
+dotenv.config ();
 
 const PORT = process.env.PORT || 3001;
 
@@ -27,19 +29,16 @@ app.use ('/study-material', studyMaterialRouter);
 app.use ('/dashboard', dashboardRouter);
 app.use ('/', authRouter);
 
-const CONNECTION_URL =
-  'mongodb+srv://MeetYourDronacharya:MeetYourDronacharya@cluster0.twf3b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-
+// const CONNECTION_URL =
+//   'mongodb+srv://MeetYourDronacharya:MeetYourDronacharya@cluster0.twf3b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 mongoose
-  .connect (CONNECTION_URL, {
+  .connect (process.env.CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then (() => {
     console.log ('connected to mongo_db');
-    app.listen (PORT, () =>
-      console.log (`Server Running on Port: http://localhost:${PORT}`)
-    );
+    app.listen (PORT, () => console.log (`Server Running on Port: ${PORT}`));
   })
   .catch (error => console.log (`${error} did not connect`));
