@@ -65,7 +65,7 @@ export default function VerticalTabs() {
   return (
     <div>
       <NavBar />
-      <Typography variant="h3" component="h3" mb={2} textAlign="center">
+      <Typography variant="h4" component="h4" mb={2} textAlign="center">
                 Time Line
        </Typography>
     <Box
@@ -86,7 +86,7 @@ export default function VerticalTabs() {
         <TimeLine />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <StickyHeadTable  sx={{width:'100%' }}/>
+        <StickyHeadTable  sx={{width:"100%"}}/>
       </TabPanel>
     </Box>
        </div>
@@ -184,18 +184,15 @@ function createData(date,jan,feb,mar,apr,may,jun,jul,aug,sept,oct,nov,dec) {
   return { date,jan,feb,mar,apr,may,jun,jul,aug,sept,oct,nov,dec };
 }
 
-function ClickeableChips() {
+function ClickeableChips(props) {
   const handleClick = () => {
-    console.info('You clicked the Chip.');
+    alert('You clicked the Chip.');
   };
 
   return (
     <div>
     <Stack direction="row" spacing={1}>
-      <Chip label="CAT" variant="outlined" onClick={handleClick} />
-    </Stack>
-    <Stack direction="row" spacing={1}>
-      <Chip label="BAT" variant="outlined" onClick={handleClick} />
+      <Chip label={props.label} variant="outlined" onClick={handleClick} sx={{backgroundColor:props.color,color:props.text }} />
     </Stack>
     </div>
   );
@@ -203,37 +200,37 @@ function ClickeableChips() {
 
 
 const rows = [
-    createData(1,2,2,3,4,5,6,7,8,9,10,11,12),
-  createData(2,1,ClickeableChips(),3,4,5,6,7,8,9,10,11,12),
-  createData(3,1,2,ClickeableChips(),4,5,6,7,8,9,10,11,12),
-  createData(4,ClickeableChips(),2,3,4,5,6,7,8,9,10,11,12),
-  createData(5,1,ClickeableChips(),3,4,5,6,7,8,9,10,11,12),
-  createData(6,1,2,ClickeableChips(),4,5,6,7,8,9,10,11,12),
-  createData(7,ClickeableChips(),2,3,4,5,6,7,8,9,10,11,12),
-  createData(8,1,ClickeableChips(),3,4,5,6,7,8,9,10,11,12),
-  createData(9,1,2,ClickeableChips(),4,5,6,7,8,9,10,11,12),
-  createData(10,ClickeableChips(),2,3,4,5,6,7,8,9,10,11,12),
-  createData(11,1,ClickeableChips(),3,4,5,6,7,8,9,10,11,12),
-  createData(12,1,2,ClickeableChips(),4,5,6,7,8,9,10,11,12),
-  createData(13,ClickeableChips(),2,3,4,5,6,7,8,9,10,11,12),
-  createData(14,1,ClickeableChips(),3,4,5,6,7,8,9,10,11,12),
-  createData(15,1,2,ClickeableChips(),4,5,6,7,8,9,10,11,12),
-  createData(16,ClickeableChips(),2,3,4,5,6,7,8,9,10,11,12),
-  createData(17,1,ClickeableChips(),3,4,5,6,7,8,9,10,11,12),
-  createData(18,1,2,ClickeableChips(),4,5,6,7,8,9,10,11,12),
-  createData(19,ClickeableChips(),2,3,4,5,6,7,8,9,10,11,12),
-  createData(20,1,ClickeableChips(),3,4,5,6,7,8,9,10,11,12),
-  createData(21,1,2,ClickeableChips(),4,5,6,7,8,9,10,11,12),
-  createData(22,ClickeableChips(),2,3,4,5,6,7,8,9,10,11,12),
-  createData(23,1,ClickeableChips(),3,4,5,6,7,8,9,10,11,12),
-  createData(24,1,2,ClickeableChips(),4,5,6,7,8,9,10,11,12),
-  createData(25,ClickeableChips(),2,3,4,5,6,7,8,9,10,11,12),
-  createData(26,1,ClickeableChips(),3,4,5,6,7,8,9,10,11,12),
-  createData(27,1,2,ClickeableChips(),4,5,6,7,8,9,10,11,12),
-  createData(28,ClickeableChips(),2,3,4,5,6,7,8,9,10,11,12),
-  createData(29,1,ClickeableChips(),3,4,5,6,7,8,9,10,11,12),
-  createData(30,1,2,ClickeableChips(),4,5,6,7,8,9,10,11,12),
-  createData(31,ClickeableChips(),2,3,4,5,6,7,8,9,10,11,12),
+    createData(1,"","","","","","","","","","","",""),
+  createData(2,"","",<ClickeableChips label="CAT" color="red" text="white"/>,"","","","","","","","",""),
+  createData(3,"",<ClickeableChips label="GATE" color="green" text="white"/>,"","","","","","","","","",""),
+  createData(4,"","","","","","","","","","","",""),
+  createData(5,"","","","","","",<ClickeableChips label="Civils" color="blue" text="white"/>,"","","","",""),
+  createData(6,"","","","","","","","","","",<ClickeableChips label="UPSE" color="yellow" text="black"/>,""),
+  createData(7,"","","","","","","","","","","",""),
+  createData(8,"","","","",<ClickeableChips label="CAT" color="red" text="white"/>,"","","","","","",""),
+  createData(9,"","","","","","","","","","","",""),
+  createData(10,<ClickeableChips label="UPSE" color="yellow" text="black"/>,"","","","","","","","","","",""),
+  createData(11,"","","","","","","","","","","",""),
+  createData(12,"","","","","","","","","","","",<ClickeableChips label="GATE" color="green" text="white"/>),
+  createData(13,"","","","","","","","","","","",""),
+  createData(14,"","","","","","","","","","","",""),
+  createData(15,"","","",<ClickeableChips label="Civils" color="blue" text="white"/>,"","","","","","","",""),
+  createData(16,"","","","","","","","","","","",""),
+  createData(17,"","","","","","","","","","","",""),
+  createData(18,"","","","","","","","","","","",""),
+  createData(19,"","","","","","","","","","","",""),
+  createData(20,"","","","","","","","","","","",""),
+  createData(21,"","","","","","","","","","","",""),
+  createData(22,"","","","","","","","","","","",""),
+  createData(23,"","","","","","","","","","","",""),
+  createData(24,"","","","","","","","","","","",""),
+  createData(25,"","","","","","","","","","","",""),
+  createData(26,"","","","","","","","","","","",""),
+  createData(27,"","","","","","","","","","","",""),
+  createData(28,"","","","","","","","","","","",""),
+  createData(29,"","","","","","","","","","","",""),
+  createData(30,"","","","","","","","","","","",""),
+  createData(31,"","","","","","","","","","","",""),
 ];
 
 const StickyHeadTable = ()  =>{
@@ -250,7 +247,7 @@ const StickyHeadTable = ()  =>{
   };
 
   return (
-    <Paper sx={{overflowX: 'hidden' ,width:"110%"}}>
+    <Paper sx={{overflowX: 'hidden' ,width:"115%"}}>
       <TableContainer sx={{ maxHeight: 500 ,maxWidth: 2000}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
