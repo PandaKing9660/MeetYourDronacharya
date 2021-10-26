@@ -1,14 +1,10 @@
 import React from 'react';
-<<<<<<< HEAD
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-=======
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   useParams,
 } from 'react-router-dom';
->>>>>>> faeaa46b8663fa574f81ad46b55ab481652db50c
 import Home from './Components/Home/Home';
 import AboutUs from './Components/AboutUs/AboutUs';
 import GoToHome from './Components/Home/GoToHome';
