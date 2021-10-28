@@ -1,10 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Audiowide);
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,500;0,600;1,200;1,600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,500;0,600;1,300&display=swap');
-
-body {
-    /* background: url("https://www.indica.today/wp-content/uploads/2020/06/f80fcc6366f206d67b48e0f8f5711fbf.jpg"); */
-}
+@import url(//db.onlinewebfonts.com/c/7e96eba370659b4e4563309dc4ebb33f?family=Samarkan);
+@font-face {font-family: "Samarkan"; src: url("//db.onlinewebfonts.com/t/7e96eba370659b4e4563309dc4ebb33f.eot"); src: url("//db.onlinewebfonts.com/t/7e96eba370659b4e4563309dc4ebb33f.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/7e96eba370659b4e4563309dc4ebb33f.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/7e96eba370659b4e4563309dc4ebb33f.woff") format("woff"), url("//db.onlinewebfonts.com/t/7e96eba370659b4e4563309dc4ebb33f.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/7e96eba370659b4e4563309dc4ebb33f.svg#Samarkan") format("svg"); }
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
 
 .home_container {
@@ -33,7 +32,7 @@ body {
 .head_home {
     display: inline-block;
     -webkit-text-stroke: 1px rgb(238, 70, 40);
-    font-family: Raleway, Arial, serif;
+    font-family: "samarkan", Raleway, Arial, serif;
     font-size: 90px;
     font-weight: 600;
     color: #ff7722;

@@ -75,7 +75,6 @@ const Experience = () => {
                     rowSpacing={1}
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                     justifyContent="center"
-                    // alignItems="center"
                 >
                     {loading ? (
                         <CircularProgress />

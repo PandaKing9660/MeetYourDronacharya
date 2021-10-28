@@ -29,7 +29,8 @@ import React, {useState} from 'react';
 import findyourpassion from './findyourpassion.png';
 import NavBar from '../Home/Navbar/Navbar';
 
-const useStyles = makeStyles ({
+// Styles for all frontend data
+const useStyles = makeStyles({
   listitem_findmyself: {
     background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
     border: 0,
@@ -91,8 +92,9 @@ const FindMyself = () => {
   const resultModalOpen = () => setResultModalOpen (true);
   const resultModalClose = () => setResultModalOpen (false);
 
-  const loadQuestion = id => {
-    setQuestionSetId (id);
+  // Loading questions from JSON
+  const loadQuestion = (id) => {
+    setQuestionSetId(id);
     questions
       .filter (queid => queid.id === id)
       .map (
@@ -103,7 +105,8 @@ const FindMyself = () => {
       );
   };
 
-  const optionSelect = event => {
+  // Selecting options in bullet button
+  const optionSelect = (event) => {
     const id = event.target.value;
     const quesid = id.substring (0, 5);
     const optionid = id.substring (5, id.length);
@@ -122,6 +125,7 @@ const FindMyself = () => {
     }
   };
 
+  // Preparing Results and opening modal to display result
   const resultPreparation = async () => {
     var result = ResultCalculation (questionSetId, score, careeroptions);
 
@@ -168,6 +172,7 @@ const FindMyself = () => {
             </List>
           </Grid>
           {/* Right Part: showing questions for that list */}
+          {/* Showing message if question set is not selected otherwise questions */}
           <Grid item xs={12} sm={6}>
             {questionSetId !== 't0'
               ? <Paper
@@ -270,6 +275,7 @@ const FindMyself = () => {
           </Grid>
         </Grid>
 
+        {/* Displaing result modal */}
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"

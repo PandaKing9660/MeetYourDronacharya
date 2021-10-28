@@ -2,13 +2,20 @@ import {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import './home.css';
 
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import NavbarLinks from './Navbar/NavbarLinks';
-import MenuItem from '@mui/material/MenuItem';
-import {Box, Grid, Stack, Button, Autocomplete, TextField} from '@mui/material';
-import {purple, red} from '@mui/material/colors';
-import logoutIcon from '@mui/icons-material/Logout';
-import Tooltip from '@mui/material/Tooltip';
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import NavbarLinks from "./Navbar/NavbarLinks";
+import MenuItem from "@mui/material/MenuItem";
+import {
+  Box,
+  Grid,
+  Stack,
+  Button,
+  Autocomplete,
+  TextField,
+} from "@mui/material";
+import { red } from "@mui/material/colors";
+import logoutIcon from "@mui/icons-material/Logout";
+import Tooltip from "@mui/material/Tooltip";
 
 import IconButton from '@mui/material/IconButton';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
@@ -34,17 +41,16 @@ const Home = () => {
     variant: 'contained',
     color: red[40],
   });
-  let history = useHistory ();
+  let history = useHistory(); //Storing history website
   return (
     <Box className="home_container" justifyContent="center">
-      {/* <h1 className="head_home">MEET YOUR DRONACHARYA</h1> */}
+      {/* Shoi=wing signup/signin button according to whether the user is signed in or not */}
       <Stack direction="row" spacing={0}>
         {!JSON.parse (localStorage.getItem ('profile'))
           ? <Button
               variant="contained"
               color="warning"
               href="/login"
-              // sx={{ marginLeft: (160 * width) / 1500 }}
             >
               Signup / Signin
             </Button>
@@ -72,6 +78,7 @@ const Home = () => {
             </div>}
       </Stack>
 
+      {/* Showing Heading */}
       <Grid
         className="home"
         container
@@ -83,7 +90,6 @@ const Home = () => {
           <h1 className="head_home">Meet Your Dronacharya</h1>
         </Grid>
         <Grid item xs={5} lg={4} mb={2}>
-
           <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -98,6 +104,7 @@ const Home = () => {
           />
         </Grid>
 
+        {/* Showing Buttons to navigate to other webpage */}
         <Grid
           container
           rowSpacing={5}
@@ -198,25 +205,6 @@ const Home = () => {
             </Tooltip>
           </Grid>
         </Grid>
-        {/* <div>
-
-                        <button
-                            className="button1"
-                            onClick={() => history.push('/ask-something')}
-                            style={{
-                                width: '350px',
-                                height: '75px',
-                                fontSize: 20,
-                                color: 'white',
-                                borderRadius: 15,
-                                marginRight: width - 720,
-                                marginTop: 100,
-                            }}
-                        >
-                            Ask something
-                        </button>
-                    </div> */}
-        {/* </div> */}
       </Grid>
     </Box>
   );

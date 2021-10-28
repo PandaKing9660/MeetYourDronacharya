@@ -1,13 +1,14 @@
 import "./aboutus.css";
 import * as React from "react";
 import { Grid, Divider } from "@mui/material";
-import NavBar from '../Home/Navbar/Navbar';
+import NavBar from "../Home/Navbar/Navbar";
 
 import adi from "./Photos/adi.png";
 import amit from "./Photos/amit.png";
 import anu from "./Photos/anu.jpg";
 import sow from "./Photos/sow.png";
 
+// Action Card for displaying image
 function ActionAreaCard(props) {
   return (
     <div className="us_AboutUs">
@@ -21,6 +22,7 @@ function ActionAreaCard(props) {
   );
 }
 
+// Displaying purpose of the website
 const Aboutwebsite = () => {
   return (
     <div className="aboutwebsite_AboutUs">
@@ -28,50 +30,62 @@ const Aboutwebsite = () => {
       <div className="idea_AboutUs">
         <h3>Idea</h3>
         <p>
-          Far far away, behind the word mountains, far from the countries Vokalia
-          and Consonantia, there live the blind texts. Separated they live in
-          Bookmarksgrove right at the coast of the Semantics, a large language
-          ocean. A small river named Duden flows by their place and supplies it
-          with the necessary regelialia. It is a paradisematic country, in which
-          roasted parts of sentences fly into your mouth.
+          Sadly, in our country many students do their graduation first and then
+          think about their career of interest, because of this we are
+          developing a working class which might be good at their work but not
+          interested in it, so we are not able to innovate much as compared to
+          other developed nations. The main goal of our website is to help
+          someone with their career path as ACHARYA DRONACHARYA helped Arjun,
+          and we will do it not just by ourselves but with the help of a
+          community.
         </p>
       </div>
       <Divider />
       <div className="how_AboutUs">
         <h3>How to contribute</h3>
         <p>
-          Far far away, behind the word mountains, far from the countries Vokalia
-          and Consonantia, there live the blind texts. Separated they live in
-          Bookmarksgrove right at the coast of the Semantics, a large language
-          ocean. A small river named Duden flows by their place and supplies it
-          with the necessary regelialia. It is a paradisematic country, in which
-          roasted parts of sentences fly into your mouth.
+          A student and an expert have to login first to contribute. Without
+          login, anyone can only see the displayed data. A student can
+          contribute by asking career related questions and uploading their
+          study materials which can be used by other students. An expert can
+          contribute by answering question of students and sharing their
+          experiences. An expert can also add qestionset, answering which a
+          student will get the most suitable career choice along with relative
+          grading of other all career choices.
         </p>
       </div>
       <Divider />
       <div className="purpose_AboutUs">
         <h3>Purpose</h3>
         <p>
-          Far far away, behind the word mountains, far from the countries Vokalia
-          and Consonantia, there live the blind texts. Separated they live in
-          Bookmarksgrove right at the coast of the Semantics, a large language
-          ocean. A small river named Duden flows by their place and supplies it
-          with the necessary regelialia. It is a paradisematic country, in which
-          roasted parts of sentences fly into your mouth.
+          We have developed a platform where one can come and do various
+          activities such as asking doubts about their career as a student, add
+          experience as an expert, share study material as a senior and discuss
+          things as friends. We also have things such as a timeline for
+          important events/exams and a page to find your career interest.
         </p>
       </div>
     </div>
   );
 };
 
+// Displaying a card showing a message and the developers
 const AboutTeam = () => {
   return (
     <div className="aboutteam_AboutUs">
       <div className="team_AboutUs">
         <h1 className="mess_AboutUs">Contribute to spread experience!!!</h1>
-        <Grid className="teampic_AboutUs" container justifyContent="flex-start" alignItems="center">
+        <Grid
+          className="teampic_AboutUs"
+          container
+          justifyContent="flex-start"
+          alignItems="center"
+        >
           <Grid item sm={12}>
-            <h2 style={{textAlign:"center", display:"block"}}> DEVELOPERS </h2>
+            <h2 style={{ textAlign: "center", display: "block" }}>
+              {" "}
+              DEVELOPERS{" "}
+            </h2>
           </Grid>
           <Grid item xs={12} sm={6}>
             <ActionAreaCard
@@ -107,6 +121,7 @@ const AboutTeam = () => {
   );
 };
 
+// About US
 const AboutUs = () => {
   return (
     <div className="aboutus_AboutUs">

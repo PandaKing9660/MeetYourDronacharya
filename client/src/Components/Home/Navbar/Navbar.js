@@ -30,6 +30,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 
 import NavbarLinks from './NavbarLinks';
 
+// Navbar
 const Search = styled ('div') (({theme}) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -207,7 +208,6 @@ export default function NavBar () {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {/* {renderMenu} */}
     </Box>
   );
 }
