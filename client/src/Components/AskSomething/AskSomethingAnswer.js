@@ -16,22 +16,31 @@ const AskSomethingAnswer = () => {
 
   const [loading, setLoading] = useState (true);
 
+  // finding id in the url
+  const question_id = window.location.pathname.split ('/')[2];
+
   useEffect (() => {
     setLoading (true);
 
     axios
-      .post (`${process.env.REACT_APP_BACKEND_URL}/ask-something/answer/reverse-time-sort`, {
-        questionId: '6174fa382428990c19243930',
-      })
+      .post (
+        `${process.env.REACT_APP_BACKEND_URL}/ask-something/answer/reverse-time-sort`,
+        {
+          questionId: question_id,
+        }
+      )
       .then (res => {
         setAnswers (res.data);
       })
       .catch (err => console.log (err));
 
     axios
-      .post (`${process.env.REACT_APP_BACKEND_URL}/ask-something/question/find-by-id`, {
-        questionId: '6174fa382428990c19243930',
-      })
+      .post (
+        `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/find-by-id`,
+        {
+          questionId: question_id,
+        }
+      )
       .then (res => {
         setQuestion (res.data);
 
@@ -51,8 +60,7 @@ const AskSomethingAnswer = () => {
         {loading
           ? <CircularProgress />
           : <div>
-              {console.log (question)}
-              <CardQuestion quesData={question[0]} />
+              <CardQuestion quesData={question[0]} showAnswer={false}/>
 
               <Grid
                 container

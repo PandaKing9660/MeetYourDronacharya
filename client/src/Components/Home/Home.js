@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import "./home.css";
+import {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
+import './home.css';
 
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import NavbarLinks from "./Navbar/NavbarLinks";
@@ -17,28 +17,28 @@ import { red } from "@mui/material/colors";
 import logoutIcon from "@mui/icons-material/Logout";
 import Tooltip from "@mui/material/Tooltip";
 
-import IconButton from "@mui/material/IconButton";
-import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import FlareIcon from "@mui/icons-material/Flare";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import TimelineIcon from "@mui/icons-material/Timeline";
-import ExploreIcon from "@mui/icons-material/Explore";
-import PeopleIcon from "@mui/icons-material/People";
+import IconButton from '@mui/material/IconButton';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import FlareIcon from '@mui/icons-material/Flare';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import ExploreIcon from '@mui/icons-material/Explore';
+import PeopleIcon from '@mui/icons-material/People';
 
-const top100Films = [
-  { label: "The Shawshank Redemption", year: 1994 },
-  { label: "The Godfather", year: 1972 },
-  { label: "The Godfather: Part II", year: 1974 },
-  { label: "The Dark Knight", year: 2008 },
-  { label: "12 Angry Men", year: 1957 },
-  { label: "Schindler's List", year: 1993 },
-  { label: "Pulp Fiction", year: 1994 },
+const topExams = [
+  {label: 'UPSC', year: 1994},
+  {label: 'IIT JEE', year: 1972},
+  {label: 'NEET', year: 1974},
+  {label: 'CAT', year: 2008},
+  {label: 'GMAT', year: 1957},
+  {label: 'GATE', year: 1993},
+  {label: 'IELTS', year: 1994},
 ];
 
 const Home = () => {
-  const { height, width } = useWindowDimensions();
-  const [buttonVariant, setButtonBariant] = useState({
-    variant: "contained",
+  const {height, width} = useWindowDimensions ();
+  const [buttonVariant, setButtonBariant] = useState ({
+    variant: 'contained',
     color: red[40],
   });
   let history = useHistory(); //Storing history website
@@ -83,7 +83,7 @@ const Home = () => {
         className="home"
         container
         rowSpacing={6}
-        columnSpacing={{ xs: 1, sm: 2 }}
+        columnSpacing={{xs: 1, sm: 2}}
         justifyContent="center"
       >
         <Grid item xs={12} mb={2} mt={1}>
@@ -93,13 +93,14 @@ const Home = () => {
           <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={top100Films}
+            options={topExams}
             sx={{
               border: 1,
               borderRadius: 3,
-              background: "white",
+              background: 'white',
             }}
-            renderInput={(params) => <TextField {...params} label="Search" />}
+            renderInput={params => <TextField {...params} label="Search" />}
+          
           />
         </Grid>
 
@@ -107,7 +108,7 @@ const Home = () => {
         <Grid
           container
           rowSpacing={5}
-          columnSpacing={{ xs: 3, md: 3 }}
+          columnSpacing={{xs: 3, md: 3}}
           justifyContent="space-evenly"
           my={5}
           xs={9}
@@ -117,9 +118,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white"}}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/ask-something")}
+                onClick={() => history.push ('/ask-something')}
               >
                 <QuestionAnswerIcon />
               </IconButton>
@@ -130,9 +131,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/experience")}
+                onClick={() => history.push ('/experience')}
               >
                 <FlareIcon />
               </IconButton>
@@ -143,9 +144,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/study-material")}
+                onClick={() => history.push ('/study-material')}
               >
                 <MenuBookIcon />
               </IconButton>
@@ -156,9 +157,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/timeline")}
+                onClick={() => history.push ('/timeline')}
               >
                 <TimelineIcon />
               </IconButton>
@@ -169,9 +170,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/dashboard")}
+                onClick={() => history.push ('/dashboard')}
               >
                 <AccountCircle />
               </IconButton>
@@ -182,9 +183,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/find-myself")}
+                onClick={() => history.push ('/find-myself')}
               >
                 <ExploreIcon />
               </IconButton>
@@ -195,9 +196,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/about-us")}
+                onClick={() => history.push ('/about-us')}
               >
                 <PeopleIcon />
               </IconButton>
@@ -209,26 +210,26 @@ const Home = () => {
   );
 };
 
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
+function getWindowDimensions () {
+  const {innerWidth: width, innerHeight: height} = window;
   return {
     width,
     height,
   };
 }
 
-function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
+function useWindowDimensions () {
+  const [windowDimensions, setWindowDimensions] = useState (
+    getWindowDimensions ()
   );
 
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
+  useEffect (() => {
+    function handleResize () {
+      setWindowDimensions (getWindowDimensions ());
     }
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener ('resize', handleResize);
+    return () => window.removeEventListener ('resize', handleResize);
   }, []);
 
   return windowDimensions;

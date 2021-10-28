@@ -86,7 +86,7 @@ const Experience = () => {
                                     return (
                                         <CardExperience
                                             expData={experience}
-                                            key={index}
+                                            key={experience._id}
                                         />
                                     );
                                 })}
