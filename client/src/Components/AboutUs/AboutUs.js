@@ -3,7 +3,7 @@ import * as React from "react";
 import { Grid, Divider } from "@mui/material";
 import NavBar from "../Home/Navbar/Navbar";
 
-import adi from "./Photos/adi.png";
+import adi from "./Photos/adi.jpg";
 import amit from "./Photos/amit.png";
 import anu from "./Photos/anu.jpg";
 import sow from "./Photos/sow.png";
