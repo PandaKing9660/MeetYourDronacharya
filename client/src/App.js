@@ -37,10 +37,7 @@ function App () {
         <Route exact path="/ask-something">
           <AskSomething />
         </Route>
-        <Router exact path="/answer">
 
-          <AskSomethingAnswer />
-        </Router>
         <Route exact path="/experience">
           <Experience />
         </Route>
@@ -68,7 +65,10 @@ function App () {
         <Route exact path="/signup">
           <Signup />
         </Route>
+        <Router path="/ask-something/:id">
 
+          <AskSomethingAnswer />
+        </Router>
         <Route path="/*">
           <GoToHome />
         </Route>

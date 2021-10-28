@@ -40,12 +40,12 @@ export default function Footer() {
     const [footerNames, setfooterNames] = useState([
         { name: 'Home', linkTo: '/' },
         { name: 'Ask Something', linkTo: '/ask-something' },
-        { name: 'Experience', linkTo: 'experience' },
-        { name: 'Study Material', linkTo: 'study-material' },
-        { name: 'Time Line', linkTo: 'timeline' },
-        { name: 'Dashboard', linkTo: 'dashboard' },
-        { name: 'Find Passion', linkTo: 'find-myself' },
-        { name: 'About us', linkTo: 'about-us' },
+        { name: 'Experience', linkTo: '/experience' },
+        { name: 'Study Material', linkTo: '/study-material' },
+        { name: 'Time Line', linkTo: '/timeline' },
+        { name: 'Dashboard', linkTo: '/dashboard' },
+        { name: 'Find Passion', linkTo: '/find-myself' },
+        { name: 'About us', linkTo: '/about-us' },
     ]);
 
     const [socialLinks, setSocialLinks] = useState([

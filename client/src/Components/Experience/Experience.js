@@ -46,7 +46,7 @@ const Experience = () => {
         setLoading(true);
 
         axios
-            .post(`${process.env.BACREACT_APP_BACKEND_URLKEND_URL}/experience/${order}`, { user })
+            .post(`${process.env.REACT_APP_BACKEND_URL}/experience/${order}`, { user })
             .then((res) => {
                 setExperiences(res.data);
                 setLoading(false);
@@ -87,7 +87,7 @@ const Experience = () => {
                                     return (
                                         <CardExperience
                                             expData={experience}
-                                            key={index}
+                                            key={experience._id}
                                         />
                                     );
                                 })}

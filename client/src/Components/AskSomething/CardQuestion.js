@@ -34,7 +34,7 @@ const style = {
   p: 4,
 };
 
-const CardQuestion = ({quesData}) => {
+const CardQuestion = ({quesData, showAnswer}) => {
   const sanitizer = dompurify.sanitize;
 
   const user = JSON.parse (localStorage.getItem ('profile'));
@@ -57,10 +57,13 @@ const CardQuestion = ({quesData}) => {
       }
       console.log (quesData);
       axios
-        .post (`${process.env.REACT_APP_BACKEND_URL}/ask-something/question/check`, {
-          userId: user._id,
-          questionId: quesData._id,
-        })
+        .post (
+          `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/check`,
+          {
+            userId: user._id,
+            questionId: quesData._id,
+          }
+        )
         .then (res => {
           setUserStatus (res.data);
         })
@@ -79,10 +82,13 @@ const CardQuestion = ({quesData}) => {
       return;
     }
     axios
-      .put (`${process.env.REACT_APP_BACKEND_URL}/ask-something/question/addLike`, {
-        userId,
-        questionId,
-      })
+      .put (
+        `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/addLike`,
+        {
+          userId,
+          questionId,
+        }
+      )
       .then (res => {
         setLike (likes + 1);
         if (userStatus === 'disliked') {
@@ -102,10 +108,13 @@ const CardQuestion = ({quesData}) => {
       return;
     }
     axios
-      .put (`${process.env.REACT_APP_BACKEND_URL}/ask-something/question/addDisLike`, {
-        userId,
-        questionId,
-      })
+      .put (
+        `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/addDisLike`,
+        {
+          userId,
+          questionId,
+        }
+      )
       .then (res => {
         setDislike (dislikes + 1);
         if (userStatus === 'liked') {
@@ -185,19 +194,20 @@ const CardQuestion = ({quesData}) => {
           </CardContent>
 
           <CardActions sx={{justifyContent: 'flex-end'}}>
-            <Button
-              variant="outlined"
-              color="primary"
-              title="Check answers"
-              sx={{textTransform: 'capitalize'}}
-              onClick={() =>
-                localStorage.setItem ('id', JSON.stringify (quesData._id))}
-            >
-              <Link to={`/answer`}>
-                {numAnswers + '  '}
-                Answers
-              </Link>
-            </Button>
+            {showAnswer &&
+              <Button
+                variant="outlined"
+                color="primary"
+                title="Check answers"
+                sx={{textTransform: 'capitalize'}}
+                onClick={() =>
+                  localStorage.setItem ('id', JSON.stringify (quesData._id))}
+              >
+                <Link to={`/ask-something/${quesData._id}`}>
+                  {numAnswers + '  '}
+                  Answers
+                </Link>
+              </Button>}
             <Button
               variant="outlined"
               color="success"
