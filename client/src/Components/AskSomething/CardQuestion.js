@@ -198,7 +198,7 @@ const CardQuestion = ({quesData, showAnswer}) => {
                 onClick={() =>
                   localStorage.setItem ('id', JSON.stringify (quesData._id))}
               >
-                <Link to={`/ask-something/${quesData._id}`}>
+                <Link to={`/ask-something/${quesData._id}`} >
                   {numAnswers + '  '}
                   Answers
                 </Link>
@@ -254,6 +254,7 @@ const CardQuestion = ({quesData, showAnswer}) => {
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
+              disableEnforceFocus={true}
             >
               <Box sx={style}>
                 <EditorAndPreview option="answer" question_id={quesData._id} />

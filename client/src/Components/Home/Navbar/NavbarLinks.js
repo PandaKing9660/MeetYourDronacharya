@@ -13,7 +13,7 @@ const NavbarLinks = ({ linkSingle }) => {
 
   return (
     <div>
-      <Link to={linkTo} style={{ fontSize: "1em", padding: "0.05em" }}>
+      <Link to={linkTo} target="_parent"  style={{ fontSize: "1em", padding: "0.05em" }}>
         <Tooltip title={linkName}>
           <IconButton
             size="small"
