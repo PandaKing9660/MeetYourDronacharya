@@ -86,7 +86,7 @@ export default function StudyMaterial() {
       setLoading(true);
 
     axios
-      .post ('http://localhost:3001/study-material/fetch', {user})
+      .post ( `${process.env.REACT_APP_BACKEND_URL}/study-material/fetch`, {user})
       .then (res => {
         setMaterials (res.data);
         setLoading (false);
@@ -117,7 +117,7 @@ export default function StudyMaterial() {
 
     if (description !== '') {
       axios
-        .post ('http://localhost:3001/study-material/add', {
+        .post ( `${process.env.REACT_APP_BACKEND_URL}/study-material/add`, {
           by: user._id,
           topic: title,
           description: description,
