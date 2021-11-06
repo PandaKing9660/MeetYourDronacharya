@@ -239,4 +239,19 @@ router.put ('/addDislike', async (req, res) => {
   }
 });
 
+
+router.delete('/deleteExp', async (req,res) => {
+  console.log ('delete');
+  const {experienceId} = req.body;
+ try {
+  const deluser = await Experience.findByIdAndDelete(experienceId);
+    console.log(experienceId)
+   if (!deluser) return res.sendStatus(404);
+  console.log("deleted yoyyyyy");
+  res.send("deleted")
+ } catch (e) {
+ console.log("Error ",e);
+ }
+});
+
 module.exports = router;

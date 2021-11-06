@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,Alert} from 'react';
 import axios from 'axios';
 import dompurify from 'dompurify';
 
@@ -13,6 +13,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+
 
 import {Button, CardActions} from '@mui/material';
 
@@ -89,6 +90,22 @@ const CardExperience = ({expData}) => {
       });
   };
 
+  const DeleteUser = (experienceId) => {
+    if (!user) {
+      alert ('Please login to like this question');
+      return;
+    }
+
+    axios
+      .delete (`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
+        experienceId
+      })
+      .then (res => {
+         
+      });
+  };
+
+
   return (
     <div>
       <Paper sx={{p: 0, margin: '1em', minWidth: 300, flexGrow: 1}}>
@@ -162,6 +179,23 @@ const CardExperience = ({expData}) => {
           </CardContent>
 
           <CardActions sx={{justifyContent: 'flex-end'}}>
+
+            <Button
+              variant="outlined"
+              color="error"
+              title="Delete"
+              onClick={() => {
+                const ask = confirm("Press a button!\nEither OK or Cancel..");
+                    if (ask === true) {
+                      console.log("Yes");
+                    } else {
+                      console.log("No");
+                    }
+                DeleteUser (expData._id);
+              }}
+            >
+              Delete
+            </Button>
 
             <Button
               variant="outlined"
