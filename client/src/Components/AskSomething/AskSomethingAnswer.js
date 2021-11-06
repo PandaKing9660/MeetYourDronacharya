@@ -8,6 +8,8 @@ import NavBar from '../Home/Navbar/Navbar';
 
 import CardAnswer from './CardAnswer';
 import CardQuestion from './CardQuestion';
+import {useParams} from 'react-router-dom';
+
 
 const AskSomethingAnswer = () => {
   // dummy data for experience posts
@@ -17,7 +19,8 @@ const AskSomethingAnswer = () => {
   const [loading, setLoading] = useState (true);
 
   // finding id in the url
-  const question_id = window.location.pathname.split ('/')[2];
+  const {question_id} = useParams ();
+
 
   useEffect (() => {
     setLoading (true);
