@@ -14,6 +14,8 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
+// import { confirmWrapper, confirm } from './confirm'
+
 
 import {Button, CardActions} from '@mui/material';
 
@@ -90,21 +92,32 @@ const CardExperience = ({expData}) => {
       });
   };
 
-  const DeleteUser = (experienceId) => {
+  const DeleteUser = (userId,experienceId) => {
     if (!user) {
       alert ('Please login to like this question');
       return;
     }
-
+    console.log(userId,experienceId)
     axios
-      .delete (`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
-        experienceId
+      .post (`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
+        experienceId,
       })
       .then (res => {
-         
+         window.location.reload();
       });
   };
 
+  /*
+  const handleOnClick = async () => {
+  if (await confirm({
+    confirmation: 'Are you sure?'
+  })) {
+    console.log('yes');
+  } else {
+    console.log('no');
+  }
+}
+*/
 
   return (
     <div>
@@ -180,22 +193,18 @@ const CardExperience = ({expData}) => {
 
           <CardActions sx={{justifyContent: 'flex-end'}}>
 
-            <Button
+            {user && user._id === expData.by?
+              <Button
               variant="outlined"
               color="error"
               title="Delete"
               onClick={() => {
-                const ask = confirm("Press a button!\nEither OK or Cancel..");
-                    if (ask === true) {
-                      console.log("Yes");
-                    } else {
-                      console.log("No");
-                    }
-                DeleteUser (expData._id);
+                DeleteUser (user ? user._id : 0, expData._id);
               }}
             >
               Delete
             </Button>
+            : <div/>}
 
             <Button
               variant="outlined"

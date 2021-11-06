@@ -240,9 +240,10 @@ router.put ('/addDislike', async (req, res) => {
 });
 
 
-router.delete('/deleteExp', async (req,res) => {
+router.post('/deleteExp', async (req,res) => {
   console.log ('delete');
   const {experienceId} = req.body;
+  console.log(req.body)
  try {
   const deluser = await Experience.findByIdAndDelete(experienceId);
     console.log(experienceId)
