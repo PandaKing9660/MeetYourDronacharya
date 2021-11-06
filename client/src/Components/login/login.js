@@ -23,11 +23,11 @@ const googleSuccess = async res => {
 
   const email = userData.email;
   const password = userData.googleId;
-
+  const isGoogle = true;
   // sending request to backend, incase of deployment using netlify else localhost for development
 
   axios
-    .post (`${process.env.REACT_APP_BACKEND_URL}/login`, {email, password})
+    .post (`${process.env.REACT_APP_BACKEND_URL}/login`, {email, password, isGoogle})
     .then (res => {
       if (res.data.found === true) {
         // user found and saved in localStorage
@@ -100,6 +100,19 @@ const Login = () => {
         });
     }
   };
+
+  const handleForgetPassword = () => {
+    if (email === '') {
+      // inform to fill form
+      alert ('Please fill email for verification');
+    } else {
+      // backend call
+      axios
+        .post (`${process.env.REACT_APP_BACKEND_URL}/forget-password`, {email})
+        .then (res => {});
+    }
+  };
+
   return (
     <div>
       <AppBar position="static" alignitems="center" color="primary">
@@ -131,7 +144,7 @@ const Login = () => {
                 </Typography>
               </Grid>
               <Grid item>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} autocomplete="off">
                   <Grid container direction="column" spacing={2}>
                     <Grid item>
                       <TextField
@@ -194,7 +207,13 @@ const Login = () => {
 
               <Grid item>
                 <Link href="/signup" variant="body2">
-                  Sign up
+                  Sign up{' '}
+                </Link>
+              </Grid>
+              {/* If user forget password */}
+              <Grid item onClick={handleForgetPassword}>
+                <Link href={email ? `/verify/${email}` : '/login'} variant="body2">
+                  forgot password ?
                 </Link>
               </Grid>
             </Paper>

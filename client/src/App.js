@@ -20,6 +20,8 @@ import Signup from './Components/Login/Signup';
 import AskSomethingAnswer from './Components/AskSomething/AskSomethingAnswer';
 import Logout from './Components/Login/Logout';
 import './App.css';
+import Verify from './Components/Login/Verify';
+import ResetPassword from './Components/Login/ResetPassword';
 
 /**
  * @brief added all other routers
@@ -65,10 +67,16 @@ function App () {
         <Route exact path="/signup">
           <Signup />
         </Route>
-        <Router path="/ask-something/:id">
+        <Route exact path="/verify/:email">
+          <Verify />
+        </Route>
+        <Route exact path="/ask-something/:question_id">
 
           <AskSomethingAnswer />
-        </Router>
+        </Route>
+        <Route exact path="/reset-password/:email">
+          <ResetPassword/>
+        </Route>
         <Route path="/*">
           <GoToHome />
         </Route>
