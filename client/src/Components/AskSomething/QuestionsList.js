@@ -59,7 +59,7 @@ const QuestionsList = () => {
   return (
     <Box sx={{flexGrow: 1}} m={1} p={1} mt={2}>
       <Box sx={{minWidth: 150, textAlign: 'start'}}>
-        <FormControl style={{minWidth: 140}}>
+        <FormControl style={{minWidth: 140, marginLeft:"1.9%"}}>
           <InputLabel id="demo-simple-select-label">Order</InputLabel>
           <Select
             labelId="demo-simple-select-label"

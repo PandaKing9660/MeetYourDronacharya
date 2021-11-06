@@ -27,7 +27,7 @@ const FooterButton = ({ footerName }) => {
           color: "white",
           textTransform: "capitalize",
         }}
-        fullWidth="true"
+        fullWidth
       >
         {footerName.name}
       </Button>

@@ -2,16 +2,15 @@ import React, { useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import dompurify from 'dompurify';
 import axios from 'axios';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
+
+import {TextField, Grid, Box, Typography, Stack} from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
 import LoadingButton from '@mui/lab/LoadingButton';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+
 import CardQuestion from './CardQuestion';
+
 
 const EditorAndPreview = ({ option, question_id }) => {
     // sanitize HTML code from XSS issues
@@ -126,6 +125,7 @@ const EditorAndPreview = ({ option, question_id }) => {
             justifyContent="space-around"
             alignItems="center"
         >
+            
             {/* At loading time */}
             {!loadingEditor && (
                 <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>

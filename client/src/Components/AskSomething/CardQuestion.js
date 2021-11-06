@@ -51,7 +51,7 @@ const CardQuestion = ({quesData, showAnswer}) => {
       if (!user) {
         return;
       }
-      console.log (quesData);
+      // console.log (quesData);
       axios
         .post (
           `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/check`,
@@ -198,7 +198,7 @@ const CardQuestion = ({quesData, showAnswer}) => {
                 onClick={() =>
                   localStorage.setItem ('id', JSON.stringify (quesData._id))}
               >
-                <Link to={`/ask-something/${quesData._id}`} >
+                <Link to={`/ask-something/${quesData._id}`} style={{textDecoration:"none"}} >
                   {numAnswers + '  '}
                   Answers
                 </Link>

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios';
-import Grid from '@mui/material/Grid';
+import {Grid, Divider, Typography} from '@mui/material';
 
 import CircularProgress from '@mui/material/CircularProgress';
 import NavBar from '../Home/Navbar/Navbar';
@@ -60,8 +60,15 @@ const AskSomethingAnswer = () => {
         {loading
           ? <CircularProgress />
           : <div>
+              <Typography variant="h4" align="center">
+                  Question
+                </Typography>
               <CardQuestion quesData={question[0]} showAnswer={false}/>
+              <Divider variant="middle" />
 
+              <Typography variant="h4" align="center">
+                  Answers
+                </Typography>
               <Grid
                 container
                 // spacing={{ xs: 2, md: 3 }}
