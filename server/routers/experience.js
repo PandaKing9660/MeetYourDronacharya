@@ -117,6 +117,7 @@ router.post ('/add', async (req, res) => {
     const experience = req.body;
     let user_image = '';
     let user_name = '';
+    let exp_len = 0;
     // finding the user who added the experience for his information
 
     await user
@@ -124,8 +125,11 @@ router.post ('/add', async (req, res) => {
       .then (resp => {
         user_image = resp.imageUrl;
         user_name = resp.name;
+        exp_len = resp.experienceShared;
       })
       .catch (err => console.log (err));
+
+    
     // creating the experience using its schema
 
     const newExperience = await new Experience ({
