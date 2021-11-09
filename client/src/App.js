@@ -49,7 +49,7 @@ function App () {
         <Route exact path="/timeline">
           <TimeLine />
         </Route>
-        <Route exact path="/dashboard">
+        <Route exact path="/dashboard/:user_id">
           <Dashboard />
         </Route>
         <Route exact path="/about-us">
@@ -75,7 +75,7 @@ function App () {
           <AskSomethingAnswer />
         </Route>
         <Route exact path="/reset-password/:email">
-          <ResetPassword/>
+          <ResetPassword />
         </Route>
         <Route path="/*">
           <GoToHome />

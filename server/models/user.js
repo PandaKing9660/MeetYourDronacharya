@@ -10,6 +10,10 @@ const userSchema = new Schema ({
   socialMedia: {type: [String]},
   imageUrl: {type: String},
   date: {type: Date, default: Date.now},
+  experienceShared: {type: [String], default: []},
+  questionShared: {type: [String], default: []},
+  answerShared: {type: [String], default: []},
+  followers: {type: [String], default: []},
 });
 
 // creating model

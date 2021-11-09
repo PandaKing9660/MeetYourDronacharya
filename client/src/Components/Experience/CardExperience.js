@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import dompurify from 'dompurify';
-
+import {Link} from 'react-router-dom';
 import CardHeader from '@mui/material/CardHeader';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -118,7 +118,7 @@ const CardExperience = ({expData}) => {
                   sx={{mb: 1.5, fontSize: '0.91rem'}}
                   color="text.secondary"
                 >
-                  {expData.date}
+                  {expData.time.split ('T')[0]}
                 </Typography>
               </Grid>
 
@@ -132,21 +132,24 @@ const CardExperience = ({expData}) => {
                 align="left"
               >
                 {/* right floating avatar and name of author */}
-                <CardHeader
-                  avatar={
-                    <Avatar
-                      alt={`${expData.userName}`}
-                      src={`${expData.userImage}`}
-                    />
-                  }
-                  titleTypographyProps={{
-                    variant: 'body2',
-                    color: 'green',
-                    align: 'right',
-                  }}
-                  title={expData.userName}
-                  // subheader="September 14, 2016"
-                />
+
+                <Link to={`/dashboard/${expData.by}`}>
+                  <CardHeader
+                    avatar={
+                      <Avatar
+                        alt={`${expData.userName}`}
+                        src={`${expData.userImage}`}
+                      />
+                    }
+                    titleTypographyProps={{
+                      variant: 'body2',
+                      color: 'green',
+                      align: 'right',
+                    }}
+                    title={expData.userName}
+                    // subheader="September 14, 2016"
+                  />
+                </Link>
               </Grid>
             </Grid>
 
