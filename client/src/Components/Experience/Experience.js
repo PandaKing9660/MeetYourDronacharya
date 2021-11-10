@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+import {Typography, Grid, Modal, Button, Select, FormControl, MenuItem, InputLabel, CircularProgress} from '@mui/material';
+
 import axios from 'axios';
 import CardExperience from './CardExperience';
 import NavBar from '../Home/Navbar/Navbar';
 import EditorAndPreview from '../AskSomething/EditorAndPreview';
-import CircularProgress from '@mui/material/CircularProgress';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import MotivationPoint from "./MotivationPoint/MotivationPoint"
+
 import '../Materials/material.css'
 
 const style = {
@@ -152,7 +144,7 @@ const Experience = () => {
                                 <EditorAndPreview option="experience" />
                             </Box>
                         </Modal>
-                        {/* === modal button === */}
+                        {/* === end modal button === */}
                         <Box
                             sx={{
                                 minWidth: 205,
@@ -163,60 +155,8 @@ const Experience = () => {
                             <Typography variant="h5" mb={2}>
                                 Featured
                             </Typography>
-                            <Card sx={{ minWidth: 275 }}>
-                                <CardContent>
-                                    <Typography
-                                        sx={{ fontSize: 16 }}
-                                        color="text.secondary"
-                                        gutterBottom
-                                    >
-                                        I am dummy news
-                                    </Typography>
-
-                                    <Typography variant="body2">
-                                        well meaning and kindly.
-                                        <br />
-                                        {'"a benevolent smile"'}
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        well meaning and kindly.
-                                        <br />
-                                        {'"a benevolent smile"'}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions
-                                    sx={{ justifyContent: 'flex-end' }}
-                                >
-                                    <Button size="small">Learn More</Button>
-                                </CardActions>
-                            </Card>
-                            <Card sx={{ minWidth: 275, marginTop: 2 }}>
-                                <CardContent>
-                                    <Typography
-                                        sx={{ fontSize: 16 }}
-                                        color="text.secondary"
-                                        gutterBottom
-                                    >
-                                        Lo and behold featured
-                                    </Typography>
-
-                                    <Typography variant="body2">
-                                        well meaning and kindly.
-                                        <br />
-                                        {'"a benevolent smile"'}
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        well meaning and kindly.
-                                        <br />
-                                        {'"a benevolent smile"'}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions
-                                    sx={{ justifyContent: 'flex-end' }}
-                                >
-                                    <Button size="small">Learn More</Button>
-                                </CardActions>
-                            </Card>
+                            <MotivationPoint/>
+                            
                         </Box>
                     </Grid>
                 </Grid>
