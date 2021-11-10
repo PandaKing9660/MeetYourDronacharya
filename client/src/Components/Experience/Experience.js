@@ -146,6 +146,7 @@ const Experience = () => {
                             onClose={handleClose}
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description"
+                            disableEnforceFocus={true}
                         >
                             <Box sx={style}>
                                 <EditorAndPreview option="experience" />
