@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import {Typography, Grid, Modal, Button, Select, FormControl, MenuItem, InputLabel, CircularProgress} from '@mui/material';
+import {
+    Typography,
+    Grid,
+    Modal,
+    Button,
+    Select,
+    FormControl,
+    MenuItem,
+    InputLabel,
+    CircularProgress,
+} from '@mui/material';
 
 import axios from 'axios';
 import CardExperience from './CardExperience';
 import NavBar from '../Home/Navbar/Navbar';
 import EditorAndPreview from '../AskSomething/EditorAndPreview';
-import MotivationPoint from "./MotivationPoint/MotivationPoint"
+import MotivationPoint from './MotivationPoint/MotivationPoint';
 
-import '../Materials/material.css'
+import '../Materials/material.css';
 
 const style = {
     position: 'absolute',
@@ -38,7 +48,9 @@ const Experience = () => {
         setLoading(true);
 
         axios
-            .post(`${process.env.REACT_APP_BACKEND_URL}/experience/${order}`, { user })
+            .post(`${process.env.REACT_APP_BACKEND_URL}/experience/${order}`, {
+                user,
+            })
             .then((res) => {
                 setExperiences(res.data);
                 setLoading(false);
@@ -59,7 +71,12 @@ const Experience = () => {
         <div>
             <NavBar />
 
-            <h1 className="heading" style={{marginTop:25,textAlign:'center'}}>EXPERIENCES</h1>
+            <h1
+                className="heading"
+                style={{ marginTop: 25, textAlign: 'center' }}
+            >
+                EXPERIENCES
+            </h1>
 
             <Box sx={{ flexGrow: 1 }} m={1} p={1}>
                 <Grid
@@ -70,8 +87,10 @@ const Experience = () => {
                 >
                     {loading ? (
                         <CircularProgress />
-                    ) : (
-                        /* loop over experiences array and pass data to CardExperience component for rendering children */
+                    ) : experiences.length > 0 ? (
+                        /* loop over experiences array and pass data to
+                         CardExperience component for rendering children */
+
                         <Grid item xs={12} sm={12} md={8}>
                             <Box sx={{ minWidth: 275 }}>
                                 {experiences.map((experience, index) => {
@@ -84,6 +103,10 @@ const Experience = () => {
                                 })}
                             </Box>
                         </Grid>
+                    ) : (
+                        <Typography variant="h4" align="left">
+                            No Experience till now !!
+                        </Typography>
                     )}
 
                     {/* right side grid division for navigation or news */}
@@ -124,14 +147,14 @@ const Experience = () => {
                             </Box>
                         </Box>
                         {/* === modal button === */}
-                       <div style={{marginTop:10}}>
-                        <Button
-                            onClick={handleOpen}
-                            variant="outlined"
-                            color="warning"
-                        >
-                            Add Experience
-                        </Button>
+                        <div style={{ marginTop: 10 }}>
+                            <Button
+                                onClick={handleOpen}
+                                variant="outlined"
+                                color="warning"
+                            >
+                                Add Experience
+                            </Button>
                         </div>
                         <Modal
                             open={open}
@@ -155,8 +178,7 @@ const Experience = () => {
                             <Typography variant="h5" mb={2}>
                                 Featured
                             </Typography>
-                            <MotivationPoint/>
-                            
+                            <MotivationPoint />
                         </Box>
                     </Grid>
                 </Grid>

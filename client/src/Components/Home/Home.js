@@ -89,7 +89,7 @@ const Home = () => {
         <Grid item xs={12} mb={2} mt={1}>
           <h1 className="head_home">Meet Your Dronacharya</h1>
         </Grid>
-        <Grid item xs={5} lg={4} mb={2}>
+        <Grid item xs={10} sm={7} lg={6} mb={2}>
           <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -113,7 +113,7 @@ const Home = () => {
           my={5}
           xs={9}
         >
-          <Grid item xs={6} md={1.7}>
+          <Grid item xs={3} md={1.7}>
             <Tooltip title="Ask Something">
               <IconButton
                 size="large"
@@ -126,7 +126,7 @@ const Home = () => {
               </IconButton>
             </Tooltip>
           </Grid>
-          <Grid item xs={6} md={1.7}>
+          <Grid item xs={3} md={1.7}>
             <Tooltip title="Experience">
               <IconButton
                 size="large"
@@ -139,7 +139,7 @@ const Home = () => {
               </IconButton>
             </Tooltip>
           </Grid>
-          <Grid item xs={6} md={1.7}>
+          <Grid item xs={3} md={1.7}>
             <Tooltip title="Study Material">
               <IconButton
                 size="large"
@@ -152,7 +152,7 @@ const Home = () => {
               </IconButton>
             </Tooltip>
           </Grid>
-          <Grid item xs={6} md={1.7}>
+          <Grid item xs={3} md={1.7}>
             <Tooltip title="Timeline">
               <IconButton
                 size="large"
@@ -165,7 +165,7 @@ const Home = () => {
               </IconButton>
             </Tooltip>
           </Grid>
-          <Grid item xs={6} md={1.7}>
+          <Grid item xs={4} md={1.7}>
             <Tooltip title="Dashboard">
               <IconButton
                 size="large"
@@ -178,7 +178,7 @@ const Home = () => {
               </IconButton>
             </Tooltip>
           </Grid>
-          <Grid item xs={6} md={1.7}>
+          <Grid item xs={4} md={1.7}>
             <Tooltip title="Find Myself">
               <IconButton
                 size="large"
@@ -191,7 +191,7 @@ const Home = () => {
               </IconButton>
             </Tooltip>
           </Grid>
-          <Grid item xs={11} md={1.8}>
+          <Grid item xs={4} md={1.8}>
             <Tooltip title="About Us">
               <IconButton
                 size="large"

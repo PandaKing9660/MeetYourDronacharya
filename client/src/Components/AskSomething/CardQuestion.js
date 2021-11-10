@@ -160,6 +160,8 @@ const CardQuestion = ({quesData, showAnswer}) => {
                 }}
                 align="right"
               >
+              
+                <Link to={`/dashboard/${quesData.by}`}>
                 <CardHeader
                   avatar={
                     <Avatar
@@ -175,6 +177,7 @@ const CardQuestion = ({quesData, showAnswer}) => {
                   title={quesData.userName}
                   // subheader="September 14, 2016"
                 />
+                </Link>
               </Grid>
             </Grid>
 
