@@ -259,4 +259,19 @@ router.post('/deleteExp', async (req,res) => {
  }
 });
 
+router.post('/editExp', async (req,res) => {
+  console.log ('delete');
+  const {experienceId} = req.body;
+  console.log(req.body)
+ try {
+  const deluser = await Experience.findByIdAndDelete(experienceId);
+    console.log(experienceId)
+   if (!deluser) return res.sendStatus(404);
+  console.log("deleted yoyyyyy");
+  res.send("deleted")
+ } catch (e) {
+ console.log("Error ",e);
+ }
+});
+
 module.exports = router;

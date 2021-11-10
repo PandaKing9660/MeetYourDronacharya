@@ -13,11 +13,19 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-
-// import { confirmWrapper, confirm } from './confirm'
-
-
 import {Button, CardActions} from '@mui/material';
+
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import EditorAndPreview from '../AskSomething/EditorAndPreview';
+
+import { confirm } from "react-confirm-box";
+
+const ITEM_HEIGHT = 48;
+
 
 const CardExperience = ({expData}) => {
   const sanitizer = dompurify.sanitize;
@@ -92,21 +100,51 @@ const CardExperience = ({expData}) => {
       });
   };
 
+  const Confirm = async (userId,experienceId) => {
+   const result = await confirm("Are you sure?");
+   if (result) {
+      axios
+        .post (`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
+          experienceId,
+        })
+        .then (res => {
+          window.location.reload();
+        });
+     return;
+   }
+   console.log("You click No!");
+ };
+
   const DeleteUser = (userId,experienceId) => {
+    if (!user) {
+      alert ('Please login to like this question');
+      return;
+    }
+   Confirm (userId,experienceId) ;
+  };
+
+   const Edit = (userId,experienceId) => {
     if (!user) {
       alert ('Please login to like this question');
       return;
     }
     console.log(userId,experienceId)
     axios
-      .post (`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
+      .post (`${process.env.REACT_APP_BACKEND_URL}/experience/editExp`, {
         experienceId,
       })
       .then (res => {
          window.location.reload();
       });
   };
-
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   /*
   const handleOnClick = async () => {
   if (await confirm({
@@ -128,7 +166,44 @@ const CardExperience = ({expData}) => {
           marginY={{xs: '1em', md: '0.2em'}}
           //  This will change margin on `sm` and `md`
         >
-          <CardContent>
+          <CardContent sx={{justify: 'flex-end',float:'right'}}>
+              {user && user._id === expData.by?
+                  <div>
+                    <IconButton
+                      aria-label="more"
+                      id="long-button"
+                      aria-controls="long-menu"
+                      aria-expanded={open ? 'true' : undefined}
+                      aria-haspopup="true"
+                      onClick={handleClick}
+                    >
+                      <MoreVertIcon />
+                    </IconButton>
+                    <Menu
+                      id="long-menu"
+                      MenuListProps={{
+                        'aria-labelledby': 'long-button',
+                      }}
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      PaperProps={{
+                        style: {
+                          maxHeight: ITEM_HEIGHT * 4.5,
+                          width: '20ch',
+                        },
+                      }}
+                    >
+                        <MenuList  onClick={handleClose}>
+                            <MenuItem onClick={() => {DeleteUser (user ? user._id : 0, expData._id);}}>Delete</MenuItem>
+                            <MenuItem onClick={() => <EditorAndPreview option="experience" />}>Edit</MenuItem>
+                        </MenuList>  
+                    </Menu>
+                  </div>
+            : <div /> 
+          }
+          </CardContent>
+          <CardContent sx={{justify: 'flex-end'}}>
             <Grid
               container
               rowSpacing={1}
@@ -195,19 +270,6 @@ const CardExperience = ({expData}) => {
           </CardContent>
 
           <CardActions sx={{justifyContent: 'flex-end'}}>
-
-            {user && user._id === expData.by?
-              <Button
-              variant="outlined"
-              color="error"
-              title="Delete"
-              onClick={() => {
-                DeleteUser (user ? user._id : 0, expData._id);
-              }}
-            >
-              Delete
-            </Button>
-            : <div/>}
 
             <Button
               variant="outlined"
