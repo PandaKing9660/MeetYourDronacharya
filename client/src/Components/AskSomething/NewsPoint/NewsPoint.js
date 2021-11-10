@@ -4,10 +4,13 @@ import './newspoint.css';
 
 async function searchNews(q) {
     q = encodeURIComponent(q);
+
+    // make a call to Bing News Api
     const response = await fetch(
         `https://bing-news-search1.p.rapidapi.com/news/search?freshness=Day&textFormat=Raw&safeSearch=Strict&q=${q}`,
         {
             method: 'GET',
+            // required headers with api keys
             headers: {
                 'x-bingapis-sdk': 'true',
                 'x-rapidapi-host': 'bing-news-search1.p.rapidapi.com',
@@ -17,14 +20,14 @@ async function searchNews(q) {
         }
     );
     const body = await response.json();
-    console.log('body g', body);
+    // console.log('news body', body);
     return body.value;
 }
 
 const NewsPoint = () => {
     const [query, setQuery] = useState('Jobs');
 
-    // Set initial value to be displayed on landing
+    // Set initial value to be displayed on landing, prevents loading wait time
     const [newsList, setNewsList] = useState([
         {
             _type: 'NewsArticle',
@@ -244,6 +247,7 @@ const NewsPoint = () => {
 
     return (
         <div>
+            {/* User can enter text to search web */}
             <form onSubmit={search} style={{ paddingBottom: '3%' }}>
                 <input
                     autoFocus
@@ -264,7 +268,7 @@ const NewsPoint = () => {
             ) : (
                 <ul>
                     {newsList.map((item, i) => (
-                        <Item key={i} item={item} />
+                        <NewItem key={i} item={item} />
                     ))}
                 </ul>
             )}
@@ -272,7 +276,8 @@ const NewsPoint = () => {
     );
 };
 
-function Item({ item }) {
+// News card item to display text
+function NewItem({ item }) {
     const separateWords = (s) => s.replace(/[A-Z][a-z]+/g, '$& ').trim();
     const formatDate = (s) =>
         new Date(s).toLocaleDateString(undefined, { dateStyle: 'long' });
@@ -287,12 +292,19 @@ function Item({ item }) {
                 />
             )}
 
-            <h2 className="title">
-                <a href={item.url}>{item.name}</a>
-            </h2>
+            {/* open link of article in new page */}
+            <a
+                className="title"
+                href={item.url}
+                target="_blank"
+                rel="noreferrer noopener"
+            >
+                {item.name}
+            </a>
 
             <p className="description">{item.description}</p>
 
+            {/* Date time */}
             <div className="meta">
                 <span>{formatDate(item.datePublished)}</span>
 
@@ -310,6 +322,7 @@ function Item({ item }) {
                     {item.provider[0].name}
                 </span>
 
+                {/* Categories related to */}
                 {item.category && <span>{separateWords(item.category)}</span>}
             </div>
         </li>

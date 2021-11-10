@@ -41,6 +41,7 @@ input:focus {
 
 .item .title {
     font-size: 100%;
+    text-decoration: none;
 }
 
 .item .description {
