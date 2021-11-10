@@ -19,7 +19,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CircularProgress from '@mui/material/CircularProgress';
-import { DropzoneArea } from "material-ui-dropzone";
+// import { DropzoneArea } from "material-ui-dropzone";
 import axios from "axios";
 
 // Styles for search
@@ -71,11 +71,13 @@ export default function StudyMaterial() {
   };
 
   const [title, setTitle] = useState ('');
+  const [link, setLink] = useState ('');
   const [description, setDescription] = useState ('');
-  const [tag, setTag] = useState ('');
-  const [data, setData] = useState ({});
+  const [tag, setTag] = useState ('meetyourdronacharya');
+  // const [data, setData] = useState ({});
   const [loading, setLoading] = useState (false);
   const [materials, setMaterials] = useState ([]);
+  const [upload, setUpload] = useState (true);
 
   // To retrieve user info if logged in
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -95,13 +97,13 @@ export default function StudyMaterial() {
   }, []);
 
   // Save uploaded material
-  function onSaveFirstFile(file) {
-    setData((prevState) => ({
-      ...data,
-      firstFile: [file],
-    }));
-    console.log (111, file);
-  }
+  // function onSaveFirstFile(file) {
+  //   setData((prevState) => ({
+  //     ...data,
+  //     firstFile: [file],
+  //   }));
+  //   console.log("data", data);
+  // }
 
   // Setting Tags
   const handleTagChange = (event, value) => {
@@ -110,27 +112,41 @@ export default function StudyMaterial() {
 
   // For uploading Study Materials
   const handleSubmit = () => {
-    console.log (title);
-    console.log (description);
-    console.log (tag);
-    console.log (data);
 
-    if (description !== '') {
+    if(title === '')
+    {
+      setUpload(false);
+      alert ('Please add Heading');
+    }
+    else if(description === '')
+    {
+      setUpload(false);
+      alert ('Please add Description');
+    }
+    else if(link === '')
+    {
+      setUpload(false);
+      alert ('Please add Link');
+    }
+    else setUpload(true);
+    
+    if (upload) {
       axios
         .post ( `${process.env.REACT_APP_BACKEND_URL}/study-material/add`, {
           by: user._id,
           topic: title,
           description: description,
-          material: data,
+          link: link,
+          // image: data,
           tags: tag,
         })
         .then (res => {
           console.log (res.data);
+          alert ('Thank you for sharing the material!!!');
           window.location.reload ();
         })
         .catch (err => console.log (err));
     }
-    alert ('Thank you for sharing the material!!!');
   };
 
   // Showing two tabs: for displaying materials, for adding materials
@@ -142,7 +158,7 @@ export default function StudyMaterial() {
       </h1>
       <div className="division">
         <div className="materials">
-          <Box sx={{width: '100%', typography: 'body1'}}>
+          <Box>
             <TabContext value={value}>
               <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
                 <TabList
@@ -169,7 +185,6 @@ export default function StudyMaterial() {
                     <CircularProgress />
                   ) : (
                     <div>
-                      {console.log(materials)}
                       {materials.map((material) => {
                         return (
                             <MaterialCard material={material} />
@@ -181,13 +196,13 @@ export default function StudyMaterial() {
               </TabPanel>
               {/* For uploading Material */}
               <TabPanel value="4">
-                <Box sx={{transform: 'translateZ(0px)', flexGrow: 1}}>
-                  <form>
-                    <label style={{textAlign: 'left'}}>
-                      Enter the topic :{' '}
-                    </label>
+                <Box>
+                  <form style={{display: 'inline'}}>
+                    <h4 style={{textAlign: 'left'}}>
+                      Heading:
+                    </h4>
                     <input
-                      style={{width: '100%', padding: 15, marginBottom: 40}}
+                      style={{width: '100%', padding: 5, marginTop: 10, marginBottom: 40}}
                       type="text"
                       value={title}
                       onChange={e => setTitle (e.target.value)}
@@ -195,7 +210,7 @@ export default function StudyMaterial() {
                     <h4 style={{textAlign: 'left'}}>
                       Description about the material:
                     </h4>
-                    <div>
+                    <div style={{marginTop: 20, marginBottom: 40}}>
                       <ReactQuill
                         theme="snow"
                         sx={{backgroundColor: 'white', margin: 40}}
@@ -203,6 +218,14 @@ export default function StudyMaterial() {
                         onChange={setDescription}
                       />
                     </div>
+                    <h4 style={{textAlign: 'left'}}>
+                      Link for the material:
+                    </h4>
+                    <input
+                      style={{width: '100%', padding: 5, marginTop: 10, marginBottom: 40, color: 'blue', textDecoration: 'underline'}}
+                      type="text"
+                      onChange={e => setLink (e.target.value)}
+                    />
                     <div>
                       <Autocomplete
                         multiple
@@ -229,12 +252,13 @@ export default function StudyMaterial() {
                       />
                     </div>
 
+
                     <div style={{ margin: 40 }}>
                       {/* For droping materials like pdf or images or videos */}
-                      <DropzoneArea
+                      {/* <DropzoneArea
                         showPreviews={true}
                         onChange={onSaveFirstFile}
-                      />
+                      /> */}
                     </div>
                     <Button
                       variant="contained"
@@ -254,4 +278,4 @@ export default function StudyMaterial() {
   );
 }
 
-const subjects = [{ title: "CAT" }, { title: "UPSC" }, { title: "JEE" }];
+const subjects = [{ title: "CAT" }, { title: "UPSC" }, { title: "JEE" }, {title: "Others"}];

@@ -92,13 +92,13 @@ const AboutTeam = () => {
               photo={adi}
               name="Aditya Sharma"
               roll="CS19B001"
-              text="Panda Sharma"
+              text="Avoid thinking about your career after B.Tech. It's late but not the end."
             />
             <ActionAreaCard
               photo={amit}
               name="Amit Kesari"
               roll="CS19B003"
-              text="Robot"
+              text="Don't let AI or society decide your future."
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -106,13 +106,13 @@ const AboutTeam = () => {
               photo={anu}
               name="Anu Anand Annu"
               roll="CS19B044"
-              text="Billa"
+              text="The one-liner of other three is written by me!!!"
             />
             <ActionAreaCard
               photo={sow}
               name="Emani Sowmya"
               roll="CS19B045"
-              text="Somu Sowmya"
+              text="Be faithful to yourself and decide your career which will interests you."
             />
           </Grid>
         </Grid>
