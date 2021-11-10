@@ -19,7 +19,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CircularProgress from '@mui/material/CircularProgress';
-import { DropzoneArea } from "material-ui-dropzone";
+// import { DropzoneArea } from "material-ui-dropzone";
 import axios from "axios";
 
 // Styles for search
@@ -73,11 +73,11 @@ export default function StudyMaterial() {
   const [title, setTitle] = useState ('');
   const [link, setLink] = useState ('');
   const [description, setDescription] = useState ('');
-  const [tag, setTag] = useState ('');
+  const [tag, setTag] = useState ('meetyourdronacharya');
   // const [data, setData] = useState ({});
   const [loading, setLoading] = useState (false);
   const [materials, setMaterials] = useState ([]);
-
+  const [upload, setUpload] = useState (true);
 
   // To retrieve user info if logged in
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -113,7 +113,24 @@ export default function StudyMaterial() {
   // For uploading Study Materials
   const handleSubmit = () => {
 
-    if (description !== '') {
+    if(title === '')
+    {
+      setUpload(false);
+      alert ('Please add Heading');
+    }
+    else if(description === '')
+    {
+      setUpload(false);
+      alert ('Please add Description');
+    }
+    else if(link === '')
+    {
+      setUpload(false);
+      alert ('Please add Link');
+    }
+    else setUpload(true);
+    
+    if (upload) {
       axios
         .post ( `${process.env.REACT_APP_BACKEND_URL}/study-material/add`, {
           by: user._id,
@@ -125,11 +142,11 @@ export default function StudyMaterial() {
         })
         .then (res => {
           console.log (res.data);
+          alert ('Thank you for sharing the material!!!');
           window.location.reload ();
         })
         .catch (err => console.log (err));
     }
-    alert ('Thank you for sharing the material!!!');
   };
 
   // Showing two tabs: for displaying materials, for adding materials
