@@ -1,12 +1,10 @@
 import Button from '@mui/material/Button';
 import {useState} from 'react';
-import sow from '../AboutUs/Photos/sow.png';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 const Profile = ({userData}) => {
-  console.log (userData);
   const [isFriendAdded, setIsHeartLiked] = useState (true);
   const handleClick = () => {
     setIsHeartLiked (!isFriendAdded);
@@ -23,7 +21,7 @@ const Profile = ({userData}) => {
         <h3>Name: {userData.name}</h3>
         <h3>Email: {userData.email}</h3>
         <h3>
-          Social Media: {userData.socialMedia.map (media => <p>{media}</p>)}
+          Social Media: {userData.socialMedia.map (media => media + ' ')}
         </h3>
         <div style={{display: 'flex'}}>
           <BasicCard text="Followers" number={userData.followers.length} />
@@ -53,15 +51,15 @@ const Profile = ({userData}) => {
 
 const Before = () => {
   return (
-    <div style={{marginTop: 15}}>
-      <Button variant="contained">ADD FRIEND</Button>
+    <div style={{marginTop: '2%'}}>
+      <Button variant="contained">Follow</Button>
     </div>
   );
 };
 
 const After = () => {
   return (
-    <div style={{marginTop: 15}}>
+    <div style={{marginTop: '2%'}}>
       <Button
         variant="contained"
         sx={{
@@ -71,7 +69,7 @@ const After = () => {
           },
         }}
       >
-        Friend ADded
+        Unfollow
       </Button>
     </div>
   );

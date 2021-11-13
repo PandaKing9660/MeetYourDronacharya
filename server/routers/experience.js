@@ -129,7 +129,6 @@ router.post ('/add', async (req, res) => {
       })
       .catch (err => console.log (err));
 
-    
     // creating the experience using its schema
 
     const newExperience = await new Experience ({
@@ -243,35 +242,33 @@ router.put ('/addDislike', async (req, res) => {
   }
 });
 
-
-router.post('/deleteExp', async (req,res) => {
-  console.log ('delete');
+router.post ('/deleteExp', async (req, res) => {
   const {experienceId} = req.body;
-  console.log(req.body)
- try {
-  const deluser = await Experience.findByIdAndDelete(experienceId);
-    console.log(experienceId)
-   if (!deluser) return res.sendStatus(404);
-  console.log("deleted yoyyyyy");
-  res.send("deleted")
- } catch (e) {
- console.log("Error ",e);
- }
+  console.log (req.body);
+  try {
+    const deluser = await Experience.findByIdAndDelete (experienceId);
+    console.log (experienceId);
+    if (!deluser) return res.sendStatus (404);
+
+    res.send ('deleted');
+  } catch (e) {
+    console.log ('Error ', e);
+  }
 });
 
-router.post('/editExp', async (req,res) => {
+router.post ('/editExp', async (req, res) => {
   console.log ('delete');
   const {experienceId} = req.body;
-  console.log(req.body)
- try {
-  const deluser = await Experience.findByIdAndDelete(experienceId);
-    console.log(experienceId)
-   if (!deluser) return res.sendStatus(404);
-  console.log("deleted yoyyyyy");
-  res.send("deleted")
- } catch (e) {
- console.log("Error ",e);
- }
+  console.log (req.body);
+  try {
+    const deluser = await Experience.findByIdAndDelete (experienceId);
+    console.log (experienceId);
+    if (!deluser) return res.sendStatus (404);
+    console.log ('deleted yoyyyyy');
+    res.send ('deleted');
+  } catch (e) {
+    console.log ('Error ', e);
+  }
 });
 
 module.exports = router;

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  useParams,
-} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from './Components/Home/Home';
 import AboutUs from './Components/AboutUs/AboutUs';
 import GoToHome from './Components/Home/GoToHome';
@@ -22,6 +17,9 @@ import Logout from './Components/Login/Logout';
 import './App.css';
 import Verify from './Components/Login/Verify';
 import ResetPassword from './Components/Login/ResetPassword';
+import UserAnswered from './Components/Dashboard/UserAnswered';
+import UserExperience from './Components/Dashboard/UserExperience';
+import UserQuestion from './Components/Dashboard/UserQuestion';
 
 /**
  * @brief added all other routers
@@ -51,6 +49,18 @@ function App () {
         </Route>
         <Route exact path="/dashboard/:user_id">
           <Dashboard />
+        </Route>
+        <Route exact path="/dashboard">
+          <Dashboard />
+        </Route>
+        <Route exact path="/dashboard/:userId/user-experience">
+          <UserExperience />
+        </Route>
+        <Route exact path="/dashboard/:userId/user-answer">
+          <UserAnswered />
+        </Route>
+        <Route exact path="/dashboard/:userId/user-question">
+          <UserQuestion />
         </Route>
         <Route exact path="/about-us">
           <AboutUs />

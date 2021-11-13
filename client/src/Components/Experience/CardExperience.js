@@ -1,4 +1,4 @@
-import React, {useState, useEffect,Alert} from 'react';
+import React, {useState, useEffect, Alert} from 'react';
 import axios from 'axios';
 import dompurify from 'dompurify';
 import {Link} from 'react-router-dom';
@@ -22,10 +22,9 @@ import MenuList from '@mui/material/MenuList';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditorAndPreview from '../AskSomething/EditorAndPreview';
 
-import { confirm } from "react-confirm-box";
+import {confirm} from 'react-confirm-box';
 
 const ITEM_HEIGHT = 48;
-
 
 const CardExperience = ({expData}) => {
   const sanitizer = dompurify.sanitize;
@@ -100,50 +99,50 @@ const CardExperience = ({expData}) => {
       });
   };
 
-  const Confirm = async (userId,experienceId) => {
-   const result = await confirm("Are you sure?");
-   if (result) {
+  const Confirm = async (userId, experienceId) => {
+    const result = await confirm ('Are you sure?');
+    if (result) {
       axios
         .post (`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
           experienceId,
         })
         .then (res => {
-          window.location.reload();
+          window.location.reload ();
         });
-     return;
-   }
-   console.log("You click No!");
- };
-
-  const DeleteUser = (userId,experienceId) => {
-    if (!user) {
-      alert ('Please login to like this question');
       return;
     }
-   Confirm (userId,experienceId) ;
+    console.log ('You click No!');
   };
 
-   const Edit = (userId,experienceId) => {
+  const DeleteUser = (userId, experienceId) => {
     if (!user) {
       alert ('Please login to like this question');
       return;
     }
-    console.log(userId,experienceId)
+    Confirm (userId, experienceId);
+  };
+
+  const Edit = (userId, experienceId) => {
+    if (!user) {
+      alert ('Please login to like this question');
+      return;
+    }
+    console.log (userId, experienceId);
     axios
       .post (`${process.env.REACT_APP_BACKEND_URL}/experience/editExp`, {
         experienceId,
       })
       .then (res => {
-         window.location.reload();
+        window.location.reload ();
       });
   };
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const [anchorEl, setAnchorEl] = React.useState (null);
+  const open = Boolean (anchorEl);
+  const handleClick = event => {
+    setAnchorEl (event.currentTarget);
   };
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorEl (null);
   };
   /*
   const handleOnClick = async () => {
@@ -166,42 +165,51 @@ const CardExperience = ({expData}) => {
           marginY={{xs: '1em', md: '0.2em'}}
           //  This will change margin on `sm` and `md`
         >
-          <CardContent sx={{justify: 'flex-end',float:'right'}}>
-              {user && user._id === expData.by?
-                  <div>
-                    <IconButton
-                      aria-label="more"
-                      id="long-button"
-                      aria-controls="long-menu"
-                      aria-expanded={open ? 'true' : undefined}
-                      aria-haspopup="true"
-                      onClick={handleClick}
-                    >
-                      <MoreVertIcon />
-                    </IconButton>
-                    <Menu
-                      id="long-menu"
-                      MenuListProps={{
-                        'aria-labelledby': 'long-button',
-                      }}
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}
-                      PaperProps={{
-                        style: {
-                          maxHeight: ITEM_HEIGHT * 4.5,
-                          width: '20ch',
-                        },
-                      }}
-                    >
-                        <MenuList  onClick={handleClose}>
-                            <MenuItem onClick={() => {DeleteUser (user ? user._id : 0, expData._id);}}>Delete</MenuItem>
-                            <MenuItem onClick={() => <EditorAndPreview option="experience" />}>Edit</MenuItem>
-                        </MenuList>  
-                    </Menu>
-                  </div>
-            : <div /> 
-          }
+          <CardContent sx={{justify: 'flex-end', float: 'right'}}>
+            {user && user._id === expData.by
+              ? <div>
+                  <IconButton
+                    aria-label="more"
+                    id="long-button"
+                    aria-controls="long-menu"
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
+                  <Menu
+                    id="long-menu"
+                    MenuListProps={{
+                      'aria-labelledby': 'long-button',
+                    }}
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                      style: {
+                        maxHeight: ITEM_HEIGHT * 4.5,
+                        width: '20ch',
+                      },
+                    }}
+                  >
+                    <MenuList onClick={handleClose}>
+                      <MenuItem
+                        onClick={() => {
+                          DeleteUser (user ? user._id : 0, expData._id);
+                        }}
+                      >
+                        Delete
+                      </MenuItem>
+                      <MenuItem
+                        onClick={() => <EditorAndPreview option="experience" />}
+                      >
+                        Edit
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
+                </div>
+              : <div />}
           </CardContent>
           <CardContent sx={{justify: 'flex-end'}}>
             <Grid
