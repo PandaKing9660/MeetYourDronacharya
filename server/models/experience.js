@@ -2,7 +2,6 @@ const mongoose = require ('mongoose');
 
 const Schema = mongoose.Schema;
 
-
 // Creating Experience Schema
 const experienceSchema = new Schema ({
   title: {type: String, require: true},
