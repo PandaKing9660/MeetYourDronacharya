@@ -30,9 +30,14 @@ const MaterialCard = ({ material }) => {
           title={material.userName}
           subheader={material.date.split("T")[0]}
         />
-        <Button variant="outlined" href={material.link} target="_blank" rel="noopener noreferrer">
-          View Material
-        </Button>
+        <div style={{display: "inline-block"}}>
+          <Button variant="outlined" href={material.link} target="_blank" rel="noopener noreferrer" style={{margin: "2% 10%"}}>
+            View Material
+          </Button>
+          <Button variant="outlined" style={{margin: "2% 10%"}}>
+            Chat
+          </Button>
+        </div>
       </div>
       <div>
         <CardContent>
@@ -46,6 +51,9 @@ const MaterialCard = ({ material }) => {
               }}
               style={{ padding: "1%" }}
             />
+          </Typography>
+          <Typography variant="h7" color="text.primary">
+            {material.location}
           </Typography>
         </CardContent>
 

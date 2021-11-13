@@ -33,6 +33,7 @@ router.post ('/add', async (req, res) => {
       description: material.description,
       // image: material.image,
       link: material.link,
+      location: material.location,
       tags: material.tags,
       userName: user_name,
       userImage: user_image,

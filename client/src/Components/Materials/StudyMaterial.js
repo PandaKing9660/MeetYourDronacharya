@@ -73,6 +73,7 @@ export default function StudyMaterial() {
   const [title, setTitle] = useState ('');
   const [link, setLink] = useState ('');
   const [description, setDescription] = useState ('');
+  const [location, setLocation] = useState ('');
   const [tag, setTag] = useState ('meetyourdronacharya');
   // const [data, setData] = useState ({});
   const [loading, setLoading] = useState (false);
@@ -128,6 +129,11 @@ export default function StudyMaterial() {
       setUpload(false);
       alert ('Please add Link');
     }
+    else if(location === '')
+    {
+      setUpload(false);
+      alert ('Please add Location');
+    }
     else setUpload(true);
     
     if (upload) {
@@ -137,6 +143,7 @@ export default function StudyMaterial() {
           topic: title,
           description: description,
           link: link,
+          location: location,
           // image: data,
           tags: tag,
         })
@@ -224,7 +231,15 @@ export default function StudyMaterial() {
                     <input
                       style={{width: '100%', padding: 5, marginTop: 10, marginBottom: 40, color: 'blue', textDecoration: 'underline'}}
                       type="text"
-                      onChange={e => setLink (e.target.value)}
+                      onChange={e => setLink(e.target.value)}
+                    />
+                    <h4 style={{textAlign: 'left'}}>
+                      Location:
+                    </h4>
+                    <input
+                      style={{width: '100%', padding: 5, marginTop: 10, marginBottom: 40}}
+                      type="text"
+                      onChange={e => setLocation(e.target.value)}
                     />
                     <div>
                       <Autocomplete
@@ -253,13 +268,13 @@ export default function StudyMaterial() {
                     </div>
 
 
-                    <div style={{ margin: 40 }}>
-                      {/* For droping materials like pdf or images or videos */}
-                      {/* <DropzoneArea
+                    {/* <div style={{ margin: 40 }}>
+                      For droping materials like pdf or images or videos
+                      <DropzoneArea
                         showPreviews={true}
                         onChange={onSaveFirstFile}
-                      /> */}
-                    </div>
+                      />
+                    </div> */}
                     <Button
                       variant="contained"
                       color="primary"
