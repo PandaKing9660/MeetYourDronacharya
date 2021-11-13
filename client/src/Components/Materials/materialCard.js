@@ -15,7 +15,7 @@ const MaterialCard = ({ material }) => {
   // For showing cards displaying studying material
   return (
     <Card
-      sx={{ display: "flex", marginTop: 5, padding: 5, background: "#EAE6F8" }}
+      sx={{ display: "flex", marginTop: "2%", padding: "1.5%", background: "#EAE6F8" }}
     >
       <div style={{ width: "30%" }}>
         <CardHeader
@@ -31,10 +31,10 @@ const MaterialCard = ({ material }) => {
           subheader={material.date.split("T")[0]}
         />
         <div style={{display: "inline-block"}}>
-          <Button variant="outlined" href={material.link} target="_blank" rel="noopener noreferrer" style={{margin: "2% 10%"}}>
+          <Button variant="outlined" href={material.link} target="_blank" rel="noopener noreferrer" style={{margin: "2% 5%"}}>
             View Material
           </Button>
-          <Button variant="outlined" style={{margin: "2% 10%"}}>
+          <Button variant="outlined" style={{margin: "2% 5%"}}>
             Chat
           </Button>
         </div>
@@ -56,10 +56,11 @@ const MaterialCard = ({ material }) => {
             {material.location}
           </Typography>
         </CardContent>
-
-        {material.tags.map((tag) => (
-          <Typography color="primary">#{tag}</Typography>
-        ))}
+        <div style={{ padding: "0.5%" }}>
+          {material.tags.map((tag) => (
+            <Typography display="inline" color="primary">#{tag} </Typography>
+          ))}
+        </div>
       </div>
     </Card>
   );

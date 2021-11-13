@@ -63,32 +63,42 @@ const AskSomethingAnswer = () => {
         {loading
           ? <CircularProgress />
           : <div>
-              <Typography variant="h4" align="center">
-                  Question
-                </Typography>
-              <CardQuestion quesData={question[0]} showAnswer={false}/>
-              <Divider variant="middle" />
-
-              <Typography variant="h4" align="center">
-                  Answers
-                </Typography>
               <Grid
                 container
-                // spacing={{ xs: 2, md: 3 }}
-                columns={{xs: 4, sm: 8, md: 2}}
-                justifyContent="flex-start"
-                alignItems="center"
+                p={1}
+                direction="row"
+                rowSpacing={{xs: 1}}
+                justifyContent="space-around"
               >
-                {answers.map (answer => {
-                  return (
-                    <Grid item xs={12} md={6} key={answer._id}>
-                      <CardAnswer ansData={answer} />
-                    </Grid>
-                  );
-                })}
+                <Grid item xs={12} md={6} style={{overflow: 'auto'}}>
+                  <Typography variant="h4" align="center">
+                      Question
+                    </Typography>
+                  <CardQuestion quesData={question[0]} showAnswer={false}/>
+                  <Divider variant="middle" />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Typography variant="h4" align="center">
+                      Answers
+                    </Typography>
+                  <Grid
+                    container
+                    columns={{xs: 4, sm: 8, md: 2}}
+                    justifyContent="flex-start"
+                    alignItems="center"
+                    style={{overflow: 'auto', height: '580px'}}
+                  >
+                    {answers.map (answer => {
+                      return (
+                        <Grid item xs={12} md={6} key={answer._id}>
+                          <CardAnswer ansData={answer} />
+                        </Grid>
+                      );
+                    })}
+                  </Grid>
+                </Grid>
               </Grid>
             </div>}
-
       </Box>
     </div>
   );

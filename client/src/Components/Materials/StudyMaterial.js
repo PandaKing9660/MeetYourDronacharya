@@ -160,14 +160,14 @@ export default function StudyMaterial() {
   return (
     <div className="material_StudyMaterial">
       <NavBar />
-      <h1 className="heading" style={{marginTop: 25, textAlign: 'center'}}>
+      <h1 className="heading" style={{marginTop: "1%", textAlign: 'center'}}>
         STUDY MATERIAL
       </h1>
       <div className="division">
         <div className="materials">
           <Box>
             <TabContext value={value}>
-              <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
+              <Box sx={{borderBottom: "0.5%", borderColor: 'divider'}}>
                 <TabList
                   onChange={handleChange}
                   aria-label="lab API tabs example"
@@ -209,7 +209,7 @@ export default function StudyMaterial() {
                       Heading:
                     </h4>
                     <input
-                      style={{width: '100%', padding: 5, marginTop: 10, marginBottom: 40}}
+                      style={{width: '100%', padding: "0.5%", marginTop: "1%", marginBottom: "1%"}}
                       type="text"
                       value={title}
                       onChange={e => setTitle (e.target.value)}
@@ -217,10 +217,10 @@ export default function StudyMaterial() {
                     <h4 style={{textAlign: 'left'}}>
                       Description about the material:
                     </h4>
-                    <div style={{marginTop: 20, marginBottom: 40}}>
+                    <div style={{marginTop: "1%", marginBottom: "1%"}}>
                       <ReactQuill
                         theme="snow"
-                        sx={{backgroundColor: 'white', margin: 40}}
+                        sx={{backgroundColor: 'white', margin: "1%"}}
                         value={description}
                         onChange={setDescription}
                       />
@@ -229,7 +229,7 @@ export default function StudyMaterial() {
                       Link for the material:
                     </h4>
                     <input
-                      style={{width: '100%', padding: 5, marginTop: 10, marginBottom: 40, color: 'blue', textDecoration: 'underline'}}
+                      style={{width: '100%', padding: "0.5%", marginTop: "1%", marginBottom: "1%", color: 'blue', textDecoration: 'underline'}}
                       type="text"
                       onChange={e => setLink(e.target.value)}
                     />
@@ -237,7 +237,7 @@ export default function StudyMaterial() {
                       Location:
                     </h4>
                     <input
-                      style={{width: '100%', padding: 5, marginTop: 10, marginBottom: 40}}
+                      style={{width: '100%', padding: "0.5%", marginTop: "1%", marginBottom: "1%"}}
                       type="text"
                       onChange={e => setLocation(e.target.value)}
                     />
@@ -279,6 +279,7 @@ export default function StudyMaterial() {
                       variant="contained"
                       color="primary"
                       onClick={handleSubmit}
+                      style={{marginTop: "1%"}}
                     >
                       Submit
                     </Button>

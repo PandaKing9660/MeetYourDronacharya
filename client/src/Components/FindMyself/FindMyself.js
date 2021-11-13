@@ -146,7 +146,6 @@ const FindMyself = () => {
           container
           p={1}
           direction="row"
-          //  spacing={{ xs: 1}}
           rowSpacing={{xs: 1}}
           justifyContent="space-around"
           alignItems="center"
@@ -185,6 +184,12 @@ const FindMyself = () => {
                   <h1 style={{textAlign: 'center'}}>
                     <u>Question Set</u>
                   </h1>
+                  <h4 style={{textAlign: 'right'}}>
+                    {questions.filter(queid => queid.id === questionSetId)
+                      .map (queset => (
+                        <u>- {queset.setby}</u>
+                      ))}
+                  </h4>
                   <p align="left">Choose the most suitable options:</p>
                   <ol type="1" style={{padding: '2%'}}>
                     {questions
