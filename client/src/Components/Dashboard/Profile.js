@@ -4,6 +4,7 @@ import sow from '../AboutUs/Photos/sow.png';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import ChatBox from './ChatBox/ChatBox';
 
 const Profile = ({userData}) => {
   console.log (userData);
@@ -45,6 +46,7 @@ const Profile = ({userData}) => {
         </div>
         <div>
           <Button variant="contained" sx={{marginTop: 2}}>CHAT</Button>
+          <ChatBox/>
         </div>
       </div>
     </div>
