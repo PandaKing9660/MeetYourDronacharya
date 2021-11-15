@@ -9,7 +9,7 @@ import QuestionsAsked from './QuestionsAsked';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import '../Materials/material.css';
-import {useParams, Redirect} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import Followers from './Followers';
 
 const Dashboard = () => {
@@ -53,7 +53,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard">
+    <div>
       <NavBar />
 
       {loading
