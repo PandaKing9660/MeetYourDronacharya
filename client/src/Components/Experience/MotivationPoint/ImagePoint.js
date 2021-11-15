@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Card, CardContent, CardMedia } from '@mui/material';
+import {
+    Typography,
+    Card,
+    CardContent,
+    CardMedia,
+    Skeleton,
+    Stack,
+} from '@mui/material';
 
 // asynchronous function for getting image according to the quote's tag
 async function searchImage(q) {
@@ -18,18 +25,18 @@ async function searchImage(q) {
         }
     );
     const body = await response.json();
-    console.log('image body', body);
-    return body.value;
+    // console.log('image body', body);
+    return body.value[0].contentUrl;
 }
 
 const ImagePoint = ({ query }) => {
     // Set initial value to be displayed on landing
-    const [imageKey, setImageKey] = useState('sunny');
+    const [imageKey, setImageKey] = useState('');
 
     useEffect(() => {
         searchImage(query).then(setImageKey);
     }, []);
-
+    
     return (
         <div>
             <Card sx={{ minWidth: 275 }}>
@@ -42,13 +49,26 @@ const ImagePoint = ({ query }) => {
                     >
                         Incitement
                     </Typography>
-                    <CardMedia
-                        component="img"
-                        height="100%"
-                        image="https://i.pinimg.com/originals/57/e5/f2/57e5f2836d165912d3dd109da5bee9a3.jpg"
-                        alt="Nice Image"
-                    />
-                    {/* <img src={imageKey.relatedSearches[0].thumbnail.thumbnailUrl}></img> */}
+
+                    {/* Show loading till image is loading after searching the requested tag. */}
+                    {imageKey === '' ? (
+                        <Stack spacing={1}>
+                            <Skeleton variant="image" />
+                            <Skeleton
+                                variant="rectangular"
+                                minWidth={200}
+                                height={118}
+                            />
+                        </Stack>
+                    ) : (
+                        <CardMedia
+                            component="img"
+                            height="100%"
+                            // image="https://i.pinimg.com/originals/57/e5/f2/57e5f2836d165912d3dd109da5bee9a3.jpg"
+                            image={imageKey}
+                            alt="Nice Image"
+                        />
+                    )}
                 </CardContent>
             </Card>
         </div>

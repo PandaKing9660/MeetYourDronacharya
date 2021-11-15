@@ -69,9 +69,9 @@ const ExamCard = ({ cardData }) => {
             )}
           </IconButton>
         </Tooltip>
-        <IconButton aria-label="share">
+        {/* <IconButton aria-label="share">
           <ShareIcon />
-        </IconButton>
+        </IconButton> */}
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

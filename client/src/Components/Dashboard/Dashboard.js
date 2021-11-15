@@ -3,8 +3,11 @@ import axios from 'axios';
 import NavBar from '../Home/Navbar/Navbar';
 import './dashboard.scss';
 import Profile from './Profile';
+import Experience from './Experience';
+import Answered from './Answered';
+import QuestionsAsked from './QuestionsAsked';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import Typography from '@mui/material/Typography';
 import '../Materials/material.css';
 import {useParams} from 'react-router-dom';
 
@@ -14,17 +17,26 @@ const Dashboard = () => {
 
   const [loading, setLoading] = useState (true);
   const [userData, setUserData] = useState ({});
+  const [userMsg, setUserMsg] = useState ('');
+  const user = JSON.parse (localStorage.getItem ('profile'));
 
   useEffect (() => {
     setLoading (true);
+    const to_send = user_id ? user_id : user ? user._id : '-1';
+    
 
     axios
       .post (`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
-        userId: user_id,
+        userId: to_send,
       })
       .then (res => {
-        setUserData (res.data[0]);
-        
+        console.log (res.data.length);
+        if (res.data.length === 0) {
+          if (user_id) setUserMsg ('No User Found');
+          else setUserMsg ('Login to see profile');
+        } else {
+          setUserData (res.data[0]);
+        }
       })
       .catch (err => console.log (err));
 
@@ -36,93 +48,36 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <NavBar />
+      {console.log (userMsg)}
+
       {loading
         ? <CircularProgress />
-        : <div>
-            <h1
-              className="heading"
-              style={{marginTop: 25, marginBottom: 10, textAlign: 'center'}}
-            >
-              PROFILE
-            </h1>
-            <div style={{width: '90%'}}>
-              <Profile style={{marginLeft: 'auto', marginRight: 'auto'}} userData={userData}/>
-              <div style={{width: '110%', display: 'flex'}}>
-                <Experience />
-                <QuestionsAsked />
-                <Answered />
-              </div>
-            </div>
-          </div>}
-    </div>
-  );
-};
-
-const Experience = () => {
-  return (
-    <div className="card-container">
-      <div className="card">
-        <a href="worldweb">
-          <div className="card--display">
-            <i className="material-icons">public</i>
-            <h2>Experience</h2>
-          </div>
-          <div className="card--hover">
-            <h2>Experience</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia.
-            </p>
-            <p className="link">Click to see project</p>
-          </div>
-        </a>
-        <div className="card--border" />
-      </div>
-    </div>
-  );
-};
-
-const QuestionsAsked = () => {
-  return (
-    <div className="card-container">
-      <div className="card card--dark">
-        <a href="phonesoff">
-          <div className="card--display">
-            <i className="material-icons">ring_volume</i>
-            <h2>Questions asked</h2>
-          </div>
-          <div className="card--hover">
-            <h2>Questions asked</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia. Cras volutpat arcu sit amet elit sodales, nec volutpat velit bibendum.
-            </p>
-            <p className="link">Click to see project</p>
-          </div>
-        </a>
-        <div className="card--border" />
-      </div>
-    </div>
-  );
-};
-
-const Answered = () => {
-  return (
-    <div className="card-container">
-      <div className="card">
-        <a href="worldweb">
-          <div className="card--display">
-            <i className="material-icons">public</i>
-            <h2>Answered</h2>
-          </div>
-          <div className="card--hover">
-            <h2>Answered</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at est orci. Nam molestie pellentesque mi nec lacinia. Cras volutpat arcu sit amet elit sodales, nec volutpat velit bibendum.
-            </p>
-            <p className="link">Click to see project</p>
-          </div>
-        </a>
-        <div className="card--border" />
-      </div>
+        : userMsg
+            ? <Typography
+                sx={{mb: 1.5, fontSize: '0.91rem'}}
+                color="text.secondary"
+              >
+                {userMsg}
+              </Typography>
+            : <div>
+                <h1
+                  className="heading"
+                  style={{marginTop: 25, marginBottom: 10, textAlign: 'center'}}
+                >
+                  PROFILE
+                </h1>
+                <div style={{width: '90%'}}>
+                  <Profile
+                    style={{marginLeft: 'auto', marginRight: 'auto'}}
+                    userData={userData}
+                  />
+                  <div style={{width: '110%', display: 'flex'}}>
+                    <Experience id={userData._id}     current_profile={user_id} />
+                    <QuestionsAsked id={userData._id} current_profile={user_id} />
+                    <Answered id={userData._id}       current_profile={user_id} />
+                  </div>
+                </div>
+              </div>}
     </div>
   );
 };

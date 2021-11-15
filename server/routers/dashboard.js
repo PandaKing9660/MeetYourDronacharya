@@ -1,6 +1,9 @@
 const express = require ('express');
 const router = express.Router ();
 const user = require ('../models/user');
+const askSomethingQuestion = require ('../models/askSomethingQuestion');
+const askSomethingAnswer = require ('../models/askSomethingAnswer');
+const Experience = require ('../models/experience');
 
 router.use (express.json ());
 
@@ -130,8 +133,109 @@ router.post ('/get-user', async (req, res) => {
       .find ({})
       .then (resp => {
         const ans = resp.filter (users => users._id == userId);
-        console.log (ans);
+
         res.json (ans);
+      })
+      .catch (err => console.log (err));
+  } catch (err) {
+    console.log (err);
+  }
+});
+router.post ('/user-answer', async (req, res) => {
+  try {
+    const {userId} = req.body;
+    let ans = [];
+
+    // searching for the id
+    await user
+      .find ({})
+      .then (resp => {
+        const temp = resp.filter (users => users._id == userId);
+
+        if (temp.length === 0) {
+          res.json ([-1]);
+        }
+        if (ans.length === temp[0].answerShared.length) {
+          res.json (ans);
+        }
+
+        temp[0].answerShared.map (async ans_id => {
+          const answer = await askSomethingAnswer.findById (ans_id);
+
+          ans.push (answer);
+
+          if (ans.length === temp[0].answerShared.length) {
+            res.json (ans);
+          }
+        });
+      })
+      .catch (err => console.log (err));
+  } catch (err) {
+    console.log (err);
+  }
+});
+
+router.post ('/user-experience', async (req, res) => {
+  try {
+    const {userId} = req.body;
+    let exp = [];
+
+    // searching for the id
+    await user
+      .find ({})
+      .then (resp => {
+        const temp = resp.filter (users => users._id == userId);
+
+        if (temp.length === 0) {
+          res.json ([-1]);
+        }
+        if (exp.length === temp[0].experienceShared.length) {
+          res.json (exp);
+        }
+
+        temp[0].experienceShared.map (async exp_id => {
+          const exp_ = await Experience.findById (exp_id);
+
+          exp.push (exp_);
+
+          if (exp.length === temp[0].experienceShared.length) {
+            res.json (exp);
+          }
+        });
+      })
+      .catch (err => console.log (err));
+  } catch (err) {
+    console.log (err);
+  }
+});
+
+router.post ('/user-question', async (req, res) => {
+  try {
+    const {userId} = req.body;
+    let ques = [];
+
+    // searching for the id
+    await user
+      .find ({})
+      .then (resp => {
+        const temp = resp.filter (users => users._id == userId);
+
+        if (temp.length === 0) {
+          res.json ([-1]);
+        }
+        if (ques.length === temp[0].questionShared.length) {
+          res.json (ques);
+        }
+
+        temp[0].questionShared.map (async ans_id => {
+          const question = await askSomethingQuestion.findById (ans_id);
+
+          ques.push (question);
+
+          if (ques.length === temp[0].questionShared.length) {
+            res.json (ques);
+          }
+        });
       })
       .catch (err => console.log (err));
   } catch (err) {
