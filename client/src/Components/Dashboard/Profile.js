@@ -1,14 +1,70 @@
 import Button from '@mui/material/Button';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import axios from 'axios';
 
-const Profile = ({userData}) => {
+const Profile = ({userData, handleOpen}) => {
   const [isFriendAdded, setIsHeartLiked] = useState (true);
+  const [followers, setFollowers] = useState (userData.followers.length);
+  const user = JSON.parse (localStorage.getItem ('profile'));
+
   const handleClick = () => {
+    if (!user) {
+      alert ('please login to follow the user');
+      return;
+    }
     setIsHeartLiked (!isFriendAdded);
+    if (isFriendAdded) {
+      // if true then user un-followed the current user
+      axios
+        .put (`${process.env.REACT_APP_BACKEND_URL}/dashboard/add-follower`, {
+          userId: userData._id,
+          followerId: user._id,
+        })
+        .then (res => {
+          console.log ('updated');
+          setFollowers (followers + 1);
+        })
+        .catch (err => console.log (err));
+    } else {
+      axios
+        .put (
+          `${process.env.REACT_APP_BACKEND_URL}/dashboard/remove-follower`,
+          {
+            userId: userData._id,
+            followerId: user._id,
+          }
+        )
+        .then (res => {
+          console.log ('updated');
+          setFollowers (followers - 1);
+        })
+        .catch (err => console.log (err));
+    }
   };
+
+  useEffect (() => {
+    if (user) {
+      axios
+        .post (
+          `${process.env.REACT_APP_BACKEND_URL}/dashboard/check-follower`,
+          {
+            userId: userData._id,
+            followerId: user._id,
+          }
+        )
+        .then (res => {
+          console.log ('hello', res.data);
+          setIsHeartLiked (!res.data);
+        })
+        .catch (err => console.log (err));
+    } else {
+      setIsHeartLiked (true);
+    }
+  }, []);
+
   return (
     <div className="card__collection clear-fix" style={{display: 'flex'}}>
       <div className="cards cards--two">
@@ -24,7 +80,7 @@ const Profile = ({userData}) => {
           Social Media: {userData.socialMedia.map (media => media + ' ')}
         </h3>
         <div style={{display: 'flex'}}>
-          <BasicCard text="Followers" number={userData.followers.length} />
+          <BasicCard text="Total Followers" number={followers} />
           <BasicCard
             text="Questions answered"
             number={userData.answerShared.length}
@@ -42,7 +98,16 @@ const Profile = ({userData}) => {
           {isFriendAdded ? <Before /> : <After />}
         </div>
         <div>
-          <Button variant="contained" sx={{marginTop: 2}}>CHAT</Button>
+          <Button variant="contained" sx={{marginTop: '2%'}}>CHAT</Button>
+        </div>
+        <div>
+          <Button
+            variant="contained"
+            sx={{marginTop: '2%'}}
+            onClick={handleOpen}
+          >
+            Edit Profile
+          </Button>
         </div>
       </div>
     </div>
