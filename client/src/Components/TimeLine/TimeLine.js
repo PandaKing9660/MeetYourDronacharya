@@ -17,7 +17,6 @@ import TableRow from '@mui/material/TableRow';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import NavBar from '../Home/Navbar/Navbar';
-import { Divider } from '@mui/material';
 import '../Materials/material.css'
 
 // COntains the s and their respective timelines

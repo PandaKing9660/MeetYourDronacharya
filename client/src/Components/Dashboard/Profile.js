@@ -3,6 +3,11 @@ import {useState, useEffect} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import {Modal, Backdrop, Box, Fade, Grid, Input} from '@mui/material';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
 import axios from 'axios';
 
@@ -13,6 +18,10 @@ const Profile = ({userData, handleOpen}) => {
   const [isFriendAdded, setIsHeartLiked] = useState (true);
   const [followers, setFollowers] = useState (userData.followers.length);
   const user = JSON.parse (localStorage.getItem ('profile'));
+  const [editProfile, seteditProfileModalOpen] = useState (false);
+
+  const editProfileModalOpen = () => seteditProfileModalOpen (true);
+  const editProfileModalClose = () => seteditProfileModalOpen (false);
 
   const handleClick = () => {
     if (!user) {
@@ -48,6 +57,10 @@ const Profile = ({userData, handleOpen}) => {
         .catch (err => console.log (err));
     }
   };
+
+  const updateProfile = () => {
+    seteditProfileModalOpen (false)
+  }
 
   useEffect (() => {
     if (user) {
@@ -109,7 +122,7 @@ const Profile = ({userData, handleOpen}) => {
           <Button
             variant="contained"
             sx={{marginTop: '2%'}}
-            onClick={handleOpen}
+            onClick={editProfileModalOpen}
           >
             Edit Profile
           </Button>
@@ -119,6 +132,80 @@ const Profile = ({userData, handleOpen}) => {
 
         </div>
       </div>
+      {/* Displaing add question modal */}
+      <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={editProfile}
+          onClose={editProfileModalClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={editProfile}>
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '40%',
+                background: 'white',
+                padding: "1%",
+                borderRadius: "1%",
+              }}
+            >
+              <Typography align="center" variant="h6">
+                <u>Edit Profile</u>
+              </Typography>
+              <Grid container direction="row" align="left">
+                <Grid item sm={2}>
+                  Name:
+                </Grid>
+                <Grid item sm={10}>
+                  <Input fullWidth="true" defaultValue={userData.name} placeholder="name"/>
+                </Grid>
+                <Grid item sm={2}>
+                  <AlternateEmailIcon/>
+                </Grid>
+                <Grid item sm={10}>
+                  <Input type="email" fullWidth="true" readOnly="true" defaultValue={userData.email} placeholder="e-mail id"/>
+                </Grid>
+                <Grid item sm={2}>
+                  <LinkedInIcon/>
+                </Grid>
+                <Grid item sm={10}>
+                  <Input fullWidth="true" placeholder="linkedIn profile link" />
+                </Grid>
+                <Grid item sm={2}>
+                  <FacebookIcon/>
+                </Grid>
+                <Grid item sm={10}>
+                  <Input fullWidth="true" placeholder="facebook profile link" />
+                </Grid>
+                <Grid item sm={2}>
+                  <InstagramIcon/>
+                </Grid>
+                <Grid item sm={10}>
+                  <Input fullWidth="true" placeholder="instagram profile link" />
+                </Grid>
+                <Grid item sm={2}>
+                  DP:
+                </Grid>
+                <Grid item sm={10}>
+                  <Input type="url" fullWidth="true" placeholder="url for profile pic" />
+                </Grid>
+              </Grid>
+              <div display="flex" justifyContent="center" alignItems="center" align="center">
+                <Button alignSelf="center" onClick={updateProfile}>
+                  Submit
+                </Button>
+              </div>
+            </Box>
+          </Fade>
+        </Modal>
     </div>
   );
 };
