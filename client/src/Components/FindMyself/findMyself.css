@@ -14,12 +14,12 @@
 }
 
 .message_findmyself>h1 {
-    padding-top: 3%;
+    padding-top: 0.5%;
     text-align: center;
 }
 .message_findmyself>p {
     text-align: justify;
-    padding: 3%;
+    padding: 2%;
 }
 
 .message_findmyself>img {

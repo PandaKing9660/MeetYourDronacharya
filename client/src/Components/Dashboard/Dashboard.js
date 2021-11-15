@@ -34,7 +34,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div>
+    <div className="dashboard">
       <NavBar />
       {loading
         ? <CircularProgress />
