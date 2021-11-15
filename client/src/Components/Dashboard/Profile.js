@@ -3,7 +3,11 @@ import {useState, useEffect} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+
 import axios from 'axios';
+
+import ChatBox from './ChatBox/ChatBox';
+
 
 const Profile = ({userData, handleOpen}) => {
   const [isFriendAdded, setIsHeartLiked] = useState (true);
@@ -98,6 +102,7 @@ const Profile = ({userData, handleOpen}) => {
           {isFriendAdded ? <Before /> : <After />}
         </div>
         <div>
+
           <Button variant="contained" sx={{marginTop: '2%'}}>CHAT</Button>
         </div>
         <div>
@@ -108,6 +113,10 @@ const Profile = ({userData, handleOpen}) => {
           >
             Edit Profile
           </Button>
+
+          <Button variant="contained" sx={{marginTop: 2}}>CHAT</Button>
+          <ChatBox/>
+
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@
         {
             "id": "t1",
             "name": "Science vs Commerce vs Arts",
+            "setby": "DACARPAS",
             "options": [
                 {
                     "option1": "Science",
@@ -86,6 +87,7 @@
         {
             "id": "t2",
             "name": "After Science",
+            "setby": "DACARPAS",
             "options": [
                 {
                     "option1": "B.Tech.",
@@ -268,6 +270,7 @@
         {
             "id": "t3",
             "name": "After Commerce",
+            "setby": "DACARPAS",
             "options": [
                 {
                     "option1": "BBA",
@@ -320,6 +323,7 @@
         {
             "id": "t4",
             "name": "After Arts",
+            "setby": "DACARPAS",
             "options": [
                 {
                     "option1": "LAW",

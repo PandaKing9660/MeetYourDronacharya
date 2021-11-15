@@ -79,18 +79,32 @@ const useStyles = makeStyles({
     color: 'black',
     align: 'center',
   },
+  addque_modal: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '40%',
+    background: 'white',
+    boxShadow: 24,
+    p: 4,
+  }
 });
 
 const FindMyself = () => {
   const classes = useStyles ();
   const [questionSetId, setQuestionSetId] = useState ('t0');
   const [resultDisplay, setResultModalOpen] = useState (false);
+  const [addque, setaddqueModalOpen] = useState (false);
   const [score, setScore] = useState ({});
   const [careeroptions, setCareerOptions] = useState ({});
   const [resultCareer, setResultCareer] = useState ({});
 
   const resultModalOpen = () => setResultModalOpen (true);
   const resultModalClose = () => setResultModalOpen (false);
+
+  const addqueModalOpen = () => setaddqueModalOpen (true);
+  const addqueModalClose = () => setaddqueModalOpen (false);
 
   // Loading questions from JSON
   const loadQuestion = (id) => {
@@ -146,13 +160,13 @@ const FindMyself = () => {
           container
           p={1}
           direction="row"
-          //  spacing={{ xs: 1}}
           rowSpacing={{xs: 1}}
           justifyContent="space-around"
           alignItems="center"
         >
           {/* Left part: Showing list of topics */}
           <Grid item xs={12} sm={6}>
+            <Button style={{margin: "1%"}} onClick={addqueModalOpen}>Add Question</ Button>
             <List
               className={classes.list_findmyself}
               component="nav"
@@ -185,6 +199,12 @@ const FindMyself = () => {
                   <h1 style={{textAlign: 'center'}}>
                     <u>Question Set</u>
                   </h1>
+                  <h4 style={{textAlign: 'right'}}>
+                    {questions.filter(queid => queid.id === questionSetId)
+                      .map (queset => (
+                        <u>- {queset.setby}</u>
+                      ))}
+                  </h4>
                   <p align="left">Choose the most suitable options:</p>
                   <ol type="1" style={{padding: '2%'}}>
                     {questions
@@ -320,6 +340,37 @@ const FindMyself = () => {
                   Note: Percentage calculated is with respect to the suggested
                   career option
                 </p>
+              </Typography>
+            </Box>
+          </Fade>
+        </Modal>
+
+        {/* Displaing add question modal */}
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={addque}
+          onClose={addqueModalClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={addque}>
+            <Box className={classes.addque_modal}>
+              <Typography align="center" variant="h6">
+                <u>Add Question</u>
+              </Typography>
+              <Typography variant="p" margin="2%">
+                <b>How?</b><br/>
+                <ul padding="2%" margin="200%">
+                  <li>Click on the link given and fill the google form.</li>
+                  <li>The template for the question is provided.</li>
+                  <li>Stick to the template.</li>
+                  <a href="https://forms.gle/At8dji4KerQYtQm8A" target="_blank" rel="noopener noreferrer">
+                    Link</a>
+                </ul>
               </Typography>
             </Box>
           </Fade>
