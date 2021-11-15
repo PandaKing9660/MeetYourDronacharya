@@ -9,7 +9,8 @@ import QuestionsAsked from './QuestionsAsked';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import '../Materials/material.css';
-import {useParams} from 'react-router-dom';
+import {useParams, Redirect} from 'react-router-dom';
+import Followers from './Followers';
 
 const Dashboard = () => {
   // finding id in the url
@@ -22,8 +23,10 @@ const Dashboard = () => {
 
   useEffect (() => {
     setLoading (true);
+    if (user._id === user_id) {
+      window.location = process.env.REACT_APP_FRONTEND_URL + '/dashboard';
+    }
     const to_send = user_id ? user_id : user ? user._id : '-1';
-    
 
     axios
       .post (`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
@@ -45,10 +48,13 @@ const Dashboard = () => {
     }, 2000);
   }, []);
 
+  const handleEdit = () => {
+    console.log ('helo sire i m here');
+  };
+
   return (
     <div className="dashboard">
       <NavBar />
-      {console.log (userMsg)}
 
       {loading
         ? <CircularProgress />
@@ -66,17 +72,30 @@ const Dashboard = () => {
                 >
                   PROFILE
                 </h1>
-                <div style={{width: '90%'}}>
+                <div style={{width: '100%'}}>
                   <Profile
                     style={{marginLeft: 'auto', marginRight: 'auto'}}
                     userData={userData}
+                    handleEdit={handleEdit}
                   />
-                  <div style={{width: '110%', display: 'flex'}}>
-                    <Experience id={userData._id}     current_profile={user_id} />
-                    <QuestionsAsked id={userData._id} current_profile={user_id} />
-                    <Answered id={userData._id}       current_profile={user_id} />
+                  <div
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      flexWrap: 'wrap',
+                    }}
+                  >
+                    <Experience id={userData._id} current_profile={user_id} />
+                    <QuestionsAsked
+                      id={userData._id}
+                      current_profile={user_id}
+                    />
+                    <Answered id={userData._id} current_profile={user_id} />
+                    <Followers id={userData._id} current_profile={user_id} />
                   </div>
                 </div>
+
               </div>}
     </div>
   );

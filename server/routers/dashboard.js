@@ -124,6 +124,107 @@ router.put ('/add-experience', async (req, res) => {
   }
 });
 
+router.put ('/add-follower', async (req, res) => {
+  try {
+    const {userId, followerId} = req.body;
+    console.log (userId, followerId);
+    let newListFollowers;
+
+    // finding the user who added exp
+    await user
+      .findById (userId)
+      .then (resp => {
+        newListFollowers = resp.followers.filter (
+          follower => follower !== followerId
+        );
+      })
+      .catch (err => console.log (err));
+
+    // adding follower to array
+    newListFollowers.push (followerId);
+
+    // updating the user, adding follower to array
+    await user.findByIdAndUpdate (
+      userId,
+      {
+        followers: newListFollowers,
+      },
+      {new: true},
+      (err, result) => {
+        if (err) {
+          console.log (err);
+        } else {
+          console.log ('updated');
+        }
+      }
+    );
+    res.send ('ook');
+  } catch (err) {
+    console.log (err);
+    res.send ('some error');
+  }
+});
+
+router.put ('/remove-follower', async (req, res) => {
+  try {
+    const {userId, followerId} = req.body;
+    console.log (userId, followerId);
+    let newListFollowers;
+
+    // finding the user who added exp
+    await user
+      .findById (userId)
+      .then (resp => {
+        newListFollowers = resp.followers.filter (
+          follower => follower !== followerId
+        );
+      })
+      .catch (err => console.log (err));
+
+    // updating the user, adding follower to array
+    await user.findByIdAndUpdate (
+      userId,
+      {
+        followers: newListFollowers,
+      },
+      {new: true},
+      (err, result) => {
+        if (err) {
+          console.log (err);
+        } else {
+          console.log ('updated');
+        }
+      }
+    );
+    res.send ('ook');
+  } catch (err) {
+    console.log (err);
+    res.send ('some error');
+  }
+});
+
+router.post ('/check-follower', async (req, res) => {
+  try {
+    const {userId, followerId} = req.body;
+
+    // finding the user who added exp
+    await user
+      .findById (userId)
+      .then (resp => {
+        resp.followers.map (follower => {
+          if (follower === followerId) {
+            res.send (true);
+          }
+        });
+        res.send (false);
+      })
+      .catch (err => console.log (err));
+  } catch (err) {
+    console.log (err);
+    res.send ('some error');
+  }
+});
+
 router.post ('/get-user', async (req, res) => {
   try {
     const {userId} = req.body;
@@ -141,6 +242,7 @@ router.post ('/get-user', async (req, res) => {
     console.log (err);
   }
 });
+
 router.post ('/user-answer', async (req, res) => {
   try {
     const {userId} = req.body;
@@ -234,6 +336,40 @@ router.post ('/user-question', async (req, res) => {
 
           if (ques.length === temp[0].questionShared.length) {
             res.json (ques);
+          }
+        });
+      })
+      .catch (err => console.log (err));
+  } catch (err) {
+    console.log (err);
+  }
+});
+
+router.post ('/user-followers', async (req, res) => {
+  try {
+    const {userId} = req.body;
+    let followers = [];
+
+    // searching for the id
+    await user
+      .find ({})
+      .then (resp => {
+        const temp = resp.filter (users => users._id == userId);
+
+        if (temp.length === 0) {
+          res.json ([-1]);
+        }
+        if (followers.length === temp[0].followers.length) {
+          res.json (followers);
+        }
+
+        temp[0].followers.map (async follower_id => {
+          const follower_user = await user.findById (follower_id);
+
+          followers.push (follower_user);
+
+          if (followers.length === temp[0].followers.length) {
+            res.json (followers);
           }
         });
       })

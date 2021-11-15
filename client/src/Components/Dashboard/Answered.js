@@ -12,7 +12,7 @@ const Answered = ({id, current_profile}) => {
           }
         >
           <div className="card--display">
-            <i className="material-icons">public</i>
+            <i className="material-icons">question_answer</i>
             <h2>Answered</h2>
           </div>
           <div className="card--hover">
