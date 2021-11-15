@@ -13,9 +13,8 @@ import axios from 'axios';
 
 import ChatBox from './ChatBox/ChatBox';
 
-
 const Profile = ({userData, handleOpen}) => {
-  const [isFriendAdded, setIsHeartLiked] = useState (true);
+  const [canFollow, setCanFollow] = useState (true);
   const [followers, setFollowers] = useState (userData.followers.length);
   const user = JSON.parse (localStorage.getItem ('profile'));
   const [editProfile, seteditProfileModalOpen] = useState (false);
@@ -28,8 +27,8 @@ const Profile = ({userData, handleOpen}) => {
       alert ('please login to follow the user');
       return;
     }
-    setIsHeartLiked (!isFriendAdded);
-    if (isFriendAdded) {
+    setCanFollow (!canFollow);
+    if (canFollow) {
       // if true then user un-followed the current user
       axios
         .put (`${process.env.REACT_APP_BACKEND_URL}/dashboard/add-follower`, {
@@ -74,11 +73,11 @@ const Profile = ({userData, handleOpen}) => {
         )
         .then (res => {
           console.log ('hello', res.data);
-          setIsHeartLiked (!res.data);
+          setCanFollow (!res.data);
         })
         .catch (err => console.log (err));
     } else {
-      setIsHeartLiked (true);
+      setCanFollow (true);
     }
   }, []);
 
@@ -111,8 +110,10 @@ const Profile = ({userData, handleOpen}) => {
             number={userData.experienceShared.length}
           />
         </div>
-        <div onClick={handleClick}>
-          {isFriendAdded ? <Before /> : <After />}
+        <div >
+          {canFollow
+            ? <Before handleClick={handleClick} />
+            : <After handleClick={handleClick} />}
         </div>
         <div>
 
@@ -128,7 +129,7 @@ const Profile = ({userData, handleOpen}) => {
           </Button>
 
           <Button variant="contained" sx={{marginTop: 2}}>CHAT</Button>
-          <ChatBox/>
+          <ChatBox />
 
         </div>
       </div>
@@ -210,15 +211,15 @@ const Profile = ({userData, handleOpen}) => {
   );
 };
 
-const Before = () => {
+const Before = ({handleClick}) => {
   return (
     <div style={{marginTop: '2%'}}>
-      <Button variant="contained">Follow</Button>
+      <Button variant="contained" onClick={handleClick}>Follow</Button>
     </div>
   );
 };
 
-const After = () => {
+const After = ({handleClick}) => {
   return (
     <div style={{marginTop: '2%'}}>
       <Button
@@ -229,6 +230,7 @@ const After = () => {
             backgroundColor: 'green',
           },
         }}
+        onClick={handleClick}
       >
         Unfollow
       </Button>
