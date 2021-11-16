@@ -203,6 +203,39 @@ router.put ('/remove-follower', async (req, res) => {
   }
 });
 
+router.put ('/edit-user', async (req, res) => {
+  try {
+    const {
+      userId,
+
+      linkedIn,
+      facebook,
+      instagram,
+      twitter,
+      github,
+    } = req.body;
+
+    const newSocialMedia = [linkedIn, facebook, instagram, twitter, github];
+
+    await user.findByIdAndUpdate (
+      userId,
+      {
+        socialMedia: newSocialMedia,
+      },
+      {new: true},
+      (err, result) => {
+        if (err) {
+          console.log (err);
+        } else {
+          console.log (result);
+        }
+      }
+    );
+  } catch (err) {
+    console.log (err);
+  }
+});
+
 router.post ('/check-follower', async (req, res) => {
   try {
     const {userId, followerId} = req.body;
