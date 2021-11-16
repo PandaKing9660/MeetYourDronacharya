@@ -12,6 +12,7 @@ const askSomethingAnswerSchema = new Schema ({
   disliked: {type: [String], required: true},
   userName: {type: String, required: true},
   userImage: {type: String, required: true},
+  tags: {type: [String]},
 });
 
 // creating model

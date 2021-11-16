@@ -147,6 +147,7 @@ router.post ('/add', async (req, res) => {
       disliked: [],
       userName: user_name,
       userImage: user_image,
+      tags: question.tags,
     });
 
     // adding the question into database

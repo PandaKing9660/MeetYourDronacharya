@@ -185,10 +185,14 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
         .post(`${process.env.REACT_APP_BACKEND_URL}/experience/fetchtitle`, {
           experienceId: question_id,
         })
-        .then((res) => setTitle(res.data.title))
+        .then((res) => {
+          setTitle(res.data.title);
+          setDescription(res.data.experience);
+          setTags(res.data.tags);
+        })
 
         .catch((err) => console.log(err));
-
+      /*
       axios
         .post(
           `${process.env.REACT_APP_BACKEND_URL}/experience/fetchdescription`,
@@ -207,6 +211,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
         .then((res) => setTags(res.data.tags))
 
         .catch((err) => console.log(err));
+        */
     }
   }, []);
 
