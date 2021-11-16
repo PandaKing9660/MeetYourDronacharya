@@ -23,7 +23,12 @@ const Dashboard = () => {
 
   useEffect (() => {
     setLoading (true);
-    if (user._id === user_id) {
+    if (!user && !user_id) {
+      setUserMsg ('Login to see profile');
+      setLoading (false);
+      return;
+    }
+    if (user && user._id === user_id) {
       window.location = process.env.REACT_APP_FRONTEND_URL + '/dashboard';
     }
     const to_send = user_id ? user_id : user ? user._id : '-1';
