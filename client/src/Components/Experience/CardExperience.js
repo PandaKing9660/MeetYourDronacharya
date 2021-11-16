@@ -116,6 +116,10 @@ const CardExperience = ({ expData }) => {
           experienceId,
         })
         .then((res) => {
+          axios.put(`${process.env.REACT_APP_BACKEND_URL}/dashboard/delExp`, {
+            experienceId,
+            userId,
+          });
           window.location.reload();
         });
       return;

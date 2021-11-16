@@ -280,16 +280,4 @@ router.post("/fetchtitle", async (req, res) => {
   }
 });
 
-router.post("/fetchdescription", async (req, res) => {
-  console.log("fetch");
-  const { experienceId } = req.body;
-  const exp = await Experience.findById(experienceId);
-  try {
-    console.log(exp);
-    res.json(exp);
-  } catch (e) {
-    console.log("Error ", e);
-  }
-});
-
 module.exports = router;

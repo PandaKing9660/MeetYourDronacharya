@@ -74,10 +74,8 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
   const [tag, setTag] = useState("meetyourdronacharya");
   // submits the data and send for display in list
   const handleSubmit = () => {
-    console.log(option);
     if (editorRef.current && editorRef.current.getContent()) {
       if (option === "question") {
-        console.log("question edit", edit);
         axios
           .post(
             `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/add`,
@@ -89,7 +87,6 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
             }
           )
           .then((res) => {
-            console.log("res.data", res.data);
             axios
               .put(
                 `${process.env.REACT_APP_BACKEND_URL}/dashboard/add-question`,
@@ -104,7 +101,6 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
           })
           .catch((err) => console.log(err));
       } else if (option === "answer") {
-        console.log("answer edit", edit);
         axios
           .post(
             `${process.env.REACT_APP_BACKEND_URL}/ask-something/answer/add`,
@@ -117,7 +113,6 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
             }
           )
           .then((res) => {
-            console.log(res.data);
             axios
               .put(
                 `${process.env.REACT_APP_BACKEND_URL}/dashboard/add-answer`,
@@ -132,7 +127,6 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
           })
           .catch((err) => console.log(err));
       } else if (option === "experience") {
-        console.log("experience edit", edit);
         axios
           .post(`${process.env.REACT_APP_BACKEND_URL}/experience/add`, {
             by: user._id,
@@ -141,7 +135,6 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
             experience: editorRef.current.getContent(),
           })
           .then((res) => {
-            console.log(res.data.tags);
             axios
               .put(
                 `${process.env.REACT_APP_BACKEND_URL}/dashboard/add-experience`,
@@ -150,11 +143,25 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
                   experienceId: res.data._id,
                 }
               )
-              .then((res) => console.log(res.data));
-
-            window.location.reload();
+              .then((res) => {
+                console.log(res.data);
+              });
           })
           .catch((err) => console.log(err));
+      }
+      if (edit) {
+        console.log("Hiii");
+        axios
+          .post(`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
+            experienceId: question_id,
+          })
+          .then((res) => {
+            axios.put(`${process.env.REACT_APP_BACKEND_URL}/dashboard/delExp`, {
+              experienceId: question_id,
+              userId: user._id,
+            });
+            window.location.reload();
+          });
       }
     }
   };
