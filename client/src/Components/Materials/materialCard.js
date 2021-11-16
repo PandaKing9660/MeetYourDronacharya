@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import Button from "@mui/material/Button";
 import dompurify from "dompurify";
+import { Grid } from "@mui/material";
+import { textAlign } from "@mui/system";
 
 const MaterialCard = ({ material }) => {
   const sanitizer = dompurify.sanitize;
@@ -17,51 +19,53 @@ const MaterialCard = ({ material }) => {
     <Card
       sx={{ display: "flex", marginTop: "2%", padding: "1.5%", background: "#EAE6F8" }}
     >
-      <div style={{ width: "30%" }}>
-        <CardHeader
-          avatar={
-            <Avatar
-              sx={{ bgcolor: red[500] }}
-              aria-label="recipe"
-              alt={`${material.userName}`}
-              src={`${material.userImage}`}
-            />
-          }
-          title={material.userName}
-          subheader={material.date.split("T")[0]}
-        />
-        <div style={{display: "inline-block"}}>
-          <Button variant="outlined" href={material.link} target="_blank" rel="noopener noreferrer" style={{margin: "2% 5%"}}>
-            View Material
-          </Button>
-          <Button variant="outlined" style={{margin: "2% 5%"}}>
-            Chat
-          </Button>
-        </div>
-      </div>
-      <div>
-        <CardContent>
-          <Typography variant="h4" color="text.primary">
-            {material.topic}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            <div
-              dangerouslySetInnerHTML={{
-                __html: sanitizer(material.description),
-              }}
-              style={{ padding: "1%" }}
-            />
-          </Typography>
-          <Typography variant="h7" color="text.primary">
-            {material.location}
-          </Typography>
-        </CardContent>
-        <div style={{ padding: "0.5%" }}>
-          {material.tags.map((tag) => (
-            <Typography display="inline" color="primary">#{tag} </Typography>
-          ))}
-        </div>
-      </div>
+      <Grid container>
+        <Grid item sm={4} md={3}>
+          <CardHeader
+            avatar={
+              <Avatar
+                sx={{ bgcolor: red[500] }}
+                aria-label="recipe"
+                alt={`${material.userName}`}
+                src={`${material.userImage}`}
+              />
+            }
+            title={material.userName}
+            subheader={material.date.split("T")[0]}
+          />
+          <div style={{display: "inline-block"}}>
+            <Button variant="outlined" href={material.link} target="_blank" rel="noopener noreferrer" style={{margin: "2% 5%"}}>
+              View Material
+            </Button>
+            <Button variant="outlined" style={{margin: "2% 5%"}}>
+              Chat
+            </Button>
+          </div>
+        </Grid>
+        <Grid item sm={8} md={9}>
+          <CardContent>
+            <Typography variant="h4" color="text.primary">
+              {material.topic}
+            </Typography>
+            <Typography variant="body2" color="text.secondary" textAlign="justify">
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: sanitizer(material.description),
+                }}
+                style={{ padding: "1%", textAlign: "justify" }}
+              />
+            </Typography>
+            <Typography variant="h7" color="text.primary">
+              {material.location}
+            </Typography>
+          </CardContent>
+          <div style={{ padding: "0.5%" }}>
+            {material.tags.map((tag) => (
+              <Typography display="inline" color="primary">#{tag} </Typography>
+            ))}
+          </div>
+        </Grid>
+      </Grid>
     </Card>
   );
 };

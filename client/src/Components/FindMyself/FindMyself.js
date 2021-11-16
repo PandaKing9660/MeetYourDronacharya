@@ -52,7 +52,7 @@ const useStyles = makeStyles({
     boxShadow: '5px 10px 8px 10px #888888',
     backgroundColor: '#fffafa',
     color: 'black',
-    height: '580px',
+    height: 'auto',
   },
   formcontrol_findmyself: {
     width: '90%',
@@ -275,7 +275,6 @@ const FindMyself = () => {
                       Passion" to know one of the most difficult and equally
                       important question of student life "What should be our
                       career???"
-                      <br />
                       <br />
                       Select a domain from the left and start answering to the
                       questions asked by thinking from mind and answering through

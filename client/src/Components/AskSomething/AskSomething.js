@@ -42,16 +42,16 @@ const AskSomething = () => {
                 direction="row"
                 justifyContent="space-evenly"
                 alignItems="flex-start"
-                
+                overflow="hidden"
             >
-                <Grid item md={8}>
+                <Grid item md={8} sm={12}>
                     {/* Button to write a doubt */}
                     <Button
                         onClick={handleOpen}
                         variant="outlined"
                         color="warning"
                         size="large"
-                        sx={{ float: 'right', marginRight: '3.1%', marginTop: "3%" }}
+                        sx={{ float: 'right', marginRight: '3%', marginTop: "3%" }}
                     >
                         Ask a Doubt
                     </Button>
