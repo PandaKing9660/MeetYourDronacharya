@@ -27,7 +27,7 @@ router.post ('/signup', async (req, res) => {
       email: email,
       name: name,
       password: cryptPassword,
-      socialMedia: [],
+      socialMedia: ['', '', '', '', ''],
       imageUrl: imageUrl || `https://robohash.org/${name}`,
     });
 
