@@ -17,6 +17,8 @@ import CardExperience from './CardExperience';
 import NavBar from '../Home/Navbar/Navbar';
 import EditorAndPreview from '../AskSomething/EditorAndPreview';
 import MotivationPoint from './MotivationPoint/MotivationPoint';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 import '../Materials/material.css';
 
@@ -162,8 +164,12 @@ const Experience = () => {
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description"
                             disableEnforceFocus={true}
+                            
                         >
                             <Box sx={style}>
+                                 <IconButton aria-label="Close"  sx={{float:'right'}} onClick={handleClose}>
+                                    <CloseIcon />
+                                </IconButton>
                                 <EditorAndPreview option="experience" />
                             </Box>
                         </Modal>
