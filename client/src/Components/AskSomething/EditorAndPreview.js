@@ -154,7 +154,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
               experienceId: question_id,
               title: title,
               tags: tags,
-              description: description,
+              experience: editorRef.current.getContent(),
             })
             .then((res) => {
               console.log("done");
