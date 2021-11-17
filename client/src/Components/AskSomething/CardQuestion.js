@@ -5,6 +5,8 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import QuestionAnswerRoundedIcon from '@mui/icons-material/QuestionAnswerRounded';
+import AddCommentRoundedIcon from '@mui/icons-material/AddCommentRounded';
 import {Link} from 'react-router-dom';
 
 import EditorAndPreview from './EditorAndPreview';
@@ -202,8 +204,8 @@ const CardQuestion = ({quesData, showAnswer}) => {
                   localStorage.setItem ('id', JSON.stringify (quesData._id))}
               >
                 <Link to={`/ask-something/${quesData._id}`} style={{textDecoration:"none"}} >
-                  {numAnswers + '  '}
-                  Answers
+                  <QuestionAnswerRoundedIcon/>
+                  {numAnswers}
                 </Link>
               </Button>}
             <Button
@@ -214,12 +216,12 @@ const CardQuestion = ({quesData, showAnswer}) => {
                 AddLikes (user ? user._id : 0, quesData._id);
               }}
             >
-              {likes}
               {userStatus === 'none'
                 ? <ThumbUpOffAltIcon />
                 : userStatus === 'disliked'
                     ? <ThumbUpOffAltIcon />
                     : <ThumbUpIcon />}
+              {likes}
             </Button>
             <Button
               variant="outlined"
@@ -249,7 +251,7 @@ const CardQuestion = ({quesData, showAnswer}) => {
                 textTransform: 'capitalize',
               }}
             >
-              Answer
+              <AddCommentRoundedIcon/>
             </Button>
 
             <Modal

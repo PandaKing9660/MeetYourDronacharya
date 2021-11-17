@@ -43,7 +43,7 @@ const useStyles = makeStyles({
   },
   list_findmyself: {
     width: '90%',
-    padding: '2%',
+    padding: '1%',
   },
   paper_findmyself: {
     width: '95%',
@@ -52,16 +52,10 @@ const useStyles = makeStyles({
     boxShadow: '5px 10px 8px 10px #888888',
     backgroundColor: '#fffafa',
     color: 'black',
-    height: 'auto',
+    height: '570px',
   },
   formcontrol_findmyself: {
     width: '90%',
-  },
-  pagination_findmyself: {
-    marginTop: '10px',
-    paddingBottom: '10px',
-    justifyContent: 'center',
-    display: 'flex',
   },
   result_modal: {
     position: 'absolute',
@@ -206,7 +200,7 @@ const FindMyself = () => {
                       ))}
                   </h4>
                   <p align="left">Choose the most suitable options:</p>
-                  <ol type="1" style={{padding: '2%'}}>
+                  <ol type="1" style={{padding: '0 3%'}}>
                     {questions
                       .filter (queid => queid.id === questionSetId)
                       .map (queset =>
@@ -239,17 +233,12 @@ const FindMyself = () => {
                                   label="High"
                                 />
                               </RadioGroup>
-                              <Divider padding="2px" />
+                              <Divider padding="1px" />
                             </FormControl>
                           </li>
                         ))
                       )}
                   </ol>
-                  <Pagination
-                    className={classes.pagination_findmyself}
-                    count={1}
-                    color="primary"
-                  />
                   <Button
                     className={classes.submitbutton_findmyself}
                     variant="outlined"
