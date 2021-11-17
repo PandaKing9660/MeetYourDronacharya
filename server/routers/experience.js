@@ -259,14 +259,14 @@ router.post("/deleteExp", async (req, res) => {
 
 router.post("/editExp", async (req, res) => {
   console.log("edit");
-  const { title, description, tags, experienceId } = req.body;
+  const { title, experience, tags, experienceId } = req.body;
   console.log(req.body);
   try {
     await Experience.findByIdAndUpdate(
       experienceId,
       {
         title: title,
-        experience: description,
+        experience: experience,
         tags: tags,
       },
       (err, result) => {
