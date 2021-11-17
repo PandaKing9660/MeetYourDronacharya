@@ -1,15 +1,15 @@
-import "./aboutus.css";
-import * as React from "react";
-import { Grid, Divider } from "@mui/material";
-import NavBar from "../Home/Navbar/Navbar";
+import './aboutus.css';
+import * as React from 'react';
+import {Grid, Divider} from '@mui/material';
+import NavBar from '../Home/Navbar/Navbar';
 
-import adi from "./Photos/adi.jpg";
-import amit from "./Photos/amit.png";
-import anu from "./Photos/anu.jpg";
-import sow from "./Photos/sow.png";
+import adi from './Photos/adi.jpg';
+import amit from './Photos/amit.png';
+import anu from './Photos/anu.jpg';
+import sow from './Photos/sow.png';
 
 // Action Card for displaying image
-function ActionAreaCard(props) {
+function ActionAreaCard (props) {
   return (
     <div className="us_AboutUs">
       <div className="image_AboutUs">
@@ -82,9 +82,9 @@ const AboutTeam = () => {
           alignItems="center"
         >
           <Grid item sm={12}>
-            <h2 style={{ textAlign: "center", display: "block" }}>
-              {" "}
-              DEVELOPERS{" "}
+            <h2 style={{textAlign: 'center', display: 'block'}}>
+              {' '}
+              DEVELOPERS{' '}
             </h2>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -103,17 +103,18 @@ const AboutTeam = () => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <ActionAreaCard
-              photo={anu}
-              name="Anu Anand Annu"
-              roll="CS19B044"
-              text="The one-liner of other three is written by me!!!"
-            />
-            <ActionAreaCard
               photo={sow}
               name="Emani Sowmya"
               roll="CS19B045"
               text="Be faithful to yourself and decide your career which will interests you."
             />
+            <ActionAreaCard
+              photo={anu}
+              name="Anu Anand Annu"
+              roll="CS19B044"
+              text="The one-liner of other three is written by me!!!"
+            />
+
           </Grid>
         </Grid>
       </div>
