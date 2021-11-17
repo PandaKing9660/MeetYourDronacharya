@@ -217,7 +217,7 @@ router.put("/delExp", async (req, res) => {
         );
       })
       .catch((err) => console.log(err));
-
+    console.log(newListExp);
     // updating the user, adding follower to array
     await user.findByIdAndUpdate(
       userId,
