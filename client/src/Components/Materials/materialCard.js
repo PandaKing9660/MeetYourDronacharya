@@ -10,6 +10,7 @@ import dompurify from 'dompurify';
 import {Grid} from '@mui/material';
 import {textAlign} from '@mui/system';
 import {Link} from 'react-router-dom';
+import RoomIcon from '@mui/icons-material/Room';
 
 const MaterialCard = ({material}) => {
   const sanitizer = dompurify.sanitize;
@@ -26,7 +27,10 @@ const MaterialCard = ({material}) => {
     >
       <Grid container>
         <Grid item sm={4} md={3}>
-          <Link to={`/dashboard/${material.by}`}>
+          <Link
+            to={`/dashboard/${material.by}`}
+            style={{textDecoration: 'none'}}
+          >
             <CardHeader
               avatar={
                 <Avatar
@@ -36,6 +40,11 @@ const MaterialCard = ({material}) => {
                   src={`${material.userImage}`}
                 />
               }
+              titleTypographyProps={{
+                variant: 'body2',
+                color: 'green',
+                align: 'left',
+              }}
               title={material.userName}
               subheader={material.date.split ('T')[0]}
             />
@@ -53,6 +62,10 @@ const MaterialCard = ({material}) => {
             <Button variant="outlined" style={{margin: '2% 5%'}}>
               Chat
             </Button>
+            <RoomIcon style={{width: '20px', paddingTop: '1.5em'}} />
+            <Typography variant="body" color="text.primary" mb="5">
+              {material.location}
+            </Typography>
           </div>
         </Grid>
         <Grid item sm={8} md={9}>
@@ -72,9 +85,7 @@ const MaterialCard = ({material}) => {
                 style={{padding: '1%', textAlign: 'justify'}}
               />
             </Typography>
-            <Typography variant="h7" color="text.primary">
-              {material.location}
-            </Typography>
+
           </CardContent>
           <div style={{padding: '0.5%'}}>
             {material.tags.map (tag => (

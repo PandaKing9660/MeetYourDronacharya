@@ -10,7 +10,6 @@ import CardAnswer from './CardAnswer';
 import CardQuestion from './CardQuestion';
 import {useParams} from 'react-router-dom';
 
-
 const AskSomethingAnswer = () => {
   // dummy data for experience posts
   const [answers, setAnswers] = useState ([]);
@@ -20,7 +19,6 @@ const AskSomethingAnswer = () => {
 
   // finding id in the url
   const {question_id} = useParams ();
-
 
   useEffect (() => {
     setLoading (true);
@@ -72,30 +70,34 @@ const AskSomethingAnswer = () => {
               >
                 <Grid item xs={12} md={6} style={{overflow: 'auto'}}>
                   <Typography variant="h4" align="center">
-                      Question
-                    </Typography>
-                  <CardQuestion quesData={question[0]} showAnswer={false}/>
+                    Question
+                  </Typography>
+                  <CardQuestion quesData={question[0]} showAnswer={false} />
                   <Divider variant="middle" />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <Typography variant="h4" align="center">
-                      Answers
-                    </Typography>
-                  <Grid
-                    container
-                    columns={{xs: 4, sm: 8, md: 2}}
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    style={{overflow: 'auto', height: '580px'}}
-                  >
-                    {answers.map (answer => {
-                      return (
-                        <Grid item xs={12} md={6} key={answer._id}>
-                          <CardAnswer ansData={answer} />
-                        </Grid>
-                      );
-                    })}
-                  </Grid>
+                    Answers
+                  </Typography>
+                  {answers.length > 0
+                    ? <Grid
+                        container
+                        columns={{xs: 4, sm: 8, md: 2}}
+                        justifyContent="flex-start"
+                        alignItems="center"
+                        style={{overflow: 'auto', height: '580px'}}
+                      >
+                        {answers.map (answer => {
+                          return (
+                            <Grid item xs={12} md={6} key={answer._id}>
+                              <CardAnswer ansData={answer} />
+                            </Grid>
+                          );
+                        })}
+                      </Grid>
+                    : <Typography variant="h6" align="center">
+                        No Answers yet!!
+                      </Typography>}
                 </Grid>
               </Grid>
             </div>}
