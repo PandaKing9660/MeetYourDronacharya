@@ -19,9 +19,13 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CircularProgress from '@mui/material/CircularProgress';
+
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import { DropzoneArea } from "material-ui-dropzone";
 import axios from "axios";
 
+toast.configure()
 // Styles for search
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -117,17 +121,17 @@ export default function StudyMaterial() {
     if(title === '')
     {
       setUpload(false);
-      alert ('Please add Heading');
+      toast.error('Please add Heading')
     }
     else if(description === '')
     {
       setUpload(false);
-      alert ('Please add Description');
+      toast.error('Please add Description')
     }
     else if(link === '')
     {
       setUpload(false);
-      alert ('Please add Link');
+      toast.error('Please add Link')
     }
     else if(location === '')
     {
@@ -149,7 +153,7 @@ export default function StudyMaterial() {
         })
         .then (res => {
           console.log (res.data);
-          alert ('Thank you for sharing the material!!!');
+          toast.info('Thank you for sharing the material!!!')
           window.location.reload ();
         })
         .catch (err => console.log (err));

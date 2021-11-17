@@ -89,6 +89,7 @@ router.post ('/add', async (req, res) => {
       disliked: [],
       userName: user_name,
       userImage: user_image,
+      tags: answer.tags,
     });
 
     // finding the question which is answered

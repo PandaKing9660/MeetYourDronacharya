@@ -86,10 +86,11 @@ const Dashboard = () => {
             />
             <div
               style={{
-                width: "100%",
+                width: "95%",
                 display: "flex",
                 justifyContent: "center",
                 flexWrap: "wrap",
+                paddingRight: "2%",
               }}
             >
               <Experience id={userData._id} current_profile={user_id} />
