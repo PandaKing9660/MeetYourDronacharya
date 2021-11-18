@@ -277,11 +277,7 @@ const CardExperience = ({ expData }) => {
               alignItems="center"
             >
               <Grid item xs={6} sm={4.6} md={8} align="left">
-                <Typography
-                  variant="h5"
-                  component="div"
-                  sx={{ textDecoration: "underline" }}
-                >
+                <Typography variant="h5" component="div">
                   {expData.title}
                 </Typography>
                 <Typography
@@ -303,7 +299,10 @@ const CardExperience = ({ expData }) => {
               >
                 {/* right floating avatar and name of author */}
 
-                <Link to={`/dashboard/${expData.by}`}>
+                <Link
+                  to={`/dashboard/${expData.by}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <CardHeader
                     avatar={
                       <Avatar
@@ -334,14 +333,17 @@ const CardExperience = ({ expData }) => {
           </CardContent>
 
           <div style={{ display: "flex" }}>
-            {expData.tags.map((tag) => (
-              // <Typography color="primary">#{tag}</Typography>
-              <Chip
-                label={"#" + tag}
-                variant="outlined"
-                sx={{ marginRight: "10px", color: "blue" }}
-              />
-            ))}
+            {expData.tags.map(
+              (
+                tag // <Typography color="primary">#{tag}</Typography>
+              ) => (
+                <Chip
+                  label={"#" + tag}
+                  variant="outlined"
+                  sx={{ marginRight: "10px", color: "blue" }}
+                />
+              )
+            )}
           </div>
 
           <CardActions sx={{ justifyContent: "flex-end" }}>
