@@ -42,6 +42,9 @@ const Experience = () => {
   const [loading, setLoading] = useState (false);
 
   const [open, setOpen] = React.useState (false);
+  const [searchedExperience, setSearchedExperience] = useState ([]);
+  const [searchResult, setSearchResult] = useState ('');
+
   const handleOpen = () =>
     user ? setOpen (true) : alert ('please login to add experience');
   const handleClose = () => setOpen (false);
@@ -56,12 +59,43 @@ const Experience = () => {
         })
         .then (res => {
           setExperiences (res.data);
+          setSearchedExperience (res.data);
           setLoading (false);
           console.log (res.data[0]);
         })
         .catch (err => console.log (err));
     },
     [order]
+  );
+
+  useEffect (
+    () => {
+      const newSearchedExperience = experiences.filter (experience => {
+        if (
+          experience.title.toLowerCase ().includes (searchResult.toLowerCase ())
+        )
+          return true;
+        if (
+          experience.experience
+            .toLowerCase ()
+            .includes (searchResult.toLowerCase ())
+        )
+          return true;
+        if (experience.userName.toLowerCase ().includes (searchResult.toLowerCase ()))
+          return true;
+
+        const res = experience.tags.filter (tag => {
+          return tag.toLowerCase ().includes (searchResult.toLowerCase ());
+        });
+
+        if (res.length) return true;
+
+        return false;
+      });
+      console.log (newSearchedExperience);
+      setSearchedExperience (newSearchedExperience);
+    },
+    [searchResult]
   );
 
   const handleChange = event => {
@@ -74,7 +108,7 @@ const Experience = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar setSearchResult={setSearchResult} />
 
       <h1 className="heading" style={{marginTop: 25, textAlign: 'center'}}>
         EXPERIENCES
@@ -89,13 +123,13 @@ const Experience = () => {
         >
           {loading
             ? <CircularProgress />
-            : experiences.length > 0
+            : searchedExperience.length > 0
                 ? /* loop over experiences array and pass data to
                          CardExperience component for rendering children */
 
                   <Grid item xs={12} sm={12} md={8}>
                     <Box sx={{minWidth: 275}}>
-                      {experiences.map ((experience, index) => {
+                      {searchedExperience.map ((experience, index) => {
                         return (
                           <CardExperience
                             expData={experience}

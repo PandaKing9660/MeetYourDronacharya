@@ -59,7 +59,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar noSearch={true}/>
 
       {loading ? (
         <CircularProgress />
