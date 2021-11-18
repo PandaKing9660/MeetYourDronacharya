@@ -16,6 +16,9 @@ import { Link } from "react-router-dom";
 import MenuList from "@mui/material/MenuList";
 import axios from "axios";
 import { confirm } from "react-confirm-box";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const MaterialCard = ({ material }) => {
   const sanitizer = dompurify.sanitize;
@@ -30,23 +33,30 @@ const MaterialCard = ({ material }) => {
     setAnchorEl(null);
   };
 
-  const Confirm = async (userId, experienceId) => {
+  const Confirm = async (userId, materialId) => {
     //const result = await confirm("Are you sure?");
-    if (await confirm("Are you sure?")) {
-      axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
-          experienceId,
-        })
-        .then((res) => {
-          axios.put(`${process.env.REACT_APP_BACKEND_URL}/dashboard/delExp`, {
-            experienceId,
-            userId,
-          });
-          window.location.reload();
-        });
-      return;
-    }
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/study-material/deletematerial`,
+        {
+          materialId,
+        }
+      )
+      .then((res) => {
+        window.location.reload();
+      });
+    return;
     console.log("You click No!");
+  };
+
+  const [openconfirm, setOpenConfirm] = React.useState(false);
+
+  const handleClickOpenconfirm = () => {
+    setOpenConfirm(true);
+  };
+
+  const handleCloseconfirm = () => {
+    setOpenConfirm(false);
   };
 
   const DeleteMat = (userId, experienceId) => {
@@ -99,14 +109,43 @@ const MaterialCard = ({ material }) => {
                     <Button
                       onClick={() => {
                         {
-                          handleClose();
+                          handleClickOpenconfirm();
                         }
-                        DeleteMat(user ? user._id : 0, material._id);
                       }}
                       sx={{ color: "black" }}
                     >
                       Delete
                     </Button>
+                    <Dialog
+                      open={openconfirm}
+                      onClick={() => {
+                        {
+                          handleClose();
+                          handleCloseconfirm();
+                        }
+                      }}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle id="alert-dialog-title">
+                        {"Are you sure to delete?"}
+                      </DialogTitle>
+                      <DialogActions>
+                        <Button
+                          onClick={() => {
+                            {
+                              handleCloseconfirm();
+                            }
+                            DeleteMat(user ? user._id : 0, material._id);
+                          }}
+                        >
+                          Yes
+                        </Button>
+                        <Button onClick={handleCloseconfirm} autoFocus>
+                          No
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
                   </MenuItem>
                 </MenuList>
               </Menu>
