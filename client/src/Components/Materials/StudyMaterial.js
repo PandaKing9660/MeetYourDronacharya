@@ -173,7 +173,7 @@ export default function StudyMaterial() {
   return (
     <div className="material_StudyMaterial">
       <NavBar setSearchResult={setSearchResult} />
-      <h1 className="heading" style={{marginTop: '1%', textAlign: 'center'}}>
+      <h1 className="heading" style={{ marginTop: "1%", textAlign: "center" }}>
         STUDY MATERIAL
       </h1>
       <div className="division">
