@@ -1,11 +1,13 @@
 import Button from '@mui/material/Button';
 import {useState} from 'react';
+import sow from '../AboutUs/Photos/sow.png';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import ChatBox from './ChatBox/ChatBox';
+import {Link} from 'react-router-dom';
 
 const Profile = ({userData}) => {
+  console.log (userData);
   const [isFriendAdded, setIsHeartLiked] = useState (true);
   const handleClick = () => {
     setIsHeartLiked (!isFriendAdded);
@@ -22,7 +24,7 @@ const Profile = ({userData}) => {
         <h3>Name: {userData.name}</h3>
         <h3>Email: {userData.email}</h3>
         <h3>
-          Social Media: {userData.socialMedia.map (media => media + ' ')}
+          Social Media: {userData.socialMedia.map (media => <p>{media}</p>)}
         </h3>
         <div style={{display: 'flex'}}>
           <BasicCard text="Followers" number={userData.followers.length} />
@@ -43,8 +45,9 @@ const Profile = ({userData}) => {
           {isFriendAdded ? <Before /> : <After />}
         </div>
         <div>
-          <Button variant="contained" sx={{marginTop: 2}}>CHAT</Button>
-          <ChatBox/>
+          <Link to={`/chatbox?name=${userData.name}&id=${userData._id}`}>
+            <Button variant="contained" sx={{marginTop: 2}}>CHAT</Button>
+          </Link>
         </div>
       </div>
     </div>
@@ -53,15 +56,15 @@ const Profile = ({userData}) => {
 
 const Before = () => {
   return (
-    <div style={{marginTop: '2%'}}>
-      <Button variant="contained">Follow</Button>
+    <div style={{marginTop: 15}}>
+      <Button variant="contained">ADD FRIEND</Button>
     </div>
   );
 };
 
 const After = () => {
   return (
-    <div style={{marginTop: '2%'}}>
+    <div style={{marginTop: 15}}>
       <Button
         variant="contained"
         sx={{
@@ -71,7 +74,7 @@ const After = () => {
           },
         }}
       >
-        Unfollow
+        Friend ADded
       </Button>
     </div>
   );

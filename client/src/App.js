@@ -20,6 +20,7 @@ import ResetPassword from './Components/Login/ResetPassword';
 import UserAnswered from './Components/Dashboard/UserAnswered';
 import UserExperience from './Components/Dashboard/UserExperience';
 import UserQuestion from './Components/Dashboard/UserQuestion';
+import ChatBox from './Components/Dashboard/ChatBox/ChatBox';
 
 /**
  * @brief added all other routers
@@ -61,6 +62,9 @@ function App () {
         </Route>
         <Route exact path="/dashboard/:userId/user-question">
           <UserQuestion />
+        </Route>
+        <Route exact path="/chatbox">
+          <ChatBox/>
         </Route>
         <Route exact path="/about-us">
           <AboutUs />
