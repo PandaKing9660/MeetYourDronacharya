@@ -118,11 +118,7 @@ const CardAnswer = ({ansData}) => {
             <Grid container justifyContent="space-between" alignItems="center">
               {/*Displaying Answer Title and time */}
               <Grid item align="left">
-                <Typography
-                  variant="h5"
-                  component="div"
-                  sx={{textDecoration: 'underline'}}
-                >
+                <Typography variant="h5" component="div">
                   {ansData.title}
                 </Typography>
                 <Typography
@@ -143,7 +139,10 @@ const CardAnswer = ({ansData}) => {
               >
                 {/* right floating avatar and name of author */}
 
-                <Link to={`/dashboard/${ansData.by}`}>
+                <Link
+                  to={`/dashboard/${ansData.by}`}
+                  style={{textDecoration: 'none'}}
+                >
                   <CardHeader
                     avatar={
                       <Avatar

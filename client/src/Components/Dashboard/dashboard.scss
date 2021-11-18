@@ -1,6 +1,6 @@
-*,
-*:before,
-*:after {
+.dashboard,
+.dashboard:before,
+.dashboard:after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -161,7 +161,7 @@ $highlight: #5bc0eb;
 $darkhighlight: #fde74c;
 
 .card-container {
-  flex: 300px;
+  flex: 200px;
   margin: 30px;
 
   .card {

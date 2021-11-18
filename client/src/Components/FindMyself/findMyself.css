@@ -14,12 +14,10 @@
 }
 
 .message_findmyself>h1 {
-    padding-top: 3%;
     text-align: center;
 }
 .message_findmyself>p {
     text-align: justify;
-    padding: 3%;
 }
 
 .message_findmyself>img {
@@ -48,8 +46,8 @@
     color: rgb(36, 34, 34);
     font-size: medium;
     text-align: left;
-    padding: 2%;
-    margin: 2%;
+    padding: 1%;
+    margin: 1%;
 }
 
 .note_findmyself {

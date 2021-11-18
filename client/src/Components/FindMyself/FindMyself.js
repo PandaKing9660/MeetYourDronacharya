@@ -30,7 +30,7 @@ import findyourpassion from './findyourpassion.png';
 import NavBar from '../Home/Navbar/Navbar';
 
 // Styles for all frontend data
-const useStyles = makeStyles({
+const useStyles = makeStyles ({
   listitem_findmyself: {
     background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
     border: 0,
@@ -43,7 +43,7 @@ const useStyles = makeStyles({
   },
   list_findmyself: {
     width: '90%',
-    padding: '2%',
+    padding: '1%',
   },
   paper_findmyself: {
     width: '95%',
@@ -52,16 +52,10 @@ const useStyles = makeStyles({
     boxShadow: '5px 10px 8px 10px #888888',
     backgroundColor: '#fffafa',
     color: 'black',
-    height: '580px',
+    height: '570px',
   },
   formcontrol_findmyself: {
     width: '90%',
-  },
-  pagination_findmyself: {
-    marginTop: '10px',
-    paddingBottom: '10px',
-    justifyContent: 'center',
-    display: 'flex',
   },
   result_modal: {
     position: 'absolute',
@@ -79,12 +73,23 @@ const useStyles = makeStyles({
     color: 'black',
     align: 'center',
   },
+  addque_modal: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '40%',
+    background: 'white',
+    boxShadow: 24,
+    p: 4,
+  },
 });
 
 const FindMyself = () => {
   const classes = useStyles ();
   const [questionSetId, setQuestionSetId] = useState ('t0');
   const [resultDisplay, setResultModalOpen] = useState (false);
+  const [addque, setaddqueModalOpen] = useState (false);
   const [score, setScore] = useState ({});
   const [careeroptions, setCareerOptions] = useState ({});
   const [resultCareer, setResultCareer] = useState ({});
@@ -92,9 +97,12 @@ const FindMyself = () => {
   const resultModalOpen = () => setResultModalOpen (true);
   const resultModalClose = () => setResultModalOpen (false);
 
+  const addqueModalOpen = () => setaddqueModalOpen (true);
+  const addqueModalClose = () => setaddqueModalOpen (false);
+
   // Loading questions from JSON
-  const loadQuestion = (id) => {
-    setQuestionSetId(id);
+  const loadQuestion = id => {
+    setQuestionSetId (id);
     questions
       .filter (queid => queid.id === id)
       .map (
@@ -106,7 +114,7 @@ const FindMyself = () => {
   };
 
   // Selecting options in bullet button
-  const optionSelect = (event) => {
+  const optionSelect = event => {
     const id = event.target.value;
     const quesid = id.substring (0, 5);
     const optionid = id.substring (5, id.length);
@@ -139,20 +147,22 @@ const FindMyself = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar noSearch={true} />
       <div className="findmyself_FindMyself">
         <h1 className="h1_findmyself">Find My Passion</h1>
         <Grid
           container
           p={1}
           direction="row"
-          //  spacing={{ xs: 1}}
           rowSpacing={{xs: 1}}
           justifyContent="space-around"
           alignItems="center"
         >
           {/* Left part: Showing list of topics */}
           <Grid item xs={12} sm={6}>
+            <Button style={{margin: '1%'}} onClick={addqueModalOpen}>
+              Add Question
+            </Button>
             <List
               className={classes.list_findmyself}
               component="nav"
@@ -185,8 +195,13 @@ const FindMyself = () => {
                   <h1 style={{textAlign: 'center'}}>
                     <u>Question Set</u>
                   </h1>
+                  <h4 style={{textAlign: 'right'}}>
+                    {questions
+                      .filter (queid => queid.id === questionSetId)
+                      .map (queset => <u>- {queset.setby}</u>)}
+                  </h4>
                   <p align="left">Choose the most suitable options:</p>
-                  <ol type="1" style={{padding: '2%'}}>
+                  <ol type="1" style={{padding: '0 3%'}}>
                     {questions
                       .filter (queid => queid.id === questionSetId)
                       .map (queset =>
@@ -219,17 +234,12 @@ const FindMyself = () => {
                                   label="High"
                                 />
                               </RadioGroup>
-                              <Divider padding="2px" />
+                              <Divider padding="1px" />
                             </FormControl>
                           </li>
                         ))
                       )}
                   </ol>
-                  <Pagination
-                    className={classes.pagination_findmyself}
-                    count={1}
-                    color="primary"
-                  />
                   <Button
                     className={classes.submitbutton_findmyself}
                     variant="outlined"
@@ -255,7 +265,6 @@ const FindMyself = () => {
                       Passion" to know one of the most difficult and equally
                       important question of student life "What should be our
                       career???"
-                      <br />
                       <br />
                       Select a domain from the left and start answering to the
                       questions asked by thinking from mind and answering through
@@ -320,6 +329,42 @@ const FindMyself = () => {
                   Note: Percentage calculated is with respect to the suggested
                   career option
                 </p>
+              </Typography>
+            </Box>
+          </Fade>
+        </Modal>
+
+        {/* Displaing add question modal */}
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={addque}
+          onClose={addqueModalClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={addque}>
+            <Box className={classes.addque_modal}>
+              <Typography align="center" variant="h6">
+                <u>Add Question</u>
+              </Typography>
+              <Typography variant="p" margin="2%">
+                <b>How?</b><br />
+                <ul padding="2%" margin="200%">
+                  <li>Click on the link given and fill the google form.</li>
+                  <li>The template for the question is provided.</li>
+                  <li>Stick to the template.</li>
+                  <a
+                    href="https://forms.gle/At8dji4KerQYtQm8A"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Link
+                  </a>
+                </ul>
               </Typography>
             </Box>
           </Fade>

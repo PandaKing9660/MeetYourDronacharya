@@ -47,8 +47,9 @@ const ChatBox = () => {
         'https://i.pinimg.com/originals/31/86/f4/3186f45e48d5e71354b65c8f31eeafe6.jpg',
         'https://i.pinimg.com/564x/d8/23/83/d8238334e5d1273e25d6d14336a968f8.jpg',
     ];
-    const imageKey =
-        imageKeyArr[Math.floor(Math.random() * (imageKeyArr.length - 1))];
+    const d = new Date();
+    let day = d.getDay();
+    const imageKey = imageKeyArr[day];
 
     useEffect(() => {
         // connect socket.io to backend
@@ -129,7 +130,7 @@ const ChatBox = () => {
                             {/* Show image after daily. */}
                             <CardMedia
                                 component="img"
-                                height="460vh"
+                                height="470vh"
                                 image={imageKey}
                                 alt="Nice Image"
                             />

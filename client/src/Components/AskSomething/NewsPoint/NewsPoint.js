@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Button } from '@mui/material';
+import { Grid, Button, CircularProgress } from '@mui/material';
 import './newspoint.css';
 
 async function searchNews(q) {
@@ -25,8 +25,9 @@ async function searchNews(q) {
 }
 
 const NewsPoint = () => {
-    const [query, setQuery] = useState('Jobs');
+    const [query, setQuery] = useState('Software');
 
+    const [loading, setLoading] = useState(false);
     // Set initial value to be displayed on landing, prevents loading wait time
     const [newsList, setNewsList] = useState([
         {
@@ -239,16 +240,28 @@ const NewsPoint = () => {
     ]);
 
     const search = (e) => {
+
         e.preventDefault();
-        searchNews(query).then(setNewsList);
+        setLoading(true);
+        searchNews (query).then (res => {
+  setNewsList (res);
+  setLoading (false);
+});
+
     };
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        setLoading(true);
+        searchNews(query).then(res => {
+            setNewsList(res);
+            setLoading(false);
+        });
+    }, []);
 
     return (
         <div>
             {/* User can enter text to search web */}
-            <form onSubmit={search} style={{ paddingBottom: '3%' }}>
+            <form style={{ paddingBottom: '3%' }}>
                 <input
                     autoFocus
                     value={query}
@@ -256,12 +269,14 @@ const NewsPoint = () => {
                     placeholder="Search On Web"
                 />
 
-                <Button variant="outlined" color="success" size="large">
+                <Button variant="outlined" color="success" size="large" onClick={search}>
                     Search
                 </Button>
             </form>
 
-            {!newsList ? null : newsList.length === 0 ? (
+            {loading
+        ? <CircularProgress />
+         : newsList.length === 0 ? (
                 <p>
                     <i>No results</i>
                 </p>
@@ -314,7 +329,7 @@ function NewItem({ item }) {
                             className="provider-thumbnail"
                             alt=""
                             src={
-                                item.provider[0].image.thumbnail.contentUrl +
+                                item.provider[0].image?.thumbnail.contentUrl +
                                 '&w=16&h=16'
                             }
                         />
