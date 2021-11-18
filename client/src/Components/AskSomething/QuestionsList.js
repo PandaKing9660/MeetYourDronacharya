@@ -9,9 +9,10 @@ import Select from '@mui/material/Select';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import CardQuestion from './CardQuestion';
+import {Typography} from '@mui/material';
 
-const QuestionsList = () => {
-  // dummy data for experience posts
+const QuestionsList = ({searchResult, setSearchResult}) => {
+  // dummy data for Question posts
   const [questions, setQuestions] = useState ([
     {
       title: '',
@@ -27,6 +28,8 @@ const QuestionsList = () => {
   ]);
   const [order, setOrder] = useState ('reverse-time-sort');
   const [loading, setLoading] = useState (false);
+  const [searchedQuestion, setSearchedQuestion] = useState ([]);
+
   const user = JSON.parse (localStorage.getItem ('profile'));
 
   useEffect (
@@ -40,12 +43,47 @@ const QuestionsList = () => {
         )
         .then (res => {
           setQuestions (res.data);
+          setSearchedQuestion (res.data);
           setLoading (false);
           console.log (res.data[0]);
         })
         .catch (err => console.log (err));
     },
     [order]
+  );
+
+  useEffect (
+    () => {
+      const newSearchedQuestion = questions.filter (question => {
+        if (
+          question.title.toLowerCase ().includes (searchResult.toLowerCase ())
+        )
+          return true;
+        if (
+          question.question
+            .toLowerCase ()
+            .includes (searchResult.toLowerCase ())
+        )
+          return true;
+        if (
+          question.userName
+            .toLowerCase ()
+            .includes (searchResult.toLowerCase ())
+        )
+          return true;
+
+        const res = question.tags.filter (tag => {
+          return tag.toLowerCase ().includes (searchResult.toLowerCase ());
+        });
+
+        if (res.length) return true;
+
+        return false;
+      });
+      console.log (newSearchedQuestion);
+      setSearchedQuestion (newSearchedQuestion);
+    },
+    [searchResult]
   );
 
   const handleChange = event => {
@@ -59,7 +97,7 @@ const QuestionsList = () => {
   return (
     <Box sx={{flexGrow: 1}} m={1} p={1} mt={2}>
       <Box sx={{minWidth: 150, textAlign: 'start'}}>
-        <FormControl style={{minWidth: 140, marginLeft:"1.9%"}}>
+        <FormControl style={{minWidth: 140, marginLeft: '1.9%'}}>
           <InputLabel id="demo-simple-select-label">Order</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -81,25 +119,29 @@ const QuestionsList = () => {
         </FormControl>
       </Box>
 
-      {/* loop over experiences array and pass data to CardExperience component for rendering children */}
+      {/* loop over Questions array and pass data to CardQuestion component for rendering children */}
 
       {loading
         ? <CircularProgress />
-        : <Grid
-            container
-            // spacing={{ xs: 2, md: 3 }}
-            columns={{xs: 4, sm: 8, md: 2}}
-            justifyContent="flex-start"
-            alignItems="center"
-          >
-            {questions.map (question => {
-              return (
-                <Grid item xs={12} md={6} key={question._id}>
-                  <CardQuestion quesData={question} showAnswer={true} />
-                </Grid>
-              );
-            })}
-          </Grid>}
+        : searchedQuestion.length > 0
+            ? <Grid
+                container
+                // spacing={{ xs: 2, md: 3 }}
+                columns={{xs: 4, sm: 8, md: 2}}
+                justifyContent="flex-start"
+                alignItems="center"
+              >
+                {searchedQuestion.map (question => {
+                  return (
+                    <Grid item xs={12} md={6} key={question._id}>
+                      <CardQuestion quesData={question} showAnswer={true} />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            : <Typography variant="h4">
+                No Questions !!
+              </Typography>}
     </Box>
   );
 };
