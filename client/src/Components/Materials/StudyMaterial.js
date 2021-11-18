@@ -183,7 +183,7 @@ export default function StudyMaterial () {
   // Showing two tabs: for displaying materials, for adding materials
   return (
     <div className="material_StudyMaterial">
-      <NavBar />
+      <NavBar setSearchResult={setSearchResult} />
       <h1 className="heading" style={{marginTop: '1%', textAlign: 'center'}}>
         STUDY MATERIAL
       </h1>

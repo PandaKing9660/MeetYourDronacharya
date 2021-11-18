@@ -16,6 +16,8 @@ const AskSomethingAnswer = () => {
   const [question, setQuestion] = useState ([]);
 
   const [loading, setLoading] = useState (true);
+  const [searchResult, setSearchResult] = useState ('');
+  const [searchedAnswer, setSearchedAnswer] = useState ([]);
 
   // finding id in the url
   const {question_id} = useParams ();
@@ -32,6 +34,7 @@ const AskSomethingAnswer = () => {
       )
       .then (res => {
         setAnswers (res.data);
+        setSearchedAnswer (res.data);
       })
       .catch (err => console.log (err));
 
@@ -52,9 +55,35 @@ const AskSomethingAnswer = () => {
     }, 2000);
   }, []);
 
+  useEffect (
+    () => {
+      const newSearchedAnswer = answers.filter (answer => {
+        if (answer.title.toLowerCase ().includes (searchResult.toLowerCase ()))
+          return true;
+        if (answer.answer.toLowerCase ().includes (searchResult.toLowerCase ()))
+          return true;
+        if (
+          answer.userName.toLowerCase ().includes (searchResult.toLowerCase ())
+        )
+          return true;
+
+        const res = answer.tags.filter (tag => {
+          return tag.toLowerCase ().includes (searchResult.toLowerCase ());
+        });
+
+        if (res.length) return true;
+
+        return false;
+      });
+      console.log (newSearchedAnswer);
+      setSearchedAnswer (newSearchedAnswer);
+    },
+    [searchResult]
+  );
+
   return (
     <div>
-      <NavBar />
+      <NavBar setSearchResult={setSearchResult} />
 
       <Box sx={{flexGrow: 1}} m={1} p={1} mt={2}>
 
@@ -68,26 +97,30 @@ const AskSomethingAnswer = () => {
                 rowSpacing={{xs: 1}}
                 justifyContent="space-around"
               >
-                <Grid item xs={12} md={6} style={{overflow: 'auto'}}>
-                  <Typography variant="h4" align="center">
-                    Question
-                  </Typography>
-                  <CardQuestion quesData={question[0]} showAnswer={false} />
-                  <Divider variant="middle" />
-                </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                  style={{
+                    boxShadow: '5px 10px 8px 1px #888888',
+                  }}
+                >
                   <Typography variant="h4" align="center">
                     Answers
                   </Typography>
-                  {answers.length > 0
+                  {searchedAnswer.length > 0
                     ? <Grid
                         container
                         columns={{xs: 4, sm: 8, md: 2}}
                         justifyContent="flex-start"
                         alignItems="center"
-                        style={{overflow: 'auto', height: '580px'}}
+                        style={{
+                          overflow: 'auto',
+                          height: '580px',
+                          // boxShadow: '5px 10px 8px 1px #888888',
+                        }}
                       >
-                        {answers.map (answer => {
+                        {searchedAnswer.map (answer => {
                           return (
                             <Grid item xs={12} md={6} key={answer._id}>
                               <CardAnswer ansData={answer} />
@@ -98,6 +131,21 @@ const AskSomethingAnswer = () => {
                     : <Typography variant="h6" align="center">
                         No Answers yet!!
                       </Typography>}
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                  style={{
+                    overflow: 'auto',
+                  }}
+                >
+                  <Typography variant="h4" align="center">
+                    Question
+                  </Typography>
+                  <Divider variant="middle" />
+                  <CardQuestion quesData={question[0]} showAnswer={false} />
+                  <Divider variant="middle" />
                 </Grid>
               </Grid>
             </div>}

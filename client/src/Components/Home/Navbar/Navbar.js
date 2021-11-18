@@ -71,7 +71,7 @@ const StyledInputBase = styled (InputBase) (({theme}) => ({
   },
 }));
 
-export default function NavBar () {
+export default function NavBar({setSearchResult, noSearch}) {
   const user = JSON.parse (localStorage.getItem ('profile'));
   const [linksArray, setLinksArray] = useState ([
     {linkName: 'Home', linkTo: '', iconProp: HomeIcon},
@@ -177,15 +177,18 @@ export default function NavBar () {
             </Typography>
           </Button>
 
-          <Search sx={{display: {xs: 'none', sm: 'block',color:'white'}}}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{'aria-label': 'search'}}
-            />
-          </Search>
+          {!noSearch
+            ? <Search sx={{display: {xs: 'none', sm: 'block', color: 'white'}}}>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{'aria-label': 'search'}}
+                  onChange={e => setSearchResult (e.target.value)}
+                />
+              </Search>
+            : <div />}
           <Box sx={{flexGrow: 1}} />
           <Box sx={{display: {xs: 'none', md: 'flex'}}}>
             {linksArray.map (linkSingle => {
