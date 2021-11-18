@@ -8,7 +8,6 @@ const getUser = async ({ sId, idMe, idYou }) => {
     // email=email.trim().toLowerCase();
     try {
         let users = [];
-        let error = '';
         await user
             .find({})
             .then((resp) => {
@@ -17,13 +16,13 @@ const getUser = async ({ sId, idMe, idYou }) => {
             })
             .catch((err) => {
                 console.log(err);
-                error = err;
-                return err;
+                return users;
             });
 
         return users;
     } catch (err) {
         console.log(err);
+        return users;
     }
 
     // return users.find((user) => user.id === id);

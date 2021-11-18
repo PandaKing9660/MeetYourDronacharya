@@ -41,25 +41,29 @@ io.on('connection', (socket) => {
             idYou: idYou,
         });
 
-        let error = false;
-        // if (users == null) return callback(error);
-        console.log('room users', users);
+        let error = 'Error joining in room. Please try again later.';
+        if (users === []) return callback(error);
+
+        // console.log('room users', users);
 
         // roomName is concatenation of the two users' name
         // users[0] is host(Me), users[1] is Guest(You)
 
         let roomName =
-            users[0].name.trim().toLowerCase() +
-            users[1].name.trim().toLowerCase();
+            users[0].name.trim().toLowerCase() <
+            users[1].name.trim().toLowerCase()
+                ? users[0].name.trim().toLowerCase()
+                : users[1].name.trim().toLowerCase();
+
         console.log(roomName, 'rooomiieee');
         socket.join(roomName);
 
         socket.emit('message', {
-            user: 'admin',
+            user: 'System',
             text: `${users[0].name},  ${users[1].name} welcomes you.`,
         });
         socket.broadcast.to(roomName).emit('message', {
-            user: 'admin',
+            user: 'System',
             text: `${users[1].name} has joined!`,
         });
 
@@ -78,31 +82,48 @@ io.on('connection', (socket) => {
             idYou: idYou,
         });
         let roomName =
-            users[0].name.trim().toLowerCase() +
-            users[1].name.trim().toLowerCase();
+            users[0].name.trim().toLowerCase() <
+            users[1].name.trim().toLowerCase()
+                ? users[0].name.trim().toLowerCase()
+                : users[1].name.trim().toLowerCase();
 
-        io.to(roomName).emit('message', { user: users[1].name, text: message });
+        let error = 'Error sending messages in room. Please try again later.';
+        if (users === []) return callback(error);
+
+        io.to(roomName).emit('message', { user: users[0].name, text: message });
 
         callback();
     });
 
-    socket.on('disconnect', () => {
+    socket.on('disconnect', async ({ idMe, idYou }, callback) => {
         console.log('User left Socket');
-        let roomName =
-            users[0].name.trim().toLowerCase() +
-            users[1].name.trim().toLowerCase();
-
-        // const user = removeUser(socket.id);
-
-        // if (user) {
-        //     io.to(user.room).emit('message', {
-        //         user: 'Admin',
-        //         text: `${user.name} has left.`,
+        // try {
+        //     const users = await getUser({
+        //         id: socket.id,
+        //         idMe: idMe,
+        //         idYou: idYou,
         //     });
-        //     io.to(user.room).emit('roomData', {
-        //         room: user.room,
-        //         users: getUsersInRoom(user.room),
+
+        //     console.log(users, 'left it');
+        //     let error = 'Error joining in room. Please try again later.';
+        //     if (users === []) return callback(error);
+
+        //     let roomName =
+        //         users[0].name.trim().toLowerCase() <
+        //         users[1].name.trim().toLowerCase()
+        //             ? users[0].name.trim().toLowerCase()
+        //             : users[1].name.trim().toLowerCase();
+
+        //     io.to(roomName).emit('message', {
+        //         user: 'System',
+        //         text: `${users[0].name} has left.`,
         //     });
+        //     io.to(roomName).emit('roomData', {
+        //         room: roomName,
+        //         users: users,
+        //     });
+        // } catch (err) {
+        //     console.log(err);
         // }
     });
 });
