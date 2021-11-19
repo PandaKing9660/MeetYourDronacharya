@@ -46,7 +46,6 @@ const MaterialCard = ({ material }) => {
         window.location.reload();
       });
     return;
-    console.log("You click No!");
   };
 
   const [openconfirm, setOpenConfirm] = React.useState(false);

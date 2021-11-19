@@ -161,7 +161,6 @@ export default function StudyMaterial() {
           tags: tag,
         })
         .then((res) => {
-          console.log(res.data);
           toast.info("Thank you for sharing the material!!!");
           window.location.reload();
         })
