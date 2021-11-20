@@ -12,6 +12,8 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
 import axios from "axios";
+import {Link} from 'react-router-dom';
+
 
 import ChatBox from "./ChatBox/ChatBox";
 
@@ -220,15 +222,14 @@ const Profile = ({ userData, handleOpen }) => {
             ) : (
               <div />
             )}
-            <div>
-              <Button variant="contained" sx={{ marginTop: 2 }}>
-                CHAT
-              </Button>
-              <ChatBox />
-            </div>
           </div>
         </Grid>
       </Grid>
+      <div>
+        <Link to={`/chatbox?name=${userData.name}&id=${userData._id}`}>
+          <Button variant="contained" sx={{marginTop: 2}}>CHAT</Button>
+        </Link>
+      </div>
       {/* Displaying Update Profile modal */}
       <Modal
         aria-labelledby="transition-modal-title"
@@ -366,7 +367,7 @@ const After = ({ handleClick }) => {
         }}
         onClick={handleClick}
       >
-        Unfollow
+        Friend ADded
       </Button>
     </div>
   );

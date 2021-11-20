@@ -1,13 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import dompurify from 'dompurify';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
-import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import QuestionAnswerRoundedIcon from '@mui/icons-material/QuestionAnswerRounded';
-import AddCommentRoundedIcon from '@mui/icons-material/AddCommentRounded';
-import {Link} from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import dompurify from "dompurify";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import Chip from "@mui/material/Chip";
+import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
+import AddCommentRoundedIcon from "@mui/icons-material/AddCommentRounded";
+import { Link } from "react-router-dom";
 
 import EditorAndPreview from "./EditorAndPreview";
 import {
@@ -133,14 +134,10 @@ const CardQuestion = ({ quesData, showAnswer }) => {
             <Grid container justifyContent="space-between" alignItems="center">
               <Link
                 to={`/ask-something/${quesData._id}`}
-                style={{ textDecoration: "none" }}
+                style={{ textDecoration: "none", color: "black" }}
               >
                 <Grid item align="left">
-                  <Typography
-                    variant="h5"
-                    component="div"
-                    sx={{ textDecoration: "underline" }}
-                  >
+                  <Typography variant="h5" component="div">
                     {quesData.title}
                   </Typography>
                   <Typography
@@ -160,7 +157,10 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                 }}
                 align="right"
               >
-                <Link to={`/dashboard/${quesData.by}`}>
+                <Link
+                  to={`/dashboard/${quesData.by}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <CardHeader
                     avatar={
                       <Avatar
@@ -201,8 +201,11 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                   localStorage.setItem("id", JSON.stringify(quesData._id))
                 }
               >
-                <Link to={`/ask-something/${quesData._id}`} style={{textDecoration:"none"}} >
-                  <QuestionAnswerRoundedIcon/>
+                <Link
+                  to={`/ask-something/${quesData._id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <QuestionAnswerRoundedIcon />
                   {numAnswers}
                 </Link>
               </Button>
@@ -215,11 +218,13 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                 AddLikes(user ? user._id : 0, quesData._id);
               }}
             >
-              {userStatus === 'none'
-                ? <ThumbUpOffAltIcon />
-                : userStatus === 'disliked'
-                    ? <ThumbUpOffAltIcon />
-                    : <ThumbUpIcon />}
+              {userStatus === "none" ? (
+                <ThumbUpOffAltIcon />
+              ) : userStatus === "disliked" ? (
+                <ThumbUpOffAltIcon />
+              ) : (
+                <ThumbUpIcon />
+              )}
               {likes}
             </Button>
             <Button
@@ -252,7 +257,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                 textTransform: "capitalize",
               }}
             >
-              <AddCommentRoundedIcon/>
+              <AddCommentRoundedIcon />
             </Button>
 
             <Modal

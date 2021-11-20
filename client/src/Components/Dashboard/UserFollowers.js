@@ -23,6 +23,8 @@ const UserFollowers = () => {
 
   const [loading, setLoading] = useState (false);
   const [userMsg, setUserMsg] = useState ('');
+  const [searchedFollower, setSearchedFollower] = useState ([]);
+  const [searchResult, setSearchResult] = useState ('');
 
   useEffect (() => {
     console.log (userId);
@@ -40,14 +42,33 @@ const UserFollowers = () => {
         } else if (res.data[0] === -1) setUserMsg ('No User Found');
         else {
           setFollowers (res.data);
+          setSearchedFollower (res.data);
         }
       })
       .catch (err => console.log (err));
   }, []);
 
+  useEffect (
+    () => {
+      const newSearchedFollower = followers.filter (follower => {
+        if (follower.name.toLowerCase ().includes (searchResult.toLowerCase ()))
+          return true;
+        if (
+          follower.email.toLowerCase ().includes (searchResult.toLowerCase ())
+        )
+          return true;
+
+        return false;
+      });
+      console.log (newSearchedFollower);
+      setSearchedFollower (newSearchedFollower);
+    },
+    [searchResult]
+  );
+
   return (
     <div>
-      <NavBar />
+      <NavBar setSearchResult={setSearchResult} />
       <h1
         className="heading"
         style={{marginTop: 25, marginBottom: 10, textAlign: 'center'}}
@@ -67,26 +88,34 @@ const UserFollowers = () => {
                 >
                   {userMsg}
                 </Typography>
-              : <div>
-                  <Grid
-                    container
-                    columns={{xs: 4, sm: 8, md: 2}}
-                    justifyContent="flex-grow"
-                    alignItems="center"
-                  >
-                    {followers.map (follower => {
-                      return (
-                        <Grid item xs={12} md={6} key={follower._id}>
-                          <UserCard follower={follower} />
-                        </Grid>
-                      );
-                    })}
+              : searchedFollower.length > 0
+                  ? <div>
+                      <Grid
+                        container
+                        columns={{xs: 4, sm: 8, md: 2}}
+                        justifyContent="flex-grow"
+                        alignItems="center"
+                      >
+                        {searchedFollower.map (follower => {
+                          return (
+                            <Grid item xs={12} md={6} key={follower._id}>
+                              <UserCard follower={follower} />
+                            </Grid>
+                          );
+                        })}
 
-                  </Grid>
-                  <Grid>
-                    container
-                  </Grid>
-                </div>}
+                      </Grid>
+
+                      <Grid>
+                        container
+                      </Grid>
+                    </div>
+                  : <Typography
+                      sx={{mb: 1.5, fontSize: '0.91rem'}}
+                      color="text.secondary"
+                    >
+                      No Follower
+                    </Typography>}
       </Box>
     </div>
   );

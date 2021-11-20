@@ -15,8 +15,8 @@ const UserAnswered = () => {
 
   const [loading, setLoading] = useState (false);
   const [userMsg, setUserMsg] = useState ('');
-
-  const user = JSON.parse (localStorage.getItem ('profile'));
+  const [searchResult, setSearchResult] = useState ('');
+  const [searchedAnswer, setSearchedAnswer] = useState ([]);
 
   useEffect (() => {
     console.log (userId);
@@ -34,14 +34,41 @@ const UserAnswered = () => {
         } else if (res.data[0] === -1) setUserMsg ('No User Found');
         else {
           setAnswers (res.data);
+          setSearchedAnswer (res.data);
         }
       })
       .catch (err => console.log (err));
   }, []);
 
+  useEffect (
+    () => {
+      const newSearchedAnswer = answers.filter (answer => {
+        if (answer.title.toLowerCase ().includes (searchResult.toLowerCase ()))
+          return true;
+        if (answer.answer.toLowerCase ().includes (searchResult.toLowerCase ()))
+          return true;
+        if (
+          answer.userName.toLowerCase ().includes (searchResult.toLowerCase ())
+        )
+          return true;
+
+        const res = answer.tags.filter (tag => {
+          return tag.toLowerCase ().includes (searchResult.toLowerCase ());
+        });
+
+        if (res.length) return true;
+
+        return false;
+      });
+      console.log (newSearchedAnswer);
+      setSearchedAnswer (newSearchedAnswer);
+    },
+    [searchResult]
+  );
+
   return (
     <div>
-      <NavBar />
+      <NavBar setSearchResult={setSearchResult} />
       <h1
         className="heading"
         style={{marginTop: 25, marginBottom: 10, textAlign: 'center'}}
@@ -61,21 +88,28 @@ const UserAnswered = () => {
                 >
                   {userMsg}
                 </Typography>
-              : <Grid
-                  container
-                  // spacing={{ xs: 2, md: 3 }}
-                  columns={{xs: 4, sm: 8, md: 2}}
-                  justifyContent="flex-start"
-                  alignItems="center"
-                >
-                  {answers.map (answer => {
-                    return (
-                      <Grid item xs={12} md={6} key={answer._id}>
-                        <CardAnswer ansData={answer} />
-                      </Grid>
-                    );
-                  })}
-                </Grid>}
+              : searchedAnswer.length > 0
+                  ? <Grid
+                      container
+                      // spacing={{ xs: 2, md: 3 }}
+                      columns={{xs: 4, sm: 8, md: 2}}
+                      justifyContent="flex-start"
+                      alignItems="center"
+                    >
+                      {searchedAnswer.map (answer => {
+                        return (
+                          <Grid item xs={12} md={6} key={answer._id}>
+                            <CardAnswer ansData={answer} />
+                          </Grid>
+                        );
+                      })}
+                    </Grid>
+                  : <Typography
+                      sx={{mb: 1.5, fontSize: '0.91rem'}}
+                      color="text.secondary"
+                    >
+                      No Answers Found
+                    </Typography>}
       </Box>
     </div>
   );

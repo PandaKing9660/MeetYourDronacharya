@@ -21,8 +21,9 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditorAndPreview from "../AskSomething/EditorAndPreview";
-
-import { confirm } from "react-confirm-box";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const ITEM_HEIGHT = 45;
 
@@ -110,21 +111,18 @@ const CardExperience = ({ expData }) => {
 
   const Confirm = async (userId, experienceId) => {
     //const result = await confirm("Are you sure?");
-    if (await confirm("Are you sure?")) {
-      axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
+    axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
+        experienceId,
+      })
+      .then((res) => {
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/dashboard/delExp`, {
           experienceId,
-        })
-        .then((res) => {
-          axios.put(`${process.env.REACT_APP_BACKEND_URL}/dashboard/delExp`, {
-            experienceId,
-            userId,
-          });
-          window.location.reload();
+          userId,
         });
-      return;
-    }
-    console.log("You click No!");
+        window.location.reload();
+      });
+    return;
   };
 
   const DeleteUser = (userId, experienceId) => {
@@ -139,6 +137,16 @@ const CardExperience = ({ expData }) => {
   const handleOpen2 = () =>
     user ? setOpen2(true) : alert("please login to add experience");
   const handleClose2 = () => setOpen2(false);
+
+  const [openconfirm, setOpenConfirm] = React.useState(false);
+
+  const handleClickOpenconfirm = () => {
+    setOpenConfirm(true);
+  };
+
+  const handleCloseconfirm = () => {
+    setOpenConfirm(false);
+  };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -191,14 +199,43 @@ const CardExperience = ({ expData }) => {
                       <Button
                         onClick={() => {
                           {
-                            handleClose();
+                            handleClickOpenconfirm();
                           }
-                          DeleteUser(user ? user._id : 0, expData._id);
                         }}
                         sx={{ color: "black" }}
                       >
                         Delete
                       </Button>
+                      <Dialog
+                        open={openconfirm}
+                        onClick={() => {
+                          {
+                            handleClose();
+                            handleCloseconfirm();
+                          }
+                        }}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                      >
+                        <DialogTitle id="alert-dialog-title">
+                          {"Are you sure to delete?"}
+                        </DialogTitle>
+                        <DialogActions>
+                          <Button
+                            onClick={() => {
+                              {
+                                handleCloseconfirm();
+                              }
+                              DeleteUser(user ? user._id : 0, expData._id);
+                            }}
+                          >
+                            Yes
+                          </Button>
+                          <Button onClick={handleCloseconfirm} autoFocus>
+                            No
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
                     </MenuItem>
                     <MenuItem>
                       <Button onClick={handleOpen2} sx={{ color: "black" }}>
@@ -236,11 +273,7 @@ const CardExperience = ({ expData }) => {
               alignItems="center"
             >
               <Grid item xs={6} sm={4.6} md={8} align="left">
-                <Typography
-                  variant="h5"
-                  component="div"
-                  sx={{ textDecoration: "underline" }}
-                >
+                <Typography variant="h5" component="div">
                   {expData.title}
                 </Typography>
                 <Typography
@@ -262,7 +295,10 @@ const CardExperience = ({ expData }) => {
               >
                 {/* right floating avatar and name of author */}
 
-                <Link to={`/dashboard/${expData.by}`}>
+                <Link
+                  to={`/dashboard/${expData.by}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <CardHeader
                     avatar={
                       <Avatar
@@ -293,14 +329,17 @@ const CardExperience = ({ expData }) => {
           </CardContent>
 
           <div style={{ display: "flex" }}>
-            {expData.tags.map((tag) => (
-              // <Typography color="primary">#{tag}</Typography>
-              <Chip
-                label={"#" + tag}
-                variant="outlined"
-                sx={{ marginRight: "10px", color: "blue" }}
-              />
-            ))}
+            {expData.tags.map(
+              (
+                tag // <Typography color="primary">#{tag}</Typography>
+              ) => (
+                <Chip
+                  label={"#" + tag}
+                  variant="outlined"
+                  sx={{ marginRight: "10px", color: "blue" }}
+                />
+              )
+            )}
           </div>
 
           <CardActions sx={{ justifyContent: "flex-end" }}>

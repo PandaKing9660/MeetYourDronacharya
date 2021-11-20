@@ -126,7 +126,7 @@ const AboutTeam = () => {
 const AboutUs = () => {
   return (
     <div className="aboutus_AboutUs">
-      <NavBar />
+      <NavBar noSearch={true} />
       <Grid container spacing={2}>
         <Grid item sm={12} md={7}>
           <Aboutwebsite />

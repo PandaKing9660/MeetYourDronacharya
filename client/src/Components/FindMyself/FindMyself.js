@@ -44,8 +44,8 @@ const FindMyself = () => {
   const addqueModalClose = () => setaddqueModalOpen (false);
 
   // Loading questions from JSON
-  const loadQuestion = (id) => {
-    setQuestionSetId(id);
+  const loadQuestion = id => {
+    setQuestionSetId (id);
     questions
       .filter (queid => queid.id === id)
       .map (
@@ -57,7 +57,7 @@ const FindMyself = () => {
   };
 
   // Selecting options in bullet button
-  const optionSelect = (event) => {
+  const optionSelect = event => {
     const id = event.target.value;
     const quesid = id.substring (0, 5);
     const optionid = id.substring (5, id.length);
@@ -90,7 +90,7 @@ const FindMyself = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar noSearch={true} />
       <div className="findmyself_FindMyself">
         <h1 className="h1_findmyself">Find My Passion</h1>
         <Grid
@@ -103,7 +103,9 @@ const FindMyself = () => {
         >
           {/* Left part: Showing list of topics */}
           <Grid item xs={12} sm={6}>
-            <Button style={{margin: "1%"}} onClick={addqueModalOpen}>Add Question</ Button>
+            <Button style={{margin: '1%'}} onClick={addqueModalOpen}>
+              Add Question
+            </Button>
             <List
               component="nav"
               aria-label="mailbox folders"
@@ -157,10 +159,9 @@ const FindMyself = () => {
                     <u>Question Set</u>
                   </h1>
                   <h4 style={{textAlign: 'right'}}>
-                    {questions.filter(queid => queid.id === questionSetId)
-                      .map (queset => (
-                        <u>- {queset.setby}</u>
-                      ))}
+                    {questions
+                      .filter (queid => queid.id === questionSetId)
+                      .map (queset => <u>- {queset.setby}</u>)}
                   </h4>
                   <p align="left">Choose the most suitable options:</p>
                   <ol type="1" style={{padding: '0 3%'}}>
@@ -346,13 +347,18 @@ const FindMyself = () => {
                 <u>Add Question</u>
               </Typography>
               <Typography variant="p" margin="2%">
-                <b>How?</b><br/>
+                <b>How?</b><br />
                 <ul padding="2%" margin="200%">
                   <li>Click on the link given and fill the google form.</li>
                   <li>The template for the question is provided.</li>
                   <li>Stick to the template.</li>
-                  <a href="https://forms.gle/At8dji4KerQYtQm8A" target="_blank" rel="noopener noreferrer">
-                    Link</a>
+                  <a
+                    href="https://forms.gle/At8dji4KerQYtQm8A"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Link
+                  </a>
                 </ul>
               </Typography>
             </Box>
