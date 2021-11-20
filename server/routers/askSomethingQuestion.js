@@ -273,7 +273,6 @@ router.put("/delAnswer", async (req, res) => {
   try {
     const { answerId, questionId } = req.body;
     let newListAns;
-    console.log("question id", questionId);
     // finding the user who added exp
     await askSomethingQuestion
       .findById(questionId)
@@ -281,8 +280,9 @@ router.put("/delAnswer", async (req, res) => {
         newListAns = resp.answers.filter((answer) => answer !== answerId);
       })
       .catch((err) => console.log(err));
+    console.log("list", newListAns);
     // updating the user, adding follower to array
-    await user.findByIdAndUpdate(
+    await askSomethingQuestion.findByIdAndUpdate(
       questionId,
       {
         answers: newListAns,
