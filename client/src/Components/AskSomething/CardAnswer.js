@@ -113,7 +113,7 @@ const CardAnswer = ({ ansData, questionId }) => {
         });
 
         axios.put(
-          `${process.env.REACT_APP_BACKEND_URL}/askSomethingQuestion/delAnswer`,
+          `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/delAnswer`,
           {
             answerId,
             questionId,
