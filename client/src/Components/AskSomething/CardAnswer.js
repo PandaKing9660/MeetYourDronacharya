@@ -275,7 +275,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                       >
                         <Box sx={style}>
                           <EditorAndPreview
-                            option="experience"
+                            option="answer"
                             question_id={ansData._id}
                             edit="true"
                           />

@@ -239,4 +239,41 @@ router.post("/deleteAnswer", async (req, res) => {
   }
 });
 
+router.post("/fetchtitle", async (req, res) => {
+  console.log("fetch");
+  const { experienceId } = req.body;
+  const exp = await askSomethingAnswer.findById(experienceId);
+  try {
+    console.log(exp);
+    res.json(exp);
+  } catch (e) {
+    console.log("Error ", e);
+  }
+});
+
+router.post("/editAns", async (req, res) => {
+  console.log("edit");
+  const { title, answer, tags, experienceId } = req.body;
+  console.log(req.body);
+  try {
+    await askSomethingAnswer.findByIdAndUpdate(
+      experienceId,
+      {
+        title: title,
+        answer: answer,
+        tags: tags,
+      },
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("updated");
+        }
+      }
+    );
+  } catch (e) {
+    console.log("Error ", e);
+  }
+});
+
 module.exports = router;
