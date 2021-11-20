@@ -9,11 +9,14 @@ const dotenv = require('dotenv');
 const socketio = require('socket.io');
 const http = require('http');
 
+// socket route functions
+const { getUser } = require('./routers/chatusers');
+const { verifyKey } = require('./helper/spamCheck');
+
 dotenv.config();
 
 // for deployment
 const PORT = process.env.PORT || 3001;
-const PORT2 = process.env.PORT2 || 3002;
 
 // using body-parser to parse the data
 app.use(body_parser.json());
@@ -97,38 +100,13 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', async ({ idMe, idYou }, callback) => {
         console.log('User left Socket');
-        // try {
-        //     const users = await getUser({
-        //         id: socket.id,
-        //         idMe: idMe,
-        //         idYou: idYou,
-        //     });
-
-        //     console.log(users, 'left it');
-        //     let error = 'Error joining in room. Please try again later.';
-        //     if (users === []) return callback(error);
-
-        //     let roomName =
-        //         users[0].name.trim().toLowerCase() <
-        //         users[1].name.trim().toLowerCase()
-        //             ? users[0].name.trim().toLowerCase()
-        //             : users[1].name.trim().toLowerCase();
-
-        //     io.to(roomName).emit('message', {
-        //         user: 'System',
-        //         text: `${users[0].name} has left.`,
-        //     });
-        //     io.to(roomName).emit('roomData', {
-        //         room: roomName,
-        //         users: users,
-        //     });
-        // } catch (err) {
-        //     console.log(err);
-        // }
     });
 });
 
-const { getUser } = require('./routers/chatusers');
+
+// Verifying Spam removal Key
+verifyKey();
+
 
 // importing all the routers
 const chatboxRouter = require('./routers/chatbox');

@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const Experience = require("../models/experience");
 const user = require("../models/user");
+const { checkSpam } = require('../helper/spamCheck');
+
 
 router.use(express.json());
 

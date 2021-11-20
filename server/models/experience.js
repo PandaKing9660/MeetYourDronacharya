@@ -13,6 +13,7 @@ const experienceSchema = new Schema ({
   userName: {type: String, required: true},
   userImage: {type: String, required: true},
   tags: {type: [String]},
+  isSpam : {type: Boolean}
 });
 
 // creating model
