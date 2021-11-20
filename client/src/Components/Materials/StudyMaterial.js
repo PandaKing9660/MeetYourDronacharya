@@ -20,9 +20,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { DropzoneArea } from "material-ui-dropzone";
+import {toast} from 'react-toastify';
 import axios from 'axios';
 
 toast.configure ();
@@ -310,14 +309,6 @@ export default function StudyMaterial () {
                         )}
                       />
                     </div>
-
-                    {/* <div style={{ margin: 40 }}>
-                      For droping materials like pdf or images or videos
-                      <DropzoneArea
-                        showPreviews={true}
-                        onChange={onSaveFirstFile}
-                      />
-                    </div> */}
                     <Button
                       variant="contained"
                       color="primary"
