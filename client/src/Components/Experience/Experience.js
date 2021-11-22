@@ -81,7 +81,11 @@ const Experience = () => {
             .includes (searchResult.toLowerCase ())
         )
           return true;
-        if (experience.userName.toLowerCase ().includes (searchResult.toLowerCase ()))
+        if (
+          experience.userName
+            .toLowerCase ()
+            .includes (searchResult.toLowerCase ())
+        )
           return true;
 
         const res = experience.tags.filter (tag => {

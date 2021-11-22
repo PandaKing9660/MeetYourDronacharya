@@ -75,7 +75,7 @@ const UserExperience = () => {
 
   return (
     <div>
-      <NavBar setSearchResult={setSearchResult} />;
+      <NavBar setSearchResult={setSearchResult} />
 
       <h1
         className="heading"
