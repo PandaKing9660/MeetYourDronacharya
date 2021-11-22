@@ -449,4 +449,38 @@ router.post("/user-followers", async (req, res) => {
   }
 });
 
+router.put("/delAnswer", async (req, res) => {
+  try {
+    const { answerId, userId } = req.body;
+    let newListAns;
+
+    // finding the user who added exp
+    await user
+      .findById(userId)
+      .then((resp) => {
+        newListAns = resp.answerShared.filter((answer) => answer !== answerId);
+      })
+      .catch((err) => console.log(err));
+    // updating the user, adding follower to array
+    await user.findByIdAndUpdate(
+      userId,
+      {
+        answerShared: newListAns,
+      },
+      { new: true },
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("updated");
+        }
+      }
+    );
+    res.send("ook");
+  } catch (err) {
+    console.log(err);
+    res.send("some error");
+  }
+});
+
 module.exports = router;

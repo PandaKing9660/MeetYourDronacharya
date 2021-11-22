@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import dompurify from 'dompurify';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
-import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import QuestionAnswerRoundedIcon
-  from '@mui/icons-material/QuestionAnswerRounded';
-import AddCommentRoundedIcon from '@mui/icons-material/AddCommentRounded';
-import {Link} from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import dompurify from "dompurify";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import Chip from "@mui/material/Chip";
+import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
+import AddCommentRoundedIcon from "@mui/icons-material/AddCommentRounded";
+import { Link } from "react-router-dom";
 
-import EditorAndPreview from './EditorAndPreview';
+import EditorAndPreview from "./EditorAndPreview";
 import {
   Button,
   CardActions,
@@ -22,132 +22,129 @@ import {
   CardHeader,
   Box,
   Paper,
-} from '@mui/material';
+} from "@mui/material";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '90%',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "90%",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 
-const CardQuestion = ({quesData, showAnswer}) => {
+const CardQuestion = ({ quesData, showAnswer }) => {
   const sanitizer = dompurify.sanitize;
-  const user = JSON.parse (localStorage.getItem ('profile'));
-  const [likes, setLike] = useState (quesData.liked.length);
-  const [dislikes, setDislike] = useState (quesData.disliked.length);
-  const [userStatus, setUserStatus] = useState ('none');
-  const [numAnswers, setNumAnswers] = useState (quesData.answers.length);
-  const [open, setOpen] = useState (false);
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const [likes, setLike] = useState(quesData.liked.length);
+  const [dislikes, setDislike] = useState(quesData.disliked.length);
+  const [userStatus, setUserStatus] = useState("none");
+  const [numAnswers, setNumAnswers] = useState(quesData.answers.length);
+  const [open, setOpen] = useState(false);
   const handleOpen = () =>
-    user ? setOpen (true) : alert ('Login to ask question');
-  const handleClose = () => setOpen (false);
+    user ? setOpen(true) : alert("Login to ask question");
+  const handleClose = () => setOpen(false);
 
   // Retrieving Questions from backend
-  useEffect (
-    () => {
-      if (!user) {
-        return;
-      }
-      // console.log (quesData);
-      axios
-        .post (
-          `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/check`,
-          {
-            userId: user._id,
-            questionId: quesData._id,
-          }
-        )
-        .then (res => {
-          setUserStatus (res.data);
-        })
-        .catch (err => console.log (err));
-    },
-    [quesData._id]
-  );
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    // console.log (quesData);
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/check`,
+        {
+          userId: user._id,
+          questionId: quesData._id,
+        }
+      )
+      .then((res) => {
+        setUserStatus(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [quesData._id]);
 
   // Adding like to questions and storing it in backend
   const AddLikes = (userId, questionId) => {
     if (!user) {
-      alert ('Please login to like this question');
+      alert("Please login to like this question");
       return;
     }
 
-    if (userStatus === 'liked') {
+    if (userStatus === "liked") {
       return;
     }
     axios
-      .put (
+      .put(
         `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/addLike`,
         {
           userId,
           questionId,
         }
       )
-      .then (res => {
-        setLike (likes + 1);
-        if (userStatus === 'disliked') {
-          setDislike (dislikes - 1);
+      .then((res) => {
+        setLike(likes + 1);
+        if (userStatus === "disliked") {
+          setDislike(dislikes - 1);
         }
-        setUserStatus ('liked');
+        setUserStatus("liked");
       });
   };
 
   // Adding dislike to questions and storing it in backend
   const AddDislikes = (userId, questionId) => {
     if (!user) {
-      alert ('Please login to like this question');
+      alert("Please login to like this question");
       return;
     }
 
-    if (userStatus === 'disliked') {
+    if (userStatus === "disliked") {
       return;
     }
     axios
-      .put (
+      .put(
         `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/addDisLike`,
         {
           userId,
           questionId,
         }
       )
-      .then (res => {
-        setDislike (dislikes + 1);
-        if (userStatus === 'liked') {
-          setLike (likes - 1);
+      .then((res) => {
+        setDislike(dislikes + 1);
+        if (userStatus === "liked") {
+          setLike(likes - 1);
         }
-        setUserStatus ('disliked');
+        setUserStatus("disliked");
       });
   };
 
   return (
     <div>
-      <Paper sx={{p: 0, margin: '1em', minWidth: 300, flexGrow: 1}}>
+      <Paper sx={{ p: 0, margin: "1em", minWidth: 300, flexGrow: 1 }}>
         <Box
           p={1}
-          marginY={{xs: '1em', md: '0.2em'}}
+          marginY={{ xs: "1em", md: "0.2em" }}
           //  This will change margin on `sm` and `md`
         >
           <CardContent>
             <Grid container justifyContent="space-between" alignItems="center">
               <Link
                 to={`/ask-something/${quesData._id}`}
-                style={{textDecoration: 'none', color: 'black'}}
+                style={{ textDecoration: "none", color: "black" }}
               >
                 <Grid item align="left">
                   <Typography variant="h5" component="div">
                     {quesData.title}
                   </Typography>
                   <Typography
-                    sx={{mb: 1.5, fontSize: '0.91rem'}}
+                    sx={{ mb: 1.5, fontSize: "0.91rem" }}
                     color="text.secondary"
                   >
-                    {quesData.time.split ('T')[0]}
+                    {quesData.time.split("T")[0]}
                   </Typography>
                 </Grid>
               </Link>
@@ -155,14 +152,14 @@ const CardQuestion = ({quesData, showAnswer}) => {
               <Grid
                 item
                 sx={{
-                  textTransform: 'uppercase',
-                  display: 'flex',
+                  textTransform: "uppercase",
+                  display: "flex",
                 }}
                 align="right"
               >
                 <Link
                   to={`/dashboard/${quesData.by}`}
-                  style={{textDecoration: 'none'}}
+                  style={{ textDecoration: "none" }}
                 >
                   <CardHeader
                     avatar={
@@ -172,9 +169,9 @@ const CardQuestion = ({quesData, showAnswer}) => {
                       />
                     }
                     titleTypographyProps={{
-                      variant: 'body2',
-                      color: 'green',
-                      align: 'right',
+                      variant: "body2",
+                      color: "green",
+                      align: "right",
                     }}
                     title={quesData.userName}
                     // subheader="September 14, 2016"
@@ -186,44 +183,48 @@ const CardQuestion = ({quesData, showAnswer}) => {
             <Typography variant="body2" align="justify">
               <div
                 dangerouslySetInnerHTML={{
-                  __html: sanitizer (quesData.question),
+                  __html: sanitizer(quesData.question),
                 }}
-                style={{padding: '1%'}}
+                style={{ padding: "1%" }}
               />
             </Typography>
           </CardContent>
 
-          <CardActions sx={{justifyContent: 'flex-end'}}>
-            {showAnswer &&
+          <CardActions sx={{ justifyContent: "flex-end" }}>
+            {showAnswer && (
               <Button
                 variant="outlined"
                 color="primary"
                 title="Check answers"
-                sx={{textTransform: 'capitalize'}}
+                sx={{ textTransform: "capitalize" }}
                 onClick={() =>
-                  localStorage.setItem ('id', JSON.stringify (quesData._id))}
+                  localStorage.setItem("id", JSON.stringify(quesData._id))
+                }
               >
                 <Link
                   to={`/ask-something/${quesData._id}`}
-                  style={{textDecoration: 'none'}}
+                  style={{ textDecoration: "none" }}
                 >
                   <QuestionAnswerRoundedIcon />
                   {numAnswers}
                 </Link>
-              </Button>}
+              </Button>
+            )}
             <Button
               variant="outlined"
               color="success"
               title="Liked it"
               onClick={() => {
-                AddLikes (user ? user._id : 0, quesData._id);
+                AddLikes(user ? user._id : 0, quesData._id);
               }}
             >
-              {userStatus === 'none'
-                ? <ThumbUpOffAltIcon />
-                : userStatus === 'disliked'
-                    ? <ThumbUpOffAltIcon />
-                    : <ThumbUpIcon />}
+              {userStatus === "none" ? (
+                <ThumbUpOffAltIcon />
+              ) : userStatus === "disliked" ? (
+                <ThumbUpOffAltIcon />
+              ) : (
+                <ThumbUpIcon />
+              )}
               {likes}
             </Button>
             <Button
@@ -231,14 +232,16 @@ const CardQuestion = ({quesData, showAnswer}) => {
               color="error"
               title="Disliked it"
               onClick={() => {
-                AddDislikes (user ? user._id : 0, quesData._id);
+                AddDislikes(user ? user._id : 0, quesData._id);
               }}
             >
-              {userStatus === 'none'
-                ? <ThumbDownOffAltIcon />
-                : userStatus === 'liked'
-                    ? <ThumbDownOffAltIcon />
-                    : <ThumbDownIcon />}
+              {userStatus === "none" ? (
+                <ThumbDownOffAltIcon />
+              ) : userStatus === "liked" ? (
+                <ThumbDownOffAltIcon />
+              ) : (
+                <ThumbDownIcon />
+              )}
 
               {dislikes}
             </Button>
@@ -249,9 +252,9 @@ const CardQuestion = ({quesData, showAnswer}) => {
               color="primary"
               title="Answer the question"
               sx={{
-                float: 'right',
-                marginRight: '1%',
-                textTransform: 'capitalize',
+                float: "right",
+                marginRight: "1%",
+                textTransform: "capitalize",
               }}
             >
               <AddCommentRoundedIcon />

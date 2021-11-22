@@ -29,64 +29,7 @@ import React, {useState} from 'react';
 import findyourpassion from './findyourpassion.png';
 import NavBar from '../Home/Navbar/Navbar';
 
-// Styles for all frontend data
-const useStyles = makeStyles ({
-  listitem_findmyself: {
-    background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
-    border: 0,
-    borderRadius: 3,
-    boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .4)',
-    color: 'white',
-    height: 48,
-    padding: '0 20px',
-    margin: '20px 20px',
-  },
-  list_findmyself: {
-    width: '90%',
-    padding: '1%',
-  },
-  paper_findmyself: {
-    width: '95%',
-    marginBottom: '20px',
-    padding: '2%',
-    boxShadow: '5px 10px 8px 10px #888888',
-    backgroundColor: '#fffafa',
-    color: 'black',
-    height: '570px',
-  },
-  formcontrol_findmyself: {
-    width: '90%',
-  },
-  result_modal: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    background: 'white',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  },
-  submitbutton_findmyself: {
-    marginBottom: '2%',
-    background: 'white',
-    color: 'black',
-    align: 'center',
-  },
-  addque_modal: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '40%',
-    background: 'white',
-    boxShadow: 24,
-    p: 4,
-  },
-});
-
 const FindMyself = () => {
-  const classes = useStyles ();
   const [questionSetId, setQuestionSetId] = useState ('t0');
   const [resultDisplay, setResultModalOpen] = useState (false);
   const [addque, setaddqueModalOpen] = useState (false);
@@ -164,17 +107,29 @@ const FindMyself = () => {
               Add Question
             </Button>
             <List
-              className={classes.list_findmyself}
               component="nav"
               aria-label="mailbox folders"
+              style = {{
+                width: '90%',
+                padding: '1%',
+              }}
             >
               {questions.map (m => (
                 <ListItem
-                  className={classes.listitem_findmyself}
                   button
                   divider
                   onClick={() => loadQuestion (m.id)}
                   key={m.id}
+                  style = {{
+                    background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+                    border: 0,
+                    borderRadius: 3,
+                    boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .4)',
+                    color: 'white',
+                    height: 48,
+                    padding: '0 20px',
+                    margin: '20px 20px',
+                  }}
                 >
                   <ListItemText primary={m.name} />
                 </ListItem>
@@ -186,11 +141,19 @@ const FindMyself = () => {
           <Grid item xs={12} sm={6}>
             {questionSetId !== 't0'
               ? <Paper
-                  className={classes.paper_findmyself}
                   variant="outlined"
                   square
                   elevation={24}
-                  style={{overflow: 'auto'}}
+                  style={{
+                    overflow: 'auto',
+                    width: '95%',
+                    marginBottom: '20px',
+                    padding: '2%',
+                    boxShadow: '5px 10px 8px 10px #888888',
+                    backgroundColor: '#fffafa',
+                    color: 'black',
+                    height: '570px',
+                  }}
                 >
                   <h1 style={{textAlign: 'center'}}>
                     <u>Question Set</u>
@@ -208,7 +171,7 @@ const FindMyself = () => {
                         queset.questionset.map (q => (
                           <li>
                             <FormControl
-                              className={classes.formcontrol_findmyself}
+                              style = {{ width: '90%' }}
                               component="fieldset"
                             >
                               <FormLabel component="legend"> {q.que}</FormLabel>
@@ -241,7 +204,12 @@ const FindMyself = () => {
                       )}
                   </ol>
                   <Button
-                    className={classes.submitbutton_findmyself}
+                    style = {{
+                      marginBottom: '2%',
+                      background: 'white',
+                      color: 'black',
+                      align: 'center',
+                    }}
                     variant="outlined"
                     onClick={resultPreparation}
                   >
@@ -249,7 +217,16 @@ const FindMyself = () => {
                   </Button>
                 </Paper>
               : <Paper
-                  className={classes.paper_findmyself}
+              style={{
+                overflow: 'auto',
+                width: '95%',
+                marginBottom: '20px',
+                padding: '2%',
+                boxShadow: '5px 10px 8px 10px #888888',
+                backgroundColor: '#fffafa',
+                color: 'black',
+                height: '570px',
+              }}
                   variant="outlined"
                   square
                   elevation={24}
@@ -297,7 +274,16 @@ const FindMyself = () => {
           }}
         >
           <Fade in={resultDisplay}>
-            <Box className={classes.result_modal}>
+            <Box style = {{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              background: 'white',
+              border: '2px solid #000',
+              boxShadow: 24,
+              p: 4,
+            }}>
               <Typography
                 id="transition-modal-title"
                 variant="h6"
@@ -347,7 +333,16 @@ const FindMyself = () => {
           }}
         >
           <Fade in={addque}>
-            <Box className={classes.addque_modal}>
+            <Box style = {{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '40%',
+              background: 'white',
+              boxShadow: 24,
+              p: 4,
+            }}>
               <Typography align="center" variant="h6">
                 <u>Add Question</u>
               </Typography>
