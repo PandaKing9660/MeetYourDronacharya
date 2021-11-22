@@ -185,7 +185,9 @@ export default function NavBar({setSearchResult, noSearch}) {
                 <StyledInputBase
                   placeholder="Search…"
                   inputProps={{'aria-label': 'search'}}
-                  onChange={e => setSearchResult (e.target.value)}
+                  onChange={e => {
+                    setSearchResult (e.target.value);
+                  }}
                 />
               </Search>
             : <div />}

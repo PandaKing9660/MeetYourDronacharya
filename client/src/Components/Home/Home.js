@@ -2,20 +2,14 @@ import {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import './home.css';
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import NavbarLinks from "./Navbar/NavbarLinks";
-import MenuItem from "@mui/material/MenuItem";
-import {
-  Box,
-  Grid,
-  Stack,
-  Button,
-  Autocomplete,
-  TextField,
-} from "@mui/material";
-import { red } from "@mui/material/colors";
-import logoutIcon from "@mui/icons-material/Logout";
-import Tooltip from "@mui/material/Tooltip";
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import NavbarLinks from './Navbar/NavbarLinks';
+import MenuItem from '@mui/material/MenuItem';
+import {Box, Grid, Stack, Button} from '@mui/material';
+import {red} from '@mui/material/colors';
+import logoutIcon from '@mui/icons-material/Logout';
+import Tooltip from '@mui/material/Tooltip';
+import TextField from '@material-ui/core/TextField';
 
 import IconButton from '@mui/material/IconButton';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
@@ -25,33 +19,29 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import ExploreIcon from '@mui/icons-material/Explore';
 import PeopleIcon from '@mui/icons-material/People';
 
-const topExams = [
-  {label: 'UPSC', year: 1994},
-  {label: 'IIT JEE', year: 1972},
-  {label: 'NEET', year: 1974},
-  {label: 'CAT', year: 2008},
-  {label: 'GMAT', year: 1957},
-  {label: 'GATE', year: 1993},
-  {label: 'IELTS', year: 1994},
-];
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+
+import Typography from '@mui/material/Typography';
+
+const topSearch = ['Question', 'Experience', 'Materials'];
 
 const Home = () => {
   const {height, width} = useWindowDimensions ();
-  const [buttonVariant, setButtonBariant] = useState ({
+  const [buttonVariant, setButtonVariant] = useState ({
     variant: 'contained',
     color: red[40],
   });
-  let history = useHistory(); //Storing history website
+
+  const [value, setValue] = useState ('');
+
+  let history = useHistory (); //Storing history website
   return (
     <Box className="home_container" justifyContent="center">
       {/* Shoi=wing signup/signin button according to whether the user is signed in or not */}
       <Stack direction="row" spacing={0}>
         {!JSON.parse (localStorage.getItem ('profile'))
-          ? <Button
-              variant="contained"
-              color="warning"
-              href="/login"
-            >
+          ? <Button variant="contained" color="warning" href="/login">
               Signup / Signin
             </Button>
           : <div style={{display: 'flex'}}>
@@ -89,20 +79,7 @@ const Home = () => {
         <Grid item xs={12} mb={2} mt={1}>
           <h1 className="head_home">Meet Your Dronacharya</h1>
         </Grid>
-        <Grid item xs={10} sm={7} lg={6} mb={2}>
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={topExams}
-            sx={{
-              border: 1,
-              borderRadius: 3,
-              background: 'white',
-            }}
-            renderInput={params => <TextField {...params} label="Search" />}
-          
-          />
-        </Grid>
+        
 
         {/* Showing Buttons to navigate to other webpage */}
         <Grid
