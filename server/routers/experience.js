@@ -144,7 +144,7 @@ router.post("/add", async (req, res) => {
       name: user_name,
     };
     const is_spam = await checkSpam(comment);
-    // console.log("sempam", comment);
+    // console.log("spam", comment);
 
     // creating the experience using its schema
 

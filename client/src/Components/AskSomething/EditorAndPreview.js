@@ -98,7 +98,7 @@ const EditorAndPreview = ({option, question_id, edit}) => {
               )
               .then (res => console.log (res.data));
 
-            // window.location.reload ();
+            window.location.reload ();
           })
           .catch (err => console.log (err));
       } else if (option === 'answer') {

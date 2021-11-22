@@ -5,8 +5,10 @@ const key = 'ef32823c37b3';
 const blog = 'http://localhost:3000';
 const client = new akismetClient.AkismetClient({ key, blog });
 
+// verifies the api key
 async function verifyKey() {
     try {
+        // api call
         const isValid = await client.verifyKey();
 
         if (isValid) console.log('Valid key!');
@@ -16,12 +18,14 @@ async function verifyKey() {
     }
 }
 
+// checks spam content in the passed args comment
 async function checkSpam(comment) {
     try {
+        // detect if spam or not
         const isSpam = await client.checkSpam(comment);
 
         if (isSpam) {
-            console.log('OMG Spam!');
+            console.log('Pakka Spam');
             return true;
         } else {
             console.log('Totally not spam');

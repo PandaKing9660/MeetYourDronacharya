@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const askSomethingQuestion = require("../models/askSomethingQuestion");
 const user = require("../models/user");
+const { checkSpam } = require('../helper/spamCheck');
 
 router.use(express.json());
 
@@ -127,6 +128,7 @@ router.post("/add", async (req, res) => {
     const question = req.body;
     let user_image = "";
     let user_name = "";
+    let user_email = "";
 
     // finding the user who added the question for his information
     await user
@@ -134,8 +136,21 @@ router.post("/add", async (req, res) => {
       .then((resp) => {
         user_image = resp.imageUrl;
         user_name = resp.name;
+        user_email = resp.email;
       })
       .catch((err) => console.log(err));
+
+    // check for spam content
+    const comment = {
+      ip: req.ip,
+      useragent: req.headers['user-agent'],
+      content: question.question,
+      // For guaranteed spam use email : akismet-guaranteed-spam@example.com
+      email: user_email, 
+      name: user_name,
+    };
+    const is_spam = await checkSpam(comment);
+    
 
     // creating the question using its schema
     const newQuestion = await new askSomethingQuestion({
@@ -148,6 +163,7 @@ router.post("/add", async (req, res) => {
       userName: user_name,
       userImage: user_image,
       tags: question.tags,
+      isSpam: is_spam
     });
 
     // adding the question into database

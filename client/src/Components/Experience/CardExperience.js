@@ -1,29 +1,33 @@
-import React, { useState, useEffect, Alert } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import dompurify from 'dompurify';
 import { Link } from 'react-router-dom';
-import CardHeader from '@mui/material/CardHeader';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import CardContent from '@mui/material/CardContent';
-import Avatar from '@mui/material/Avatar';
+import {
+    DialogTitle,
+    Dialog,
+    DialogActions,
+    IconButton,
+    Chip,
+    Menu,
+    MenuItem,
+    MenuList,
+    Button,
+    CardActions,
+    Modal,
+    Typography,
+    Grid,
+    Avatar,
+    CardContent,
+    CardHeader,
+    Paper,
+    Box,
+} from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import { Button, CardActions, Modal } from '@mui/material';
-import Chip from '@mui/material/Chip';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditorAndPreview from '../AskSomething/EditorAndPreview';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogTitle from '@mui/material/DialogTitle';
 
 const ITEM_HEIGHT = 45;
 
@@ -179,15 +183,17 @@ const CardExperience = ({ expData }) => {
                         marginY={{ xs: '1em', md: '0.2em' }}
                         //  This will change margin on `sm` and `md`
                     >
+                        {/* spam warning */}
                         <Typography
                             sx={{ mb: 1.5, fontSize: '0.91rem' }}
                             color="text.secondary"
                         >
-                         <i> Spam Detected</i>
+                            <i> Spam Detected</i>
                         </Typography>
                         <CardContent
                             sx={{ justify: 'flex-end', float: 'right' }}
                         >
+                            {/* give edit and delete option only if same user */}
                             {user && user._id === expData.by ? (
                                 <div>
                                     <IconButton
@@ -280,6 +286,7 @@ const CardExperience = ({ expData }) => {
                             )}
                         </CardContent>
                         <CardContent sx={{ justify: 'flex-end' }}>
+                            {/* experience content */}
                             <Grid
                                 container
                                 rowSpacing={1}
@@ -334,6 +341,7 @@ const CardExperience = ({ expData }) => {
                                 </Grid>
                             </Grid>
 
+                            {/* html content data description */}
                             <Typography variant="body2" align="justify">
                                 <div
                                     dangerouslySetInnerHTML={{
@@ -357,6 +365,7 @@ const CardExperience = ({ expData }) => {
                         <CardContent
                             sx={{ justify: 'flex-end', float: 'right' }}
                         >
+                            {/* give edit and delete option only if same user */}
                             {user && user._id === expData.by ? (
                                 <div>
                                     <IconButton
@@ -473,6 +482,8 @@ const CardExperience = ({ expData }) => {
                                 <div />
                             )}
                         </CardContent>
+
+                        {/* title and dates of the experiences */}
                         <CardContent sx={{ justify: 'flex-end' }}>
                             <Grid
                                 container
@@ -530,6 +541,7 @@ const CardExperience = ({ expData }) => {
                                 </Grid>
                             </Grid>
 
+                            {/* render html description content */}
                             <Typography variant="body2" align="justify">
                                 <div
                                     dangerouslySetInnerHTML={{
@@ -557,6 +569,7 @@ const CardExperience = ({ expData }) => {
                             )}
                         </div>
 
+                        {/* action buttons  */}
                         <CardActions sx={{ justifyContent: 'flex-end' }}>
                             <Button
                                 variant="outlined"
