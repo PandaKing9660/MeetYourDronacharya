@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from './Components/Home/Home';
 import AboutUs from './Components/AboutUs/AboutUs';
@@ -22,6 +22,7 @@ import UserExperience from './Components/Dashboard/UserExperience';
 import UserQuestion from './Components/Dashboard/UserQuestion';
 import ChatBox from './Components/Dashboard/ChatBox/ChatBox';
 import UserFollowers from './Components/Dashboard/UserFollowers';
+import { FormControlUnstyledContext } from '@mui/core';
 
 /**
  * @brief added all other routers
@@ -30,16 +31,16 @@ import UserFollowers from './Components/Dashboard/UserFollowers';
  */
 
 function App () {
+
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Home />
+          <Home/>
         </Route>
         <Route exact path="/ask-something">
-          <AskSomething />
+          <AskSomething  />
         </Route>
-
         <Route exact path="/experience">
           <Experience />
         </Route>

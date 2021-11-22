@@ -100,124 +100,137 @@ const Profile = ({ userData, handleOpen }) => {
   }, []);
 
   return (
-    <div className="card__collection clear-fix" style={{ display: "flex" }}>
-      <div className="cards cards--two">
-        <img src={userData.imageUrl} className="img-responsive" alt="Cards" />
-        <span className="cards--two__rect" />
-        <span className="cards--two__tri" />
-        <p>{userData.name}</p>
-      </div>
-      <div
-        style={{
-          width: "100%",
-          textAlign: "right",
-        }}
-      >
-        <h3>Name: {userData.name}</h3>
-        <h3>Email: {userData.email}</h3>
-        <h3>
-          Social Media:
-          {userData.socialMedia[0] ? (
-            <a
-              href={`${userData.socialMedia[0]}`}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <LinkedInIcon />{" "}
-            </a>
-          ) : (
-            " "
-          )}
-          {userData.socialMedia[1] ? (
-            <a
-              href={`${userData.socialMedia[1]}`}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <FacebookIcon />{" "}
-            </a>
-          ) : (
-            ""
-          )}
-          {userData.socialMedia[2] ? (
-            <a
-              href={`${userData.socialMedia[2]}`}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <InstagramIcon />{" "}
-            </a>
-          ) : (
-            ""
-          )}
-          {userData.socialMedia[3] ? (
-            <a
-              href={`${userData.socialMedia[3]}`}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <TwitterIcon />{" "}
-            </a>
-          ) : (
-            ""
-          )}
-          {userData.socialMedia[4] ? (
-            <a
-              href={`${userData.socialMedia[4]}`}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <GitHubIcon />{" "}
-            </a>
-          ) : (
-            ""
-          )}
-        </h3>
-        <div style={{ display: "flex" }}>
-          <BasicCard 
-            text="Total Followers" 
-            number={followers} 
-          />
-          <BasicCard
-            text="Questions answered"
-            number={userData.answerShared.length}
-          />
-          <BasicCard
-            text="Asked questions"
-            number={userData.questionShared.length}
-          />
-          <BasicCard
-            text="Experiences shared"
-            number={userData.experienceShared.length}
-          />
-        </div>
-        <div>
-          {canFollow ? (
-            <Before handleClick={handleClick} />
-          ) : (
-            <After handleClick={handleClick} />
-          )}
-        </div>
-        {user && user._id === userData._id ? (
-          <div>
-            <Button
-              variant="contained"
-              sx={{ marginTop: "2%" }}
-              onClick={addSocialMediaModalOpen}
-            >
-              Add Social Media
-            </Button>
+    <div className="card__collection clear-fix">
+      <Grid container >
+        <Grid item sm={3} xs={12}>
+          <div className="cards cards--two">
+            <img
+              src={userData.imageUrl}
+              className="img-responsive"
+              alt="Cards"
+              style={{ width: "300px" }}
+            />
+            <span className="cards--two__rect" style={{ height: "500px" }} />
+            <span className="cards--two__tri" />
+            <p>{userData.name}</p>
           </div>
-        ) : (
-          <div />
-        )}
-        <div>
-          <Link to={`/chatbox?name=${userData.name}&id=${userData._id}`}>
-            <Button variant="contained" sx={{marginTop: 2}}>CHAT</Button>
-          </Link>
-        </div>
+        </Grid>
+        <Grid item sm={9} xs={12}>
+          <div
+            style={{
+              width: "100%",
+              textAlign: "right",
+            }}
+          >
+            <h5 style={{ margin: 0 }}>Name</h5>
+            <h3 style={{ marginTop: "0.3px", marginBottom: "2%" }}>
+              {userData.name}
+            </h3>
+            <h5 style={{ margin: 0 }}>Email</h5>
+            <h3 style={{ marginTop: "0.3px", marginBottom: "2%" }}>
+              {userData.email}
+            </h3>
+            <h5 style={{ margin: 0 }}>Social Media</h5>
+            <h3 style={{ marginTop: "0.3px", marginBottom: "2%" }}>
+              {userData.socialMedia[0] ? (
+                <a
+                  href={`${userData.socialMedia[0]}`}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <LinkedInIcon />{" "}
+                </a>
+              ) : (
+                " "
+              )}
+              {userData.socialMedia[1] ? (
+                <a
+                  href={`${userData.socialMedia[1]}`}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <FacebookIcon />{" "}
+                </a>
+              ) : (
+                ""
+              )}
+              {userData.socialMedia[2] ? (
+                <a
+                  href={`${userData.socialMedia[2]}`}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <InstagramIcon />{" "}
+                </a>
+              ) : (
+                ""
+              )}
+              {userData.socialMedia[3] ? (
+                <a
+                  href={`${userData.socialMedia[3]}`}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <TwitterIcon />{" "}
+                </a>
+              ) : (
+                ""
+              )}
+              {userData.socialMedia[4] ? (
+                <a
+                  href={`${userData.socialMedia[4]}`}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <GitHubIcon />{" "}
+                </a>
+              ) : (
+                ""
+              )}
+            </h3>
+            <div style={{ display: "inline-flex", padding: "4%", paddingRight:"7%"}}>
+              <div className="infocard_profile">
+                Total<br/>Followers<br/>{followers}
+              </div>
+              <div className="infocard_profile">
+                Questions<br/>Answered<br/>{userData.answerShared.length}
+              </div>
+              <div className="infocard_profile">
+                Asked<br/>Questions<br/>{userData.questionShared.length}
+              </div>
+              <div className="infocard_profile">
+                Experiences<br/>Shared<br/>{userData.experienceShared.length}
+              </div>
+            </div>
+            <div>
+              {canFollow ? (
+                <Before handleClick={handleClick} />
+              ) : (
+                <After handleClick={handleClick} />
+              )}
+            </div>
+            {user && user._id === userData._id ? (
+              <div>
+                <Button
+                  variant="contained"
+                  sx={{ marginTop: "2%" }}
+                  onClick={addSocialMediaModalOpen}
+                >
+                  Add Social Media
+                </Button>
+              </div>
+            ) : (
+              <div />
+            )}
+          </div>
+        </Grid>
+      </Grid>
+      <div>
+        <Link to={`/chatbox?name=${userData.name}&id=${userData._id}`}>
+          <Button variant="contained" sx={{marginTop: 2}}>CHAT</Button>
+        </Link>
       </div>
-      {/* Displaying add question modal */}
+      {/* Displaying Update Profile modal */}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -359,28 +372,5 @@ const After = ({ handleClick }) => {
     </div>
   );
 };
-
-function BasicCard(props) {
-  return (
-    <Card
-      sx={{
-        width: "auto",
-        height: "auto",
-        // paddingRight: 5,
-        marginLeft: 5,
-        // marginTop: 6,
-      }}
-    >
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {props.text}
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {props.number}
-        </Typography>
-      </CardContent>
-    </Card>
-  );
-}
 
 export default Profile;

@@ -33,7 +33,7 @@
     display: inline-block;
     -webkit-text-stroke: 1px rgb(238, 70, 40);
     font-family: "samarkan", Raleway, Arial, serif;
-    font-size: 90px;
+    font-size: 100px;
     font-weight: 600;
     color: #ff7722;
     margin: 0.7em 0.5em;
@@ -113,12 +113,12 @@
 
 @media only screen and (max-width: 1150px) {
     .head_home {
-        font-size: 60px;
+        font-size: 70px;
     }
 }
 
 @media only screen and (max-width: 576px) {
     .head_home {
-        font-size: 40px;
+        font-size: 50px;
     }
 }

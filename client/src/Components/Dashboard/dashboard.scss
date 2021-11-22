@@ -13,7 +13,7 @@
 }
 
 .img-responsive {
-  max-width: 100%;
+  width: auto;
   height: auto;
 }
 
@@ -30,16 +30,43 @@ $color-box-7: #de8b3e;
 .card__collection {
   position: relative;
   display: block;
-  padding: 10px;
-  background: rgba(136, 133, 133, 0.445);
+  padding: 0.5%;
+  background: white;
+  border-radius: 5px;
+  border: 2px solid #000;
+  box-shadow: 24;
   margin-left: 20%;
   margin-right: 20%;
   font-family: "Do Hyeon", sans-serif;
   overflow: hidden;
+}
+
+@media only screen and (max-width: 1120px) {
+  .card__collection {
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .card__collection {
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+}
+
+.infocard_profile {
+  background: white;
+  padding: 1%;
+  margin: 0.5%;
+  border-radius: 4%;
+  font-size: smaller;
+  text-align: center;
+}
 
   .cards {
-    width: 300px;
-    height: 350px;
+    width: auto;
+    height: auto;
     display: block;
     background-size: cover;
     float: left;
@@ -47,7 +74,7 @@ $color-box-7: #de8b3e;
     position: relative;
     overflow: hidden;
     background-position: center;
-    margin: 10px;
+    margin: 0.5%;
   }
 
   .cards--two {
@@ -151,7 +178,6 @@ $color-box-7: #de8b3e;
       }
     }
   }
-}
 
 /* experience ,questions and answers */
 
@@ -167,7 +193,7 @@ $darkhighlight: #fde74c;
   .card {
     font-weight: bold;
     position: relative;
-    width: 100%;
+    width: 73%;
 
     a {
       padding: 30px;
@@ -180,7 +206,7 @@ $darkhighlight: #fde74c;
       transition: 0.25s ease;
 
       &:hover {
-        transform: translate(-30px, -30px);
+        transform: translate(-10px, -10px);
         border-color: $highlight;
 
         .card--display {
