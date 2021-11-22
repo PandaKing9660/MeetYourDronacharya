@@ -16,22 +16,20 @@ async function verifyKey() {
     }
 }
 
-const comment = {
-    ip: '1.1.1.1',
-    useragent: 'CommentorsAgent 1.0 WebKit',
-    content: 'Very nice blog! Check out mine!',
-    email: 'not.a.spammer@gmail.com',
-    name: 'John Doe',
-};
-
-async function checkSpam() {
+async function checkSpam(comment) {
     try {
         const isSpam = await client.checkSpam(comment);
 
-        if (isSpam) console.log('OMG Spam!');
-        else console.log('Totally not spam');
+        if (isSpam) {
+            console.log('OMG Spam!');
+            return true;
+        } else {
+            console.log('Totally not spam');
+            return false;
+        }
     } catch (err) {
         console.error('Something went wrong in checking spam:', err.message);
+        return false;
     }
 }
 

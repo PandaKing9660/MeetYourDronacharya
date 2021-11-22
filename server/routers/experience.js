@@ -119,6 +119,7 @@ router.post("/add", async (req, res) => {
     const experience = req.body;
     let user_image = "";
     let user_name = "";
+    let user_email = "";
     let exp_len = 0;
     // finding the user who added the experience for his information
 
@@ -127,9 +128,23 @@ router.post("/add", async (req, res) => {
       .then((resp) => {
         user_image = resp.imageUrl;
         user_name = resp.name;
+        user_email = resp.email;
         exp_len = resp.experienceShared;
       })
       .catch((err) => console.log(err));
+
+
+    // check for spam content
+    const comment = {
+      ip: req.ip,
+      useragent: req.headers['user-agent'],
+      content: experience.experience,
+      // For guaranteed spam use email : akismet-guaranteed-spam@example.com
+      email: user_email, 
+      name: user_name,
+    };
+    const is_spam = await checkSpam(comment);
+    // console.log("sempam", comment);
 
     // creating the experience using its schema
 
@@ -142,9 +157,10 @@ router.post("/add", async (req, res) => {
       userName: user_name,
       userImage: user_image,
       tags: experience.tags,
+      isSpam: is_spam
     });
+    
     // adding the experience into database
-
     await newExperience
       .save()
       .then((experience) => res.json(experience))

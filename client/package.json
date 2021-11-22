@@ -17,7 +17,6 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "@tinymce/tinymce-react": "^3.13.0",
-    "akismet-api": "^5.2.1",
     "axios": "^0.23.0",
     "chokidar": "^3.5.2",
     "dompurify": "^2.3.3",
