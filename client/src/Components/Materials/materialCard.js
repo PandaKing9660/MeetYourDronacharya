@@ -37,7 +37,7 @@ const MaterialCard = ({ material }) => {
     //const result = await confirm("Are you sure?");
     axios
       .post(
-        `${process.env.REACT_APP_BACKEND_URL}/study-material/deletematerial`,
+        `${process.env.REACT_APP_BACKEND_URL}/study-material/deleteMaterial`,
         {
           materialId,
         }
