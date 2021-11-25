@@ -22,7 +22,7 @@ import UserExperience from './Components/Dashboard/UserExperience';
 import UserQuestion from './Components/Dashboard/UserQuestion';
 import ChatBox from './Components/Dashboard/ChatBox/ChatBox';
 import UserFollowers from './Components/Dashboard/UserFollowers';
-import { FormControlUnstyledContext } from '@mui/core';
+import Guruji from './Components/Guruji/Guruji';
 
 /**
  * @brief added all other routers
@@ -31,15 +31,14 @@ import { FormControlUnstyledContext } from '@mui/core';
  */
 
 function App () {
-
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Home/>
+          <Home />
         </Route>
         <Route exact path="/ask-something">
-          <AskSomething  />
+          <AskSomething />
         </Route>
         <Route exact path="/experience">
           <Experience />
@@ -66,7 +65,7 @@ function App () {
           <UserQuestion />
         </Route>
         <Route exact path="/chatbox">
-          <ChatBox/>
+          <ChatBox />
         </Route>
         <Route exact path="/dashboard/:userId/user-followers">
           <UserFollowers />
@@ -96,6 +95,9 @@ function App () {
         <Route exact path="/reset-password/:email">
           <ResetPassword />
         </Route>
+        <Router exact path="/guruji">
+          <Guruji />
+        </Router>
         <Route path="/*">
           <GoToHome />
         </Route>
