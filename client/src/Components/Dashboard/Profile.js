@@ -12,8 +12,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
 import axios from "axios";
-import {Link} from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 import ChatBox from "./ChatBox/ChatBox";
 
@@ -101,7 +100,7 @@ const Profile = ({ userData, handleOpen }) => {
 
   return (
     <div className="card__collection clear-fix">
-      <Grid container >
+      <Grid container>
         <Grid item sm={3} xs={12}>
           <div className="cards cards--two">
             <img
@@ -137,6 +136,7 @@ const Profile = ({ userData, handleOpen }) => {
                   href={`${userData.socialMedia[0]}`}
                   rel="noreferrer"
                   target="_blank"
+                  style={{ textDecoration: "none" }}
                 >
                   <LinkedInIcon />{" "}
                 </a>
@@ -188,19 +188,51 @@ const Profile = ({ userData, handleOpen }) => {
                 ""
               )}
             </h3>
-            <div style={{ display: "inline-flex", padding: "4%", paddingRight:"7%"}}>
+            <div
+              style={{
+                display: "inline-flex",
+                padding: "4%",
+                paddingRight: "7%",
+              }}
+            >
               <div className="infocard_profile">
-                Total<br/>Followers<br/>{followers}
+                Total
+                <br />
+                Followers
+                <br />
+                {followers}
               </div>
               <div className="infocard_profile">
-                Questions<br/>Answered<br/>{userData.answerShared.length}
+                Questions
+                <br />
+                Answered
+                <br />
+                {userData.answerShared.length}
               </div>
               <div className="infocard_profile">
-                Asked<br/>Questions<br/>{userData.questionShared.length}
+                Asked
+                <br />
+                Questions
+                <br />
+                {userData.questionShared.length}
               </div>
               <div className="infocard_profile">
-                Experiences<br/>Shared<br/>{userData.experienceShared.length}
+                Experiences
+                <br />
+                Shared
+                <br />
+                {userData.experienceShared.length}
               </div>
+            </div>
+            <div>
+              <Link to={`/chatbox?name=${userData.name}&id=${userData._id}`}>
+                <Button
+                  variant="contained"
+                  sx={{ marginTop: "2%", width: "165px" }}
+                >
+                  CHAT
+                </Button>
+              </Link>
             </div>
             <div>
               {canFollow ? (
@@ -213,7 +245,7 @@ const Profile = ({ userData, handleOpen }) => {
               <div>
                 <Button
                   variant="contained"
-                  sx={{ marginTop: "2%" }}
+                  sx={{ marginTop: "2%", width: "165px" }}
                   onClick={addSocialMediaModalOpen}
                 >
                   Add Social Media
@@ -225,11 +257,6 @@ const Profile = ({ userData, handleOpen }) => {
           </div>
         </Grid>
       </Grid>
-      <div>
-        <Link to={`/chatbox?name=${userData.name}&id=${userData._id}`}>
-          <Button variant="contained" sx={{marginTop: 2}}>CHAT</Button>
-        </Link>
-      </div>
       {/* Displaying Update Profile modal */}
       <Modal
         aria-labelledby="transition-modal-title"
@@ -347,7 +374,14 @@ const Profile = ({ userData, handleOpen }) => {
 const Before = ({ handleClick }) => {
   return (
     <div style={{ marginTop: "2%" }}>
-      <Button variant="contained" onClick={handleClick}>
+      <Button
+        variant="contained"
+        onClick={handleClick}
+        sx={{
+          marginTop: "2%",
+          width: "165px",
+        }}
+      >
         Follow
       </Button>
     </div>
@@ -361,13 +395,15 @@ const After = ({ handleClick }) => {
         variant="contained"
         sx={{
           backgroundColor: "green",
+          marginTop: "2%",
+          width: "165px",
           "&:hover": {
             backgroundColor: "green",
           },
         }}
         onClick={handleClick}
       >
-        Friend ADded
+        Friend
       </Button>
     </div>
   );
