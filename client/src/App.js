@@ -26,7 +26,7 @@ import Guruji from './Components/Guruji/Guruji';
 
 /**
  * @brief added all other routers
- * 
+ *
  * @returns Main app component
  */
 
@@ -89,7 +89,6 @@ function App () {
           <Verify />
         </Route>
         <Route exact path="/ask-something/:question_id">
-
           <AskSomethingAnswer />
         </Route>
         <Route exact path="/reset-password/:email">
