@@ -44,6 +44,16 @@ const Experience = () => {
   const [open, setOpen] = React.useState (false);
   const [searchedExperience, setSearchedExperience] = useState ([]);
   const [searchResult, setSearchResult] = useState ('');
+  const [showSpam, setShowSpam] = useState (false);
+  const [spamExp, setSpamExp] = useState ([]);
+
+  const handleSpamChange = () => {
+    setShowSpam (!showSpam);
+    setLoading (true);
+    setTimeout (() => {
+      setLoading (false);
+    }, 1000);
+  };
 
   const handleOpen = () =>
     user ? setOpen (true) : alert ('please login to add experience');
@@ -58,10 +68,21 @@ const Experience = () => {
           user,
         })
         .then (res => {
-          setExperiences (res.data);
-          setSearchedExperience (res.data);
+          let good_exp = [];
+          let bad_exp = [];
+
+          res.data.forEach (ele => {
+            if (ele.isSpam) {
+              bad_exp.push (ele);
+            } else {
+              good_exp.push (ele);
+            }
+          });
+
+          setExperiences (good_exp);
+          setSearchedExperience (good_exp);
+          setSpamExp (bad_exp);
           setLoading (false);
-          console.log (res.data[0]);
         })
         .catch (err => console.log (err));
     },
@@ -70,36 +91,69 @@ const Experience = () => {
 
   useEffect (
     () => {
-      const newSearchedExperience = experiences.filter (experience => {
-        if (
-          experience.title.toLowerCase ().includes (searchResult.toLowerCase ())
-        )
-          return true;
-        if (
-          experience.experience
-            .toLowerCase ()
-            .includes (searchResult.toLowerCase ())
-        )
-          return true;
-        if (
-          experience.userName
-            .toLowerCase ()
-            .includes (searchResult.toLowerCase ())
-        )
-          return true;
+      if (showSpam === false) {
+        const newSearchedExperience = experiences.filter (experience => {
+          if (
+            experience.title
+              .toLowerCase ()
+              .includes (searchResult.toLowerCase ())
+          )
+            return true;
+          if (
+            experience.experience
+              .toLowerCase ()
+              .includes (searchResult.toLowerCase ())
+          )
+            return true;
+          if (
+            experience.userName
+              .toLowerCase ()
+              .includes (searchResult.toLowerCase ())
+          )
+            return true;
 
-        const res = experience.tags.filter (tag => {
-          return tag.toLowerCase ().includes (searchResult.toLowerCase ());
+          const res = experience.tags.filter (tag => {
+            return tag.toLowerCase ().includes (searchResult.toLowerCase ());
+          });
+
+          if (res.length) return true;
+
+          return false;
         });
+        setSearchedExperience (newSearchedExperience);
+      } else {
+        const newSearchedExperience = spamExp.filter (experience => {
+          if (
+            experience.title
+              .toLowerCase ()
+              .includes (searchResult.toLowerCase ())
+          )
+            return true;
+          if (
+            experience.experience
+              .toLowerCase ()
+              .includes (searchResult.toLowerCase ())
+          )
+            return true;
+          if (
+            experience.userName
+              .toLowerCase ()
+              .includes (searchResult.toLowerCase ())
+          )
+            return true;
 
-        if (res.length) return true;
+          const res = experience.tags.filter (tag => {
+            return tag.toLowerCase ().includes (searchResult.toLowerCase ());
+          });
 
-        return false;
-      });
-      console.log (newSearchedExperience);
-      setSearchedExperience (newSearchedExperience);
+          if (res.length) return true;
+
+          return false;
+        });
+        setSearchedExperience (newSearchedExperience);
+      }
     },
-    [searchResult]
+    [searchResult, showSpam, experiences, spamExp]
   );
 
   const handleChange = event => {
@@ -132,6 +186,13 @@ const Experience = () => {
                          CardExperience component for rendering children */
 
                   <Grid item xs={12} sm={12} md={8}>
+                    <Button
+                      variant="contained"
+                      style={{margin: '2%'}}
+                      onClick={handleSpamChange}
+                    >
+                      {showSpam ? 'Experience' : 'Spam'}
+                    </Button>
                     <Box sx={{minWidth: 275}}>
                       {searchedExperience.map ((experience, index) => {
                         return (
