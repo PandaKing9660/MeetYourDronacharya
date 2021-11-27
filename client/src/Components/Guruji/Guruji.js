@@ -26,11 +26,19 @@ const dictionary = [
     ],
   },
   {
-    question: 'share,experience,about,life,expert,my',
+    question: 'share,experience,about,life,expert,my,thought',
     answers: [
       'you know, i am kind of a guru myself, go and share your experience here',
       'life is too short to keep your knowledge to yourself, its good you know it, share your experience here',
       'i am proud of you vats, share your experience here. We need more heros like you',
+    ],
+  },
+  {
+    question: 'thank you,thank,you,amazing,helpful,nice,very good',
+    answers: [
+      'I am flattered that you liked my work',
+      'welcome vats, helping you was my dharma',
+      'give me guru dhakshina by sharing this website with your friends',
     ],
   },
 ];

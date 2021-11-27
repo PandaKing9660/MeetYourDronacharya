@@ -9,7 +9,7 @@ import Select from '@mui/material/Select';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import CardQuestion from './CardQuestion';
-import {Typography} from '@mui/material';
+import {Button, Typography} from '@mui/material';
 
 const QuestionsList = ({searchResult, setSearchResult}) => {
   // dummy data for Question posts
@@ -26,11 +26,35 @@ const QuestionsList = ({searchResult, setSearchResult}) => {
       userImage: '',
     },
   ]);
+  const [spamQuestions, setSpamQuestions] = useState ([
+    {
+      title: '',
+      question: '',
+      by: '',
+      time: '',
+      answers: [],
+      liked: [],
+      disliked: [],
+      userName: '',
+      userImage: '',
+    },
+  ]);
+
+  const [showSpam, setShowSpam] = useState (false);
+
   const [order, setOrder] = useState ('reverse-time-sort');
   const [loading, setLoading] = useState (false);
   const [searchedQuestion, setSearchedQuestion] = useState ([]);
 
   const user = JSON.parse (localStorage.getItem ('profile'));
+
+  const handleSpamChange = () => {
+    setShowSpam (!showSpam);
+    setLoading (true);
+    setTimeout (() => {
+      setLoading (false);
+    }, 1000);
+  };
 
   useEffect (
     () => {
@@ -42,10 +66,21 @@ const QuestionsList = ({searchResult, setSearchResult}) => {
           {user}
         )
         .then (res => {
-          setQuestions (res.data);
-          setSearchedQuestion (res.data);
+          let good_questions = [];
+          let bad_questions = [];
+
+          res.data.forEach (ele => {
+            if (ele.isSpam) {
+              bad_questions.push (ele);
+            } else {
+              good_questions.push (ele);
+            }
+          });
+
+          setQuestions (good_questions);
+          setSearchedQuestion (good_questions);
+          setSpamQuestions (bad_questions);
           setLoading (false);
-          console.log (res.data[0]);
         })
         .catch (err => console.log (err));
     },
@@ -54,36 +89,67 @@ const QuestionsList = ({searchResult, setSearchResult}) => {
 
   useEffect (
     () => {
-      const newSearchedQuestion = questions.filter (question => {
-        if (
-          question.title.toLowerCase ().includes (searchResult.toLowerCase ())
-        )
-          return true;
-        if (
-          question.question
-            .toLowerCase ()
-            .includes (searchResult.toLowerCase ())
-        )
-          return true;
-        if (
-          question.userName
-            .toLowerCase ()
-            .includes (searchResult.toLowerCase ())
-        )
-          return true;
+      if (showSpam === false) {
+        const newSearchedQuestion = questions.filter (question => {
+          if (
+            question.title.toLowerCase ().includes (searchResult.toLowerCase ())
+          )
+            return true;
+          if (
+            question.question
+              .toLowerCase ()
+              .includes (searchResult.toLowerCase ())
+          )
+            return true;
+          if (
+            question.userName
+              .toLowerCase ()
+              .includes (searchResult.toLowerCase ())
+          )
+            return true;
 
-        const res = question.tags.filter (tag => {
-          return tag.toLowerCase ().includes (searchResult.toLowerCase ());
+          const res = question.tags.filter (tag => {
+            return tag.toLowerCase ().includes (searchResult.toLowerCase ());
+          });
+
+          if (res.length) return true;
+
+          return false;
         });
 
-        if (res.length) return true;
+        setSearchedQuestion (newSearchedQuestion);
+      } else {
+        const newSearchedQuestion = spamQuestions.filter (question => {
+          if (
+            question.title.toLowerCase ().includes (searchResult.toLowerCase ())
+          )
+            return true;
+          if (
+            question.question
+              .toLowerCase ()
+              .includes (searchResult.toLowerCase ())
+          )
+            return true;
+          if (
+            question.userName
+              .toLowerCase ()
+              .includes (searchResult.toLowerCase ())
+          )
+            return true;
 
-        return false;
-      });
-      console.log (newSearchedQuestion);
-      setSearchedQuestion (newSearchedQuestion);
+          const res = question.tags.filter (tag => {
+            return tag.toLowerCase ().includes (searchResult.toLowerCase ());
+          });
+
+          if (res.length) return true;
+
+          return false;
+        });
+
+        setSearchedQuestion (newSearchedQuestion);
+      }
     },
-    [searchResult]
+    [searchResult, showSpam, spamQuestions, questions]
   );
 
   const handleChange = event => {
@@ -124,21 +190,63 @@ const QuestionsList = ({searchResult, setSearchResult}) => {
       {loading
         ? <CircularProgress />
         : searchedQuestion.length > 0
-            ? <Grid
-                container
-                // spacing={{ xs: 2, md: 3 }}
-                columns={{xs: 4, sm: 8, md: 2}}
-                justifyContent="flex-start"
-                alignItems="center"
-              >
-                {searchedQuestion.map (question => {
-                  return (
-                    <Grid item xs={12} md={6} key={question._id}>
-                      <CardQuestion quesData={question} showAnswer={true} />
+            ? showSpam
+                ? <div>
+                    <div>
+                      <Button
+                        variant="contained"
+                        style={{marginTop: '5%'}}
+                        onClick={handleSpamChange}
+                      >
+                        Questions
+                      </Button>
+                      <Grid
+                        container
+                        // spacing={{ xs: 2, md: 3 }}
+                        columns={{xs: 4, sm: 8, md: 2}}
+                        justifyContent="flex-start"
+                        alignItems="center"
+                      >
+                        {searchedQuestion.map (question => {
+                          return (
+                            <Grid item xs={12} md={6} key={question._id}>
+                              <CardQuestion
+                                quesData={question}
+                                showAnswer={true}
+                              />
+                            </Grid>
+                          );
+                        })}
+                      </Grid>
+                    </div>
+                  </div>
+                : <div>
+                    <Button
+                      variant="contained"
+                      style={{marginTop: '5%'}}
+                      onClick={handleSpamChange}
+                    >
+                      Spam
+                    </Button>
+                    <Grid
+                      container
+                      // spacing={{ xs: 2, md: 3 }}
+                      columns={{xs: 4, sm: 8, md: 2}}
+                      justifyContent="flex-start"
+                      alignItems="center"
+                    >
+                      {searchedQuestion.map (question => {
+                        return (
+                          <Grid item xs={12} md={6} key={question._id}>
+                            <CardQuestion
+                              quesData={question}
+                              showAnswer={true}
+                            />
+                          </Grid>
+                        );
+                      })}
                     </Grid>
-                  );
-                })}
-              </Grid>
+                  </div>
             : <Typography variant="h4">
                 No Questions !!
               </Typography>}

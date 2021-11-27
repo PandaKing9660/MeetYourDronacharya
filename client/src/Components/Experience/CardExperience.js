@@ -47,8 +47,8 @@ const CardExperience = ({ expData }) => {
     const sanitizer = dompurify.sanitize;
 
     const user = JSON.parse(localStorage.getItem('profile'));
-    const [likes, setLike] = useState(expData.liked.length);
-    const [dislikes, setDislike] = useState(expData.disliked.length);
+    const [likes, setLike] = useState(expData?.liked?.length);
+    const [dislikes, setDislike] = useState(expData?.disliked?.length);
 
     const [userStatus, setUserStatus] = useState('none');
 
@@ -60,13 +60,13 @@ const CardExperience = ({ expData }) => {
         axios
             .post(`${process.env.REACT_APP_BACKEND_URL}/experience/check`, {
                 userId: user._id,
-                experienceId: expData._id,
+                experienceId: expData?._id,
             })
             .then((res) => {
                 setUserStatus(res.data);
             })
             .catch((err) => console.log(err));
-    }, [expData._id]);
+    }, [expData?._id]);
 
     const AddLikes = (userId, experienceId) => {
         if (!user) {
@@ -167,7 +167,7 @@ const CardExperience = ({ expData }) => {
     return (
         <div>
             {/* If the content is spam, grey it out and disable functions */}
-            {expData.isSpam === true ? (
+            {expData?.isSpam === true ? (
                 <Paper
                     sx={{
                         p: 0,
@@ -194,7 +194,7 @@ const CardExperience = ({ expData }) => {
                             sx={{ justify: 'flex-end', float: 'right' }}
                         >
                             {/* give edit and delete option only if same user */}
-                            {user && user._id === expData.by ? (
+                            {user && user._id === expData?.by ? (
                                 <div>
                                     <IconButton
                                         aria-label="more"
@@ -226,11 +226,7 @@ const CardExperience = ({ expData }) => {
                                         <MenuList>
                                             <MenuItem>
                                                 <Button
-                                                    onClick={() => {
-                                                        {
-                                                            handleClickOpenconfirm();
-                                                        }
-                                                    }}
+                                                    onClick={() => {handleClickOpenconfirm()}}
                                                     sx={{ color: 'black' }}
                                                 >
                                                     Delete
@@ -238,10 +234,10 @@ const CardExperience = ({ expData }) => {
                                                 <Dialog
                                                     open={openconfirm}
                                                     onClick={() => {
-                                                        {
+                                                        
                                                             handleClose();
                                                             handleCloseconfirm();
-                                                        }
+                                                        
                                                     }}
                                                     aria-labelledby="alert-dialog-title"
                                                     aria-describedby="alert-dialog-description"
@@ -254,14 +250,14 @@ const CardExperience = ({ expData }) => {
                                                     <DialogActions>
                                                         <Button
                                                             onClick={() => {
-                                                                {
+                                                                
                                                                     handleCloseconfirm();
-                                                                }
+                                                                
                                                                 DeleteUser(
                                                                     user
                                                                         ? user._id
                                                                         : 0,
-                                                                    expData._id
+                                                                    expData?._id
                                                                 );
                                                             }}
                                                         >
@@ -295,13 +291,13 @@ const CardExperience = ({ expData }) => {
                             >
                                 <Grid item xs={6} sm={4.6} md={8} align="left">
                                     <Typography variant="h5" component="div">
-                                        {expData.title}
+                                        {expData?.title}
                                     </Typography>
                                     <Typography
                                         sx={{ mb: 1.5, fontSize: '0.91rem' }}
                                         color="text.secondary"
                                     >
-                                        {expData.time.split('T')[0]}
+                                        {expData?.time.split('T')[0]}
                                     </Typography>
                                 </Grid>
 
@@ -320,14 +316,14 @@ const CardExperience = ({ expData }) => {
                                     {/* right floating avatar and name of author */}
 
                                     <Link
-                                        to={`/dashboard/${expData.by}`}
+                                        to={`/dashboard/${expData?.by}`}
                                         style={{ textDecoration: 'none' }}
                                     >
                                         <CardHeader
                                             avatar={
                                                 <Avatar
-                                                    alt={`${expData.userName}`}
-                                                    src={`${expData.userImage}`}
+                                                    alt={`${expData?.userName}`}
+                                                    src={`${expData?.userImage}`}
                                                 />
                                             }
                                             titleTypographyProps={{
@@ -335,7 +331,7 @@ const CardExperience = ({ expData }) => {
                                                 color: 'green',
                                                 align: 'right',
                                             }}
-                                            title={expData.userName}
+                                            title={expData?.userName}
                                         />
                                     </Link>
                                 </Grid>
@@ -345,7 +341,7 @@ const CardExperience = ({ expData }) => {
                             <Typography variant="body2" align="justify">
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: sanitizer(expData.experience),
+                                        __html: sanitizer(expData?.experience),
                                     }}
                                     style={{ padding: '1%' }}
                                 />
@@ -366,7 +362,7 @@ const CardExperience = ({ expData }) => {
                             sx={{ justify: 'flex-end', float: 'right' }}
                         >
                             {/* give edit and delete option only if same user */}
-                            {user && user._id === expData.by ? (
+                            {user && user._id === expData?.by ? (
                                 <div>
                                     <IconButton
                                         aria-label="more"
@@ -399,9 +395,9 @@ const CardExperience = ({ expData }) => {
                                             <MenuItem>
                                                 <Button
                                                     onClick={() => {
-                                                        {
+                                                        
                                                             handleClickOpenconfirm();
-                                                        }
+                                                        
                                                     }}
                                                     sx={{ color: 'black' }}
                                                 >
@@ -410,10 +406,10 @@ const CardExperience = ({ expData }) => {
                                                 <Dialog
                                                     open={openconfirm}
                                                     onClick={() => {
-                                                        {
+                                                        
                                                             handleClose();
                                                             handleCloseconfirm();
-                                                        }
+                                                        
                                                     }}
                                                     aria-labelledby="alert-dialog-title"
                                                     aria-describedby="alert-dialog-description"
@@ -426,14 +422,14 @@ const CardExperience = ({ expData }) => {
                                                     <DialogActions>
                                                         <Button
                                                             onClick={() => {
-                                                                {
+                                                                
                                                                     handleCloseconfirm();
-                                                                }
+                                                                
                                                                 DeleteUser(
                                                                     user
                                                                         ? user._id
                                                                         : 0,
-                                                                    expData._id
+                                                                    expData?._id
                                                                 );
                                                             }}
                                                         >
@@ -468,7 +464,7 @@ const CardExperience = ({ expData }) => {
                                                         <EditorAndPreview
                                                             option="experience"
                                                             question_id={
-                                                                expData._id
+                                                                expData?._id
                                                             }
                                                             edit="true"
                                                         />
@@ -494,13 +490,13 @@ const CardExperience = ({ expData }) => {
                             >
                                 <Grid item xs={6} sm={4.6} md={8} align="left">
                                     <Typography variant="h5" component="div">
-                                        {expData.title}
+                                        {expData?.title}
                                     </Typography>
                                     <Typography
                                         sx={{ mb: 1.5, fontSize: '0.91rem' }}
                                         color="text.secondary"
                                     >
-                                        {expData.time.split('T')[0]}
+                                        {expData?.time.split('T')[0]}
                                     </Typography>
                                 </Grid>
 
@@ -519,14 +515,14 @@ const CardExperience = ({ expData }) => {
                                     {/* right floating avatar and name of author */}
 
                                     <Link
-                                        to={`/dashboard/${expData.by}`}
+                                        to={`/dashboard/${expData?.by}`}
                                         style={{ textDecoration: 'none' }}
                                     >
                                         <CardHeader
                                             avatar={
                                                 <Avatar
-                                                    alt={`${expData.userName}`}
-                                                    src={`${expData.userImage}`}
+                                                    alt={`${expData?.userName}`}
+                                                    src={`${expData?.userImage}`}
                                                 />
                                             }
                                             titleTypographyProps={{
@@ -534,7 +530,7 @@ const CardExperience = ({ expData }) => {
                                                 color: 'green',
                                                 align: 'right',
                                             }}
-                                            title={expData.userName}
+                                            title={expData?.userName}
                                             // subheader="September 14, 2016"
                                         />
                                     </Link>
@@ -545,7 +541,7 @@ const CardExperience = ({ expData }) => {
                             <Typography variant="body2" align="justify">
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: sanitizer(expData.experience),
+                                        __html: sanitizer(expData?.experience),
                                     }}
                                     style={{ padding: '1%' }}
                                 />
@@ -553,7 +549,7 @@ const CardExperience = ({ expData }) => {
                         </CardContent>
 
                         <div style={{ display: 'flex' }}>
-                            {expData.tags.map(
+                            {expData?.tags.map(
                                 (
                                     tag // <Typography color="primary">#{tag}</Typography>
                                 ) => (
@@ -576,7 +572,7 @@ const CardExperience = ({ expData }) => {
                                 color="success"
                                 title="Liked it"
                                 onClick={() => {
-                                    AddLikes(user ? user._id : 0, expData._id);
+                                    AddLikes(user ? user._id : 0, expData?._id);
                                 }}
                             >
                                 {likes}
@@ -595,7 +591,7 @@ const CardExperience = ({ expData }) => {
                                 onClick={() => {
                                     AddDislikes(
                                         user ? user._id : 0,
-                                        expData._id
+                                        expData?._id
                                     );
                                 }}
                             >
