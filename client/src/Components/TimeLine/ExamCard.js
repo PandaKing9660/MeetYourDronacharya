@@ -40,14 +40,16 @@ const ExamCard = ({ cardData, cardId }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const [isBookMarked, setisBookMarked] = useState(false);
   useEffect(() => {
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
-        userId: user._id,
-      })
-      .then((res) => {
-        if (res.data[0].bookmarked[cardId] === "T") setisBookMarked(true);
-      })
-      .catch((err) => console.log(err));
+    if (user) {
+      axios
+        .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
+          userId: user._id,
+        })
+        .then((res) => {
+          if (res.data[0].bookmarked[cardId] === "T") setisBookMarked(true);
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   const [expanded, setExpanded] = useState(false);
@@ -61,14 +63,14 @@ const ExamCard = ({ cardData, cardId }) => {
     setisBookMarked(!isBookMarked);
   };
 
-  const AddBookmark = (userId, timelineNo) => {
+  const AddBookmark = () => {
     if (!user) {
-      alert("Please login to add boomark");
+      alert("Please login to save bookmark");
       return;
     }
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/addTimeline`, {
-        userId,
+        userId : user._id,
         timelineNo: cardId,
       })
       .then((res) => {});
@@ -76,7 +78,7 @@ const ExamCard = ({ cardData, cardId }) => {
 
   const DeleteBookmark = (userId, timelineNo) => {
     if (!user) {
-      alert("Please login to add boomark");
+      alert("Please login to save bookmark");
       return;
     }
     axios
@@ -106,11 +108,11 @@ const ExamCard = ({ cardData, cardId }) => {
         <Tooltip TransitionComponent={Zoom} title="BookMark" placement="top">
           <IconButton aria-label="add to favorites" onClick={handleHeartClick}>
             {!isBookMarked ? (
-              <BookmarkIcon  />
+              <BookmarkIcon />
             ) : (
               <BookmarkIcon
                 style={{ color: "green" }}
-                onClick={AddBookmark(user._id, cardId)}
+                onClick={AddBookmark()}
               />
             )}
           </IconButton>

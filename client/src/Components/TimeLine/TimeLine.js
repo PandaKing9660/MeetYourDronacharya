@@ -107,14 +107,16 @@ const TimeLine = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const [bookmark, setbookmark] = React.useState([]);
   useEffect(() => {
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
-        userId: user._id,
-      })
-      .then((res) => {
-        setbookmark(res.data[0].bookmarked);
-      })
-      .catch((err) => console.log(err));
+    if (user) {
+      axios
+        .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
+          userId: user._id,
+        })
+        .then((res) => {
+          setbookmark(res.data[0].bookmarked);
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
   const [examCards, setExamCards] = useState([
     {
@@ -193,6 +195,8 @@ const Book = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const [bookmark, setbookmark] = React.useState([]);
   useEffect(() => {
+    if(user)
+    {
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
         userId: user._id,
@@ -201,6 +205,7 @@ const Book = () => {
         setbookmark(res.data[0].bookmarked);
       })
       .catch((err) => console.log(err));
+    }
   }, []);
   const [examCards, setExamCards] = useState([
     {
