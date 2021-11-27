@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./Components/Home/Home";
-import AboutUs from "./Components/AboutUs/AboutUs";
-import GoToHome from "./Components/Home/GoToHome";
-import Footer from "./Components/Home/Footer";
-import AskSomething from "./Components/AskSomething/AskSomething";
-import Experience from "./Components/Experience/Experience";
-import StudyMaterial from "./Components/Materials/StudyMaterial";
-import TimeLine from "./Components/TimeLine/TimeLine";
-import Dashboard from "./Components/Dashboard/Dashboard";
-import FindMyself from "./Components/FindMyself/FindMyself";
-import Login from "./Components/Login/Login";
-import Signup from "./Components/Login/Signup";
-import AskSomethingAnswer from "./Components/AskSomething/AskSomethingAnswer";
-import Logout from "./Components/Login/Logout";
-import "./App.css";
-import Verify from "./Components/Login/Verify";
-import ResetPassword from "./Components/Login/ResetPassword";
-import UserAnswered from "./Components/Dashboard/UserAnswered";
-import UserExperience from "./Components/Dashboard/UserExperience";
-import UserQuestion from "./Components/Dashboard/UserQuestion";
-import ChatBox from "./Components/Dashboard/ChatBox/ChatBox";
-import UserFollowers from "./Components/Dashboard/UserFollowers";
-//import { FormControlUnstyledContext } from '@mui/core';
+import React, {useState} from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Home from './Components/Home/Home';
+import AboutUs from './Components/AboutUs/AboutUs';
+import GoToHome from './Components/Home/GoToHome';
+import Footer from './Components/Home/Footer';
+import AskSomething from './Components/AskSomething/AskSomething';
+import Experience from './Components/Experience/Experience';
+import StudyMaterial from './Components/Materials/StudyMaterial';
+import TimeLine from './Components/TimeLine/TimeLine';
+import Dashboard from './Components/Dashboard/Dashboard';
+import FindMyself from './Components/FindMyself/FindMyself';
+import Login from './Components/Login/Login';
+import Signup from './Components/Login/Signup';
+import AskSomethingAnswer from './Components/AskSomething/AskSomethingAnswer';
+import Logout from './Components/Login/Logout';
+import './App.css';
+import Verify from './Components/Login/Verify';
+import ResetPassword from './Components/Login/ResetPassword';
+import UserAnswered from './Components/Dashboard/UserAnswered';
+import UserExperience from './Components/Dashboard/UserExperience';
+import UserQuestion from './Components/Dashboard/UserQuestion';
+import ChatBox from './Components/Dashboard/ChatBox/ChatBox';
+import UserFollowers from './Components/Dashboard/UserFollowers';
+import Guruji from './Components/Guruji/Guruji';
 
 /**
  * @brief added all other routers
@@ -30,7 +30,7 @@ import UserFollowers from "./Components/Dashboard/UserFollowers";
  * @returns Main app component
  */
 
-function App() {
+function App () {
   return (
     <Router>
       <Switch>
@@ -94,6 +94,9 @@ function App() {
         <Route exact path="/reset-password/:email">
           <ResetPassword />
         </Route>
+        <Router exact path="/guruji">
+          <Guruji />
+        </Router>
         <Route path="/*">
           <GoToHome />
         </Route>

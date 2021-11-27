@@ -120,7 +120,9 @@ function makeOTP(length) {
 // incase user forget his/her password
 router.post("/forget-password", async (req, res) => {
   try {
-    random_OTP = makeOTP(6);
+    random_OTP = makeOTP (6);
+
+    // output message
     const output = `
       <p>Hello sir/ma'am,</p>
       <p>Lost your password ? Happens with all of us...</p>

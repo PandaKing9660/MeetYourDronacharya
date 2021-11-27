@@ -48,8 +48,8 @@ const CardAnswer = ({ ansData, questionId }) => {
     const sanitizer = dompurify.sanitize;
 
     const user = JSON.parse(localStorage.getItem('profile'));
-    const [likes, setLike] = useState(ansData.liked.length);
-    const [dislikes, setDislike] = useState(ansData.disliked.length);
+    const [likes, setLike] = useState(ansData?.liked?.length);
+    const [dislikes, setDislike] = useState(ansData?.disliked?.length);
 
     const [userStatus, setUserStatus] = useState('none');
 
@@ -64,14 +64,14 @@ const CardAnswer = ({ ansData, questionId }) => {
                 `${process.env.REACT_APP_BACKEND_URL}/ask-something/answer/check`,
                 {
                     userId: user._id,
-                    answerId: ansData._id,
+                    answerId: ansData?._id,
                 }
             )
             .then((res) => {
                 setUserStatus(res.data);
             })
             .catch((err) => console.log(err));
-    }, [ansData._id]);
+    }, [ansData?._id]);
 
     // adding likes and storing it in backend for each answers
     const AddLikes = (userId, answerId) => {
@@ -191,7 +191,7 @@ const CardAnswer = ({ ansData, questionId }) => {
 
     return (
         <div>
-            {ansData.isSpam === true ? (
+            {ansData?.isSpam === true ? (
                 <Paper
                     sx={{
                         p: 0,
@@ -219,7 +219,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                         >
                             {/* give edit and delete option only if same user */}
 
-                            {user && user._id === ansData.by ? (
+                            {user && user._id === ansData?.by ? (
                                 <div>
                                     <IconButton
                                         aria-label="more"
@@ -286,7 +286,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                                                                     user
                                                                         ? user._id
                                                                         : 0,
-                                                                    ansData._id
+                                                                    ansData?._id
                                                                 );
                                                             }}
                                                         >
@@ -321,7 +321,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                                                         <EditorAndPreview
                                                             option="experience"
                                                             question_id={
-                                                                ansData._id
+                                                                ansData?._id
                                                             }
                                                             edit="true"
                                                         />
@@ -346,13 +346,13 @@ const CardAnswer = ({ ansData, questionId }) => {
                                 {/*Displaying Answer Title and time */}
                                 <Grid item align="left">
                                     <Typography variant="h5" component="div">
-                                        {ansData.title}
+                                        {ansData?.title}
                                     </Typography>
                                     <Typography
                                         sx={{ mb: 1.5, fontSize: '0.91rem' }}
                                         color="text.secondary"
                                     >
-                                        {ansData.time.split('T')[0]}
+                                        {ansData?.time.split('T')[0]}
                                     </Typography>
                                 </Grid>
 
@@ -367,14 +367,14 @@ const CardAnswer = ({ ansData, questionId }) => {
                                     {/* right floating avatar and name of author */}
 
                                     <Link
-                                        to={`/dashboard/${ansData.by}`}
+                                        to={`/dashboard/${ansData?.by}`}
                                         style={{ textDecoration: 'none' }}
                                     >
                                         <CardHeader
                                             avatar={
                                                 <Avatar
-                                                    alt={`${ansData.userName}`}
-                                                    src={`${ansData.userImage}`}
+                                                    alt={`${ansData?.userName}`}
+                                                    src={`${ansData?.userImage}`}
                                                 />
                                             }
                                             titleTypographyProps={{
@@ -382,7 +382,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                                                 color: 'green',
                                                 align: 'right',
                                             }}
-                                            title={ansData.userName}
+                                            title={ansData?.userName}
                                         />
                                     </Link>
                                 </Grid>
@@ -392,14 +392,14 @@ const CardAnswer = ({ ansData, questionId }) => {
                             <Typography variant="body2" align="justify">
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: sanitizer(ansData.answer),
+                                        __html: sanitizer(ansData?.answer),
                                     }}
                                     style={{ padding: '1%' }}
                                 />
                             </Typography>
                         </CardContent>
                         <div style={{ display: 'flex' }}>
-                            {ansData.tags.map(
+                            {ansData?.tags.map(
                                 (
                                     tag // <Typography color="primary">#{tag}</Typography>
                                 ) => (
@@ -422,7 +422,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                                 title="Liked it"
                                 disabled
                                 onClick={() => {
-                                    AddLikes(user ? user._id : 0, ansData._id);
+                                    AddLikes(user ? user._id : 0, ansData?._id);
                                 }}
                             >
                                 {likes}
@@ -442,7 +442,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                                 onClick={() => {
                                     AddDislikes(
                                         user ? user._id : 0,
-                                        ansData._id
+                                        ansData?._id
                                     );
                                 }}
                             >
@@ -471,7 +471,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                         >
                             {/* give edit and delete option only if same user */}
 
-                            {user && user._id === ansData.by ? (
+                            {user && user._id === ansData?.by ? (
                                 <div>
                                     <IconButton
                                         aria-label="more"
@@ -538,7 +538,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                                                                     user
                                                                         ? user._id
                                                                         : 0,
-                                                                    ansData._id
+                                                                    ansData?._id
                                                                 );
                                                             }}
                                                         >
@@ -573,7 +573,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                                                         <EditorAndPreview
                                                             option="experience"
                                                             question_id={
-                                                                ansData._id
+                                                                ansData?._id
                                                             }
                                                             edit="true"
                                                         />
@@ -598,13 +598,13 @@ const CardAnswer = ({ ansData, questionId }) => {
                                 {/*Displaying Answer Title and time */}
                                 <Grid item align="left">
                                     <Typography variant="h5" component="div">
-                                        {ansData.title}
+                                        {ansData?.title}
                                     </Typography>
                                     <Typography
                                         sx={{ mb: 1.5, fontSize: '0.91rem' }}
                                         color="text.secondary"
                                     >
-                                        {ansData.time.split('T')[0]}
+                                        {ansData?.time.split('T')[0]}
                                     </Typography>
                                 </Grid>
 
@@ -619,14 +619,14 @@ const CardAnswer = ({ ansData, questionId }) => {
                                     {/* right floating avatar and name of author */}
 
                                     <Link
-                                        to={`/dashboard/${ansData.by}`}
+                                        to={`/dashboard/${ansData?.by}`}
                                         style={{ textDecoration: 'none' }}
                                     >
                                         <CardHeader
                                             avatar={
                                                 <Avatar
-                                                    alt={`${ansData.userName}`}
-                                                    src={`${ansData.userImage}`}
+                                                    alt={`${ansData?.userName}`}
+                                                    src={`${ansData?.userImage}`}
                                                 />
                                             }
                                             titleTypographyProps={{
@@ -634,7 +634,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                                                 color: 'green',
                                                 align: 'right',
                                             }}
-                                            title={ansData.userName}
+                                            title={ansData?.userName}
                                         />
                                     </Link>
                                 </Grid>
@@ -644,14 +644,14 @@ const CardAnswer = ({ ansData, questionId }) => {
                             <Typography variant="body2" align="justify">
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: sanitizer(ansData.answer),
+                                        __html: sanitizer(ansData?.answer),
                                     }}
                                     style={{ padding: '1%' }}
                                 />
                             </Typography>
                         </CardContent>
                         <div style={{ display: 'flex' }}>
-                            {ansData.tags.map(
+                            {ansData?.tags.map(
                                 (
                                     tag // <Typography color="primary">#{tag}</Typography>
                                 ) => (
@@ -673,7 +673,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                                 color="success"
                                 title="Liked it"
                                 onClick={() => {
-                                    AddLikes(user ? user._id : 0, ansData._id);
+                                    AddLikes(user ? user._id : 0, ansData?._id);
                                 }}
                             >
                                 {likes}
@@ -692,7 +692,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                                 onClick={() => {
                                     AddDislikes(
                                         user ? user._id : 0,
-                                        ansData._id
+                                        ansData?._id
                                     );
                                 }}
                             >

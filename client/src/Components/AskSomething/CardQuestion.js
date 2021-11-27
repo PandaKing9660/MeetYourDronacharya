@@ -39,10 +39,10 @@ const style = {
 const CardQuestion = ({ quesData, showAnswer }) => {
     const sanitizer = dompurify.sanitize;
     const user = JSON.parse(localStorage.getItem('profile'));
-    const [likes, setLike] = useState(quesData.liked.length);
-    const [dislikes, setDislike] = useState(quesData.disliked.length);
+    const [likes, setLike] = useState(quesData?.liked?.length);
+    const [dislikes, setDislike] = useState(quesData?.disliked?.length);
     const [userStatus, setUserStatus] = useState('none');
-    const [numAnswers, setNumAnswers] = useState(quesData.answers.length);
+    const [numAnswers, setNumAnswers] = useState(quesData?.answers?.length);
     const [open, setOpen] = useState(false);
     const handleOpen = () =>
         user ? setOpen(true) : alert('Login to ask question');
@@ -59,14 +59,14 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                 `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/check`,
                 {
                     userId: user._id,
-                    questionId: quesData._id,
+                    questionId: quesData?._id,
                 }
             )
             .then((res) => {
                 setUserStatus(res.data);
             })
             .catch((err) => console.log(err));
-    }, [quesData._id]);
+    }, [quesData?._id]);
 
     // Adding like to questions and storing it in backend
     const AddLikes = (userId, questionId) => {
@@ -125,7 +125,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
     return (
         <div>
             {/* if spam is detected, grey it out and disable functionalities */}
-            {quesData.isSpam === true ? (
+            {quesData?.isSpam === true ? (
                 <Paper
                     sx={{
                         p: 0,
@@ -156,7 +156,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                             >
                                 {/* put in link for going to all answers */}
                                 <Link
-                                    to={`/ask-something/${quesData._id}`}
+                                    to={`/ask-something/${quesData?._id}`}
                                     style={{
                                         textDecoration: 'none',
                                         color: 'black',
@@ -167,7 +167,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                                             variant="h5"
                                             component="div"
                                         >
-                                            {quesData.title}
+                                            {quesData?.title}
                                         </Typography>
                                         <Typography
                                             sx={{
@@ -176,7 +176,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                                             }}
                                             color="text.secondary"
                                         >
-                                            {quesData.time.split('T')[0]}
+                                            {quesData?.time.split('T')[0]}
                                         </Typography>
                                     </Grid>
                                 </Link>
@@ -191,14 +191,14 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                                     align="right"
                                 >
                                     <Link
-                                        to={`/dashboard/${quesData.by}`}
+                                        to={`/dashboard/${quesData?.by}`}
                                         style={{ textDecoration: 'none' }}
                                     >
                                         <CardHeader
                                             avatar={
                                                 <Avatar
-                                                    alt={`${quesData.userName}`}
-                                                    src={`${quesData.userImage}`}
+                                                    alt={`${quesData?.userName}`}
+                                                    src={`${quesData?.userImage}`}
                                                 />
                                             }
                                             titleTypographyProps={{
@@ -206,7 +206,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                                                 color: 'green',
                                                 align: 'right',
                                             }}
-                                            title={quesData.userName}
+                                            title={quesData?.userName}
                                             // subheader="September 14, 2016"
                                         />
                                     </Link>
@@ -216,7 +216,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                             <Typography variant="body2" align="justify">
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: sanitizer(quesData.question),
+                                        __html: sanitizer(quesData?.question),
                                     }}
                                     style={{ padding: '1%' }}
                                 />
@@ -236,12 +236,12 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                                     onClick={() =>
                                         localStorage.setItem(
                                             'id',
-                                            JSON.stringify(quesData._id)
+                                            JSON.stringify(quesData?._id)
                                         )
                                     }
                                 >
                                     <Link
-                                        to={`/ask-something/${quesData._id}`}
+                                        to={`/ask-something/${quesData?._id}`}
                                         style={{ textDecoration: 'none' }}
                                     >
                                         <QuestionAnswerRoundedIcon />
@@ -257,7 +257,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                                 title="Liked it"
                                 disabled
                                 onClick={() => {
-                                    AddLikes(user ? user._id : 0, quesData._id);
+                                    AddLikes(user ? user._id : 0, quesData?._id);
                                 }}
                             >
                                 {userStatus === 'none' ? (
@@ -277,7 +277,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                                 onClick={() => {
                                     AddDislikes(
                                         user ? user._id : 0,
-                                        quesData._id
+                                        quesData?._id
                                     );
                                 }}
                             >
@@ -319,7 +319,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                                 <Box sx={style}>
                                     <EditorAndPreview
                                         option="answer"
-                                        question_id={quesData._id}
+                                        question_id={quesData?._id}
                                     />
                                 </Box>
                             </Modal>

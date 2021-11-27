@@ -43,6 +43,7 @@ const UserFollowers = () => {
         else {
           setFollowers (res.data);
           setSearchedFollower (res.data);
+          console.log (searchedFollower);
         }
       })
       .catch (err => console.log (err));
@@ -51,17 +52,18 @@ const UserFollowers = () => {
   useEffect (
     () => {
       const newSearchedFollower = followers.filter (follower => {
-        if (follower.name.toLowerCase ().includes (searchResult.toLowerCase ()))
+        if (follower?.name.toLowerCase ().includes (searchResult.toLowerCase ()))
           return true;
         if (
-          follower.email.toLowerCase ().includes (searchResult.toLowerCase ())
+          follower?.email.toLowerCase ().includes (searchResult.toLowerCase ())
         )
           return true;
 
         return false;
       });
-      console.log (newSearchedFollower);
+    
       setSearchedFollower (newSearchedFollower);
+      
     },
     [searchResult]
   );
@@ -90,6 +92,7 @@ const UserFollowers = () => {
                 </Typography>
               : searchedFollower.length > 0
                   ? <div>
+                  {console.log(searchedFollower)}
                       <Grid
                         container
                         columns={{xs: 4, sm: 8, md: 2}}
@@ -98,7 +101,7 @@ const UserFollowers = () => {
                       >
                         {searchedFollower.map (follower => {
                           return (
-                            <Grid item xs={12} md={6} key={follower._id}>
+                            <Grid item xs={12} md={6} key={follower?._id}>
                               <UserCard follower={follower} />
                             </Grid>
                           );
@@ -106,9 +109,6 @@ const UserFollowers = () => {
 
                       </Grid>
 
-                      <Grid>
-                        container
-                      </Grid>
                     </div>
                   : <Typography
                       sx={{mb: 1.5, fontSize: '0.91rem'}}
@@ -127,7 +127,7 @@ const handleChange = id => {
 
 const UserCard = ({follower}) => {
   const [canFollow, setCanFollow] = useState (true);
-  const [followers, setFollowers] = useState (follower.followers.length);
+  const [followers, setFollowers] = useState (follower?.followers?.length);
   const user = JSON.parse (localStorage.getItem ('profile'));
 
   const handleClick = () => {
@@ -140,7 +140,7 @@ const UserCard = ({follower}) => {
       // if true then user un-followed the current user
       axios
         .put (`${process.env.REACT_APP_BACKEND_URL}/dashboard/add-follower`, {
-          userId: follower._id,
+          userId: follower?._id,
           followerId: user._id,
         })
         .then (res => {
@@ -152,7 +152,7 @@ const UserCard = ({follower}) => {
         .put (
           `${process.env.REACT_APP_BACKEND_URL}/dashboard/remove-follower`,
           {
-            userId: follower._id,
+            userId: follower?._id,
             followerId: user._id,
           }
         )
@@ -169,8 +169,8 @@ const UserCard = ({follower}) => {
         .post (
           `${process.env.REACT_APP_BACKEND_URL}/dashboard/check-follower`,
           {
-            userId: follower._id,
-            followerId: user._id,
+            userId: follower?._id,
+            followerId: user?._id,
           }
         )
         .then (res => {
@@ -195,9 +195,9 @@ const UserCard = ({follower}) => {
         <CardMedia
           component="img"
           sx={{width: 151}}
-          image={follower.imageUrl}
+          image={follower?.imageUrl}
           alt="User Image"
-          onClick={() => handleChange (follower._id)}
+          onClick={() => handleChange (follower?._id)}
           style={{cursor: 'pointer'}}
         />
 
@@ -205,18 +205,18 @@ const UserCard = ({follower}) => {
 
           <CardContent
             sx={{flex: '1 0 auto'}}
-            onClick={() => handleChange (follower._id)}
+            onClick={() => handleChange (follower?._id)}
             style={{cursor: 'pointer'}}
           >
             <Typography component="div" variant="h5">
-              {follower.name}
+              {follower?.name}
             </Typography>
             <Typography
               variant="subtitle1"
               color="text.secondary"
               component="div"
             >
-              {follower.email}
+              {follower?.email}
             </Typography>
           </CardContent>
           <Box sx={{display: 'flex', alignItems: 'center', pl: 1, pb: 1}}>
@@ -227,7 +227,7 @@ const UserCard = ({follower}) => {
                 (window.location =
                   process.env.REACT_APP_FRONTEND_URL +
                   '/dashboard/' +
-                  follower._id +
+                  follower?._id +
                   '/user-followers')}
             >
               <PersonIcon />
@@ -238,7 +238,7 @@ const UserCard = ({follower}) => {
                 (window.location =
                   process.env.REACT_APP_FRONTEND_URL +
                   '/dashboard/' +
-                  follower._id +
+                  follower?._id +
                   '/user-experience')}
               title="user experience"
             >
@@ -250,7 +250,7 @@ const UserCard = ({follower}) => {
                 (window.location =
                   process.env.REACT_APP_FRONTEND_URL +
                   '/dashboard/' +
-                  follower._id +
+                  follower?._id +
                   '/user-answer')}
               title="user answers"
             >
@@ -263,7 +263,7 @@ const UserCard = ({follower}) => {
                 (window.location =
                   process.env.REACT_APP_FRONTEND_URL +
                   '/dashboard/' +
-                  follower._id +
+                  follower?._id +
                   '/user-question')}
               title="user questions"
             >
