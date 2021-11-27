@@ -483,4 +483,74 @@ router.put("/delAnswer", async (req, res) => {
   }
 });
 
+router.post("/addTimeline", async (req, res) => {
+  try {
+    const { userId, timelineNo } = req.body;
+    console.log(userId);
+    let newList;
+
+    await user
+      .findById(userId)
+      .then((resp) => {
+        newList = resp.bookmarked.filter((bm) => bm);
+        newList[timelineNo] = "T";
+      })
+      .catch((err) => console.log(err));
+
+    await user.findByIdAndUpdate(
+      userId,
+      {
+        bookmarked: newList,
+      },
+      { new: true },
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("updated");
+        }
+      }
+    );
+    res.send("ook");
+  } catch (err) {
+    console.log(err);
+    res.send("some error");
+  }
+});
+
+router.post("/delTimeline", async (req, res) => {
+  try {
+    const { userId, timelineNo } = req.body;
+    console.log(userId);
+    let newList;
+
+    await user
+      .findById(userId)
+      .then((resp) => {
+        newList = resp.bookmarked.filter((bm) => bm);
+        newList[timelineNo] = "F";
+      })
+      .catch((err) => console.log(err));
+
+    await user.findByIdAndUpdate(
+      userId,
+      {
+        bookmarked: newList,
+      },
+      { new: true },
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("updated");
+        }
+      }
+    );
+    res.send("ook");
+  } catch (err) {
+    console.log(err);
+    res.send("some error");
+  }
+});
+
 module.exports = router;

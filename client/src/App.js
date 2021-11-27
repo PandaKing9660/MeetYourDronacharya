@@ -1,45 +1,44 @@
-import React, {useState} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Home from './Components/Home/Home';
-import AboutUs from './Components/AboutUs/AboutUs';
-import GoToHome from './Components/Home/GoToHome';
-import Footer from './Components/Home/Footer';
-import AskSomething from './Components/AskSomething/AskSomething';
-import Experience from './Components/Experience/Experience';
-import StudyMaterial from './Components/Materials/StudyMaterial';
-import TimeLine from './Components/TimeLine/TimeLine';
-import Dashboard from './Components/Dashboard/Dashboard';
-import FindMyself from './Components/FindMyself/FindMyself';
-import Login from './Components/Login/Login';
-import Signup from './Components/Login/Signup';
-import AskSomethingAnswer from './Components/AskSomething/AskSomethingAnswer';
-import Logout from './Components/Login/Logout';
-import './App.css';
-import Verify from './Components/Login/Verify';
-import ResetPassword from './Components/Login/ResetPassword';
-import UserAnswered from './Components/Dashboard/UserAnswered';
-import UserExperience from './Components/Dashboard/UserExperience';
-import UserQuestion from './Components/Dashboard/UserQuestion';
-import ChatBox from './Components/Dashboard/ChatBox/ChatBox';
-import UserFollowers from './Components/Dashboard/UserFollowers';
-import { FormControlUnstyledContext } from '@mui/core';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./Components/Home/Home";
+import AboutUs from "./Components/AboutUs/AboutUs";
+import GoToHome from "./Components/Home/GoToHome";
+import Footer from "./Components/Home/Footer";
+import AskSomething from "./Components/AskSomething/AskSomething";
+import Experience from "./Components/Experience/Experience";
+import StudyMaterial from "./Components/Materials/StudyMaterial";
+import TimeLine from "./Components/TimeLine/TimeLine";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import FindMyself from "./Components/FindMyself/FindMyself";
+import Login from "./Components/Login/Login";
+import Signup from "./Components/Login/Signup";
+import AskSomethingAnswer from "./Components/AskSomething/AskSomethingAnswer";
+import Logout from "./Components/Login/Logout";
+import "./App.css";
+import Verify from "./Components/Login/Verify";
+import ResetPassword from "./Components/Login/ResetPassword";
+import UserAnswered from "./Components/Dashboard/UserAnswered";
+import UserExperience from "./Components/Dashboard/UserExperience";
+import UserQuestion from "./Components/Dashboard/UserQuestion";
+import ChatBox from "./Components/Dashboard/ChatBox/ChatBox";
+import UserFollowers from "./Components/Dashboard/UserFollowers";
+//import { FormControlUnstyledContext } from '@mui/core';
 
 /**
  * @brief added all other routers
- * 
+ *
  * @returns Main app component
  */
 
-function App () {
-
+function App() {
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Home/>
+          <Home />
         </Route>
         <Route exact path="/ask-something">
-          <AskSomething  />
+          <AskSomething />
         </Route>
         <Route exact path="/experience">
           <Experience />
@@ -66,7 +65,7 @@ function App () {
           <UserQuestion />
         </Route>
         <Route exact path="/chatbox">
-          <ChatBox/>
+          <ChatBox />
         </Route>
         <Route exact path="/dashboard/:userId/user-followers">
           <UserFollowers />
@@ -90,7 +89,6 @@ function App () {
           <Verify />
         </Route>
         <Route exact path="/ask-something/:question_id">
-
           <AskSomethingAnswer />
         </Route>
         <Route exact path="/reset-password/:email">

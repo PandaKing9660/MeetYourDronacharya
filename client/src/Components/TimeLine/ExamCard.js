@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { styled } from "@mui/material/styles";
-
+import axios from "axios";
+import dompurify from "dompurify";
 import {
   Tooltip,
   Collapse,
@@ -15,9 +16,9 @@ import {
 
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+//import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import ShareIcon from "@mui/icons-material/Share";
+//import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import EventsInExam from "./EventsInExam";
@@ -33,15 +34,57 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const ExamCard = ({ cardData }) => {
-  const [expanded, setExpanded] = useState(false);
-  const [isBookMarked, setisBookMarked] = useState(false);
+const ExamCard = ({ cardData, cardId }) => {
+  const sanitizer = dompurify.sanitize;
 
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const [isBookMarked, setisBookMarked] = useState(false);
+  useEffect(() => {
+    axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
+        userId: user._id,
+      })
+      .then((res) => {
+        if (res.data[0].bookmarked[cardId] === "T") setisBookMarked(true);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const [expanded, setExpanded] = useState(false);
+
+  //console.log(user.bookmarked);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
   const handleHeartClick = () => {
     setisBookMarked(!isBookMarked);
+  };
+
+  const AddBookmark = (userId, timelineNo) => {
+    if (!user) {
+      alert("Please login to add boomark");
+      return;
+    }
+    axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/addTimeline`, {
+        userId,
+        timelineNo: cardId,
+      })
+      .then((res) => {});
+  };
+
+  const DeleteBookmark = (userId, timelineNo) => {
+    if (!user) {
+      alert("Please login to add boomark");
+      return;
+    }
+    axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/delTimeline`, {
+        userId,
+        timelineNo: cardId,
+      })
+      .then((res) => {});
   };
 
   return (
@@ -63,9 +106,12 @@ const ExamCard = ({ cardData }) => {
         <Tooltip TransitionComponent={Zoom} title="BookMark" placement="top">
           <IconButton aria-label="add to favorites" onClick={handleHeartClick}>
             {!isBookMarked ? (
-              <BookmarkIcon />
+              <BookmarkIcon  />
             ) : (
-              <BookmarkIcon style={{ color: "green" }} />
+              <BookmarkIcon
+                style={{ color: "green" }}
+                onClick={AddBookmark(user._id, cardId)}
+              />
             )}
           </IconButton>
         </Tooltip>
