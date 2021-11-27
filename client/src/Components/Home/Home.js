@@ -19,10 +19,7 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import ExploreIcon from '@mui/icons-material/Explore';
 import PeopleIcon from '@mui/icons-material/People';
 
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-
-import Typography from '@mui/material/Typography';
+import {Link} from 'react-router-dom';
 
 const topSearch = ['Question', 'Experience', 'Materials'];
 
@@ -78,8 +75,10 @@ const Home = () => {
       >
         <Grid item xs={12} mb={2} mt={1}>
           <h1 className="head_home">Meet Your Dronacharya</h1>
+          <Button variant="contained">
+            <Link to="/guruji">Meet Guruji</Link>
+          </Button>
         </Grid>
-        
 
         {/* Showing Buttons to navigate to other webpage */}
         <Grid
