@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
-import SendRoundedIcon from '@mui/icons-material/SendRounded';
+import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
 import {
   Card,
@@ -9,79 +9,80 @@ import {
   Grid,
   Typography,
   Divider,
-} from '@mui/material';
+} from "@mui/material";
 
-import Navbar from '../Home/Navbar/Navbar';
-import Messages from './Messages';
+import Navbar from "../Home/Navbar/Navbar";
+import Messages from "./Messages";
 
-import './guruji.css';
+import "./guruji.css";
 
 const dictionary = [
   {
-    question: 'what,question,questions,answer,ask,doubt,how,which,who,?',
+    question: "what,question,questions,answer,ask,doubt,how,which,who,?",
     answers: [
-      'Having trouble in something, no problem, ask here to clear your doubts',
-      'First of all, ask nicely with respect, I am atleast 100 centuries older than you, go and ask your doubt in ask-something section',
-      'we got your back vats, ask your query in our ask-something section',
+      "Having trouble in something, no problem, ask here to clear your doubts",
+      "First of all, ask nicely with respect, I am atleast 100 centuries older than you, go and ask your doubt in ask-something section",
+      "we got your back vats, ask your query in our ask-something section",
     ],
   },
   {
-    question: 'share,experience,about,life,expert,my,thought',
+    question: "share,experience,about,life,expert,my,thought",
     answers: [
-      'you know, i am kind of a guru myself, go and share your experience here',
-      'life is too short to keep your knowledge to yourself, its good you know it, share your experience here',
-      'i am proud of you vats, share your experience here. We need more heros like you',
+      "you know, i am kind of a guru myself, go and share your experience here",
+      "life is too short to keep your knowledge to yourself, its good you know it, share your experience here",
+      "i am proud of you vats, share your experience here. We need more heros like you",
     ],
   },
   {
-    question: 'thank you,thank,you,amazing,helpful,nice,very good',
+    question: "thank you,thank,you,amazing,helpful,nice,very good",
     answers: [
-      'I am flattered that you liked my work',
-      'welcome vats, helping you was my dharma',
-      'give me guru dhakshina by sharing this website with your friends',
+      "I am flattered that you liked my work",
+      "welcome vats, helping you was my dharma",
+      "give me guru dhakshina by sharing this website with your friends",
     ],
   },
 ];
 
 const Guruji = () => {
-  const user = JSON.parse (localStorage.getItem ('profile'));
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   // single message
-  const [message, setMessage] = useState ('');
+  const [message, setMessage] = useState("");
   // array of the messages
-  const [messages, setMessages] = useState ([
-    {text: 'Hello Vats, How can i help you?', user: 'Guruji'},
+  const [messages, setMessages] = useState([
+    { text: "Hello Vats, How can i help you?", user: "Guruji" },
   ]);
 
   // function for sending messages to message area
-  const sendMessage = event => {
-    event.preventDefault ();
+  const sendMessage = (event) => {
+    event.preventDefault();
 
     if (message) {
       let newMsgs = messages;
 
-      newMsgs.push ({text: message, user: user ? user.name : 'guest'});
-      setTimeout (() => {
+      newMsgs.push({ text: message, user: user ? user.name : "guest" });
+      setTimeout(() => {
         let newMsgs = messages;
         let max_match = 0;
         let max_match_index = 0;
 
-        dictionary.map ((obj, index) => {
+        dictionary.map((obj, index) => {
           let match_this = 0;
-          const question = obj.question.split (',');
-          const temp = message.trim ().split (' ');
+          const question = obj.question.split(",");
+          const temp = message.trim().split(" ");
 
           let user_question = [];
 
-          temp.forEach (word => {
-            let word_letter = '', word_mark = '';
+          temp.forEach((word) => {
+            let word_letter = "",
+              word_mark = "";
 
             for (let i = 0; i < word.length; i++) {
-              const c = word.charAt (i);
-              if (c.toLowerCase () === c.toUpperCase ()) {
+              const c = word.charAt(i);
+              if (c.toLowerCase() === c.toUpperCase()) {
                 word_mark += c;
               } else {
-                word_letter += c.toLowerCase ();
+                word_letter += c.toLowerCase();
               }
             }
 
@@ -105,50 +106,50 @@ const Guruji = () => {
 
               */
 
-              if (word_letter.endsWith ('ing')) {
-                word_letter = word_letter.slice (0, word_letter.length - 3);
-              } else if (word_letter.endsWith ('ed')) {
-                word_letter = word_letter.slice (0, word_letter.length - 2);
-              } else if (word_letter.endsWith ('sses')) {
-                word_letter = word_letter.slice (0, word_letter.length - 2);
-              } else if (word_letter.endsWith ('ies')) {
-                word_letter = word_letter.slice (0, word_letter.length - 2);
-              } else if (word_letter.endsWith ('ss')) {
-                word_letter = word_letter.slice (0, word_letter.length);
-              } else if (word_letter.endsWith ('s')) {
-                word_letter = word_letter.slice (0, word_letter.length - 1);
-              } else if (word_letter.endsWith ('ational')) {
-                word_letter = word_letter.slice (0, word_letter.length - 5);
-                word_letter += 'e';
-              } else if (word_letter.endsWith ('izer')) {
-                word_letter = word_letter.slice (0, word_letter.length - 1);
-              } else if (word_letter.endsWith ('ator')) {
-                word_letter = word_letter.slice (0, word_letter.length - 2);
-                word_letter += 'e';
-              } else if (word_letter.endsWith ('al')) {
-                word_letter = word_letter.slice (0, word_letter.length - 2);
-              } else if (word_letter.endsWith ('able')) {
-                word_letter = word_letter.slice (0, word_letter.length - 4);
-              } else if (word_letter.endsWith ('ate')) {
-                word_letter = word_letter.slice (0, word_letter.length - 3);
+              if (word_letter.endsWith("ing")) {
+                word_letter = word_letter.slice(0, word_letter.length - 3);
+              } else if (word_letter.endsWith("ed")) {
+                word_letter = word_letter.slice(0, word_letter.length - 2);
+              } else if (word_letter.endsWith("sses")) {
+                word_letter = word_letter.slice(0, word_letter.length - 2);
+              } else if (word_letter.endsWith("ies")) {
+                word_letter = word_letter.slice(0, word_letter.length - 2);
+              } else if (word_letter.endsWith("ss")) {
+                word_letter = word_letter.slice(0, word_letter.length);
+              } else if (word_letter.endsWith("s")) {
+                word_letter = word_letter.slice(0, word_letter.length - 1);
+              } else if (word_letter.endsWith("ational")) {
+                word_letter = word_letter.slice(0, word_letter.length - 5);
+                word_letter += "e";
+              } else if (word_letter.endsWith("izer")) {
+                word_letter = word_letter.slice(0, word_letter.length - 1);
+              } else if (word_letter.endsWith("ator")) {
+                word_letter = word_letter.slice(0, word_letter.length - 2);
+                word_letter += "e";
+              } else if (word_letter.endsWith("al")) {
+                word_letter = word_letter.slice(0, word_letter.length - 2);
+              } else if (word_letter.endsWith("able")) {
+                word_letter = word_letter.slice(0, word_letter.length - 4);
+              } else if (word_letter.endsWith("ate")) {
+                word_letter = word_letter.slice(0, word_letter.length - 3);
               }
 
-              user_question.push (word_letter);
+              user_question.push(word_letter);
             }
-            if (word_mark.length > 0) user_question.push (word_mark);
+            if (word_mark.length > 0) user_question.push(word_mark);
           });
 
-          console.log (user_question);
+          console.log(user_question);
 
-          question.forEach (ques => {
-            user_question.forEach (ques2 => {
+          question.forEach((ques) => {
+            user_question.forEach((ques2) => {
               if (ques === ques2) match_this++;
             });
           });
 
-          match_this = match_this / question.length * 100;
+          match_this = (match_this / question.length) * 100;
 
-          console.log (match_this);
+          console.log(match_this);
 
           if (match_this > max_match) {
             max_match = match_this;
@@ -157,25 +158,25 @@ const Guruji = () => {
         });
 
         if (max_match >= 20) {
-          newMsgs.push ({
+          newMsgs.push({
             text: dictionary[max_match_index].answers[
-              Math.floor (
-                Math.random () * dictionary[max_match_index].answers.length
+              Math.floor(
+                Math.random() * dictionary[max_match_index].answers.length
               )
             ],
-            user: 'Guruji',
+            user: "Guruji",
           });
         } else {
-          newMsgs.push ({
+          newMsgs.push({
             text: "Sorry, you know i am old i can't understand you, please repeat",
-            user: 'Guruji',
+            user: "Guruji",
           });
         }
-        setMessages (newMsgs);
-        setMessage (' ');
+        setMessages(newMsgs);
+        setMessage(" ");
       }, 2000);
-      setMessages (newMsgs);
-      setMessage ('');
+      setMessages(newMsgs);
+      setMessage("");
     }
   };
 
@@ -192,11 +193,11 @@ const Guruji = () => {
       >
         {/* left side */}
         <Grid item xs={11} md={4}>
-          <Card sx={{minWidth: 225}}>
+          <Card sx={{ minWidth: 225 }}>
             {/* Daily changing image */}
             <CardContent>
               <Typography
-                sx={{fontSize: 16}}
+                sx={{ fontSize: 16 }}
                 color="text.secondary"
                 gutterBottom
               >
@@ -208,7 +209,7 @@ const Guruji = () => {
                 component="img"
                 height="470vh"
                 image={
-                  'https://st2.depositphotos.com/1037178/7669/v/600/depositphotos_76695295-stock-illustration-concentrating-maharishi-vishvamitra-hindu-saint.jpg'
+                  "https://st2.depositphotos.com/1037178/7669/v/600/depositphotos_76695295-stock-illustration-concentrating-maharishi-vishvamitra-hindu-saint.jpg"
                 }
                 alt="Nice Image"
               />
@@ -221,8 +222,8 @@ const Guruji = () => {
           <Messages
             className="messageArea"
             messages={messages}
-            nameMe={user ? user.name : 'guest'}
-            nameYou={'Guruji'}
+            nameMe={user ? user.name : "guest"}
+            nameYou={"Guruji"}
           />
           <Divider />
 
@@ -233,11 +234,12 @@ const Guruji = () => {
               type="text"
               placeholder="Type a message..."
               value={message}
-              onChange={({target: {value}}) => setMessage (value)}
-              onKeyPress={event =>
-                event.key === 'Enter' ? sendMessage (event) : null}
+              onChange={({ target: { value } }) => setMessage(value)}
+              onKeyPress={(event) =>
+                event.key === "Enter" ? sendMessage(event) : null
+              }
             />
-            <button className="sendButton" onClick={e => sendMessage (e)}>
+            <button className="sendButton" onClick={(e) => sendMessage(e)}>
               <SendRoundedIcon />
             </button>
           </form>

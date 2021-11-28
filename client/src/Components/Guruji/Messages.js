@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import ScrollToBottom from 'react-scroll-to-bottom';
-import {Card, CardContent, Typography, Chip} from '@mui/material';
-import AdjustIcon from '@mui/icons-material/Adjust';
-import Message from './Message';
-import './messages.css';
+import ScrollToBottom from "react-scroll-to-bottom";
+import { Card, CardContent, Typography, Chip } from "@mui/material";
+import AdjustIcon from "@mui/icons-material/Adjust";
+import Message from "./Message";
+import "./messages.css";
 
-const Messages = ({messages, nameMe, nameYou}) => {
+const Messages = ({ messages, nameMe, nameYou }) => {
   const labelName = `${nameYou} : Online `;
   return (
     <Card>
@@ -24,7 +24,7 @@ const Messages = ({messages, nameMe, nameYou}) => {
         {/* scrolls to bottom automatically after typing texts */}
         <ScrollToBottom className="messages">
           {/* map through each message */}
-          {messages.map ((message, i) => (
+          {messages.map((message, i) => (
             <div key={i}>
               <Message message={message} name={nameMe} />
             </div>

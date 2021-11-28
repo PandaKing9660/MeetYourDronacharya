@@ -70,45 +70,13 @@
     23px 23px 0 rgba(36, 117, 203, 0.06), -25px 40px 0 rgba(36, 117, 203, 0.04),
     27px 27px 0 rgba(36, 117, 203, 0.02), -29px 29px 0 rgba(36, 117, 203, 0);*/
 }
-
-.button1 {
-    background: #212121c5;
-    font-weight: bold;
+.meetguruji_home {
+    color: blue;
+    background-color: white;
 }
 
-.button2 {
-    background: #212121be;
-    font-weight: bold;
-}
-
-.button3 {
-    background: #424242ce;
-    font-weight: bold;
-}
-
-.button4 {
-    background: #424242ce;
-    font-weight: bold;
-}
-
-.button5 {
-    background: #616161cb;
-    font-weight: bold;
-}
-
-.button6 {
-    background: #616161be;
-    font-weight: bold;
-}
-
-.button7 {
-    background: rgba(33, 33, 33, 0.712);
-    font-weight: bold;
-}
-
-.button8 {
-    background: rgba(33, 33, 33, 0.733);
-    font-weight: bold;
+.meetguruji_home:hover {
+    color: white;
 }
 
 @media only screen and (max-width: 1150px) {
