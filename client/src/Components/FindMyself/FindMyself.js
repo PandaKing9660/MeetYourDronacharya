@@ -351,7 +351,7 @@ const FindMyself = () => {
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                width: "40%",
+                width: "65%",
                 background: "white",
                 boxShadow: 24,
                 p: 4,
@@ -375,7 +375,7 @@ const FindMyself = () => {
                     <li>Stick to the template.</li>
                   </ul>
                 </Grid>
-                <Grid item sx={12} sm={6} sx={{ padding: "2%" }}>
+                <Grid item xs={12} sm={6} sx={{ padding: "2%" }}>
                   <b>Why?</b>
                   <ul padding="2%">
                     <li>Contribute to the society.</li>

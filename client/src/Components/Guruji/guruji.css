@@ -1,32 +1,32 @@
 .form {
-    display: flex;
-    /* border-top: 2px solid #d3d3d3; */
-    border: 2px solid #d3d3d3;
-    /* margin: 2% 20%; */
-    margin-top: 1%;
+  display: flex;
+  /* border-top: 2px solid #d3d3d3; */
+  border: 2px solid #d3d3d3;
+  /* margin: 2% 20%; */
+  margin-top: 1%;
 }
 
 .input {
-    border: none;
-    border-radius: 0;
-    padding: 1%;
-    width: 85%;
-    font-size: 1.2em;
+  border: none;
+  border-radius: 0;
+  padding: 1%;
+  width: 85%;
+  font-size: 1.2em;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-    outline: none;
+  outline: none;
 }
 
 .sendButton {
-    color: #fff;
-    text-transform: uppercase;
-    text-decoration: none;
-    background: #2979ff;
-    padding: 2% 0;
-    display: inline-block;
-    border: none;
-    width: 15%;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #2979ff;
+  padding: 2% 0;
+  display: inline-block;
+  border: none;
+  width: 15%;
 }
