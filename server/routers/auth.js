@@ -1,43 +1,43 @@
 // importing all important files, along with bcrypt for security,
 // nodemailer for forget password option
-const express = require("express");
-const router = express.Router();
-const User = require("../models/user");
-const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer");
+const express = require ('express');
+const router = express.Router ();
+const User = require ('../models/user');
+const bcrypt = require ('bcrypt');
+const nodemailer = require ('nodemailer');
 
-let random_OTP = "";
+let random_OTP = '';
 
-router.use(express.json());
+router.use (express.json ());
 
 // for signup
-router.post("/signup", async (req, res) => {
+router.post ('/signup', async (req, res) => {
   try {
-    const { email, name, password, imageUrl } = req.body;
+    const {email, name, password, imageUrl} = req.body;
 
     if (!name || !email || !password) {
-      return res.send("Fill All the details");
+      return res.send ('Fill All the details');
     }
 
     // using encryption for user's password
-    const cryptPassword = await bcrypt.hash(password, 10);
+    const cryptPassword = await bcrypt.hash (password, 10);
 
     // creating the user with given information and adding an image if not done already
-    const newUser = new User({
+    const newUser = new User ({
       email: email,
       name: name,
       password: cryptPassword,
-      socialMedia: ["", "", "", "", ""],
+      socialMedia: ['', '', '', '', ''],
       imageUrl: imageUrl || `https://robohash.org/${name}`,
-      bookmarked: ["F", "F", "F", "F"],
+      bookmarked: ['F', 'F', 'F', 'F'],
     });
 
     // saving user into database
     const postResult = await newUser
-      .save()
-      .then((result) =>
-        res.send({
-          msg: "done",
+      .save ()
+      .then (result =>
+        res.send ({
+          msg: 'done',
           found: true,
           user: {
             name: newUser.name,
@@ -48,30 +48,30 @@ router.post("/signup", async (req, res) => {
           },
         })
       )
-      .catch((err) => {
-        res.status(403).send({ msg: "User Already Exists" });
+      .catch (err => {
+        res.status (403).send ({msg: 'User Already Exists'});
       });
   } catch (err) {
-    console.log("err", err);
+    console.log ('err', err);
   }
 });
 
 // used for the user login
-router.post("/login", async (req, res) => {
+router.post ('/login', async (req, res) => {
   try {
-    const { email, password, isGoogle } = req.body;
+    const {email, password, isGoogle} = req.body;
 
     // finding the registered email
-    const user = await User.find({
+    const user = await User.find ({
       email: email,
     });
 
     // checking is email is found or not
     if (user.length) {
       // using decryption to check the password and sending appropriate replies
-      if ((await bcrypt.compare(password, user[0].password)) || isGoogle) {
-        res.send({
-          msg: "User Found",
+      if ((await bcrypt.compare (password, user[0].password)) || isGoogle) {
+        res.send ({
+          msg: 'User Found',
           found: true,
           user: {
             name: user[0].name,
@@ -82,23 +82,23 @@ router.post("/login", async (req, res) => {
           },
         });
       } else {
-        res.send({
-          msg: "Wrong Password",
+        res.send ({
+          msg: 'Wrong Password',
           found: false,
           user: null,
         });
       }
     } else {
-      res.send({
-        msg: "Invalid Email ID",
+      res.send ({
+        msg: 'Invalid Email ID',
         found: false,
         user: null,
       });
     }
   } catch (error) {
-    console.log(error);
-    res.status(404).send({
-      msg: "some error",
+    console.log (error);
+    res.status (404).send ({
+      msg: 'some error',
       found: false,
       user: null,
     });
@@ -106,19 +106,21 @@ router.post("/login", async (req, res) => {
 });
 
 // random OTP
-function makeOTP(length) {
-  var result = "";
+function makeOTP (length) {
+  var result = '';
   var characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var charactersLength = characters.length;
   for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    result += characters.charAt (
+      Math.floor (Math.random () * charactersLength)
+    );
   }
   return result;
 }
 
 // incase user forget his/her password
-router.post("/forget-password", async (req, res) => {
+router.post ('/forget-password', async (req, res) => {
   try {
     random_OTP = makeOTP (6);
 
@@ -137,105 +139,105 @@ router.post("/forget-password", async (req, res) => {
     `;
 
     // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-      service: "hotmail",
+    let transporter = nodemailer.createTransport ({
+      service: 'hotmail',
       auth: {
-        user: "adityabill@outlook.com",
-        pass: "Aditya_nandita9660",
+        user: 'adityabill@outlook.com',
+        pass: 'password_my',
       },
     });
 
     // setup email data with unicode symbols
     let mailOptions = {
-      from: "adityabill@outlook.com", // sender address
+      from: 'adityabill@outlook.com', // sender address
       to: req.body.email, // list of receivers
-      subject: "Reset password", // Subject line
-      text: "Reset password", // plain text body
+      subject: 'Reset password', // Subject line
+      text: 'Reset password', // plain text body
       html: output, // html body
     };
 
     // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail (mailOptions, (error, info) => {
       if (error) {
-        return console.log(error);
+        return console.log (error);
       }
-      console.log("Message sent: %s", info.messageId);
-      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+      console.log ('Message sent: %s', info.messageId);
+      console.log ('Preview URL: %s', nodemailer.getTestMessageUrl (info));
 
-      res.render("contact", { msg: "Email has been sent" });
+      res.render ('contact', {msg: 'Email has been sent'});
     });
   } catch (err) {
-    console.log("Error found : ", err);
+    console.log ('Error found : ', err);
   }
 });
 
 // verification of password
-router.post("/verify", async (req, res) => {
+router.post ('/verify', async (req, res) => {
   try {
-    const { OTP, email } = req.body;
+    const {OTP, email} = req.body;
 
     // finding the registered email
-    const user = await User.find({
+    const user = await User.find ({
       email: email,
     });
 
     // checking is email is found or not
     if (user.length) {
       // checking OTP and random_otp created
-      console.log(OTP, random_OTP);
+      console.log (OTP, random_OTP);
       if (OTP === random_OTP) {
-        res.send({
-          msg: "User Found",
+        res.send ({
+          msg: 'User Found',
           found: true,
         });
       } else {
-        res.send({
-          msg: "Wrong OTP",
+        res.send ({
+          msg: 'Wrong OTP',
           found: false,
         });
       }
     } else {
-      res.send({
-        msg: "Invalid Email ID",
+      res.send ({
+        msg: 'Invalid Email ID',
         found: false,
       });
     }
   } catch (error) {
-    console.log(error);
-    res.status(404).send({
-      msg: "some error",
+    console.log (error);
+    res.status (404).send ({
+      msg: 'some error',
       found: false,
       user: null,
     });
   }
 });
 
-router.put("/reset-password", async (req, res) => {
+router.put ('/reset-password', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const {email, password} = req.body;
 
     // finding the registered email
-    const user = await User.find({
+    const user = await User.find ({
       email: email,
     });
 
     // using encryption for user's password
-    const cryptPassword = await bcrypt.hash(password, 10);
+    const cryptPassword = await bcrypt.hash (password, 10);
 
     // updating the password
-    await User.findByIdAndUpdate(
+    await User.findByIdAndUpdate (
       user[0]._id,
       {
         password: cryptPassword,
       },
-      { new: true },
+      {new: true},
       (err, result) => {
         if (err) {
-          console.log(err);
+          console.log (err);
         } else {
-          console.log("updated", result);
-          res.send({
-            msg: "User Updated",
+          console.log ('updated', result);
+          res.send ({
+            msg: 'User Updated',
             found: true,
             user: result,
           });
@@ -243,7 +245,7 @@ router.put("/reset-password", async (req, res) => {
       }
     );
   } catch (e) {
-    console.log(e);
+    console.log (e);
   }
 });
 
