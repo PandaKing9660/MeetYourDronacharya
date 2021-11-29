@@ -34,6 +34,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+//card for showing the details of exam
 const ExamCard = ({ cardData, cardId }) => {
   const sanitizer = dompurify.sanitize;
 

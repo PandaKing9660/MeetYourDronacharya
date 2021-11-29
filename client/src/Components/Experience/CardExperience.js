@@ -42,7 +42,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
+// card for experience
 const CardExperience = ({ expData }) => {
   const sanitizer = dompurify.sanitize;
 
@@ -51,7 +51,7 @@ const CardExperience = ({ expData }) => {
   const [dislikes, setDislike] = useState(expData?.disliked?.length);
 
   const [userStatus, setUserStatus] = useState("none");
-
+  
   useEffect(() => {
     if (!user) {
       return;
@@ -68,6 +68,7 @@ const CardExperience = ({ expData }) => {
       .catch((err) => console.log(err));
   }, [expData?._id]);
 
+  // adds like to the experience shared
   const AddLikes = (userId, experienceId) => {
     if (!user) {
       alert("Please login to like this question");
@@ -90,6 +91,8 @@ const CardExperience = ({ expData }) => {
         setUserStatus("liked");
       });
   };
+
+  // adds dislike to the experience shared
   const AddDislikes = (userId, experienceId) => {
     if (!user) {
       alert("Please login to like this question");
@@ -113,6 +116,7 @@ const CardExperience = ({ expData }) => {
       });
   };
 
+  // deletes the experience
   const Confirm = async (userId, experienceId) => {
     //const result = await confirm("Are you sure?");
     axios
@@ -216,6 +220,7 @@ const CardExperience = ({ expData }) => {
                       },
                     }}
                   >
+                    
                     <MenuList>
                       <MenuItem>
                         <Button

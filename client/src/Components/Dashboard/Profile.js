@@ -61,7 +61,7 @@ const Profile = ({ userData, handleOpen }) => {
         .catch((err) => console.log(err));
     }
   };
-
+  //edits the links of different social media of the user
   const updateProfile = () => {
     axios
       .put(`${process.env.REACT_APP_BACKEND_URL}/dashboard/edit-user`, {
@@ -371,6 +371,7 @@ const Profile = ({ userData, handleOpen }) => {
   );
 };
 
+//before the user is followed
 const Before = ({ handleClick }) => {
   return (
     <div style={{ marginTop: "2%" }}>
@@ -387,7 +388,7 @@ const Before = ({ handleClick }) => {
     </div>
   );
 };
-
+//after the user is followed
 const After = ({ handleClick }) => {
   return (
     <div style={{ marginTop: "2%" }}>
