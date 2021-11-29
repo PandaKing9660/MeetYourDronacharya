@@ -55,7 +55,7 @@ const QuestionsList = ({searchResult, setSearchResult}) => {
       setLoading (false);
     }, 1000);
   };
-
+  //retrieving questions from backend
   useEffect (
     () => {
       setLoading (true);

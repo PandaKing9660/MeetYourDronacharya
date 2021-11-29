@@ -24,6 +24,7 @@ const AskSomethingAnswer = () => {
   // finding id in the url
   const {question_id} = useParams ();
 
+  // handling spam report
   const handleSpamChange = () => {
     setShowSpam (!showSpam);
     setLoading (true);
@@ -32,6 +33,7 @@ const AskSomethingAnswer = () => {
     }, 1000);
   };
 
+  // sorts answers in reverse time order
   useEffect (() => {
     setLoading (true);
 
@@ -157,6 +159,7 @@ const AskSomethingAnswer = () => {
                     boxShadow: '5px 10px 8px 1px #888888',
                   }}
                 >
+                  {/* Can see all the answers and also checks for spam */}
                   <Typography variant="h4" align="center">
                     Answers
                   </Typography>
@@ -194,6 +197,7 @@ const AskSomethingAnswer = () => {
                             </Grid>
                           </div>
                         : <div>
+                            {/* Button to check the spam answers in that question */}
                             <Button
                               variant="contained"
                               style={{margin: '2%'}}

@@ -23,7 +23,7 @@ const subjects = [
 const EditorAndPreview = ({ option, question_id, edit }) => {
   // sanitize HTML code from XSS issues
   const sanitizer = dompurify.sanitize;
-
+  // if edit is 1 them, it opens an edit modal with already written details
   // for editor state saving
   const editorRef = useRef(null);
   const [editorPrev, setEditorPrev] = useState("");
@@ -70,7 +70,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
     setTags(value);
   };
 
-  // submits the data and send for display in list
+  // submits the data and send for display in list, delete and edit backend
   const handleSubmit = () => {
     if (editorRef.current && editorRef.current.getContent()) {
       if (option === "question") {
@@ -226,7 +226,8 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
       return "Please mention your experience here";
     }
   };
-
+  
+  // used to fetch the title,description,tags while edit mode
   useEffect(() => {
     if (edit && option === "experience") {
       console.log("fetch front");

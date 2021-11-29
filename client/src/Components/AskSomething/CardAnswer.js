@@ -99,7 +99,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                 setUserStatus('liked');
             });
     };
-
+    //deletes answer from backend
     const Confirm = async (userId, answerId) => {
         //const result = await confirm("Are you sure?");
         axios
@@ -129,7 +129,6 @@ const CardAnswer = ({ ansData, questionId }) => {
             });
         return;
     };
-
     const DeleteAnswer = (userId, answerId) => {
         if (!user) {
             alert('Please login to like this question');
@@ -271,6 +270,7 @@ const CardAnswer = ({ ansData, questionId }) => {
                                                     aria-labelledby="alert-dialog-title"
                                                     aria-describedby="alert-dialog-description"
                                                 >
+                                                    {/* confirms with user whether to delete or not */}
                                                     <DialogTitle id="alert-dialog-title">
                                                         {
                                                             'Are you sure to delete?'
