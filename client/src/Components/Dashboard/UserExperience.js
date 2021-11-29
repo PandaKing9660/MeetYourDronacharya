@@ -7,7 +7,7 @@ import CardExperience from '../Experience/CardExperience';
 import {useParams} from 'react-router';
 import Typography from '@mui/material/Typography';
 import NavBar from '../Home/Navbar/Navbar';
-
+//the experiences user shared
 const UserExperience = () => {
   const {userId} = useParams ();
 

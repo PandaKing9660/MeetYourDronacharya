@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-
+// shows all the followers of the user
 const Followers = ({id, current_profile}) => {
   return (
     <div className="card-container">

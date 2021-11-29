@@ -7,7 +7,7 @@ import CardQuestion from '../AskSomething/CardQuestion';
 import {useParams} from 'react-router';
 import Typography from '@mui/material/Typography';
 import NavBar from '../Home/Navbar/Navbar';
-
+//the questions user asked
 const UserQuestion = () => {
   const {userId} = useParams ();
 

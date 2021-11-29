@@ -7,7 +7,7 @@ import CardAnswer from '../AskSomething/CardAnswer';
 import {useParams} from 'react-router';
 import Typography from '@mui/material/Typography';
 import NavBar from '../Home/Navbar/Navbar';
-
+//the answers user answered
 const UserAnswered = () => {
   const {userId} = useParams ();
 
@@ -76,7 +76,6 @@ const UserAnswered = () => {
         Answers
       </h1>
       <Box sx={{flexGrow: 1}} m={1} p={1} mt={2}>
-
         {/* loop over experiences array and pass data to CardExperience component for rendering children */}
 
         {loading

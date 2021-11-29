@@ -1,3 +1,4 @@
+//questions and answers based on the dictionary
 const Guruji_database = () => {
   const dictionary = [
     {
