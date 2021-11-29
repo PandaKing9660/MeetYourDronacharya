@@ -10,7 +10,6 @@ import {
   FormControlLabel,
   FormLabel,
   Divider,
-  Pagination,
   Button,
   Modal,
   Backdrop,
@@ -22,7 +21,6 @@ import {
 } from "@mui/material";
 
 import { Chart } from "react-google-charts";
-import { makeStyles } from "@mui/styles";
 import "./findMyself.css";
 import { questions } from "./FindMyselfQuestion.json";
 import ResultCalculation from "./ResultCalculation.js";
