@@ -26,7 +26,7 @@ const ResetPassword = () => {
     console.log (password, email);
     if (password !== confirmPassword) {
       // inform to fill form
-      alert ('Please check password');
+      alert ('Passwords do not match, check again');
     } else {
       // backend call
       axios
