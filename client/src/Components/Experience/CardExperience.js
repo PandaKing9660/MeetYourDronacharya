@@ -28,6 +28,10 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditorAndPreview from "../AskSomething/EditorAndPreview";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
 
 const ITEM_HEIGHT = 45;
 
@@ -71,7 +75,8 @@ const CardExperience = ({ expData }) => {
   // adds like to the experience shared
   const AddLikes = (userId, experienceId) => {
     if (!user) {
-      alert("Please login to like this question");
+      //alert("Please login to like this question");
+      toast.error("Please login to like this question");
       return;
     }
     console.log(experienceId);
@@ -95,7 +100,8 @@ const CardExperience = ({ expData }) => {
   // adds dislike to the experience shared
   const AddDislikes = (userId, experienceId) => {
     if (!user) {
-      alert("Please login to like this question");
+      //alert("Please login to like this question");
+       toast.error("Please login to dislike this question");
       return;
     }
 
@@ -135,7 +141,8 @@ const CardExperience = ({ expData }) => {
 
   const DeleteUser = (userId, experienceId) => {
     if (!user) {
-      alert("Please login to like this question");
+      //alert("Please login to like this question");
+      toast.error("Please login to like this question");
       return;
     }
     Confirm(userId, experienceId);
@@ -143,7 +150,7 @@ const CardExperience = ({ expData }) => {
 
   const [open2, setOpen2] = useState(false);
   const handleOpen2 = () =>
-    user ? setOpen2(true) : alert("please login to add experience");
+    user ? setOpen2(true) : toast.error("please login to add experience");
   const handleClose2 = () => setOpen2(false);
 
   const [openconfirm, setOpenConfirm] = React.useState(false);

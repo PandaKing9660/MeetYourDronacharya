@@ -15,7 +15,10 @@ import {GoogleLogin} from 'react-google-login';
 import Icon from './Icon';
 import axios from 'axios';
 import './login.css';
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
+toast.configure();
 // for logging in via google
 const googleSuccess = async res => {
   const userData = res.profileObj;

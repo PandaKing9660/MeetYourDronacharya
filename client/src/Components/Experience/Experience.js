@@ -21,6 +21,10 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 import "../Materials/material.css";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
 
 const style = {
   position: "absolute",
@@ -56,7 +60,7 @@ const Experience = () => {
   };
 
   const handleOpen = () =>
-    user ? setOpen(true) : alert("please login to add experience");
+    user ? setOpen(true) : toast.error("Please login to add experience");
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
@@ -140,7 +144,8 @@ const Experience = () => {
 
   const handleChange = (event) => {
     if (event.target.value.includes("user") && !user) {
-      alert("Login to use this feature");
+      //alert("Login to use this feature");
+       toast.error("Login to use this feature");
     } else {
       setOrder(event.target.value);
     }

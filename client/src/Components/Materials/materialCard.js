@@ -19,6 +19,11 @@ import { confirm } from "react-confirm-box";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
+
 
 const MaterialCard = ({ material }) => {
   const sanitizer = dompurify.sanitize;
@@ -60,7 +65,8 @@ const MaterialCard = ({ material }) => {
 
   const DeleteMat = (userId, experienceId) => {
     if (!user) {
-      alert("Please login to like this question");
+      //alert("Please login to like this question");
+      toast.error("Please login to like this question");
       return;
     }
     Confirm(userId, experienceId);

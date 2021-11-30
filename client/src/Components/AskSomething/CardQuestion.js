@@ -23,6 +23,10 @@ import {
     Box,
     Paper,
 } from '@mui/material';
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
 
 const style = {
     position: 'absolute',
@@ -45,7 +49,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
     const [numAnswers, setNumAnswers] = useState(quesData?.answers?.length);
     const [open, setOpen] = useState(false);
     const handleOpen = () =>
-        user ? setOpen(true) : alert('Login to ask question');
+        user ? setOpen(true) : toast.error('Login to ask question');
     const handleClose = () => setOpen(false);
 
     // Retrieving Questions from backend
@@ -71,7 +75,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
     // Adding like to questions and storing it in backend
     const AddLikes = (userId, questionId) => {
         if (!user) {
-            alert('Please login to like this question');
+            toast.error('Please login to like this question');
             return;
         }
 
@@ -98,7 +102,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
     // Adding dislike to questions and storing it in backend
     const AddDislikes = (userId, questionId) => {
         if (!user) {
-            alert('Please login to like this question');
+            toast.error('Please login to dislike this question');
             return;
         }
 

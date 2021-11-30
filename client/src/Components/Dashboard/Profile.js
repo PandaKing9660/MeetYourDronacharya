@@ -15,6 +15,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import ChatBox from "./ChatBox/ChatBox";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
 
 const Profile = ({ userData, handleOpen }) => {
   const [canFollow, setCanFollow] = useState(true);
@@ -32,7 +36,8 @@ const Profile = ({ userData, handleOpen }) => {
 
   const handleClick = () => {
     if (!user) {
-      alert("please login to follow the user");
+      //alert("please login to follow the user");
+      toast.error("Please login to follow the user");
       return;
     }
     setCanFollow(!canFollow);

@@ -28,6 +28,10 @@ import {
   Box,
   Paper,
 } from "@mui/material";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
 
 const ITEM_HEIGHT = 45;
 
@@ -73,7 +77,7 @@ const CardAnswer = ({ ansData, questionId }) => {
   // adding likes and storing it in backend for each answers
   const AddLikes = (userId, answerId) => {
     if (!user) {
-      alert("Please login to like this answer");
+      toast.error("Please login to like this answer");
       return;
     }
 
@@ -125,7 +129,7 @@ const CardAnswer = ({ ansData, questionId }) => {
   };
   const DeleteAnswer = (userId, answerId) => {
     if (!user) {
-      alert("Please login to like this question");
+      toast.error("Please login to delete this answer");
       return;
     }
     Confirm(userId, answerId);
@@ -134,7 +138,7 @@ const CardAnswer = ({ ansData, questionId }) => {
   // adding dislikes and storing it in backend for each answers
   const AddDislikes = (userId, answerId) => {
     if (!user) {
-      alert("Please login to like this answer");
+      toast.error("Please login to dislike this answer");
       return;
     }
 
@@ -179,7 +183,7 @@ const CardAnswer = ({ ansData, questionId }) => {
 
   const [open2, setOpen2] = useState(false);
   const handleOpen2 = () =>
-    user ? setOpen2(true) : alert("please login to add experience");
+    user ? setOpen2(true) : toast.error("please login to add experience");
   const handleClose2 = () => setOpen2(false);
 
   return (

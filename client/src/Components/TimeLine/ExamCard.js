@@ -20,8 +20,11 @@ import Typography from "@mui/material/Typography";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 //import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
 import EventsInExam from "./EventsInExam";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -66,12 +69,15 @@ const ExamCard = ({ cardData, cardId }) => {
 
   const AddBookmark = () => {
     if (!user) {
-      alert("Please login to save bookmark");
+      // alert("Please login to save bookmark");
+
+      toast.error("Please login to save bookmark");
+
       return;
     }
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/addTimeline`, {
-        userId : user._id,
+        userId: user._id,
         timelineNo: cardId,
       })
       .then((res) => {});
@@ -79,7 +85,8 @@ const ExamCard = ({ cardData, cardId }) => {
 
   const DeleteBookmark = (userId, timelineNo) => {
     if (!user) {
-      alert("Please login to save bookmark");
+      //alert("Please login to save bookmark");
+      toast.error("Please login to save bookmark");
       return;
     }
     axios
