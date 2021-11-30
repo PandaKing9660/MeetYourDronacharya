@@ -10,8 +10,11 @@ import {
   Typography,
   Toolbar,
   Link,
+  Tooltip,
+  IconButton
 } from '@material-ui/core';
 import {GoogleLogin} from 'react-google-login';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import Icon from './Icon';
 import axios from 'axios';
 import './login.css';
@@ -75,6 +78,7 @@ const googleError = () =>
 const Login = () => {
   const [email, setEmail] = useState ('');
   const [password, setPassword] = useState ('');
+  const [showPassword,setShow] = useState(false)
 
   const handleSubmit = event => {
     event.preventDefault ();
@@ -111,6 +115,10 @@ const Login = () => {
         .post (`${process.env.REACT_APP_BACKEND_URL}/forget-password`, {email})
         .then (res => {});
     }
+  };
+
+  const setShowPassword = () => {
+    setShow(!showPassword)
   };
 
   return (
@@ -160,16 +168,26 @@ const Login = () => {
                       />
                     </Grid>
                     <Grid item>
-                      <TextField
-                        type="password"
-                        placeholder="Password"
-                        fullWidth
-                        name="password"
-                        variant="outlined"
-                        value={password}
-                        onChange={event => setPassword (event.target.value)}
-                        required
-                      />
+                      <div style={{ display:"flex" }}>
+                        <TextField
+                          type={showPassword?"text":"password"}
+                          placeholder="Password"
+                          fullWidth
+                          name="password"
+                          variant="outlined"
+                          value={password}
+                          onChange={event => setPassword (event.target.value)}
+                          required
+                        />
+                        <Tooltip followCursor title="Click to show/hide password">
+                          <IconButton
+                            sx={{ color: "blue", background: "white" }}
+                            onClick={setShowPassword}
+                          >
+                            <VisibilityIcon/>
+                          </IconButton>
+                        </Tooltip>
+                      </div>
                     </Grid>
                     <Grid item>
                       <Button
