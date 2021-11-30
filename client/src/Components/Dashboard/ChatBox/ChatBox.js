@@ -5,6 +5,8 @@ import io from 'socket.io-client';
 import axios from 'axios';
 
 import queryString from 'query-string';
+import { useParams } from 'react-router-dom';
+
 import {
     Card,
     CardContent,
@@ -24,10 +26,6 @@ import './chatBox.css';
 let socket;
 
 const ChatBox = () => {
-    // Names and IDs of the two users
-    const [idYou, setIdYou] = useState('');
-    const [nameYou, setNameYou] = useState('');
-
     const user = JSON.parse(localStorage.getItem('profile'));
     const [idMe, setIdMe] = useState(user._id);
     const [nameMe, setNameMe] = useState(user.name);
@@ -36,8 +34,11 @@ const ChatBox = () => {
     const [message, setMessage] = useState('');
     // array of the messages
     const [messages, setMessages] = useState([]);
-    const [roomName, setRoomName] = useState(user._id);
     const [chatLoading, setChatLoading] = useState(true);
+
+    // Names and IDs of the two users
+    // parse id of the current user from params
+    const { nameYou, idYou, roomName } = useParams();
 
     // random soothing image
     const imageKeyArr = [
@@ -63,17 +64,6 @@ const ChatBox = () => {
             // , 'polling', 'flashsocket'],
         });
 
-        // parse id of the current user
-        const {
-            name: nameYou,
-            id: idYou,
-            room: roomName,
-        } = queryString.parse(window.location.search);
-
-        setNameYou(nameYou);
-        setIdYou(idYou);
-        setRoomName(roomName);
-
         // emit the event on joining the room
         socket.emit('join', { idMe: idMe, idYou: idYou }, (error) => {
             if (error) {
@@ -83,11 +73,14 @@ const ChatBox = () => {
 
         axios
             .post(`${process.env.REACT_APP_BACKEND_URL}/chatbox/get`, {
-                roomName: roomName,
+                idMe,
+                idYou,
+                roomName,
             })
             .then((res) => {
                 setMessages(res.data[0].messages);
             });
+
         setTimeout(() => {
             setChatLoading(false);
         }, 2000);
@@ -116,7 +109,7 @@ const ChatBox = () => {
             .then((res) => {
                 console.log('message try to save', res);
             })
-            .catch((err) => console.log('Chat save err: ', err));
+            .catch((err) => console.log('Chat save err'));
 
         return () => {
             socket.off('message');

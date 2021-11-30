@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 const chatSchema = new Schema ({
   roomName : {type: String, require: true},
   users : {type : [String], require: true}, // saving user ids
-  messages: {type: [{text: String, user: String}], required: true},
+  messages: {type: [{user: String, text: String}], required: true},
   time: {type: Date, default: Date.now},
 });
 

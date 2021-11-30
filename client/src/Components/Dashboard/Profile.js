@@ -245,7 +245,7 @@ const Profile = ({ userData, handleOpen }) => {
               </div>
             </div>
             <div>
-              <Link to={`/chatbox?name=${userData.name}&id=${userData._id}&room=${roomName}`}>
+              <Link to={`/chatbox/${userData.name}/${userData._id}/${roomName}`}>
                 <Button
                   variant="contained"
                   sx={{ marginTop: "2%", width: "165px" }}
