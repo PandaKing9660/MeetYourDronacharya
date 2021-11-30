@@ -15,7 +15,6 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
 import MenuList from "@mui/material/MenuList";
 import axios from "axios";
-import { confirm } from "react-confirm-box";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -26,6 +25,7 @@ const MaterialCard = ({ material }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const user = JSON.parse(localStorage.getItem("profile"));
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -33,8 +33,8 @@ const MaterialCard = ({ material }) => {
     setAnchorEl(null);
   };
 
+  // Confirming to delete the material
   const Confirm = async (userId, materialId) => {
-    //const result = await confirm("Are you sure?");
     axios
       .post(
         `${process.env.REACT_APP_BACKEND_URL}/study-material/deleteMaterial`,
@@ -58,9 +58,10 @@ const MaterialCard = ({ material }) => {
     setOpenConfirm(false);
   };
 
+  // Deleting Material
   const DeleteMat = (userId, experienceId) => {
     if (!user) {
-      alert("Please login to like this question");
+      alert("Please login to delete the material");
       return;
     }
     Confirm(userId, experienceId);
@@ -68,6 +69,7 @@ const MaterialCard = ({ material }) => {
   // For showing cards displaying studying material
   return (
     <div>
+      {/* Card to display materials */}
       <Card
         sx={{
           marginTop: "2%",
@@ -103,13 +105,12 @@ const MaterialCard = ({ material }) => {
                   },
                 }}
               >
+                {/* Menu to edit and delete */}
                 <MenuList>
                   <MenuItem>
                     <Button
                       onClick={() => {
-                        {
-                          handleClickOpenconfirm();
-                        }
+                        handleClickOpenconfirm();
                       }}
                       sx={{ color: "black" }}
                     >
@@ -118,10 +119,8 @@ const MaterialCard = ({ material }) => {
                     <Dialog
                       open={openconfirm}
                       onClick={() => {
-                        {
-                          handleClose();
-                          handleCloseconfirm();
-                        }
+                        handleClose();
+                        handleCloseconfirm();
                       }}
                       aria-labelledby="alert-dialog-title"
                       aria-describedby="alert-dialog-description"
@@ -132,9 +131,7 @@ const MaterialCard = ({ material }) => {
                       <DialogActions>
                         <Button
                           onClick={() => {
-                            {
-                              handleCloseconfirm();
-                            }
+                            handleCloseconfirm();
                             DeleteMat(user ? user._id : 0, material._id);
                           }}
                         >
@@ -152,10 +149,12 @@ const MaterialCard = ({ material }) => {
           ) : (
             <div />
           )}
+          {/* Card for materials */}
         </CardContent>
         <Grid container>
           <Grid item sm={4} md={3}>
             <Link to={`/dashboard/${material.by}`}>
+              {/* User Info */}
               <CardHeader
                 avatar={
                   <Avatar
@@ -170,6 +169,7 @@ const MaterialCard = ({ material }) => {
               />
             </Link>
             <div style={{ display: "inline-block" }}>
+              {/* Button to view demo material */}
               <Button
                 variant="outlined"
                 href={material.link}
@@ -179,6 +179,7 @@ const MaterialCard = ({ material }) => {
               >
                 View Material
               </Button>
+              {/* Button to chat with user */}
               <Button variant="outlined" style={{ margin: "2% 5%" }}>
                 Chat
               </Button>
@@ -186,9 +187,11 @@ const MaterialCard = ({ material }) => {
           </Grid>
           <Grid item sm={8} md={9}>
             <CardContent>
+              {/* Material Topic */}
               <Typography variant="h4" color="text.primary">
                 {material.topic}
               </Typography>
+              {/* Material Description */}
               <Typography
                 variant="body2"
                 color="text.secondary"
@@ -201,10 +204,12 @@ const MaterialCard = ({ material }) => {
                   style={{ padding: "1%", textAlign: "justify" }}
                 />
               </Typography>
+              {/* Seller Location */}
               <Typography variant="h7" color="text.primary">
                 {material.location}
               </Typography>
             </CardContent>
+            {/* Tags */}
             <div style={{ padding: "0.5%" }}>
               {material.tags.map((tag) => (
                 <Typography display="inline" color="primary">

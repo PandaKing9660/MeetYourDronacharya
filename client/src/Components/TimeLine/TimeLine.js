@@ -20,7 +20,7 @@ import NavBar from "../Home/Navbar/Navbar";
 import "../Materials/material.css";
 import axios from "axios";
 
-// COntains the s and their respective timelines
+// Contains the s and their respective timelines
 // Timeline.js -> ExamCard.js -> EventsInExam.js
 
 function TabPanel(props) {
@@ -58,6 +58,7 @@ function a11yProps(index) {
 
 export default function VerticalTabs() {
   const [value, setValue] = React.useState(0);
+  // To fetch user info
   const user = JSON.parse(localStorage.getItem("profile"));
 
   const handleChange = (event, newValue) => {
@@ -85,7 +86,7 @@ export default function VerticalTabs() {
             width: "150px",
           }}
         >
-      {/* Tabs for showing different types of timeine and bookmarked exams */}
+          {/* Tabs for showing different types of timeine and bookmarked exams */}
           <Tab label="Separate" {...a11yProps(0)} />
           <Tab label="Combined" {...a11yProps(1)} />
           <Tab label="Bookmarked" {...a11yProps(2)} />
@@ -120,6 +121,7 @@ const TimeLine = () => {
         .catch((err) => console.log(err));
     }
   }, []);
+  // Data to store exam cards
   const [examCards, setExamCards] = useState([
     {
       name: "UPSC",
@@ -198,16 +200,15 @@ const Book = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const [bookmark, setbookmark] = React.useState([]);
   useEffect(() => {
-    if(user)
-    {
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
-        userId: user._id,
-      })
-      .then((res) => {
-        setbookmark(res.data[0].bookmarked);
-      })
-      .catch((err) => console.log(err));
+    if (user) {
+      axios
+        .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
+          userId: user._id,
+        })
+        .then((res) => {
+          setbookmark(res.data[0].bookmarked);
+        })
+        .catch((err) => console.log(err));
     }
   }, []);
   const [examCards, setExamCards] = useState([
@@ -499,12 +500,14 @@ const StickyHeadTable = () => {
     setPage(0);
   };
 
+  // Calendar Timeline
   return (
     <Paper sx={{ overflowX: "hidden", width: "115%" }}>
       <TableContainer sx={{ maxHeight: 500, maxWidth: 2000 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
+              {/* Looping over calendar */}
               {columns.map((column) => (
                 <TableCell
                   key={column.id}

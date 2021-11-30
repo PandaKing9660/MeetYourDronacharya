@@ -1,10 +1,10 @@
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 // helps to show all experiences that the user has shared
-const Experience = ({id,current_profile}) => {
+const Experience = ({ id, current_profile }) => {
   return (
     <div className="card-container">
       <div className="card">
-      <Link
+        <Link
           to={
             current_profile
               ? `${id}/user-experience`
@@ -17,10 +17,7 @@ const Experience = ({id,current_profile}) => {
           </div>
           <div className="card--hover">
             <h2>Experience</h2>
-            <p>
-
-              Checkout all the experience shared by the user
-            </p>
+            <p>Checkout all the experience shared by the user</p>
             <p className="link">Click to see</p>
           </div>
         </Link>

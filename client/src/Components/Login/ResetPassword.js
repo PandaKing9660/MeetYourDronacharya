@@ -1,5 +1,5 @@
-import React from 'react';
-import {useState} from 'react';
+import React from "react";
+import { useState } from "react";
 import {
   Button,
   TextField,
@@ -9,52 +9,51 @@ import {
   Typography,
   Toolbar,
   Link,
-} from '@material-ui/core';
-import {useParams} from 'react-router-dom';
-import axios from 'axios';
-import './login.css';
+} from "@material-ui/core";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import "./login.css";
 
 const ResetPassword = () => {
-  const {email} = useParams ();
-  const [password, setPassword] = useState ('');
-  const [confirmPassword, setConfirmPassword] = useState ('');
+  const { email } = useParams();
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   // while submitting
-  const handleSubmit = event => {
-    event.preventDefault ();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    console.log (password, email);
+    console.log(password, email);
     if (password !== confirmPassword) {
       // inform to fill form
-      alert ('Please check password');
+      alert("Please check password");
     } else {
       // backend call
       axios
-        .put (`${process.env.REACT_APP_BACKEND_URL}/reset-password`, {
+        .put(`${process.env.REACT_APP_BACKEND_URL}/reset-password`, {
           email,
           password,
         })
-        .then (res => {
+        .then((res) => {
           // password changed and user logged in
-          console.log (res.data);
           if (res.data.found === true) {
-            console.log ('Changed');
-            localStorage.setItem (
-              'profile',
-              JSON.stringify ({...res.data.user})
+            localStorage.setItem(
+              "profile",
+              JSON.stringify({ ...res.data.user })
             );
             window.location = process.env.REACT_APP_FRONTEND_URL;
           } else {
-            alert ('something wrong');
+            alert("something wrong");
           }
         })
-        .catch (err => {
-          console.log (err);
+        .catch((err) => {
+          console.log(err);
         });
     }
   };
   return (
     <div>
+      {/* Heading  */}
       <AppBar position="static" alignitems="center" color="primary">
         <Toolbar>
           <Grid container justify="center" wrap="wrap">
@@ -86,7 +85,7 @@ const ResetPassword = () => {
               <Grid item>
                 <form onSubmit={handleSubmit}>
                   <Grid container direction="column" spacing={2}>
-
+                    {/* Writing password */}
                     <Grid item>
                       <TextField
                         type="password"
@@ -95,11 +94,11 @@ const ResetPassword = () => {
                         name="password"
                         variant="outlined"
                         value={password}
-                        onChange={event => setPassword (event.target.value)}
+                        onChange={(event) => setPassword(event.target.value)}
                         required
                       />
                     </Grid>
-
+                    {/* Confirming Password */}
                     <Grid item>
                       <TextField
                         type="password"
@@ -108,12 +107,13 @@ const ResetPassword = () => {
                         name="confirmPassword"
                         variant="outlined"
                         value={confirmPassword}
-                        onChange={event =>
-                          setConfirmPassword (event.target.value)}
+                        onChange={(event) =>
+                          setConfirmPassword(event.target.value)
+                        }
                         required
                       />
                     </Grid>
-
+                    {/* Submit Button */}
                     <Grid item>
                       <Button
                         variant="contained"
@@ -128,13 +128,11 @@ const ResetPassword = () => {
                   </Grid>
                 </form>
               </Grid>
-
               <Grid item>
                 <Link href="/login" variant="body2">
-                  Login ?
+                  Login?
                 </Link>
               </Grid>
-
             </Paper>
           </Grid>
         </Grid>

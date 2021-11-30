@@ -9,7 +9,6 @@ const studyMaterialSchema = new Schema ({
   description: {type: String, required: true},
   link: {type: String, required: true},
   location: {type: String, required: true},
-  // image: {data: Buffer, contentType: String},
   tags: {type: [String]},
   date: {type: Date, default:  Date.now},
   userName: {type: String, required: true},

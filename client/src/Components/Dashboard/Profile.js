@@ -1,7 +1,5 @@
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Modal, Backdrop, Box, Fade, Grid, Input } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -13,8 +11,6 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 
 import axios from "axios";
 import { Link } from "react-router-dom";
-
-import ChatBox from "./ChatBox/ChatBox";
 
 const Profile = ({ userData, handleOpen }) => {
   const [canFollow, setCanFollow] = useState(true);
@@ -44,7 +40,6 @@ const Profile = ({ userData, handleOpen }) => {
           followerId: user._id,
         })
         .then((res) => {
-          console.log("updated");
           setFollowers(followers + 1);
         })
         .catch((err) => console.log(err));
@@ -55,7 +50,6 @@ const Profile = ({ userData, handleOpen }) => {
           followerId: user._id,
         })
         .then((res) => {
-          console.log("updated");
           setFollowers(followers - 1);
         })
         .catch((err) => console.log(err));
@@ -81,6 +75,7 @@ const Profile = ({ userData, handleOpen }) => {
     window.location.reload();
   };
 
+  // TO collect user info from the backend
   useEffect(() => {
     if (user) {
       axios
@@ -102,6 +97,7 @@ const Profile = ({ userData, handleOpen }) => {
     <div className="card__collection clear-fix">
       <Grid container>
         <Grid item sm={3} xs={12}>
+          {/* Image of the user  */}
           <div className="cards cards--two">
             <img
               src={userData.imageUrl}
@@ -121,14 +117,17 @@ const Profile = ({ userData, handleOpen }) => {
               textAlign: "right",
             }}
           >
+            {/* Name of the user  */}
             <h5 style={{ margin: 0 }}>Name</h5>
             <h3 style={{ marginTop: "0.3px", marginBottom: "2%" }}>
               {userData.name}
             </h3>
+            {/* Email of the user  */}
             <h5 style={{ margin: 0 }}>Email</h5>
             <h3 style={{ marginTop: "0.3px", marginBottom: "2%" }}>
               {userData.email}
             </h3>
+            {/* Social Medias of the user  */}
             <h5 style={{ margin: 0 }}>Social Media</h5>
             <h3 style={{ marginTop: "0.3px", marginBottom: "2%" }}>
               {userData.socialMedia[0] ? (
@@ -192,6 +191,7 @@ const Profile = ({ userData, handleOpen }) => {
                 ""
               )}
             </h3>
+            {/* Information of the users related to this site.  */}
             <div
               style={{
                 display: "inline-flex",
@@ -228,6 +228,7 @@ const Profile = ({ userData, handleOpen }) => {
                 {userData.experienceShared.length}
               </div>
             </div>
+            {/* Link to chat box  */}
             <div>
               <Link to={`/chatbox?name=${userData.name}&id=${userData._id}`}>
                 <Button
@@ -238,6 +239,7 @@ const Profile = ({ userData, handleOpen }) => {
                 </Button>
               </Link>
             </div>
+            {/* Follow/ unfollow button  */}
             <div>
               {canFollow ? (
                 <Before handleClick={handleClick} />
@@ -245,6 +247,7 @@ const Profile = ({ userData, handleOpen }) => {
                 <After handleClick={handleClick} />
               )}
             </div>
+            {/* If user opens his own accouny, then an option to edit profile.  */}
             {user && user._id === userData._id ? (
               <div>
                 <Button

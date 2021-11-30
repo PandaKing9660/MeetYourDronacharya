@@ -1,3 +1,4 @@
+/* Message Box */
 .messageBox {
   background: #f3f3f3;
   border-radius: 0.9em;
@@ -8,6 +9,7 @@
   height: fit-content;
 }
 
+/* Message text */
 .messageText {
   width: 100%;
   letter-spacing: 0;
@@ -17,10 +19,12 @@
   margin: 0.6em 0;
 }
 
+/* Message text image */
 .messageText img {
   vertical-align: middle;
 }
 
+/* Message Container */
 .messageContainer {
   display: flex;
   justify-content: flex-end;
@@ -28,6 +32,7 @@
   margin-top: 3px;
 }
 
+/* Sent Text */
 .sentText {
   display: flex;
   align-items: center;
@@ -36,6 +41,7 @@
   letter-spacing: 0.3px;
 }
 
+/* Frequently used styling features. */
 .pl-10 {
   padding-left: 1%;
 }

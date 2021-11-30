@@ -12,6 +12,7 @@
   content: "";
 }
 
+// Image
 .img-responsive {
   width: auto;
   height: auto;
@@ -27,6 +28,7 @@ $color-box-5: #f07306;
 $color-box-6: #9b1308;
 $color-box-7: #de8b3e;
 
+// Card for contribution
 .card__collection {
   position: relative;
   display: block;
@@ -55,6 +57,7 @@ $color-box-7: #de8b3e;
   }
 }
 
+// Information card for the user
 .infocard_profile {
   background: white;
   padding: 1%;

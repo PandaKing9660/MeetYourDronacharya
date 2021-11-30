@@ -5,6 +5,7 @@
   margin: 75px 25px 75px 25px;
 }
 
+/* Heading */
 .heading {
   text-align: center;
   font-family: "Monoton", Helvetica, sans-serif;
@@ -20,6 +21,7 @@
   }
 }
 
+/* Information */
 .info {
   margin-bottom: 1%;
   margin-top: -3%;
@@ -29,6 +31,7 @@
   padding: 1%;
 }
 
+/* Materials */
 .materials {
   margin-bottom: 1%;
   margin-top: -3%;

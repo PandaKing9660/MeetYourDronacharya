@@ -1,15 +1,15 @@
-import './aboutus.css';
-import * as React from 'react';
-import {Grid, Divider} from '@mui/material';
-import NavBar from '../Home/Navbar/Navbar';
+import "./aboutus.css";
+import * as React from "react";
+import { Grid, Divider } from "@mui/material";
+import NavBar from "../Home/Navbar/Navbar";
 
-import adi from './Photos/adi.jpg';
-import amit from './Photos/amit.png';
-import anu from './Photos/anu.jpg';
-import sow from './Photos/sow.png';
+import adi from "./Photos/adi.jpg";
+import amit from "./Photos/amit.png";
+import anu from "./Photos/anu.jpg";
+import sow from "./Photos/sow.png";
 
 // Action Card for displaying image
-function ActionAreaCard (props) {
+function ActionAreaCard(props) {
   return (
     <div className="us_AboutUs">
       <div className="image_AboutUs">
@@ -27,6 +27,7 @@ const Aboutwebsite = () => {
   return (
     <div className="aboutwebsite_AboutUs">
       <h1 className="heading">ABOUT WEBSITE</h1>
+      {/* Displaying why we made this website. */}
       <div className="idea_AboutUs">
         <h3>Idea</h3>
         <p>
@@ -41,6 +42,7 @@ const Aboutwebsite = () => {
         </p>
       </div>
       <Divider />
+      {/* Displaying how to contribute in this website */}
       <div className="how_AboutUs">
         <h3>How to contribute</h3>
         <p>
@@ -49,13 +51,14 @@ const Aboutwebsite = () => {
           contribute by asking career related questions and uploading their
           study materials which can be used by other students. An expert can
           contribute by answering question of students and sharing their
-          experiences. An expert can also add qestionset, answering which a
+          experiences. An expert can also add questionset, answering which a
           student will get the most suitable career choice along with relative
           grading of other all career choices.
         </p>
       </div>
       <Divider />
       <div className="purpose_AboutUs">
+        {/* Displaying purpose of the website */}
         <h3>Purpose</h3>
         <p>
           We have developed a platform where one can come and do various
@@ -74,7 +77,9 @@ const AboutTeam = () => {
   return (
     <div className="aboutteam_AboutUs">
       <div className="team_AboutUs">
+        {/* Displaying front message */}
         <h1 className="mess_AboutUs">Contribute to spread experience!!!</h1>
+        {/* Team pic and one-linear hidden behind message. */}
         <Grid
           className="teampic_AboutUs"
           container
@@ -82,18 +87,21 @@ const AboutTeam = () => {
           alignItems="center"
         >
           <Grid item sm={12}>
-            <h2 style={{textAlign: 'center', display: 'block'}}>
-              {' '}
-              DEVELOPERS{' '}
+            <h2 style={{ textAlign: "center", display: "block" }}>
+              {" "}
+              DEVELOPERS{" "}
             </h2>
           </Grid>
+          {/* Left Half */}
           <Grid item xs={12} sm={6}>
+            {/* Aditya */}
             <ActionAreaCard
               photo={adi}
               name="Aditya Sharma"
               roll="CS19B001"
               text="Avoid thinking about your career after B.Tech. It's late but not the end."
             />
+            {/* Amit */}
             <ActionAreaCard
               photo={amit}
               name="Amit Kesari"
@@ -101,20 +109,22 @@ const AboutTeam = () => {
               text="Don't let AI or society decide your future."
             />
           </Grid>
+          {/* Right Half */}
           <Grid item xs={12} sm={6}>
+            {/* Sowmya */}
             <ActionAreaCard
               photo={sow}
               name="Emani Sowmya"
               roll="CS19B045"
               text="Be faithful to yourself and decide your career which will interests you."
             />
+            {/* Anand */}
             <ActionAreaCard
               photo={anu}
               name="Anu Anand Annu"
               roll="CS19B044"
               text="The one-liner of other three is written by me!!!"
             />
-
           </Grid>
         </Grid>
       </div>
@@ -126,11 +136,14 @@ const AboutTeam = () => {
 const AboutUs = () => {
   return (
     <div className="aboutus_AboutUs">
+      {/* Navbar */}
       <NavBar noSearch={true} />
       <Grid container spacing={2}>
+        {/* Purpose of the website */}
         <Grid item sm={12} md={7}>
           <Aboutwebsite />
         </Grid>
+        {/* Message and displaying the team */}
         <Grid item sm={12} md={5}>
           <AboutTeam />
         </Grid>

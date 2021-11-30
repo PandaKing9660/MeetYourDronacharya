@@ -1,212 +1,203 @@
-import React, {useState, useEffect} from 'react';
-import Box from '@mui/material/Box';
-import axios from 'axios';
-import Grid from '@mui/material/Grid';
-import CircularProgress from '@mui/material/CircularProgress';
-import {useParams} from 'react-router';
-import Typography from '@mui/material/Typography';
-import NavBar from '../Home/Navbar/Navbar';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import PersonIcon from '@mui/icons-material/Person';
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import PublicIcon from '@mui/icons-material/Public';
-import RingVolumeIcon from '@mui/icons-material/RingVolume';
-import Button from '@mui/material/Button';
+import React, { useState, useEffect } from "react";
+import Box from "@mui/material/Box";
+import axios from "axios";
+import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useParams } from "react-router";
+import Typography from "@mui/material/Typography";
+import NavBar from "../Home/Navbar/Navbar";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import IconButton from "@mui/material/IconButton";
+import PersonIcon from "@mui/icons-material/Person";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import PublicIcon from "@mui/icons-material/Public";
+import RingVolumeIcon from "@mui/icons-material/RingVolume";
+import Button from "@mui/material/Button";
 //the followers of users
 const UserFollowers = () => {
-  const {userId} = useParams ();
+  const { userId } = useParams();
 
-  const [followers, setFollowers] = useState ([]);
+  const [followers, setFollowers] = useState([]);
 
-  const [loading, setLoading] = useState (false);
-  const [userMsg, setUserMsg] = useState ('');
-  const [searchedFollower, setSearchedFollower] = useState ([]);
-  const [searchResult, setSearchResult] = useState ('');
+  const [loading, setLoading] = useState(false);
+  const [userMsg, setUserMsg] = useState("");
+  const [searchedFollower, setSearchedFollower] = useState([]);
+  const [searchResult, setSearchResult] = useState("");
 
-  useEffect (() => {
-    console.log (userId);
-    setLoading (true);
+  useEffect(() => {
+    setLoading(true);
 
+    // Fetching user followers details
     axios
-      .post (`${process.env.REACT_APP_BACKEND_URL}/dashboard/user-followers`, {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/user-followers`, {
         userId,
       })
-      .then (res => {
-        setLoading (false);
-        console.log (res.data.length);
+      .then((res) => {
+        setLoading(false);
         if (res.data.length === 0) {
-          setUserMsg ('No followers yet');
-        } else if (res.data[0] === -1) setUserMsg ('No User Found');
+          setUserMsg("No followers yet");
+        } else if (res.data[0] === -1) setUserMsg("No User Found");
         else {
-          setFollowers (res.data);
-          setSearchedFollower (res.data);
-          console.log (searchedFollower);
+          setFollowers(res.data);
+          setSearchedFollower(res.data);
         }
       })
-      .catch (err => console.log (err));
+      .catch((err) => console.log(err));
   }, []);
 
-  useEffect (
-    () => {
-      const newSearchedFollower = followers.filter (follower => {
-        if (follower?.name.toLowerCase ().includes (searchResult.toLowerCase ()))
-          return true;
-        if (
-          follower?.email.toLowerCase ().includes (searchResult.toLowerCase ())
-        )
-          return true;
+  // Searching in the whole webpage
+  useEffect(() => {
+    const newSearchedFollower = followers.filter((follower) => {
+      if (follower?.name.toLowerCase().includes(searchResult.toLowerCase()))
+        return true;
+      if (follower?.email.toLowerCase().includes(searchResult.toLowerCase()))
+        return true;
 
-        return false;
-      });
-    
-      setSearchedFollower (newSearchedFollower);
-      
-    },
-    [searchResult]
-  );
+      return false;
+    });
+
+    setSearchedFollower(newSearchedFollower);
+  }, [searchResult]);
 
   return (
     <div>
+      {/* Search Box  */}
       <NavBar setSearchResult={setSearchResult} />
       <h1
         className="heading"
-        style={{marginTop: 25, marginBottom: 10, textAlign: 'center'}}
+        style={{ marginTop: 25, marginBottom: 10, textAlign: "center" }}
       >
         Followers
       </h1>
-      <Box sx={{flexGrow: 1}} m={1} p={1} mt={2}>
-
+      <Box sx={{ flexGrow: 1 }} m={1} p={1} mt={2}>
         {/* loop over experiences array and pass data to CardExperience component for rendering children */}
 
-        {loading
-          ? <CircularProgress />
-          : userMsg
-              ? <Typography
-                  sx={{mb: 1.5, fontSize: '0.91rem'}}
-                  color="text.secondary"
-                >
-                  {userMsg}
-                </Typography>
-              : searchedFollower.length > 0
-                  ? <div>
-                  {console.log(searchedFollower)}
-                      <Grid
-                        container
-                        columns={{xs: 4, sm: 8, md: 2}}
-                        justifyContent="flex-grow"
-                        alignItems="center"
-                      >
-                        {searchedFollower.map (follower => {
-                          return (
-                            <Grid item xs={12} md={6} key={follower?._id}>
-                              <UserCard follower={follower} />
-                            </Grid>
-                          );
-                        })}
-
-                      </Grid>
-
-                    </div>
-                  : <Typography
-                      sx={{mb: 1.5, fontSize: '0.91rem'}}
-                      color="text.secondary"
-                    >
-                      No Follower
-                    </Typography>}
+        {loading ? (
+          <CircularProgress />
+        ) : userMsg ? (
+          <Typography
+            sx={{ mb: 1.5, fontSize: "0.91rem" }}
+            color="text.secondary"
+          >
+            {userMsg}
+          </Typography>
+        ) : searchedFollower.length > 0 ? (
+          <div>
+            {console.log(searchedFollower)}
+            <Grid
+              container
+              columns={{ xs: 4, sm: 8, md: 2 }}
+              justifyContent="flex-grow"
+              alignItems="center"
+            >
+              {searchedFollower.map((follower) => {
+                return (
+                  <Grid item xs={12} md={6} key={follower?._id}>
+                    <UserCard follower={follower} />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </div>
+        ) : (
+          <Typography
+            sx={{ mb: 1.5, fontSize: "0.91rem" }}
+            color="text.secondary"
+          >
+            No Follower
+          </Typography>
+        )}
       </Box>
     </div>
   );
 };
 
-const handleChange = id => {
-  window.location = process.env.REACT_APP_FRONTEND_URL + '/dashboard/' + id;
+const handleChange = (id) => {
+  window.location = process.env.REACT_APP_FRONTEND_URL + "/dashboard/" + id;
 };
 
-const UserCard = ({follower}) => {
-  const [canFollow, setCanFollow] = useState (true);
-  const [followers, setFollowers] = useState (follower?.followers?.length);
-  const user = JSON.parse (localStorage.getItem ('profile'));
+// User Card
+const UserCard = ({ follower }) => {
+  const [canFollow, setCanFollow] = useState(true);
+  const [followers, setFollowers] = useState(follower?.followers?.length);
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   const handleClick = () => {
     if (!user) {
-      alert ('please login to follow the user');
+      // If not logged in
+      alert("Please login to follow the user");
       return;
     }
-    setCanFollow (!canFollow);
+    setCanFollow(!canFollow);
     if (canFollow) {
       // if true then user un-followed the current user
       axios
-        .put (`${process.env.REACT_APP_BACKEND_URL}/dashboard/add-follower`, {
+        .put(`${process.env.REACT_APP_BACKEND_URL}/dashboard/add-follower`, {
           userId: follower?._id,
           followerId: user._id,
         })
-        .then (res => {
-          setFollowers (followers + 1);
+        .then((res) => {
+          setFollowers(followers + 1);
         })
-        .catch (err => console.log (err));
+        .catch((err) => console.log(err));
     } else {
+      // if false then user followed the current user
       axios
-        .put (
-          `${process.env.REACT_APP_BACKEND_URL}/dashboard/remove-follower`,
-          {
-            userId: follower?._id,
-            followerId: user._id,
-          }
-        )
-        .then (res => {
-          setFollowers (followers - 1);
+        .put(`${process.env.REACT_APP_BACKEND_URL}/dashboard/remove-follower`, {
+          userId: follower?._id,
+          followerId: user._id,
         })
-        .catch (err => console.log (err));
+        .then((res) => {
+          setFollowers(followers - 1);
+        })
+        .catch((err) => console.log(err));
     }
   };
 
-  useEffect (() => {
+  // To check whether the user follow or not
+  useEffect(() => {
     if (user) {
       axios
-        .post (
-          `${process.env.REACT_APP_BACKEND_URL}/dashboard/check-follower`,
-          {
-            userId: follower?._id,
-            followerId: user?._id,
-          }
-        )
-        .then (res => {
-          setCanFollow (!res.data);
+        .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/check-follower`, {
+          userId: follower?._id,
+          followerId: user?._id,
         })
-        .catch (err => console.log (err));
+        .then((res) => {
+          setCanFollow(!res.data);
+        })
+        .catch((err) => console.log(err));
     } else {
-      setCanFollow (true);
+      setCanFollow(true);
     }
   }, []);
 
+  // Followers cards
   return (
     <Card
       sx={{
-        display: 'flex',
-        margin: '2%',
-        width: '60%',
-        justifyContent: 'space-between',
+        display: "flex",
+        margin: "2%",
+        width: "60%",
+        justifyContent: "space-between",
       }}
     >
-      <div style={{display: 'flex'}}>
+      <div style={{ display: "flex" }}>
         <CardMedia
           component="img"
-          sx={{width: 151}}
+          sx={{ width: 151 }}
           image={follower?.imageUrl}
           alt="User Image"
-          onClick={() => handleChange (follower?._id)}
-          style={{cursor: 'pointer'}}
+          onClick={() => handleChange(follower?._id)}
+          style={{ cursor: "pointer" }}
         />
 
-        <Box sx={{display: 'flex', flexDirection: 'column'}}>
-
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
           <CardContent
-            sx={{flex: '1 0 auto'}}
-            onClick={() => handleChange (follower?._id)}
-            style={{cursor: 'pointer'}}
+            sx={{ flex: "1 0 auto" }}
+            onClick={() => handleChange(follower?._id)}
+            style={{ cursor: "pointer" }}
           >
             <Typography component="div" variant="h5">
               {follower?.name}
@@ -219,16 +210,17 @@ const UserCard = ({follower}) => {
               {follower?.email}
             </Typography>
           </CardContent>
-          <Box sx={{display: 'flex', alignItems: 'center', pl: 1, pb: 1}}>
+          <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
             <IconButton
               aria-label="followers"
               title="user followers"
               onClick={() =>
                 (window.location =
                   process.env.REACT_APP_FRONTEND_URL +
-                  '/dashboard/' +
+                  "/dashboard/" +
                   follower?._id +
-                  '/user-followers')}
+                  "/user-followers")
+              }
             >
               <PersonIcon />
             </IconButton>
@@ -237,9 +229,10 @@ const UserCard = ({follower}) => {
               onClick={() =>
                 (window.location =
                   process.env.REACT_APP_FRONTEND_URL +
-                  '/dashboard/' +
+                  "/dashboard/" +
                   follower?._id +
-                  '/user-experience')}
+                  "/user-experience")
+              }
               title="user experience"
             >
               <PublicIcon />
@@ -249,9 +242,10 @@ const UserCard = ({follower}) => {
               onClick={() =>
                 (window.location =
                   process.env.REACT_APP_FRONTEND_URL +
-                  '/dashboard/' +
+                  "/dashboard/" +
                   follower?._id +
-                  '/user-answer')}
+                  "/user-answer")
+              }
               title="user answers"
             >
               <QuestionAnswerIcon />
@@ -262,44 +256,50 @@ const UserCard = ({follower}) => {
               onClick={() =>
                 (window.location =
                   process.env.REACT_APP_FRONTEND_URL +
-                  '/dashboard/' +
+                  "/dashboard/" +
                   follower?._id +
-                  '/user-question')}
+                  "/user-question")
+              }
               title="user questions"
             >
               <RingVolumeIcon />
             </IconButton>
           </Box>
-
         </Box>
       </div>
 
-      <div style={{display: 'flex', alignItems: 'center', marginRight: '2%'}}>
-        {canFollow
-          ? <Before handleClick={handleClick} />
-          : <After handleClick={handleClick} />}
+      <div style={{ display: "flex", alignItems: "center", marginRight: "2%" }}>
+        {canFollow ? (
+          <Before handleClick={handleClick} />
+        ) : (
+          <After handleClick={handleClick} />
+        )}
       </div>
     </Card>
   );
 };
 
-const Before = ({handleClick}) => {
+// Follow button before clicked
+const Before = ({ handleClick }) => {
   return (
-    <div style={{marginTop: '2%'}}>
-      <Button variant="contained" onClick={handleClick}>Follow</Button>
+    <div style={{ marginTop: "2%" }}>
+      <Button variant="contained" onClick={handleClick}>
+        Follow
+      </Button>
     </div>
   );
 };
 
-const After = ({handleClick}) => {
+// Follow button after clicked
+const After = ({ handleClick }) => {
   return (
-    <div style={{marginTop: '2%'}}>
+    <div style={{ marginTop: "2%" }}>
       <Button
         variant="contained"
         sx={{
-          backgroundColor: 'green',
-          '&:hover': {
-            backgroundColor: 'green',
+          backgroundColor: "green",
+          "&:hover": {
+            backgroundColor: "green",
           },
         }}
         onClick={handleClick}

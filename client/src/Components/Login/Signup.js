@@ -1,5 +1,5 @@
-import React from 'react';
-import {useState} from 'react';
+import React from "react";
+import { useState } from "react";
 import {
   Button,
   TextField,
@@ -9,90 +9,107 @@ import {
   Typography,
   Toolbar,
   Link,
-} from '@material-ui/core';
-import {GoogleLogin} from 'react-google-login';
-import Icon from './Icon';
+  Tooltip,
+  IconButton,
+} from "@material-ui/core";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { GoogleLogin } from "react-google-login";
+import Icon from "./Icon";
 
-import axios from 'axios';
-import './login.css';
+import axios from "axios";
+import "./login.css";
 
-const googleSuccess = async res => {
+const googleSuccess = async (res) => {
   const userData = res.profileObj;
-  console.log (userData);
+  console.log(userData);
 
-  const {name, email, imageUrl} = userData;
+  const { name, email, imageUrl } = userData;
 
   const password = userData.googleId;
 
   // signing up the user
   axios
-    .post (`${process.env.REACT_APP_BACKEND_URL}/signup`, {
+    .post(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
       name,
       email,
       password,
       imageUrl,
     })
-    .then (res => {
-      console.log ('hello');
-      if (res.data.msg === 'done') {
-        console.log ('Registered');
-        localStorage.setItem ('profile', JSON.stringify ({...res.data.user}));
+    .then((res) => {
+      if (res.data.msg === "done") {
+        localStorage.setItem("profile", JSON.stringify({ ...res.data.user }));
         window.location = process.env.REACT_APP_FRONTEND_URL;
       } else {
-        alert ('something wrong');
+        alert("something wrong");
       }
     })
-    .catch (err => {
-      console.log (err);
+    .catch((err) => {
+      console.log(err);
     });
 };
 
+// Google error
 const googleError = () =>
-  alert ('Google Sign In was unsuccessful. Try again later');
+  alert("Google Sign In was unsuccessful. Try again later");
 
+// Signup
 const Signup = () => {
-  const [name, setName] = useState ('');
-  const [email, setEmail] = useState ('');
-  const [password, setPassword] = useState ('');
-  const [confirmPassword, setConfirmPassword] = useState ('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShow] = useState(false);
+  const [showPasswordConfirm, setShowConfirm] = useState(false);
 
   // while submitting
-  const handleSubmit = event => {
-    event.preventDefault ();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const imageUrl = false;
-    console.log (name, password, email);
+    console.log(name, password, email);
     if (password !== confirmPassword) {
       // inform to fill form
-      alert ('Please check password');
+      alert("Please check password");
     } else {
       // backend call
       axios
-        .post (`${process.env.REACT_APP_BACKEND_URL}/signup`, {
+        .post(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
           name,
           email,
           password,
           imageUrl,
         })
-        .then (res => {
-          console.log ('hello');
-          if (res.data.msg === 'done') {
-            console.log ('Registered');
-            localStorage.setItem (
-              'profile',
-              JSON.stringify ({...res.data.user})
+        .then((res) => {
+          console.log("hello");
+          if (res.data.msg === "done") {
+            console.log("Registered");
+            localStorage.setItem(
+              "profile",
+              JSON.stringify({ ...res.data.user })
             );
             window.location = process.env.REACT_APP_FRONTEND_URL;
           } else {
-            alert ('something wrong');
+            alert("something wrong");
           }
         })
-        .catch (err => {
-          console.log (err);
+        .catch((err) => {
+          console.log(err);
         });
     }
   };
+
+  // To show password after clicking eye button
+  const setShowPassword = () => {
+    setShow(!showPassword);
+  };
+
+  // To show confirm password after clicking eye button
+  const setShowPasswordConfirm = () => {
+    setShowConfirm(!showPasswordConfirm);
+  };
+
   return (
     <div>
+      {/* heading */}
       <AppBar position="static" alignitems="center" color="primary">
         <Toolbar>
           <Grid container justify="center" wrap="wrap">
@@ -124,7 +141,7 @@ const Signup = () => {
               <Grid item>
                 <form onSubmit={handleSubmit}>
                   <Grid container direction="column" spacing={2}>
-
+                    {/* Username */}
                     <Grid item>
                       <TextField
                         type="text"
@@ -133,11 +150,11 @@ const Signup = () => {
                         name="Name"
                         variant="outlined"
                         value={name}
-                        onChange={event => setName (event.target.value)}
+                        onChange={(event) => setName(event.target.value)}
                         required
                       />
                     </Grid>
-
+                    {/* Email id */}
                     <Grid item>
                       <TextField
                         type="email"
@@ -146,39 +163,68 @@ const Signup = () => {
                         name="username"
                         variant="outlined"
                         value={email}
-                        onChange={event => setEmail (event.target.value)}
+                        onChange={(event) => setEmail(event.target.value)}
                         required
                         autoFocus
                       />
                     </Grid>
-
+                    {/* Password */}
                     <Grid item>
-                      <TextField
-                        type="password"
-                        placeholder="Password"
-                        fullWidth
-                        name="password"
-                        variant="outlined"
-                        value={password}
-                        onChange={event => setPassword (event.target.value)}
-                        required
-                      />
+                      <div style={{ display: "flex" }}>
+                        <TextField
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Password"
+                          fullWidth
+                          name="password"
+                          variant="outlined"
+                          value={password}
+                          onChange={(event) => setPassword(event.target.value)}
+                          required
+                        />
+                        {/* Button for visibility of password */}
+                        <Tooltip
+                          followCursor
+                          title="Click to show/hide password"
+                        >
+                          <IconButton
+                            sx={{ color: "blue", background: "white" }}
+                            onClick={setShowPassword}
+                          >
+                            <VisibilityIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </div>
                     </Grid>
-
+                    {/* Confirm Password */}
                     <Grid item>
-                      <TextField
-                        type="password"
-                        placeholder="Confirm Password"
-                        fullWidth
-                        name="confirmPassword"
-                        variant="outlined"
-                        value={confirmPassword}
-                        onChange={event =>
-                          setConfirmPassword (event.target.value)}
-                        required
-                      />
+                      <div style={{ display: "flex" }}>
+                        <TextField
+                          type={showPasswordConfirm ? "text" : "password"}
+                          placeholder="Password"
+                          fullWidth
+                          name="password"
+                          variant="outlined"
+                          value={confirmPassword}
+                          onChange={(event) =>
+                            setConfirmPassword(event.target.value)
+                          }
+                          required
+                        />
+                        {/* Button for visibility of password */}
+                        <Tooltip
+                          followCursor
+                          title="Click to show/hide password"
+                        >
+                          <IconButton
+                            sx={{ color: "blue", background: "white" }}
+                            onClick={setShowPasswordConfirm}
+                          >
+                            <VisibilityIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </div>
                     </Grid>
-
+                    {/* Submit Button */}
                     <Grid item>
                       <Button
                         variant="contained"
@@ -190,10 +236,11 @@ const Signup = () => {
                         Submit
                       </Button>
                     </Grid>
+                    {/* Google Sign In */}
                     <Grid item>
                       <GoogleLogin
                         clientId="509042475407-tbckpsecdrm3tpqpe9hbusmef2t7vr3c.apps.googleusercontent.com"
-                        render={renderProps => (
+                        render={(renderProps) => (
                           <Button
                             color="primary"
                             fullWidth
@@ -219,7 +266,6 @@ const Signup = () => {
                   Login ?
                 </Link>
               </Grid>
-
             </Paper>
           </Grid>
         </Grid>

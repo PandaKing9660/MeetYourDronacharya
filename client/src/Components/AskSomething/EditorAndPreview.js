@@ -33,6 +33,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState(["meetyourdronacharya"]);
   const user = JSON.parse(localStorage.getItem("profile"));
+
   const [quesData, setQuesData] = useState({
     title: "Title",
     question: "description",
@@ -45,6 +46,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
     userImage: "https://robohash.org/dacarpas",
   });
 
+  // Initialising the size of the fonts.
   let smSize1, smSize2;
   if (option === "answer") {
     smSize1 = 4.5;
@@ -80,23 +82,19 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
             {
               by: user._id,
               title: title,
-
               question: editorRef.current.getContent(),
               tags: tags,
             }
           )
           .then((res) => {
-            axios
-              .put(
-                `${process.env.REACT_APP_BACKEND_URL}/dashboard/add-question`,
-                {
-                  userId: user._id,
-                  questionId: res.data._id,
-                }
-              )
-              .then((res) => console.log(res.data));
-
-            window.location.reload ();
+            axios.put(
+              `${process.env.REACT_APP_BACKEND_URL}/dashboard/add-question`,
+              {
+                userId: user._id,
+                questionId: res.data._id,
+              }
+            );
+            window.location.reload();
           })
           .catch((err) => console.log(err));
       } else if (option === "answer") {
@@ -114,35 +112,28 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
               }
             )
             .then((res) => {
-              axios
-                .put(
-                  `${process.env.REACT_APP_BACKEND_URL}/dashboard/add-answer`,
-                  {
-                    userId: user._id,
-                    answerId: res.data._id,
-                  }
-                )
-                .then((res) => console.log(res.data));
+              axios.put(
+                `${process.env.REACT_APP_BACKEND_URL}/dashboard/add-answer`,
+                {
+                  userId: user._id,
+                  answerId: res.data._id,
+                }
+              );
 
               window.location.reload();
             })
 
             .catch((err) => console.log(err));
         } else {
-          console.log("edit");
-          axios
-            .post(
-              `${process.env.REACT_APP_BACKEND_URL}/ask-something/answer/editAns`,
-              {
-                experienceId: question_id,
-                title: title,
-                tags: tags,
-                answer: editorRef.current.getContent(),
-              }
-            )
-            .then((res) => {
-              console.log("done");
-            });
+          axios.post(
+            `${process.env.REACT_APP_BACKEND_URL}/ask-something/answer/editAns`,
+            {
+              experienceId: question_id,
+              title: title,
+              tags: tags,
+              answer: editorRef.current.getContent(),
+            }
+          );
           window.location.reload();
         }
       } else if (option === "experience") {
@@ -155,59 +146,34 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
               experience: editorRef.current.getContent(),
             })
             .then((res) => {
-              axios
-                .put(
-                  `${process.env.REACT_APP_BACKEND_URL}/dashboard/add-experience`,
-                  {
-                    userId: user._id,
-                    experienceId: res.data._id,
-                  }
-                )
-                .then((res) => {
-                  console.log(res.data);
-                });
+              axios.put(
+                `${process.env.REACT_APP_BACKEND_URL}/dashboard/add-experience`,
+                {
+                  userId: user._id,
+                  experienceId: res.data._id,
+                }
+              );
 
               window.location.reload();
             })
             .catch((err) => console.log(err));
         } else {
-          axios
-            .post(`${process.env.REACT_APP_BACKEND_URL}/experience/editExp`, {
+          axios.post(
+            `${process.env.REACT_APP_BACKEND_URL}/experience/editExp`,
+            {
               experienceId: question_id,
               title: title,
               tags: tags,
               experience: editorRef.current.getContent(),
-            })
-            .then((res) => {
-              console.log("done");
-            });
+            }
+          );
           window.location.reload();
         }
       }
-      /*
-        if (edit) {
-        console.log("question_id", question_id);
-        console.log("userId", user._id);
-
-        axios
-          .post (`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
-            experienceId: question_id,
-          })
-          .then (res => {
-            axios.put (
-              `${process.env.REACT_APP_BACKEND_URL}/dashboard/delExp`,
-              {
-                experienceId: question_id,
-                userId: user._id,
-              }
-            );
-            window.location.reload ();
-          });
-      }
-      */
     }
   };
 
+  // Initializing the Heading
   const findLabel = () => {
     if (option === "question") {
       return "What is your question ?";
@@ -217,6 +183,8 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
       return "Title for your experience";
     }
   };
+
+  // Initializing Title
   const findPlaceholder = () => {
     if (option === "question") {
       return "Please provide all the information experts would need to answer your question here...";
@@ -226,12 +194,10 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
       return "Please mention your experience here";
     }
   };
-  
+
   // used to fetch the title,description,tags while edit mode
   useEffect(() => {
-    console.log(option);
-    if (edit =="true" && option == "experience") {
-      console.log("fetch front");
+    if (edit == "true" && option == "experience") {
       axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/experience/fetchtitle`, {
           experienceId: question_id,
@@ -242,9 +208,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
           setTags(res.data.tags);
         })
         .catch((err) => console.log(err));
-    }
-
-    else if (edit == "true" && option == "answer") {
+    } else if (edit == "true" && option == "answer") {
       axios
         .post(
           `${process.env.REACT_APP_BACKEND_URL}/ask-something/answer/fetchtitle`,
@@ -253,7 +217,6 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
           }
         )
         .then((res) => {
-          console.log(res.data);
           setTitle(res.data.title);
           setDescription(res.data.answer);
           setTags(res.data.tags);
@@ -264,12 +227,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
 
   return (
     <div>
-      <Grid
-        container
-        // columnSpacing={{ xs: 1 }}
-        justifyContent="space-around"
-        alignItems="center"
-      >
+      <Grid container justifyContent="space-around" alignItems="center">
         {/* At loading time */}
         {!loadingEditor && (
           <Stack sx={{ width: "100%", color: "grey.500" }} spacing={1}>
@@ -285,7 +243,6 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
           <TextField
             label={findLabel()}
             color="info"
-            // focused
             fullWidth
             value={title}
             required
@@ -305,11 +262,9 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
                 editorRef.current = editor;
                 setLoadingEditor(1);
               }}
-              // initialValue="<p>Some initial text.</p>"
               init={{
                 height: 350,
                 menubar: true,
-                // true for more options
                 plugins: [
                   "advlist autolink lists link image charmap print preview anchor",
                   "searchreplace visualblocks code fullscreen",
@@ -331,6 +286,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
             />
 
             <div style={{ paddingBottom: "15px", paddingTop: "15px" }}>
+              {/* Autocomplete for tags  */}
               <Autocomplete
                 multiple
                 id="tags-filled"
@@ -358,6 +314,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
               />
             </div>
           </Box>
+          {/* Preview of the inputs */}
           {loadingEditor && (
             <div>
               <LoadingButton
@@ -370,6 +327,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
               >
                 Preview
               </LoadingButton>
+              {/* Submit Button  */}
               <LoadingButton
                 color="info"
                 onClick={handleSubmit}
@@ -390,8 +348,6 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
             <Box
               sx={{
                 minWidth: 205,
-                // maxWidth: 600,
-                // border: '1px solid #bdc1c5',
                 marginBottom: "12px",
                 overflow: "auto",
               }}

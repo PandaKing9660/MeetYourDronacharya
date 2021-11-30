@@ -123,9 +123,10 @@ const CardAnswer = ({ ansData, questionId }) => {
       });
     return;
   };
+  // To delete an answer
   const DeleteAnswer = (userId, answerId) => {
     if (!user) {
-      alert("Please login to like this question");
+      alert("Please login to delete the answer");
       return;
     }
     Confirm(userId, answerId);
@@ -134,7 +135,7 @@ const CardAnswer = ({ ansData, questionId }) => {
   // adding dislikes and storing it in backend for each answers
   const AddDislikes = (userId, answerId) => {
     if (!user) {
-      alert("Please login to like this answer");
+      alert("Please login to dislike this answer");
       return;
     }
 
@@ -602,7 +603,7 @@ const CardAnswer = ({ ansData, questionId }) => {
             <div style={{ display: "flex" }}>
               {ansData?.tags.map(
                 (
-                  tag // <Typography color="primary">#{tag}</Typography>
+                  tag
                 ) => (
                   <Chip
                     label={"#" + tag}

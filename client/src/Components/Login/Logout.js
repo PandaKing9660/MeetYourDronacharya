@@ -6,7 +6,7 @@ import {Typography} from '@mui/material';
 
 const Logout = () => {
   useEffect (() => {
-    // loging out the user after some wait
+    // logging out the user after some wait
     setTimeout (() => {
       localStorage.removeItem ('profile');
       window.location.href = process.env.REACT_APP_FRONTEND_URL;
@@ -18,7 +18,7 @@ const Logout = () => {
 
       <Stack sx={{width: '100%', color: 'grey.500'}} spacing={3} mt={4}>
         <Typography variant="h4">
-          Signing You out...
+          Signing you out...
         </Typography>
         <LinearProgress color="secondary" />
         <LinearProgress color="success" />

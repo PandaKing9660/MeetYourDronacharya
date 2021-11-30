@@ -22,8 +22,6 @@ import './login.css';
 // for logging in via google
 const googleSuccess = async res => {
   const userData = res.profileObj;
-  console.log (userData);
-
   const email = userData.email;
   const password = userData.googleId;
   const isGoogle = true;
@@ -78,7 +76,7 @@ const googleError = () =>
 const Login = () => {
   const [email, setEmail] = useState ('');
   const [password, setPassword] = useState ('');
-  const [showPassword,setShow] = useState(false)
+  const [showPassword,setShow] = useState(false);
 
   const handleSubmit = event => {
     event.preventDefault ();
@@ -117,6 +115,7 @@ const Login = () => {
     }
   };
 
+  // To show password after clicking eye button
   const setShowPassword = () => {
     setShow(!showPassword)
   };
@@ -132,6 +131,7 @@ const Login = () => {
           </Grid>
         </Toolbar>
       </AppBar>
+      {/* Form to login  */}
       <Grid container spacing={0} justify="center" direction="row">
         <Grid item>
           <Grid
@@ -153,6 +153,7 @@ const Login = () => {
               </Grid>
               <Grid item>
                 <form onSubmit={handleSubmit} autocomplete="off">
+                  {/* To enter email id */}
                   <Grid container direction="column" spacing={2}>
                     <Grid item>
                       <TextField
@@ -168,6 +169,7 @@ const Login = () => {
                       />
                     </Grid>
                     <Grid item>
+                      {/* To enter password */}
                       <div style={{ display:"flex" }}>
                         <TextField
                           type={showPassword?"text":"password"}
@@ -179,6 +181,7 @@ const Login = () => {
                           onChange={event => setPassword (event.target.value)}
                           required
                         />
+                        {/* Button for visibility of password */}
                         <Tooltip followCursor title="Click to show/hide password">
                           <IconButton
                             sx={{ color: "blue", background: "white" }}
@@ -189,6 +192,7 @@ const Login = () => {
                         </Tooltip>
                       </div>
                     </Grid>
+                    {/* Submit Button */}
                     <Grid item>
                       <Button
                         variant="contained"
@@ -199,6 +203,7 @@ const Login = () => {
                         Submit
                       </Button>
                     </Grid>
+                    {/* Google Login */}
                     <Grid item>
                       <GoogleLogin
                         clientId="509042475407-tbckpsecdrm3tpqpe9hbusmef2t7vr3c.apps.googleusercontent.com"
@@ -231,7 +236,7 @@ const Login = () => {
               {/* If user forget password */}
               <Grid item onClick={handleForgetPassword}>
                 <Link href={email ? `/verify/${email}` : '/login'} variant="body2">
-                  forgot password ?
+                  forgot password?
                 </Link>
               </Grid>
             </Paper>

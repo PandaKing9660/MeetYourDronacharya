@@ -1,11 +1,11 @@
+/* Form of chat bot  */
 .form {
   display: flex;
-  /* border-top: 2px solid #d3d3d3; */
   border: 2px solid #d3d3d3;
-  /* margin: 2% 20%; */
   margin-top: 1%;
 }
 
+/* Input Message  */
 .input {
   border: none;
   border-radius: 0;
@@ -20,6 +20,7 @@ select:focus {
   outline: none;
 }
 
+/* Send Button  */
 .sendButton {
   color: #fff;
   text-transform: uppercase;

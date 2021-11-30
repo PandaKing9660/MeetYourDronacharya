@@ -28,6 +28,7 @@ import React, { useState } from "react";
 import findyourpassion from "./findyourpassion.png";
 import NavBar from "../Home/Navbar/Navbar";
 
+// Find Myself
 const FindMyself = () => {
   const [questionSetId, setQuestionSetId] = useState("t0");
   const [resultDisplay, setResultModalOpen] = useState(false);
@@ -113,6 +114,7 @@ const FindMyself = () => {
                 padding: "1%",
               }}
             >
+              {/* Looping over all question set  */}
               {questions.map((m) => (
                 <ListItem
                   button
@@ -155,6 +157,7 @@ const FindMyself = () => {
                   height: "570px",
                 }}
               >
+                {/* Selected question set  */}
                 <h1 style={{ textAlign: "center" }}>
                   <u>Question Set</u>
                 </h1>
@@ -167,6 +170,7 @@ const FindMyself = () => {
                 </h4>
                 <p align="left">Choose the most suitable options:</p>
                 <ol type="1" style={{ padding: "0 3%" }}>
+                  {/* Looping over questions  */}
                   {questions
                     .filter((queid) => queid.id === questionSetId)
                     .map((queset) =>
@@ -205,6 +209,7 @@ const FindMyself = () => {
                       ))
                     )}
                 </ol>
+                {/* Button to submit  */}
                 <Button
                   style={{
                     marginBottom: "2%",
@@ -218,7 +223,7 @@ const FindMyself = () => {
                   Submit
                 </Button>
               </Paper>
-            ) : (
+            ) : ( // Paper shown before selection of question set
               <Paper
                 style={{
                   overflow: "auto",
@@ -241,7 +246,7 @@ const FindMyself = () => {
                     </u>
                   </h1>
                   <p>
-                    Hey, its me Anand and welcome to the page "Find your
+                    Hey, It's me DACARPAS and welcome to the page "Find your
                     Passion" to know one of the most difficult and equally
                     important question of student life "What should be our
                     career???"
@@ -299,6 +304,7 @@ const FindMyself = () => {
                 <u>Result Page</u>
               </Typography>
               <Divider />
+              {/* Suggested Carreer Option  */}
               <Typography id="transition-modal-description" sx={{ mt: 2 }}>
                 <h5 className="suggestion_findmyself">
                   Suggested Career Option
@@ -310,6 +316,7 @@ const FindMyself = () => {
                 >
                   <b>{resultCareer["careerchoice"]}</b>
                 </Typography>
+                {/* Showing chart to compare all career choices  */}
                 <Chart
                   height="300px"
                   width="500px"
@@ -331,6 +338,7 @@ const FindMyself = () => {
         </Modal>
 
         {/* Displaing add question modal */}
+        {/* It also tells how to add questions */}
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"

@@ -124,8 +124,6 @@ const Guruji = () => {
 
           match_this = (match_this / user_question.length) * 100;
 
-          console.log(match_this);
-
           if (match_this > max_match) {
             max_match = match_this;
             max_match_index = index;

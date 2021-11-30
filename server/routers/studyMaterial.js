@@ -31,7 +31,6 @@ router.post ('/add', async (req, res) => {
       by: material.by,
       topic: material.topic,
       description: material.description,
-      // image: material.image,
       link: material.link,
       location: material.location,
       tags: material.tags,

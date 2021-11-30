@@ -1,4 +1,5 @@
 //questions and answers based on the dictionary
+// Database for Guruji bot
 const Guruji_database = () => {
   const dict = [
     {

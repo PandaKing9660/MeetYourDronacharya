@@ -1,5 +1,4 @@
 import React from "react";
-
 import ScrollToBottom from "react-scroll-to-bottom";
 import { Card, CardContent, Typography, Chip } from "@mui/material";
 import AdjustIcon from "@mui/icons-material/Adjust";

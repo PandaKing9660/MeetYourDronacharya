@@ -1,54 +1,60 @@
-@import url('https://fonts.googleapis.com/css?family=Monoton');
- 
+@import url("https://fonts.googleapis.com/css?family=Monoton");
+
 .findmyself_FindMyself {
-    margin: 100px 0;
+  margin: 100px 0;
 }
 
+/* Heading  */
 .h1_findmyself {
-    text-align: center;
-    font-family: "Monoton", Helvetica, sans-serif;
-    background: #3210c9;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: #0c9fda;
+  text-align: center;
+  font-family: "Monoton", Helvetica, sans-serif;
+  background: #3210c9;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #0c9fda;
 }
 
-.message_findmyself>h1 {
-    text-align: center;
+/* message heading  */
+.message_findmyself > h1 {
+  text-align: center;
 }
-.message_findmyself>p {
-    text-align: justify;
-}
-
-.message_findmyself>img {
-    width: 90%;
+/* message  */
+.message_findmyself > p {
+  text-align: justify;
 }
 
- @supports (-webkit-background-clip: text) {
-    .h1_findmyself {
-         color: transparent;
-         background: linear-gradient(7deg, #0c9fda 50%, #3210c9 0);
-         -webkit-background-clip: text;
-     }
+/* message iamge  */
+.message_findmyself > img {
+  width: 90%;
 }
 
+@supports (-webkit-background-clip: text) {
+  .h1_findmyself {
+    color: transparent;
+    background: linear-gradient(7deg, #0c9fda 50%, #3210c9 0);
+    -webkit-background-clip: text;
+  }
+}
+
+/* Suggested career option  */
 .suggestion_findmyself {
-    color: grey;
-    font-size: smaller;
-    text-align: center;
+  color: grey;
+  font-size: smaller;
+  text-align: center;
 }
 
+/* Other optons  */
 .otheroptions_findmyself {
-    color: rgb(36, 34, 34);
-    font-size: medium;
-    text-align: left;
-    padding: 1%;
-    margin: 1%;
+  color: rgb(36, 34, 34);
+  font-size: medium;
+  text-align: left;
+  padding: 1%;
+  margin: 1%;
 }
 
+/* note for result  */
 .note_findmyself {
-    color: grey;
-    font-size: x-small;
-    text-align: center;
+  color: grey;
+  font-size: x-small;
+  text-align: center;
 }
-

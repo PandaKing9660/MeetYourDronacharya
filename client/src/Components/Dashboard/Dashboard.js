@@ -39,6 +39,7 @@ const Dashboard = () => {
     }
     const to_send = user_id ? user_id : user ? user._id : "-1";
 
+    // Getting user from the backend
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
         userId: to_send,
@@ -60,7 +61,7 @@ const Dashboard = () => {
   }, []);
 
   const handleEdit = () => {
-    console.log("helo sire i m here");
+    console.log("Hello sire I am here");
   };
 
   return (
@@ -68,8 +69,8 @@ const Dashboard = () => {
       <NavBar noSearch={true} />
 
       {loading ? (
-        <CircularProgress />
-      ) : userMsg ? (
+        <CircularProgress /> // Showing progress till rendered
+      ) : userMsg ? ( // If not logged in
         <Grid container>
           <Grid item xs={12} md={4}>
             <Card>
@@ -80,16 +81,10 @@ const Dashboard = () => {
                   image={
                     "https://st2.depositphotos.com/1037178/7669/v/600/depositphotos_76695295-stock-illustration-concentrating-maharishi-vishvamitra-hindu-saint.jpg"
                   }
-                  alt="Nice Image"
+                  alt="Guru Dronacharya"
                 />
               </CardContent>
             </Card>
-            {/* <Typography
-              sx={{ mb: 1.5, fontSize: "0.91rem" }}
-              color="text.secondary"
-            >
-              {userMsg}
-            </Typography> */}
           </Grid>
           <Grid xs={12} md={8}>
             <Typography
@@ -106,6 +101,7 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       ) : (
+        // If logged in
         <div>
           <h1
             className="heading"
@@ -113,6 +109,7 @@ const Dashboard = () => {
           >
             PROFILE
           </h1>
+          {/* Profile of the user  */}
           <div style={{ width: "100%" }}>
             <Profile
               style={{ marginLeft: "auto", marginRight: "auto" }}
@@ -128,6 +125,7 @@ const Dashboard = () => {
                 paddingRight: "2%",
               }}
             >
+              {/* Cards to display contribution of the user  */}
               <Experience id={userData._id} current_profile={user_id} />
               <QuestionsAsked id={userData._id} current_profile={user_id} />
               <Answered id={userData._id} current_profile={user_id} />

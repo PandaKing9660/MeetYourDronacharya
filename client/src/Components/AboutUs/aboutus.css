@@ -8,6 +8,7 @@
   text-transform: uppercase;
 }
 
+/* Heading text style */
 @supports (-webkit-background-clip: text) {
   .heading {
     color: transparent;
@@ -64,6 +65,7 @@
 .teampic_AboutUs h2 {
   color: black;
 }
+
 .team_AboutUs:hover {
   background-color: white;
   background-image: linear-gradient(315deg, white 0%, white 64%);

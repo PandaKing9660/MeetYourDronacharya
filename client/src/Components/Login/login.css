@@ -1,10 +1,15 @@
+/* Login Form */
 .login-form {
   justify-content: center;
   min-height: 90vh;
 }
+
+/* Login Button */
 .button-block {
   width: 100%;
 }
+
+/* Background */
 .login-background {
   justify-content: center;
   min-height: 30vh;

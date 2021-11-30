@@ -16,9 +16,7 @@ import {
 
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-//import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-//import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import EventsInExam from "./EventsInExam";
@@ -55,28 +53,32 @@ const ExamCard = ({ cardData, cardId }) => {
 
   const [expanded, setExpanded] = useState(false);
 
-  //console.log(user.bookmarked);
+  // TO expand exam card
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  // To bookmark
   const handleHeartClick = () => {
     setisBookMarked(!isBookMarked);
   };
 
+  // To add bookmark
   const AddBookmark = () => {
     if (!user) {
+      // If not logged in
       alert("Please login to save bookmark");
       return;
     }
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/addTimeline`, {
-        userId : user._id,
+        userId: user._id,
         timelineNo: cardId,
       })
       .then((res) => {});
   };
 
+  // To delete bookmark
   const DeleteBookmark = (userId, timelineNo) => {
     if (!user) {
       alert("Please login to save bookmark");
@@ -90,9 +92,12 @@ const ExamCard = ({ cardData, cardId }) => {
       .then((res) => {});
   };
 
+  // To show exam info cards
   return (
     <Card sx={{ minWidth: 300 }}>
+      {/* Card heading */}
       <CardHeader title={cardData.name} subheader={cardData.events[0].date} />
+      {/* Card Image */}
       <CardMedia>
         <img
           src={cardData.imgLink}
@@ -100,6 +105,7 @@ const ExamCard = ({ cardData, cardId }) => {
           style={{ width: "100%", height: "20em" }}
         />
       </CardMedia>
+      {/* Card Description */}
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {cardData.description}
@@ -107,6 +113,7 @@ const ExamCard = ({ cardData, cardId }) => {
       </CardContent>
       <CardActions disableSpacing>
         <Tooltip TransitionComponent={Zoom} title="BookMark" placement="top">
+          {/* Bookmark button */}
           <IconButton aria-label="add to favorites" onClick={handleHeartClick}>
             {!isBookMarked ? (
               <BookmarkIcon />
@@ -118,9 +125,7 @@ const ExamCard = ({ cardData, cardId }) => {
             )}
           </IconButton>
         </Tooltip>
-        {/* <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton> */}
+        {/* Expand button */}
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

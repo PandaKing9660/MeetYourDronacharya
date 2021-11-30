@@ -52,6 +52,7 @@ const CardExperience = ({ expData }) => {
 
   const [userStatus, setUserStatus] = useState("none");
   
+  // Fetch user experience
   useEffect(() => {
     if (!user) {
       return;
@@ -71,10 +72,9 @@ const CardExperience = ({ expData }) => {
   // adds like to the experience shared
   const AddLikes = (userId, experienceId) => {
     if (!user) {
-      alert("Please login to like this question");
+      alert("Please login to like this experience");
       return;
     }
-    console.log(experienceId);
     if (userStatus === "liked") {
       return;
     }
@@ -95,7 +95,7 @@ const CardExperience = ({ expData }) => {
   // adds dislike to the experience shared
   const AddDislikes = (userId, experienceId) => {
     if (!user) {
-      alert("Please login to like this question");
+      alert("Please login to dislike this experience");
       return;
     }
 
@@ -116,9 +116,8 @@ const CardExperience = ({ expData }) => {
       });
   };
 
-  // deletes the experience
+  // confirming to delete the experience
   const Confirm = async (userId, experienceId) => {
-    //const result = await confirm("Are you sure?");
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
         experienceId,
@@ -133,9 +132,10 @@ const CardExperience = ({ expData }) => {
     return;
   };
 
+  // To delete user.
   const DeleteUser = (userId, experienceId) => {
     if (!user) {
-      alert("Please login to like this question");
+      alert("Please login to delete this experience");
       return;
     }
     Confirm(userId, experienceId);
@@ -220,7 +220,6 @@ const CardExperience = ({ expData }) => {
                       },
                     }}
                   >
-                    
                     <MenuList>
                       <MenuItem>
                         <Button

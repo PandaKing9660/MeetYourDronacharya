@@ -45,6 +45,7 @@ const AskSomethingAnswer = () => {
         }
       )
       .then((res) => {
+        // Storing spam and non-spam answers separately
         let good_answers = [];
         let bad_answers = [];
 
@@ -77,6 +78,7 @@ const AskSomethingAnswer = () => {
     }, 2000);
   }, []);
 
+  // Searching input in this whole webpage through Search Box
   useEffect(() => {
     if (showSpam === false) {
       const newSearchedAnswer = answers.filter((answer) => {
@@ -119,10 +121,11 @@ const AskSomethingAnswer = () => {
 
   return (
     <div>
+      {/* Search Box */}
       <NavBar setSearchResult={setSearchResult} />
-
       <Box sx={{ flexGrow: 1 }} m={1} p={1} mt={2}>
         {loading ? (
+          // Show circular progress till loading
           <CircularProgress />
         ) : (
           <div>
@@ -141,6 +144,7 @@ const AskSomethingAnswer = () => {
                   overflow: "auto",
                 }}
               >
+                {/* Showing the question  */}
                 <Typography variant="h4" align="center">
                   Question
                 </Typography>
@@ -178,7 +182,6 @@ const AskSomethingAnswer = () => {
                         style={{
                           overflow: "auto",
                           height: "580px",
-                          // boxShadow: '5px 10px 8px 1px #888888',
                         }}
                       >
                         {searchedAnswer.map((answer) => {
@@ -211,7 +214,6 @@ const AskSomethingAnswer = () => {
                         style={{
                           overflow: "auto",
                           height: "580px",
-                          // boxShadow: '5px 10px 8px 1px #888888',
                         }}
                       >
                         {searchedAnswer.map((answer) => {
@@ -229,7 +231,7 @@ const AskSomethingAnswer = () => {
                   )
                 ) : (
                   <Typography variant="h6" align="center">
-                    No Answers yet!!
+                    No Answers yet!!!
                   </Typography>
                 )}
               </Grid>

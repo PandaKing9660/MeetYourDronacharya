@@ -46,6 +46,7 @@ const Verify = () => {
     }
   };
 
+  // OTP Verification
   return (
     <div>
       <AppBar position="static" alignitems="center" color="primary">
@@ -83,6 +84,7 @@ const Verify = () => {
                 {email}
                 , fill the OTP shared
               </Typography>
+              {/* OTP input */}
               <Grid item>
                 <form onSubmit={handleSubmit} autocomplete="off">
                   <Grid container direction="column" spacing={2}>
@@ -98,7 +100,7 @@ const Verify = () => {
                         autoFocus
                       />
                     </Grid>
-
+                    {/* Submit Button */}
                     <Grid item>
                       <Button
                         variant="contained"

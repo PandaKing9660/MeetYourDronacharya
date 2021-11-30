@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import "../Materials/material.css";
 
+// Style for the page
 const style = {
   position: "absolute",
   top: "50%",
@@ -24,13 +25,14 @@ const style = {
 
 // ASK SOMETHING
 const AskSomething = () => {
-  const user = JSON.parse(localStorage.getItem("profile"));
-  const [open, setOpen] = useState(false);
-  const [searchResult, setSearchResult] = useState("");
+  const user = JSON.parse(localStorage.getItem("profile")); // Storing details of the user
+  const [open, setOpen] = useState(false); // For modal
+  const [searchResult, setSearchResult] = useState(""); // Storing search input
 
   const handleOpen = () =>
-    user ? setOpen(true) : alert("Login to ask question");
+    user ? setOpen(true) : alert("Login to ask question"); // Checking whether logged in or not
   const handleClose = () => setOpen(false);
+  
   return (
     <div>
       <NavBar setSearchResult={setSearchResult} />

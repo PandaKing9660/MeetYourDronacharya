@@ -1,6 +1,6 @@
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 // shows all the followers of the user
-const Followers = ({id, current_profile}) => {
+const Followers = ({ id, current_profile }) => {
   return (
     <div className="card-container">
       <div className="card card--dark">
@@ -17,9 +17,7 @@ const Followers = ({id, current_profile}) => {
           </div>
           <div className="card--hover">
             <h2>Followers</h2>
-            <p>
-              Checkout all followers who followed the user
-            </p>
+            <p>Checkout all followers who followed the user</p>
             <p className="link">Click to see</p>
           </div>
         </Link>
