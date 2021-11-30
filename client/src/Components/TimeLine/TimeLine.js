@@ -85,6 +85,7 @@ export default function VerticalTabs() {
             width: "150px",
           }}
         >
+      {/* Tabs for showing different types of timeine and bookmarked exams */}
           <Tab label="Separate" {...a11yProps(0)} />
           <Tab label="Combined" {...a11yProps(1)} />
           <Tab label="Bookmarked" {...a11yProps(2)} />
@@ -103,6 +104,7 @@ export default function VerticalTabs() {
   );
 }
 
+//contains the cards of all the exams
 const TimeLine = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const [bookmark, setbookmark] = React.useState([]);
@@ -191,6 +193,7 @@ const TimeLine = () => {
   );
 };
 
+//shows all the bookmarked cards
 const Book = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const [bookmark, setbookmark] = React.useState([]);
@@ -482,6 +485,7 @@ const rows = [
   createData(31, "", "", "", "", "", "", "", "", "", "", "", ""),
 ];
 
+//shows the combined timeline
 const StickyHeadTable = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-
+// helps to show all questions that the user has asked
 const QuestionsAsked = ({id, current_profile}) => {
   return (
     <div className="card-container">

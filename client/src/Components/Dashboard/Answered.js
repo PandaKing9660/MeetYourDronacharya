@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-
+// helps to show all answers that the user has answered
 const Answered = ({id, current_profile}) => {
   return (
     <div className="card-container">

@@ -15,6 +15,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import ChatBox from "./ChatBox/ChatBox";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
 
 const Profile = ({ userData, handleOpen }) => {
 
@@ -36,7 +40,8 @@ const Profile = ({ userData, handleOpen }) => {
 
   const handleClick = () => {
     if (!user) {
-      alert("please login to follow the user");
+      //alert("please login to follow the user");
+      toast.error("Please login to follow the user");
       return;
     }
     setCanFollow(!canFollow);
@@ -65,7 +70,7 @@ const Profile = ({ userData, handleOpen }) => {
         .catch((err) => console.log(err));
     }
   };
-
+  //edits the links of different social media of the user
   const updateProfile = () => {
     axios
       .put(`${process.env.REACT_APP_BACKEND_URL}/dashboard/edit-user`, {
@@ -159,6 +164,7 @@ const Profile = ({ userData, handleOpen }) => {
                   href={`${userData.socialMedia[1]}`}
                   rel="noreferrer"
                   target="_blank"
+                  style={{ textDecoration: "none" }}
                 >
                   <FacebookIcon />{" "}
                 </a>
@@ -170,6 +176,7 @@ const Profile = ({ userData, handleOpen }) => {
                   href={`${userData.socialMedia[2]}`}
                   rel="noreferrer"
                   target="_blank"
+                  style={{ textDecoration: "none" }}
                 >
                   <InstagramIcon />{" "}
                 </a>
@@ -181,6 +188,7 @@ const Profile = ({ userData, handleOpen }) => {
                   href={`${userData.socialMedia[3]}`}
                   rel="noreferrer"
                   target="_blank"
+                  style={{ textDecoration: "none" }}
                 >
                   <TwitterIcon />{" "}
                 </a>
@@ -192,6 +200,7 @@ const Profile = ({ userData, handleOpen }) => {
                   href={`${userData.socialMedia[4]}`}
                   rel="noreferrer"
                   target="_blank"
+                  style={{ textDecoration: "none" }}
                 >
                   <GitHubIcon />{" "}
                 </a>
@@ -382,6 +391,7 @@ const Profile = ({ userData, handleOpen }) => {
   );
 };
 
+//before the user is followed
 const Before = ({ handleClick }) => {
   return (
     <div style={{ marginTop: "2%" }}>
@@ -398,7 +408,7 @@ const Before = ({ handleClick }) => {
     </div>
   );
 };
-
+//after the user is followed
 const After = ({ handleClick }) => {
   return (
     <div style={{ marginTop: "2%" }}>

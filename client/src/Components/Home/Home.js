@@ -81,7 +81,7 @@ const Home = () => {
         <Grid item xs={12} mb={2} mt={1}>
           <Tooltip
             followCursor
-            title="Guruji: Namastey Vaste. Click here to have a chat with me."
+            title="Guruji: Namastey Vats. Click here to have a chat with me."
           >
             <Link to="/guruji">
               <Button

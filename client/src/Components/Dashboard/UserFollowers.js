@@ -15,7 +15,11 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import PublicIcon from '@mui/icons-material/Public';
 import RingVolumeIcon from '@mui/icons-material/RingVolume';
 import Button from '@mui/material/Button';
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
+toast.configure();
+//the followers of users
 const UserFollowers = () => {
   const {userId} = useParams ();
 
@@ -132,7 +136,8 @@ const UserCard = ({follower}) => {
 
   const handleClick = () => {
     if (!user) {
-      alert ('please login to follow the user');
+      //alert ('please login to follow the user');
+      toast.error("please login to follow the user");
       return;
     }
     setCanFollow (!canFollow);

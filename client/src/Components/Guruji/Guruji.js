@@ -14,37 +14,14 @@ import {
 import Navbar from "../Home/Navbar/Navbar";
 import Messages from "./Messages";
 
-import "./guruji.css";
+import dict from "./Guruji_database.js";
 
-const dictionary = [
-  {
-    question: "what,question,questions,answer,ask,doubt,how,which,who,?",
-    answers: [
-      "Having trouble in something, no problem, ask here to clear your doubts",
-      "First of all, ask nicely with respect, I am atleast 100 centuries older than you, go and ask your doubt in ask-something section",
-      "we got your back vats, ask your query in our ask-something section",
-    ],
-  },
-  {
-    question: "share,experience,about,life,expert,my,thought",
-    answers: [
-      "you know, i am kind of a guru myself, go and share your experience here",
-      "life is too short to keep your knowledge to yourself, its good you know it, share your experience here",
-      "i am proud of you vats, share your experience here. We need more heros like you",
-    ],
-  },
-  {
-    question: "thank you,thank,you,amazing,helpful,nice,very good",
-    answers: [
-      "I am flattered that you liked my work",
-      "welcome vats, helping you was my dharma",
-      "give me guru dhakshina by sharing this website with your friends",
-    ],
-  },
-];
+import "./guruji.css";
 
 const Guruji = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
+
+  var dictionary = dict();
 
   // single message
   const [message, setMessage] = useState("");
@@ -139,15 +116,13 @@ const Guruji = () => {
             if (word_mark.length > 0) user_question.push(word_mark);
           });
 
-          console.log(user_question);
-
           question.forEach((ques) => {
             user_question.forEach((ques2) => {
               if (ques === ques2) match_this++;
             });
           });
 
-          match_this = (match_this / question.length) * 100;
+          match_this = (match_this / user_question.length) * 100;
 
           console.log(match_this);
 
@@ -168,7 +143,7 @@ const Guruji = () => {
           });
         } else {
           newMsgs.push({
-            text: "Sorry, you know i am old i can't understand you, please repeat",
+            text: "Sorry, you know I am old I can't understand you, please repeat",
             user: "Guruji",
           });
         }
@@ -194,7 +169,7 @@ const Guruji = () => {
         {/* left side */}
         <Grid item xs={11} md={4}>
           <Card sx={{ minWidth: 225 }}>
-            {/* Daily changing image */}
+            {/* Guruji */}
             <CardContent>
               <Typography
                 sx={{ fontSize: 16 }}
@@ -204,7 +179,7 @@ const Guruji = () => {
                 Namaste Vats ✋ !!!
               </Typography>
 
-              {/* Show image after daily. */}
+              {/* Show image of Guru Dronacharya. */}
               <CardMedia
                 component="img"
                 height="470vh"
