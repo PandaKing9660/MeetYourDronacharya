@@ -6,8 +6,14 @@ import Profile from "./Profile";
 import Experience from "./Experience";
 import Answered from "./Answered";
 import QuestionsAsked from "./QuestionsAsked";
-import CircularProgress from "@mui/material/CircularProgress";
-import Typography from "@mui/material/Typography";
+import {
+  Typography,
+  CircularProgress,
+  CardMedia,
+  Card,
+  CardContent,
+  Grid,
+} from "@mui/material";
 import "../Materials/material.css";
 import { useParams } from "react-router-dom";
 import Followers from "./Followers";
@@ -59,17 +65,46 @@ const Dashboard = () => {
 
   return (
     <div>
-      <NavBar noSearch={true}/>
+      <NavBar noSearch={true} />
 
       {loading ? (
         <CircularProgress />
       ) : userMsg ? (
-        <Typography
-          sx={{ mb: 1.5, fontSize: "0.91rem" }}
-          color="text.secondary"
-        >
-          {userMsg}
-        </Typography>
+        <Grid container>
+          <Grid item xs={12} md={4}>
+            <Card>
+              <CardContent>
+                <CardMedia
+                  component="img"
+                  height="470vh"
+                  image={
+                    "https://st2.depositphotos.com/1037178/7669/v/600/depositphotos_76695295-stock-illustration-concentrating-maharishi-vishvamitra-hindu-saint.jpg"
+                  }
+                  alt="Nice Image"
+                />
+              </CardContent>
+            </Card>
+            {/* <Typography
+              sx={{ mb: 1.5, fontSize: "0.91rem" }}
+              color="text.secondary"
+            >
+              {userMsg}
+            </Typography> */}
+          </Grid>
+          <Grid xs={12} md={8}>
+            <Typography
+              variant="h2"
+              color="text.secondary"
+              gutterBottom
+              sx={{
+                textAlign: "center",
+                padding: "auto",
+              }}
+            >
+              {userMsg}
+            </Typography>
+          </Grid>
+        </Grid>
       ) : (
         <div>
           <h1

@@ -169,7 +169,7 @@ const Guruji = () => {
         {/* left side */}
         <Grid item xs={11} md={4}>
           <Card sx={{ minWidth: 225 }}>
-            {/* Daily changing image */}
+            {/* Guruji */}
             <CardContent>
               <Typography
                 sx={{ fontSize: 16 }}
@@ -179,7 +179,7 @@ const Guruji = () => {
                 Namaste Vats ✋ !!!
               </Typography>
 
-              {/* Show image after daily. */}
+              {/* Show image of Guru Dronacharya. */}
               <CardMedia
                 component="img"
                 height="470vh"
