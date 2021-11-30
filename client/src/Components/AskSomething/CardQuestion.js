@@ -339,7 +339,7 @@ const CardQuestion = ({ quesData, showAnswer }) => {
                             >
                                 {/* put in link for going to all answers */}
                                 <Link
-                                    to={`/ask-something/${quesData._id}`}
+                                    to={`/ask-something/${quesData?._id}`}
                                     style={{
                                         textDecoration: 'none',
                                         color: 'black',

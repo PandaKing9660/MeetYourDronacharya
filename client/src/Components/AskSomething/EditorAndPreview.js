@@ -129,7 +129,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
 
             .catch((err) => console.log(err));
         } else {
-          console.log("answwer");
+          console.log("edit");
           axios
             .post(
               `${process.env.REACT_APP_BACKEND_URL}/ask-something/answer/editAns`,
@@ -229,7 +229,8 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
   
   // used to fetch the title,description,tags while edit mode
   useEffect(() => {
-    if (edit && option === "experience") {
+    console.log(option);
+    if (edit =="true" && option == "experience") {
       console.log("fetch front");
       axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/experience/fetchtitle`, {
@@ -241,30 +242,9 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
           setTags(res.data.tags);
         })
         .catch((err) => console.log(err));
-      /*
-      axios
-        .post(
-          `${process.env.REACT_APP_BACKEND_URL}/experience/fetchdescription`,
-          {
-            experienceId: question_id,
-          }
-        )
-        .then((res) => setDescription(res.data.experience));
-      axios
-        .post(
-          `${process.env.REACT_APP_BACKEND_URL}/experience/fetchdescription`,
-          {
-            experienceId: question_id,
-          }
-        )
-        .then((res) => setTags(res.data.tags))
-
-        .catch((err) => console.log(err));
-        */
     }
 
-    if (edit && option === "answer") {
-      console.log("fetch front answer");
+    else if (edit == "true" && option == "answer") {
       axios
         .post(
           `${process.env.REACT_APP_BACKEND_URL}/ask-something/answer/fetchtitle`,
