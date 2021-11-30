@@ -148,6 +148,7 @@ const Profile = ({ userData, handleOpen }) => {
                   href={`${userData.socialMedia[1]}`}
                   rel="noreferrer"
                   target="_blank"
+                  style={{ textDecoration: "none" }}
                 >
                   <FacebookIcon />{" "}
                 </a>
@@ -159,6 +160,7 @@ const Profile = ({ userData, handleOpen }) => {
                   href={`${userData.socialMedia[2]}`}
                   rel="noreferrer"
                   target="_blank"
+                  style={{ textDecoration: "none" }}
                 >
                   <InstagramIcon />{" "}
                 </a>
@@ -170,6 +172,7 @@ const Profile = ({ userData, handleOpen }) => {
                   href={`${userData.socialMedia[3]}`}
                   rel="noreferrer"
                   target="_blank"
+                  style={{ textDecoration: "none" }}
                 >
                   <TwitterIcon />{" "}
                 </a>
@@ -181,6 +184,7 @@ const Profile = ({ userData, handleOpen }) => {
                   href={`${userData.socialMedia[4]}`}
                   rel="noreferrer"
                   target="_blank"
+                  style={{ textDecoration: "none" }}
                 >
                   <GitHubIcon />{" "}
                 </a>
