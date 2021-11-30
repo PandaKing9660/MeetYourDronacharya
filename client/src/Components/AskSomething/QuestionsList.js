@@ -189,8 +189,8 @@ const QuestionsList = ({searchResult, setSearchResult}) => {
 
       {loading
         ? <CircularProgress />
-        : searchedQuestion.length > 0
-            ? showSpam
+        : showSpam
+            ? searchedQuestion.length > 0
                 ? <div>
                     <div>
                       <Button
@@ -226,6 +226,19 @@ const QuestionsList = ({searchResult, setSearchResult}) => {
                       style={{marginTop: '5%'}}
                       onClick={handleSpamChange}
                     >
+                      Questions
+                    </Button>
+                    <Typography variant="h4">
+                      No Spam !!
+                    </Typography>
+                  </div>
+            : searchedQuestion.length > 0
+                ? <div>
+                    <Button
+                      variant="contained"
+                      style={{marginTop: '5%'}}
+                      onClick={handleSpamChange}
+                    >
                       Spam
                     </Button>
                     <Grid
@@ -247,9 +260,18 @@ const QuestionsList = ({searchResult, setSearchResult}) => {
                       })}
                     </Grid>
                   </div>
-            : <Typography variant="h4">
-                No Questions !!
-              </Typography>}
+                : <div>
+                    <Button
+                      variant="contained"
+                      style={{marginTop: '5%'}}
+                      onClick={handleSpamChange}
+                    >
+                      Spam
+                    </Button>
+                    <Typography variant="h4">
+                      No Questions !!
+                    </Typography>
+                  </div>}
     </Box>
   );
 };

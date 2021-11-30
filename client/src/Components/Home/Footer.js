@@ -36,6 +36,8 @@ const FooterButton = ({footerName}) => {
 };
 
 export default function Footer () {
+
+  // list for footer links
   const [footerNames, setfooterNames] = useState ([
     {name: 'Home', linkTo: '/'},
     {name: 'Ask Something', linkTo: '/ask-something'},
@@ -47,6 +49,7 @@ export default function Footer () {
     {name: 'About us', linkTo: '/about-us'},
   ]);
 
+  // list of social media links
   const [socialLinks, setSocialLinks] = useState ([
     {
       name: 'Facebook',
@@ -67,7 +70,8 @@ export default function Footer () {
       icon: <GitHubIcon />,
     },
   ]);
-
+  
+  // footer return
   return (
     <Box className="containerBox_footer" sx={{width: '100%'}}>
       <Box sx={{my: 1, mx: 2}} className="head_footer">
@@ -79,6 +83,7 @@ export default function Footer () {
           </Grid>
           <Grid item>
             <Typography gutterBottom variant="h6" component="div">
+            {/* social media links */}
               <Stack direction="row" spacing={1}>
                 {socialLinks.map ((socialLink, index) => {
                   return (
@@ -117,6 +122,7 @@ export default function Footer () {
           justifyContent="space-around"
           alignItems="center"
         >
+        {/* Footer links */}
           {footerNames.map ((footerName, index) => {
             return (
               <Grid item xs={6} sm={4} md={2} lg={1} key={index}>
@@ -126,6 +132,8 @@ export default function Footer () {
           })}
         </Grid>
       </Box>
+
+      {/* Group Copyright */}
       <Box className="copyright_footer" sx={{mt: 2}}>
         <Typography gutterBottom variant="body2">
           © DACARPAS, 2021

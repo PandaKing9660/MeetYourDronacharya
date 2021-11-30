@@ -70,22 +70,16 @@ export default function VerticalTabs() {
       <h1 className="heading" style={{ marginTop: 25, textAlign: "center" }}>
         TIMELINE
       </h1>
-      <Box sx={{ flexGrow: 1, bgcolor: "background.paper", display: "flex" }}>
+      <Box sx={{ flexGrow: 1, bgcolor: "background.paper" }}>
         <Tabs
-          orientation="vertical"
-          variant="scrollable"
           value={value}
           onChange={handleChange}
-          aria-label="Vertical tabs example"
-          sx={{
-            borderColor: "divider",
-            marginTop: 20,
-            marginLeft: 2,
-            marginRight: 2,
-            width: "150px",
-          }}
+          variant="scrollable"
+          scrollButtons
+          allowScrollButtonsMobile
+          aria-label="scrollable force tabs example"
         >
-      {/* Tabs for showing different types of timeine and bookmarked exams */}
+          {/* Tabs for showing different types of timeine and bookmarked exams */}
           <Tab label="Separate" {...a11yProps(0)} />
           <Tab label="Combined" {...a11yProps(1)} />
           <Tab label="Bookmarked" {...a11yProps(2)} />
@@ -123,7 +117,8 @@ const TimeLine = () => {
   const [examCards, setExamCards] = useState([
     {
       name: "UPSC",
-      description: "lorem ipsum lorem ipsum",
+      description:
+        "Civil Services Exam, conducted by government of India to select candidates for high power government jobs. Exam has 3 sections, section one is Prelims where two exams are conducted, Mains where 8 exams are conducted and then a final interview.",
       imgLink:
         "https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80",
       events: [
@@ -137,7 +132,8 @@ const TimeLine = () => {
     },
     {
       name: "CAT",
-      description: "lorem ipsum lorem ipsum",
+      description:
+        "CAT is used for selecting candidates for MBA programme, the exam consist of one paper consisting of 3 sections, namely Verbal Ability and Reading Comprehension, Data Interpretation and Logical Reasoning and Quantitative Ability.",
       imgLink:
         "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       events: [
@@ -147,8 +143,9 @@ const TimeLine = () => {
       ],
     },
     {
-      name: "CAT",
-      description: "lorem ipsum lorem ipsum",
+      name: "GRE",
+      description:
+        "Graduate Record Examinations is a standardized test that is an admissions requirement for many graduate schools in US, Canada and few in other countries. Exam consist of 2 verbal reasoning, 2 quantitative reasoning, and research section",
       imgLink:
         "https://images.unsplash.com/photo-1629218079827-3b28e2466725?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80",
       events: [
@@ -163,7 +160,8 @@ const TimeLine = () => {
     },
     {
       name: "JEE",
-      description: "lorem ipsum lorem ipsum",
+      description:
+        "Joint Entrance Exam is considered to be most difficult exams for India, it is a test made to select students for IITs and NITs. The Exam has 2 parts Mains and Advance both are objective type exams testing Maths, Physics and Chemistry of students",
       imgLink:
         "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       events: [
@@ -198,22 +196,22 @@ const Book = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const [bookmark, setbookmark] = React.useState([]);
   useEffect(() => {
-    if(user)
-    {
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
-        userId: user._id,
-      })
-      .then((res) => {
-        setbookmark(res.data[0].bookmarked);
-      })
-      .catch((err) => console.log(err));
+    if (user) {
+      axios
+        .post(`${process.env.REACT_APP_BACKEND_URL}/dashboard/get-user`, {
+          userId: user._id,
+        })
+        .then((res) => {
+          setbookmark(res.data[0].bookmarked);
+        })
+        .catch((err) => console.log(err));
     }
   }, []);
   const [examCards, setExamCards] = useState([
     {
       name: "UPSC",
-      description: "lorem ipsum lorem ipsum",
+      description:
+        "Civil Services Exam, conducted by government of India to select candidates for high power government jobs. Exam has 3 sections, section one is Prelims where two exams are conducted, Mains where 8 exams are conducted and then a final interview.",
       imgLink:
         "https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80",
       events: [
@@ -227,7 +225,8 @@ const Book = () => {
     },
     {
       name: "CAT",
-      description: "lorem ipsum lorem ipsum",
+      description:
+        "CAT is used for selecting candidates for MBA programme, the exam consist of one paper consisting of 3 sections, namely Verbal Ability and Reading Comprehension, Data Interpretation and Logical Reasoning and Quantitative Ability.",
       imgLink:
         "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       events: [
@@ -237,8 +236,9 @@ const Book = () => {
       ],
     },
     {
-      name: "CAT",
-      description: "lorem ipsum lorem ipsum",
+      name: "GRE",
+      description:
+        "Graduate Record Examinations is a standardized test that is an admissions requirement for many graduate schools in US, Canada and few in other countries. Exam consist of 2 verbal reasoning, 2 quantitative reasoning, and research section",
       imgLink:
         "https://images.unsplash.com/photo-1629218079827-3b28e2466725?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80",
       events: [
@@ -253,7 +253,8 @@ const Book = () => {
     },
     {
       name: "JEE",
-      description: "lorem ipsum lorem ipsum",
+      description:
+        "Joint Entrance Exam is considered to be most difficult exams for India, it is a test made to select students for IITs and NITs. The Exam has 2 parts Mains and Advance both are objective type exams testing Maths, Physics and Chemistry of students",
       imgLink:
         "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       events: [
@@ -262,6 +263,7 @@ const Book = () => {
       ],
     },
   ]);
+
   return (
     <div>
       <Grid
@@ -298,7 +300,7 @@ const columns = [
   { id: "aug", label: "August" },
   { id: "sept", label: "September" },
   { id: "oct", label: "October" },
-  { id: "nov", label: "Novemver" },
+  { id: "nov", label: "November" },
   { id: "dec", label: "December" },
 ];
 
@@ -500,8 +502,8 @@ const StickyHeadTable = () => {
   };
 
   return (
-    <Paper sx={{ overflowX: "hidden", width: "115%" }}>
-      <TableContainer sx={{ maxHeight: 500, maxWidth: 2000 }}>
+    <Paper sx={{ overflowX: "hidden", width: "100%" }}>
+      <TableContainer sx={{  maxWidth: 2000 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

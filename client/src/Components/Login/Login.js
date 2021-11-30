@@ -33,7 +33,11 @@ const googleSuccess = async res => {
   // sending request to backend, incase of deployment using netlify else localhost for development
 
   axios
-    .post (`${process.env.REACT_APP_BACKEND_URL}/login`, {email, password, isGoogle})
+    .post (`${process.env.REACT_APP_BACKEND_URL}/login`, {
+      email,
+      password,
+      isGoogle,
+    })
     .then (res => {
       if (res.data.found === true) {
         // user found and saved in localStorage
@@ -109,7 +113,7 @@ const Login = () => {
   };
 
   const handleForgetPassword = () => {
-    if (email === '') {
+    if (!email.includes ('@')) {
       // inform to fill form
       alert ('Please fill email for verification');
     } else {
@@ -233,7 +237,10 @@ const Login = () => {
               </Grid>
               {/* If user forget password */}
               <Grid item onClick={handleForgetPassword}>
-                <Link href={email ? `/verify/${email}` : '/login'} variant="body2">
+                <Link
+                  href={email.includes ('@') ? `/verify/${email}` : '/login'}
+                  variant="body2"
+                >
                   forgot password ?
                 </Link>
               </Grid>
