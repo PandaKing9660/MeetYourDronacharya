@@ -34,6 +34,8 @@ const io = socketio(server, {
     },
 });
 
+let roomName;
+// connect user to the room for chat
 io.on('connection', (socket) => {
     console.log('New Connection on SocketIO');
 
@@ -49,22 +51,21 @@ io.on('connection', (socket) => {
 
         // console.log('room users', users);
 
-        // roomName is concatenation of the two users' name
+        // roomName is concatenation of the two users' id
         // users[0] is host(Me), users[1] is Guest(You)
 
-        let roomName =
-            users[0].name.trim().toLowerCase() <
-            users[1].name.trim().toLowerCase()
-                ? users[0].name.trim().toLowerCase()
-                : users[1].name.trim().toLowerCase();
+        if (users[0]._id < users[1]._id) roomName = users[0]._id + users[1]._id;
+        else roomName = users[1]._id + users[0]._id;
 
         console.log(roomName, 'rooomiieee');
         socket.join(roomName);
 
-        socket.emit('message', {
-            user: 'System',
-            text: `${users[0].name},  ${users[1].name} welcomes you.`,
-        });
+        // socket.emit('message', {
+        //     user: 'System',
+        //     text: `${users[0].name},  ${users[1].name} welcomes you.`,
+        // });
+        
+        // broadcast to everyone but that member that he has joined
         socket.broadcast.to(roomName).emit('message', {
             user: 'System',
             text: `${users[1].name} has joined!`,
@@ -84,11 +85,6 @@ io.on('connection', (socket) => {
             idMe: idMe,
             idYou: idYou,
         });
-        let roomName =
-            users[0].name.trim().toLowerCase() <
-            users[1].name.trim().toLowerCase()
-                ? users[0].name.trim().toLowerCase()
-                : users[1].name.trim().toLowerCase();
 
         let error = 'Error sending messages in room. Please try again later.';
         if (users === []) return callback(error);
@@ -98,15 +94,13 @@ io.on('connection', (socket) => {
         callback();
     });
 
-    socket.on('disconnect', async ({ idMe, idYou }, callback) => {
+    socket.on('disconnect', async (callback) => {
         console.log('User left Socket');
     });
 });
 
-
 // Verifying Spam removal Key
 verifyKey();
-
 
 // importing all the routers
 const chatboxRouter = require('./routers/chatbox');

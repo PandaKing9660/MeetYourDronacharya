@@ -17,15 +17,19 @@ import { Link } from "react-router-dom";
 import ChatBox from "./ChatBox/ChatBox";
 
 const Profile = ({ userData, handleOpen }) => {
+
+  const user = JSON.parse(localStorage.getItem("profile"));
+
   const [canFollow, setCanFollow] = useState(true);
   const [followers, setFollowers] = useState(userData.followers.length);
-  const user = JSON.parse(localStorage.getItem("profile"));
   const [editProfile, setAddSocialMediaModalOpen] = useState(false);
   const [linkedIn, setLinkedIn] = useState(userData.socialMedia[0]);
   const [facebook, setFacebook] = useState(userData.socialMedia[1]);
   const [instagram, setInstagram] = useState(userData.socialMedia[2]);
   const [twitter, setTwitter] = useState(userData.socialMedia[3]);
   const [github, setGithub] = useState(userData.socialMedia[4]);
+
+    const [roomName, setRoomName] = useState(user._id);
 
   const addSocialMediaModalOpen = () => setAddSocialMediaModalOpen(true);
   const addSocialMediaModalClose = () => setAddSocialMediaModalOpen(false);
@@ -95,6 +99,13 @@ const Profile = ({ userData, handleOpen }) => {
         .catch((err) => console.log(err));
     } else {
       setCanFollow(true);
+    }
+
+    if(user){
+        if (user._id < userData._id) 
+          setRoomName(user._id + userData._id);
+        else 
+          setRoomName(userData._id + user._id);
     }
   }, []);
 
@@ -225,7 +236,7 @@ const Profile = ({ userData, handleOpen }) => {
               </div>
             </div>
             <div>
-              <Link to={`/chatbox?name=${userData.name}&id=${userData._id}`}>
+              <Link to={`/chatbox?name=${userData.name}&id=${userData._id}&room=${roomName}`}>
                 <Button
                   variant="contained"
                   sx={{ marginTop: "2%", width: "165px" }}
