@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import axios from "axios";
-import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
-import { useParams } from "react-router";
-import Typography from "@mui/material/Typography";
-import NavBar from "../Home/Navbar/Navbar";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import IconButton from "@mui/material/IconButton";
-import PersonIcon from "@mui/icons-material/Person";
-import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import PublicIcon from "@mui/icons-material/Public";
-import RingVolumeIcon from "@mui/icons-material/RingVolume";
-import Button from "@mui/material/Button";
+import React, {useState, useEffect} from 'react';
+import Box from '@mui/material/Box';
+import axios from 'axios';
+import Grid from '@mui/material/Grid';
+import CircularProgress from '@mui/material/CircularProgress';
+import {useParams} from 'react-router';
+import Typography from '@mui/material/Typography';
+import NavBar from '../Home/Navbar/Navbar';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import IconButton from '@mui/material/IconButton';
+import PersonIcon from '@mui/icons-material/Person';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import PublicIcon from '@mui/icons-material/Public';
+import RingVolumeIcon from '@mui/icons-material/RingVolume';
+import Button from '@mui/material/Button';
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
 //the followers of users
 const UserFollowers = () => {
   const { userId } = useParams();
@@ -126,8 +130,8 @@ const UserCard = ({ follower }) => {
 
   const handleClick = () => {
     if (!user) {
-      // If not logged in
-      alert("Please login to follow the user");
+      // if not logged in
+      toast.error("please login to follow the user");
       return;
     }
     setCanFollow(!canFollow);

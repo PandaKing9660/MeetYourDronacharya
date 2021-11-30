@@ -9,8 +9,11 @@ import EditorAndPreview from "./EditorAndPreview";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import "../Materials/material.css";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 // Style for the page
+toast.configure();
 const style = {
   position: "absolute",
   top: "50%",
@@ -30,7 +33,7 @@ const AskSomething = () => {
   const [searchResult, setSearchResult] = useState(""); // Storing search input
 
   const handleOpen = () =>
-    user ? setOpen(true) : alert("Login to ask question"); // Checking whether logged in or not
+    user ? setOpen(true) : toast.error("Login to ask question");
   const handleClose = () => setOpen(false);
   
   return (

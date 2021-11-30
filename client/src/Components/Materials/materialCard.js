@@ -18,6 +18,11 @@ import axios from "axios";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
+
 
 const MaterialCard = ({ material }) => {
   const sanitizer = dompurify.sanitize;
@@ -61,7 +66,8 @@ const MaterialCard = ({ material }) => {
   // Deleting Material
   const DeleteMat = (userId, experienceId) => {
     if (!user) {
-      alert("Please login to delete the material");
+      //alert("Please login to like this question");
+      toast.error("Please login to like this question");
       return;
     }
     Confirm(userId, experienceId);

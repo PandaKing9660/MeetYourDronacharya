@@ -28,9 +28,14 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditorAndPreview from "../AskSomething/EditorAndPreview";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
 
 const ITEM_HEIGHT = 45;
 
+// for styling the CSS in component
 const style = {
   position: "absolute",
   top: "50%",
@@ -46,7 +51,9 @@ const style = {
 const CardExperience = ({ expData }) => {
   const sanitizer = dompurify.sanitize;
 
+  // finding current user
   const user = JSON.parse(localStorage.getItem("profile"));
+  // getting like and dislike count 
   const [likes, setLike] = useState(expData?.liked?.length);
   const [dislikes, setDislike] = useState(expData?.disliked?.length);
 
@@ -57,6 +64,7 @@ const CardExperience = ({ expData }) => {
     if (!user) {
       return;
     }
+    // finding out whether the user has liked the current post or not
 
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/experience/check`, {
@@ -72,12 +80,15 @@ const CardExperience = ({ expData }) => {
   // adds like to the experience shared
   const AddLikes = (userId, experienceId) => {
     if (!user) {
-      alert("Please login to like this experience");
+      // if not logged in
+      toast.error("Please login to like this question");
       return;
     }
+    // incase it is already liked
     if (userStatus === "liked") {
       return;
     }
+    // like if is not the case
     axios
       .put(`${process.env.REACT_APP_BACKEND_URL}/experience/addLike`, {
         userId,
@@ -95,13 +106,17 @@ const CardExperience = ({ expData }) => {
   // adds dislike to the experience shared
   const AddDislikes = (userId, experienceId) => {
     if (!user) {
-      alert("Please login to dislike this experience");
+      // if not logged in
+       toast.error("Please login to dislike this question");
       return;
     }
 
+    // incase it is already disliked
     if (userStatus === "disliked") {
       return;
     }
+
+    // dislike it otherwise
     axios
       .put(`${process.env.REACT_APP_BACKEND_URL}/experience/addDislike`, {
         userId,
@@ -118,11 +133,13 @@ const CardExperience = ({ expData }) => {
 
   // confirming to delete the experience
   const Confirm = async (userId, experienceId) => {
+    //confirm message to delete the experience from database
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/experience/deleteExp`, {
         experienceId,
       })
       .then((res) => {
+        // deleting the experience from user list as well
         axios.put(`${process.env.REACT_APP_BACKEND_URL}/dashboard/delExp`, {
           experienceId,
           userId,
@@ -132,22 +149,27 @@ const CardExperience = ({ expData }) => {
     return;
   };
 
-  // To delete user.
+  // for delete user
   const DeleteUser = (userId, experienceId) => {
     if (!user) {
-      alert("Please login to delete this experience");
+      toast.error("Please login to delete thid.");
       return;
     }
     Confirm(userId, experienceId);
   };
 
+  // opening the confirm box
   const [open2, setOpen2] = useState(false);
+
+  // handling the open option
   const handleOpen2 = () =>
-    user ? setOpen2(true) : alert("please login to add experience");
+    user ? setOpen2(true) : toast.error("please login to add experience");
   const handleClose2 = () => setOpen2(false);
 
+  
   const [openconfirm, setOpenConfirm] = React.useState(false);
 
+  // handling the open confirm option
   const handleClickOpenconfirm = () => {
     setOpenConfirm(true);
   };
@@ -158,6 +180,8 @@ const CardExperience = ({ expData }) => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  // handling the close option
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -375,6 +399,7 @@ const CardExperience = ({ expData }) => {
                       <MenuItem>
                         <Button
                           onClick={() => {
+                            // after clicking
                             handleClickOpenconfirm();
                           }}
                           sx={{ color: "black" }}
@@ -384,6 +409,7 @@ const CardExperience = ({ expData }) => {
                         <Dialog
                           open={openconfirm}
                           onClick={() => {
+                            // closing after clicking
                             handleClose();
                             handleCloseconfirm();
                           }}
@@ -396,6 +422,7 @@ const CardExperience = ({ expData }) => {
                           <DialogActions>
                             <Button
                               onClick={() => {
+                                // checking user options 
                                 handleCloseconfirm();
 
                                 DeleteUser(user ? user._id : 0, expData?._id);

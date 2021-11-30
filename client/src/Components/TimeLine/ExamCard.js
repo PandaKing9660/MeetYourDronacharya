@@ -18,8 +18,11 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
 import EventsInExam from "./EventsInExam";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -66,8 +69,8 @@ const ExamCard = ({ cardData, cardId }) => {
   // To add bookmark
   const AddBookmark = () => {
     if (!user) {
-      // If not logged in
-      alert("Please login to save bookmark");
+      // if not logged in
+      toast.error("Please login to save bookmark");
       return;
     }
     axios
@@ -81,7 +84,7 @@ const ExamCard = ({ cardData, cardId }) => {
   // To delete bookmark
   const DeleteBookmark = (userId, timelineNo) => {
     if (!user) {
-      alert("Please login to save bookmark");
+      toast.error("Please login to save bookmark");
       return;
     }
     axios

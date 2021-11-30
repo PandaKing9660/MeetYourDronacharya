@@ -11,17 +11,21 @@ import { Link } from "react-router-dom";
 
 import EditorAndPreview from "./EditorAndPreview";
 import {
-  Button,
-  CardActions,
-  Modal,
-  Grid,
-  Typography,
-  Avatar,
-  CardContent,
-  CardHeader,
-  Box,
-  Paper,
-} from "@mui/material";
+    Button,
+    CardActions,
+    Modal,
+    Grid,
+    Typography,
+    Avatar,
+    CardContent,
+    CardHeader,
+    Box,
+    Paper,
+} from '@mui/material';
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
 
 // Style for the webpage
 const style = {
@@ -37,16 +41,16 @@ const style = {
 };
 
 const CardQuestion = ({ quesData, showAnswer }) => {
-  const sanitizer = dompurify.sanitize;
-  const user = JSON.parse(localStorage.getItem("profile"));
-  const [likes, setLike] = useState(quesData?.liked?.length);
-  const [dislikes, setDislike] = useState(quesData?.disliked?.length);
-  const [userStatus, setUserStatus] = useState("none");
-  const [numAnswers, setNumAnswers] = useState(quesData?.answers?.length);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () =>
-    user ? setOpen(true) : alert("Login to ask question");
-  const handleClose = () => setOpen(false);
+    const sanitizer = dompurify.sanitize;
+    const user = JSON.parse(localStorage.getItem('profile'));
+    const [likes, setLike] = useState(quesData?.liked?.length);
+    const [dislikes, setDislike] = useState(quesData?.disliked?.length);
+    const [userStatus, setUserStatus] = useState('none');
+    const [numAnswers, setNumAnswers] = useState(quesData?.answers?.length);
+    const [open, setOpen] = useState(false);
+    const handleOpen = () =>
+        user ? setOpen(true) : toast.error('Login to ask question');
+    const handleClose = () => setOpen(false);
 
   // Retrieving Questions from backend
   useEffect(() => {
@@ -67,60 +71,42 @@ const CardQuestion = ({ quesData, showAnswer }) => {
       .catch((err) => console.log(err));
   }, [quesData?._id]);
 
-  // Adding like to questions and storing it in backend
-  const AddLikes = (userId, questionId) => {
-    if (!user) {
-      alert("Please login to like this question");
-      return;
-    }
+    // Adding like to questions and storing it in backend
+    const AddLikes = (userId, questionId) => {
+        if (!user) {
+            toast.error('Please login to like this question');
+            return;
+        }
 
     if (userStatus === "liked") {
       return;
     }
     axios
       .put(
-        `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/addLike`,
-        {
-          userId,
-          questionId,
-        }
+          `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/addLike`,
+          {
+              userId,
+              questionId,
+          }
       )
       .then((res) => {
-        setLike(likes + 1);
-        if (userStatus === "disliked") {
-          setDislike(dislikes - 1);
+          setLike(likes + 1);
+          if (userStatus === 'disliked') {
+              setDislike(dislikes - 1);
+          }
+          setUserStatus('liked');
+      });
+    };
+
+    // Adding dislike to questions and storing it in backend
+    const AddDislikes = (userId, questionId) => {
+        if (!user) {
+            toast.error('Please login to dislike this question');
+            return;
         }
         setUserStatus("liked");
-      });
-  };
-
-  // Adding dislike to questions and storing it in backend
-  const AddDislikes = (userId, questionId) => {
-    if (!user) {
-      alert("Please login to like this question");
-      return;
-    }
-
-    if (userStatus === "disliked") {
-      return;
-    }
-    axios
-      .put(
-        `${process.env.REACT_APP_BACKEND_URL}/ask-something/question/addDisLike`,
-        {
-          userId,
-          questionId,
-        }
-      )
-      .then((res) => {
-        setDislike(dislikes + 1);
-        if (userStatus === "liked") {
-          setLike(likes - 1);
-        }
-        setUserStatus("disliked");
-      });
-  };
-
+      };
+ 
   return (
     <div>
       {/* if spam is detected, grey it out and disable functionalities */}
