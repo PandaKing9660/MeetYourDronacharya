@@ -47,6 +47,7 @@ const Search = styled ('div') (({theme}) => ({
   },
 }));
 
+// Search icon wrapper design
 const SearchIconWrapper = styled ('div') (({theme}) => ({
   padding: theme.spacing (0, 2),
   height: '100%',
@@ -57,6 +58,7 @@ const SearchIconWrapper = styled ('div') (({theme}) => ({
   justifyContent: 'center',
 }));
 
+// styled input for search
 const StyledInputBase = styled (InputBase) (({theme}) => ({
   color: 'white',
   '& .MuiInputBase-input': {
@@ -71,6 +73,7 @@ const StyledInputBase = styled (InputBase) (({theme}) => ({
   },
 }));
 
+// list of links and images to be used in navbar
 export default function NavBar({setSearchResult, noSearch}) {
   const user = JSON.parse (localStorage.getItem ('profile'));
   const [linksArray, setLinksArray] = useState ([
@@ -101,6 +104,7 @@ export default function NavBar({setSearchResult, noSearch}) {
     },
   ]);
 
+  // for mobile responsiveness
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState (null);
 
   const isMobileMenuOpen = Boolean (mobileMoreAnchorEl);
@@ -113,6 +117,7 @@ export default function NavBar({setSearchResult, noSearch}) {
     setMobileMoreAnchorEl (event.currentTarget);
   };
 
+  // responsive nature
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
@@ -130,6 +135,7 @@ export default function NavBar({setSearchResult, noSearch}) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      {/* mapping to all the icons in navbar and show it */}
       {linksArray.map (linkSingle => {
         return (
           <MenuItem key={Math.random ()}>
@@ -161,6 +167,7 @@ export default function NavBar({setSearchResult, noSearch}) {
           />
 
           <Button component={Link} to={'/'}>
+            {/* Heading and its link */}
             <Typography
               variant="h6"
               noWrap
@@ -177,6 +184,7 @@ export default function NavBar({setSearchResult, noSearch}) {
             </Typography>
           </Button>
 
+          {/* Conditional rendering to stop looking at search bar when not needed */}
           {!noSearch
             ? <Search sx={{display: {xs: 'none', sm: 'block', color: 'white'}}}>
                 <SearchIconWrapper>
