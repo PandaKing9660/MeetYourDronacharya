@@ -64,7 +64,7 @@ function App() {
         <Route exact path="/dashboard/:userId/user-question">
           <UserQuestion />
         </Route>
-        <Route exact path="/chatbox">
+        <Route exact path="/chatbox/:nameYou/:idYou/:roomName">
           <ChatBox />
         </Route>
         <Route exact path="/dashboard/:userId/user-followers">
