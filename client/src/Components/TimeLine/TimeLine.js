@@ -88,7 +88,7 @@ export default function VerticalTabs() {
           <TimeLine />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <StickyHeadTable sx={{ width: "50%" }} />
+          <StickyHeadTable sx={{ width: "100%" }} />
         </TabPanel>
         <TabPanel value={value} index={2}>
           <Book />
@@ -300,7 +300,7 @@ const columns = [
   { id: "aug", label: "August" },
   { id: "sept", label: "September" },
   { id: "oct", label: "October" },
-  { id: "nov", label: "Novemver" },
+  { id: "nov", label: "November" },
   { id: "dec", label: "December" },
 ];
 
@@ -502,8 +502,8 @@ const StickyHeadTable = () => {
   };
 
   return (
-    <Paper sx={{ overflowX: "hidden", width: "115%" }}>
-      <TableContainer sx={{ maxHeight: 500, maxWidth: 2000 }}>
+    <Paper sx={{ overflowX: "hidden", width: "100%" }}>
+      <TableContainer sx={{  maxWidth: 2000 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
