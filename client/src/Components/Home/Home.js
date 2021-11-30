@@ -1,70 +1,64 @@
-import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import "./home.css";
+import {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
+import './home.css';
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import NavbarLinks from "./Navbar/NavbarLinks";
-import MenuItem from "@mui/material/MenuItem";
-import { Box, Grid, Stack, Button } from "@mui/material";
-import { red } from "@mui/material/colors";
-import logoutIcon from "@mui/icons-material/Logout";
-import Tooltip from "@mui/material/Tooltip";
-import TextField from "@material-ui/core/TextField";
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import NavbarLinks from './Navbar/NavbarLinks';
+import MenuItem from '@mui/material/MenuItem';
+import {Box, Grid, Stack, Button} from '@mui/material';
+import {red} from '@mui/material/colors';
+import logoutIcon from '@mui/icons-material/Logout';
+import Tooltip from '@mui/material/Tooltip';
 
-import IconButton from "@mui/material/IconButton";
-import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import FlareIcon from "@mui/icons-material/Flare";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import TimelineIcon from "@mui/icons-material/Timeline";
-import ExploreIcon from "@mui/icons-material/Explore";
-import PeopleIcon from "@mui/icons-material/People";
+import IconButton from '@mui/material/IconButton';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import FlareIcon from '@mui/icons-material/Flare';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import ExploreIcon from '@mui/icons-material/Explore';
+import PeopleIcon from '@mui/icons-material/People';
 
-import { Link } from "react-router-dom";
+import {Link} from 'react-router-dom';
 
-const topSearch = ["Question", "Experience", "Materials"];
-
+// home page
 const Home = () => {
-  const { height, width } = useWindowDimensions();
-  const [buttonVariant, setButtonVariant] = useState({
-    variant: "contained",
+  const {height, width} = useWindowDimensions ();
+  const [buttonVariant, setButtonVariant] = useState ({
+    variant: 'contained',
     color: red[40],
   });
 
-  const [value, setValue] = useState("");
-
-  let history = useHistory(); //Storing history website
+  let history = useHistory (); //Storing history website
   return (
     <Box className="home_container" justifyContent="center">
-      {/* Shoi=wing signup/signin button according to whether the user is signed in or not */}
+      {/* Showing signup/signin button according to whether the user is signed in or not */}
       <Stack direction="row" spacing={0}>
-        {!JSON.parse(localStorage.getItem("profile")) ? (
-          <Button variant="contained" color="warning" href="/login">
-            Signup / Signin
-          </Button>
-        ) : (
-          <div style={{ display: "flex" }}>
-            <MenuItem>
-              <NavbarLinks
-                linkSingle={{
-                  linkName: "Dashboard",
-                  linkTo: "dashboard",
-                  iconProp: AccountCircle,
-                  color: "warning",
-                }}
-              />
-            </MenuItem>
-            <MenuItem>
-              <NavbarLinks
-                linkSingle={{
-                  linkName: "Logout",
-                  linkTo: "logout",
-                  iconProp: logoutIcon,
-                  color: "warning",
-                }}
-              />
-            </MenuItem>
-          </div>
-        )}
+        {!JSON.parse (localStorage.getItem ('profile'))
+          ? <Button variant="contained" color="warning" href="/login">
+              Signup / Signin
+            </Button>
+          : <div style={{display: 'flex'}}>
+              <MenuItem>
+                <NavbarLinks
+                  linkSingle={{
+                    linkName: 'Dashboard',
+                    linkTo: 'dashboard',
+                    iconProp: AccountCircle,
+                    color: 'warning',
+                  }}
+                />
+              </MenuItem>
+              <MenuItem>
+                <NavbarLinks
+                  linkSingle={{
+                    linkName: 'Logout',
+                    linkTo: 'logout',
+                    iconProp: logoutIcon,
+                    color: 'warning',
+                  }}
+                />
+              </MenuItem>
+            </div>}
       </Stack>
 
       {/* Showing Heading */}
@@ -72,7 +66,7 @@ const Home = () => {
         className="home"
         container
         rowSpacing={6}
-        columnSpacing={{ xs: 1, sm: 2 }}
+        columnSpacing={{xs: 1, sm: 2}}
         justifyContent="center"
       >
         <Grid item xs={12} mb={2} mt={1}>
@@ -87,7 +81,11 @@ const Home = () => {
               <Button
                 variant="contained"
                 className="meetguruji_home"
-                sx={{ backgroundColor: "white", textDecoration: "none", color: "blue" }}
+                sx={{
+                  backgroundColor: 'white',
+                  textDecoration: 'none',
+                  color: 'blue',
+                }}
               >
                 Meet Guruji
               </Button>
@@ -98,7 +96,7 @@ const Home = () => {
         <Grid
           container
           rowSpacing={5}
-          columnSpacing={{ xs: 3, md: 3 }}
+          columnSpacing={{xs: 3, md: 3}}
           justifyContent="space-evenly"
           my={5}
           xs={9}
@@ -108,9 +106,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/ask-something")}
+                onClick={() => history.push ('/ask-something')}
               >
                 <QuestionAnswerIcon />
               </IconButton>
@@ -121,9 +119,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/experience")}
+                onClick={() => history.push ('/experience')}
               >
                 <FlareIcon />
               </IconButton>
@@ -134,9 +132,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/study-material")}
+                onClick={() => history.push ('/study-material')}
               >
                 <MenuBookIcon />
               </IconButton>
@@ -147,9 +145,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/timeline")}
+                onClick={() => history.push ('/timeline')}
               >
                 <TimelineIcon />
               </IconButton>
@@ -160,9 +158,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/dashboard")}
+                onClick={() => history.push ('/dashboard')}
               >
                 <AccountCircle />
               </IconButton>
@@ -173,9 +171,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/find-myself")}
+                onClick={() => history.push ('/find-myself')}
               >
                 <ExploreIcon />
               </IconButton>
@@ -186,9 +184,9 @@ const Home = () => {
               <IconButton
                 size="large"
                 variant={buttonVariant.variant}
-                sx={{ color: "blue", background: "white" }}
+                sx={{color: 'blue', background: 'white'}}
                 fullWidth="bool"
-                onClick={() => history.push("/about-us")}
+                onClick={() => history.push ('/about-us')}
               >
                 <PeopleIcon />
               </IconButton>
@@ -200,26 +198,30 @@ const Home = () => {
   );
 };
 
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
+// function to get window dimensions
+
+function getWindowDimensions () {
+  const {innerWidth: width, innerHeight: height} = window;
   return {
     width,
     height,
   };
 }
 
-function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
+// using the window dimensions
+function useWindowDimensions () {
+  const [windowDimensions, setWindowDimensions] = useState (
+    getWindowDimensions ()
   );
 
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
+  // use effect for initial rendering and size change of window
+  useEffect (() => {
+    function handleResize () {
+      setWindowDimensions (getWindowDimensions ());
     }
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener ('resize', handleResize);
+    return () => window.removeEventListener ('resize', handleResize);
   }, []);
 
   return windowDimensions;
