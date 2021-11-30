@@ -70,22 +70,16 @@ export default function VerticalTabs() {
       <h1 className="heading" style={{ marginTop: 25, textAlign: "center" }}>
         TIMELINE
       </h1>
-      <Box sx={{ flexGrow: 1, bgcolor: "background.paper", display: "flex" }}>
+      <Box sx={{ flexGrow: 1, bgcolor: "background.paper" }}>
         <Tabs
-          orientation="vertical"
-          variant="scrollable"
           value={value}
           onChange={handleChange}
-          aria-label="Vertical tabs example"
-          sx={{
-            borderColor: "divider",
-            marginTop: 20,
-            marginLeft: 2,
-            marginRight: 2,
-            width: "150px",
-          }}
+          variant="scrollable"
+          scrollButtons
+          allowScrollButtonsMobile
+          aria-label="scrollable force tabs example"
         >
-      {/* Tabs for showing different types of timeine and bookmarked exams */}
+          {/* Tabs for showing different types of timeine and bookmarked exams */}
           <Tab label="Separate" {...a11yProps(0)} />
           <Tab label="Combined" {...a11yProps(1)} />
           <Tab label="Bookmarked" {...a11yProps(2)} />
