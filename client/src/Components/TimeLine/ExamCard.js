@@ -63,6 +63,11 @@ const ExamCard = ({ cardData, cardId }) => {
 
   // To bookmark
   const handleHeartClick = () => {
+    if (!user) {
+      toast.error("Please login to save bookmark");
+      setisBookMarked(isBookMarked);
+      return;
+    }
     setisBookMarked(!isBookMarked);
   };
 
@@ -117,16 +122,19 @@ const ExamCard = ({ cardData, cardId }) => {
       <CardActions disableSpacing>
         <Tooltip TransitionComponent={Zoom} title="BookMark" placement="top">
           {/* Bookmark button */}
-          <IconButton aria-label="add to favorites" onClick={handleHeartClick}>
-            {!isBookMarked ? (
-              <BookmarkIcon />
-            ) : (
-              <BookmarkIcon
-                style={{ color: "green" }}
-                onClick={AddBookmark()}
-              />
-            )}
-          </IconButton>
+            <IconButton
+              aria-label="add to favorites"
+              onClick={handleHeartClick}
+            >
+              {!isBookMarked ? (
+                <BookmarkIcon />
+              ) : (
+                <BookmarkIcon
+                  style={{ color: "green" }}
+                  onClick={AddBookmark()}
+                />
+              )}
+            </IconButton>
         </Tooltip>
         {/* Expand button */}
         <ExpandMore

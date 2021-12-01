@@ -222,99 +222,107 @@ export default function StudyMaterial() {
               </TabPanel>
               {/* For uploading Material */}
               <TabPanel value="4">
-                <Box>
-                  <form style={{ display: "inline" }}>
-                    <h4 style={{ textAlign: "left" }}>Heading:</h4>
-                    {/* To write heading */}
-                    <input
-                      style={{
-                        width: "100%",
-                        padding: "0.5%",
-                        marginTop: "1%",
-                        marginBottom: "1%",
-                      }}
-                      type="text"
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
-                    />
-                    {/* To write description */}
-                    <h4 style={{ textAlign: "left" }}>
-                      Description about the material:
-                    </h4>
-                    <div style={{ marginTop: "1%", marginBottom: "1%" }}>
-                      <ReactQuill
-                        theme="snow"
-                        sx={{ backgroundColor: "white", margin: "1%" }}
-                        value={description}
-                        onChange={setDescription}
+                {!user ? (
+                  <Box>
+                    <h3 style={{ textAlign: "center" }}>
+                      Please login to add material.
+                    </h3>
+                  </Box>
+                ) : (
+                  <Box>
+                    <form style={{ display: "inline" }}>
+                      <h4 style={{ textAlign: "left" }}>Heading:</h4>
+                      {/* To write heading */}
+                      <input
+                        style={{
+                          width: "100%",
+                          padding: "0.5%",
+                          marginTop: "1%",
+                          marginBottom: "1%",
+                        }}
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                       />
-                    </div>
-                    {/* To add link for demo material */}
-                    <h4 style={{ textAlign: "left" }}>
-                      Link for the material:
-                    </h4>
-                    <input
-                      style={{
-                        width: "100%",
-                        padding: "0.5%",
-                        marginTop: "1%",
-                        marginBottom: "1%",
-                        color: "blue",
-                        textDecoration: "underline",
-                      }}
-                      type="text"
-                      onChange={(e) => setLink(e.target.value)}
-                    />
-                    {/* To add user location */}
-                    <h4 style={{ textAlign: "left" }}>Location:</h4>
-                    <input
-                      style={{
-                        width: "100%",
-                        padding: "0.5%",
-                        marginTop: "1%",
-                        marginBottom: "1%",
-                      }}
-                      type="text"
-                      onChange={(e) => setLocation(e.target.value)}
-                    />
-                    {/* To add tags */}
-                    <div>
-                      <Autocomplete
-                        multiple
-                        id="tags-filled"
-                        options={subjects.map((option) => option.title)}
-                        onChange={handleTagChange}
-                        freeSolo
-                        renderTags={(value, getTagProps) =>
-                          value.map((option, index) => (
-                            <Chip
-                              variant="outlined"
-                              label={option}
-                              {...getTagProps({ index })}
+                      {/* To write description */}
+                      <h4 style={{ textAlign: "left" }}>
+                        Description about the material:
+                      </h4>
+                      <div style={{ marginTop: "1%", marginBottom: "1%" }}>
+                        <ReactQuill
+                          theme="snow"
+                          sx={{ backgroundColor: "white", margin: "1%" }}
+                          value={description}
+                          onChange={setDescription}
+                        />
+                      </div>
+                      {/* To add link for demo material */}
+                      <h4 style={{ textAlign: "left" }}>
+                        Link for the material:
+                      </h4>
+                      <input
+                        style={{
+                          width: "100%",
+                          padding: "0.5%",
+                          marginTop: "1%",
+                          marginBottom: "1%",
+                          color: "blue",
+                          textDecoration: "underline",
+                        }}
+                        type="text"
+                        onChange={(e) => setLink(e.target.value)}
+                      />
+                      {/* To add user location */}
+                      <h4 style={{ textAlign: "left" }}>Location:</h4>
+                      <input
+                        style={{
+                          width: "100%",
+                          padding: "0.5%",
+                          marginTop: "1%",
+                          marginBottom: "1%",
+                        }}
+                        type="text"
+                        onChange={(e) => setLocation(e.target.value)}
+                      />
+                      {/* To add tags */}
+                      <div>
+                        <Autocomplete
+                          multiple
+                          id="tags-filled"
+                          options={subjects.map((option) => option.title)}
+                          onChange={handleTagChange}
+                          freeSolo
+                          renderTags={(value, getTagProps) =>
+                            value.map((option, index) => (
+                              <Chip
+                                variant="outlined"
+                                label={option}
+                                {...getTagProps({ index })}
+                              />
+                            ))
+                          }
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              variant="filled"
+                              label="Tags"
+                              placeholder="Enter the related tags"
                             />
-                          ))
-                        }
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            variant="filled"
-                            label="Tags"
-                            placeholder="Enter the related tags"
-                          />
-                        )}
-                      />
-                    </div>
-                    {/* Submit Button */}
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleSubmit}
-                      style={{ marginTop: "1%" }}
-                    >
-                      Submit
-                    </Button>
-                  </form>
-                </Box>
+                          )}
+                        />
+                      </div>
+                      {/* Submit Button */}
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSubmit}
+                        style={{ marginTop: "1%" }}
+                      >
+                        Submit
+                      </Button>
+                    </form>
+                  </Box>
+                )}
               </TabPanel>
             </TabContext>
           </Box>
