@@ -187,7 +187,7 @@ const QuestionsList = ({ searchResult, setSearchResult }) => {
             <div>
               <Button
                 variant="contained"
-                style={{ marginTop: "5%" }}
+                style={{ margin: "1.7%" }}
                 onClick={handleSpamChange}
               >
                 Questions
@@ -214,7 +214,7 @@ const QuestionsList = ({ searchResult, setSearchResult }) => {
           <div>
             <Button
               variant="contained"
-              style={{ marginTop: "5%" }}
+              style={{ margin: "1.7%" }}
               onClick={handleSpamChange}
             >
               Spam
