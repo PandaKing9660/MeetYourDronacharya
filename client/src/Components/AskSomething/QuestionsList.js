@@ -237,8 +237,8 @@ const QuestionsList = ({ searchResult, setSearchResult }) => {
           </div>
         )
       ) : (
-        // If no questions are there
-        <Typography variant="h4">No Questions !!!</Typography>
+        // If no spam questions are there
+        <Typography variant="h4" align="center" mt={6}>No Spam !!!</Typography>
       )}
     </Box>
   );

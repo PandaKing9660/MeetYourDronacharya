@@ -1,28 +1,16 @@
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
+import React, {useState, useEffect} from "react";
+import {Card, CardHeader, CardContent, Avatar, MenuItem,
+    Typography, Button, Grid, IconButton, Menu, MenuList,
+    Dialog, DialogActions, DialogTitle} from "@mui/material";
 import { red } from "@mui/material/colors";
-import Button from "@mui/material/Button";
 import dompurify from "dompurify";
-import { Grid } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
-import MenuList from "@mui/material/MenuList";
 import axios from "axios";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogTitle from "@mui/material/DialogTitle";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
 toast.configure();
-
 
 const MaterialCard = ({ material }) => {
   const sanitizer = dompurify.sanitize;
@@ -30,6 +18,9 @@ const MaterialCard = ({ material }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const user = JSON.parse(localStorage.getItem("profile"));
   const open = Boolean(anchorEl);
+
+  console.log("mateeeeeeeeial", material);
+  const [roomName, setRoomName] = useState(user._id);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -72,6 +63,18 @@ const MaterialCard = ({ material }) => {
     }
     Confirm(userId, experienceId);
   };
+
+  useEffect(() => {
+    
+    if(user){
+        if (user._id < material.by) 
+          setRoomName(user._id + material.by);
+        else 
+          setRoomName(material.by + user._id);
+    }
+  }, []);
+
+
   // For showing cards displaying studying material
   return (
     <div>
@@ -185,10 +188,13 @@ const MaterialCard = ({ material }) => {
               >
                 View Material
               </Button>
+
               {/* Button to chat with user */}
-              <Button variant="outlined" style={{ margin: "2% 5%" }}>
-                Chat
-              </Button>
+              <Link to={`/chatbox/${material.userName}/${material.by}/${roomName}`}>
+                <Button variant="outlined" style={{ margin: "2% 5%" }}>
+                  Chat
+                </Button>
+              </Link>
             </div>
           </Grid>
           <Grid item sm={8} md={9}>
