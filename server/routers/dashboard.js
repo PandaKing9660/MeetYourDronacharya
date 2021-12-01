@@ -51,7 +51,6 @@ router.put ('/add-question', async (req, res) => {
 router.put ('/add-answer', async (req, res) => {
   try {
     const {userId, answerId} = req.body;
-    console.log (userId, answerId);
     let newListExp;
 
     // finding the user who added exp
@@ -131,7 +130,6 @@ router.put ('/add-experience', async (req, res) => {
 router.put ('/add-follower', async (req, res) => {
   try {
     const {userId, followerId} = req.body;
-    console.log (userId, followerId);
     let newListFollowers;
 
     // finding the user who added exp
@@ -173,7 +171,6 @@ router.put ('/add-follower', async (req, res) => {
 router.put ('/remove-follower', async (req, res) => {
   try {
     const {userId, followerId} = req.body;
-    console.log (userId, followerId);
     let newListFollowers;
 
     // finding the user who added exp
@@ -223,8 +220,8 @@ router.put ('/delExp', async (req, res) => {
         );
       })
       .catch (err => console.log (err));
-    console.log (newListExp);
-    // updating the user, adding follower to array
+
+      // updating the user, adding follower to array
     await user.findByIdAndUpdate (
       userId,
       {
@@ -503,7 +500,6 @@ router.put ('/delAnswer', async (req, res) => {
 router.post("/addTimeline", async (req, res) => {
   try {
     const { userId, timelineNo } = req.body;
-    console.log(userId);
     let newList;
 
     await user
@@ -538,7 +534,6 @@ router.post("/addTimeline", async (req, res) => {
 router.post("/delTimeline", async (req, res) => {
   try {
     const { userId, timelineNo } = req.body;
-    console.log(userId);
     let newList;
 
     await user

@@ -97,7 +97,6 @@ const Login = () => {
         .post (`${process.env.REACT_APP_BACKEND_URL}/login`, {email, password})
         .then (res => {
           if (res.data.found === true) {
-            console.log (res.data.user);
             localStorage.setItem (
               'profile',
               JSON.stringify ({...res.data.user})

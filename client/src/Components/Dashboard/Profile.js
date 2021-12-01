@@ -95,7 +95,6 @@ const Profile = ({ userData, handleOpen }) => {
           followerId: user._id,
         })
         .then((res) => {
-          console.log("hello", res.data);
           setCanFollow(!res.data);
         })
         .catch((err) => console.log(err));

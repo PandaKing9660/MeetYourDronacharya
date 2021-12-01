@@ -89,7 +89,6 @@ const UserFollowers = () => {
           </Typography>
         ) : searchedFollower.length > 0 ? (
           <div>
-            {console.log(searchedFollower)}
             <Grid
               container
               columns={{ xs: 4, sm: 8, md: 2 }}

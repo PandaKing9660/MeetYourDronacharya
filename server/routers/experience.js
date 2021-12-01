@@ -74,7 +74,6 @@ router.post ('/user-dislikes', (req, res) => {
 
 // this request will send the experiences in most recent last order
 router.post ('/time-sort', (req, res) => {
-  console.log ('time sort');
   Experience.find ({})
     .sort ({time: 1})
     .then (experiences => res.json (experiences))
@@ -143,7 +142,6 @@ router.post ('/add', async (req, res) => {
       name: user_name,
     };
     const is_spam = await checkSpam (comment);
-    // console.log("spam", comment);
 
     // creating the experience using its schema
 

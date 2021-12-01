@@ -96,7 +96,6 @@ router.post ('/login', async (req, res) => {
       });
     }
   } catch (error) {
-    console.log (error);
     res.status (404).send ({
       msg: 'some error',
       found: false,
@@ -185,7 +184,6 @@ router.post ('/verify', async (req, res) => {
     // checking is email is found or not
     if (user.length) {
       // checking OTP and random_otp created
-      console.log (OTP, random_OTP);
       if (OTP === random_OTP) {
         res.send ({
           msg: 'User Found',

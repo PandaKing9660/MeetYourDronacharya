@@ -25,10 +25,8 @@ async function checkSpam(comment) {
         const isSpam = await client.checkSpam(comment);
 
         if (isSpam) {
-            console.log('Pakka Spam');
             return true;
         } else {
-            console.log('Totally not spam');
             return false;
         }
     } catch (err) {

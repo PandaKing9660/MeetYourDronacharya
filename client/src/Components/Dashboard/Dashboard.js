@@ -45,7 +45,6 @@ const Dashboard = () => {
         userId: to_send,
       })
       .then((res) => {
-        console.log(res.data.length);
         if (res.data.length === 0) {
           if (user_id) setUserMsg("No User Found");
           else setUserMsg("Login to see profile");

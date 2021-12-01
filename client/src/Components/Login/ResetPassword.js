@@ -23,7 +23,6 @@ const ResetPassword = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(password, email);
     if (password !== confirmPassword) {
       // inform to fill form
       alert ('Passwords do not match, check again');

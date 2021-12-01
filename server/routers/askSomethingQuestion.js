@@ -117,7 +117,6 @@ router.post ('/check', async (req, res) => {
       })
       .catch (err => console.log (err));
   } catch (err) {
-    console.log (err);
     res.send ('some error');
   }
 });
@@ -232,7 +231,6 @@ router.put ('/addLike', async (req, res) => {
     );
     res.send ('ook');
   } catch (err) {
-    console.log (err);
     res.send ('some error');
   }
 });

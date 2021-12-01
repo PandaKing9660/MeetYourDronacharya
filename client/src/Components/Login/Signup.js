@@ -21,7 +21,6 @@ import "./login.css";
 
 const googleSuccess = async (res) => {
   const userData = res.profileObj;
-  console.log(userData);
 
   const { name, email, imageUrl } = userData;
 
@@ -65,7 +64,6 @@ const Signup = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const imageUrl = false;
-    console.log(name, password, email);
     if (password !== confirmPassword) {
       // inform to fill form
       alert("Please check password");
@@ -79,9 +77,7 @@ const Signup = () => {
           imageUrl,
         })
         .then((res) => {
-          console.log("hello");
           if (res.data.msg === "done") {
-            console.log("Registered");
             localStorage.setItem(
               "profile",
               JSON.stringify({ ...res.data.user })

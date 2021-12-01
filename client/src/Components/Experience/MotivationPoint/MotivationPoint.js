@@ -22,7 +22,6 @@ async function findQuote() {
     }
   );
   const body = await response.json();
-  console.log("quotation body", body);
   return body;
 }
 

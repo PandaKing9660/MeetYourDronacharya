@@ -18,8 +18,6 @@ router.post('/add', async (req, res) => {
         const roomName = req.body.roomName;
         const messages = req.body.messages;
 
-        // console.log('4 horsemen', idMe, idYou, roomName, messages);
-
         // find the two chatting users
         await user
             .find({})
@@ -139,7 +137,6 @@ router.post(`/get`, async (req, res) => {
                 )
                 .catch((err) => console.log(err));
         } else {
-            // console.log('pls getback msgs', response);
             res.json(response);
         }
     } catch (err) {

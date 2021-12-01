@@ -49,8 +49,6 @@ io.on('connection', (socket) => {
         let error = 'Error joining in room. Please try again later.';
         if (users === []) return callback(error);
 
-        // console.log('room users', users);
-
         // roomName is concatenation of the two users' id
         // users[0] is host(Me), users[1] is Guest(You)
 
@@ -132,7 +130,6 @@ mongoose
     })
     .then(() => {
         console.log('Connected to mongo_db');
-        // app.listen (PORT, () => console.log (`Server Running on Port: ${PORT}`));
         server.listen(PORT, () =>
             console.log(`Socket and Server has started on PORT : ${PORT}`)
         );
