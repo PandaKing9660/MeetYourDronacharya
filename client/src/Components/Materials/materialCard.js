@@ -19,8 +19,7 @@ const MaterialCard = ({ material }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const open = Boolean(anchorEl);
 
-  console.log("mateeeeeeeeial", material);
-  const [roomName, setRoomName] = useState(user._id);
+  const [roomName, setRoomName] = useState("");
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -63,6 +62,13 @@ const MaterialCard = ({ material }) => {
     }
     Confirm(userId, experienceId);
   };
+
+  const handleIsLogin = () => {
+    if (!user) {
+      // inform to login
+      alert ('Please login for chatting to user');
+    }
+  }
 
   useEffect(() => {
     
@@ -190,7 +196,9 @@ const MaterialCard = ({ material }) => {
               </Button>
 
               {/* Button to chat with user */}
-              <Link to={`/chatbox/${material.userName}/${material.by}/${roomName}`}>
+              <Link 
+                to={user ? `/chatbox/${material.userName}/${material.by}/${roomName}` : `/login`} 
+                onClick={handleIsLogin}>
                 <Button variant="outlined" style={{ margin: "2% 5%" }}>
                   Chat
                 </Button>

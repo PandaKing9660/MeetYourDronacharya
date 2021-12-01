@@ -11,7 +11,10 @@ import {
   Toolbar,
   Link,
   Tooltip,
-  IconButton
+  IconButton,
+  Card,
+  CardContent,
+  CardMedia,
 } from '@material-ui/core';
 import {GoogleLogin} from 'react-google-login';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -126,6 +129,22 @@ const Login = () => {
     setShow(!showPassword)
   };
 
+  // random soothing image
+  const imageKeyArr = [
+    'https://images.unsplash.com/photo-1542396601-dca920ea2807?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D',
+    'https://images.unsplash.com/photo-1488579456918-038d21fd9653?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDd8fHxlbnwwfHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1598349929585-fd7cfc7254ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1602946860832-7db5bd3694c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D',
+    'https://images.unsplash.com/photo-1489429516303-206b4dc27dbc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fA%3D%3D',
+    'https://c1.wallpaperflare.com/preview/768/20/884/sky-clouds-sunset-dark.jpg',
+    'https://c4.wallpaperflare.com/wallpaper/628/998/352/dark-forest-mountains-photography-wallpaper-preview.jpg',
+    'https://c4.wallpaperflare.com/wallpaper/513/135/586/purple-nights-reflection-wallpaper-preview.jpg',
+    'https://images8.alphacoders.com/100/1003836.jpg',
+  ];
+  const d = new Date();
+  let day = d.getDay();
+  const imageKey = imageKeyArr[day];
+
   return (
     <div>
       <AppBar position="static" alignitems="center" color="primary">
@@ -137,9 +156,19 @@ const Login = () => {
           </Grid>
         </Toolbar>
       </AppBar>
+
       {/* Form to login  */}
-      <Grid container spacing={0} justify="center" direction="row">
-        <Grid item>
+
+      <Grid
+          container
+          direction="row"
+          justifyContent="space-around"
+          alignItems="center"
+          spacing={0}
+      >
+        
+        {/* left side login window */}
+        <Grid item xs={11} md={4}>
           <Grid
             container
             direction="column"
@@ -154,7 +183,7 @@ const Login = () => {
             >
               <Grid item>
                 <Typography component="h1" variant="h5">
-                  Sign in
+                  Sign In
                 </Typography>
               </Grid>
               <Grid item>
@@ -245,12 +274,37 @@ const Login = () => {
                   href={email.includes ('@') ? `/verify/${email}` : '/login'}
                   variant="body2"
                 >
-                  forgot password ?
+                  Forgot password ?
                 </Link>
               </Grid>
             </Paper>
           </Grid>
         </Grid>
+
+        {/* right side display card */}
+        <Grid item xs={11} md={6}>
+            <Card sx={{ minWidth: 225 }}>
+                {/* Daily changing image */}
+                <CardContent>
+                    <Typography
+                        sx={{ fontSize: 16 }}
+                        color="text.secondary"
+                        gutterBottom
+                    >
+                        Sign In to Gain Experience
+                    </Typography>
+
+                    {/* Show image after daily. */}
+                    <CardMedia
+                        component="img"
+                        height="470vh"
+                        image={imageKey}
+                        alt="Nice Image"
+                    />
+                </CardContent>
+            </Card>
+        </Grid>
+
       </Grid>
     </div>
   );
