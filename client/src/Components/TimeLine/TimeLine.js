@@ -268,15 +268,16 @@ const Book = () => {
 
   return (
     <div>
-      <Grid
+      <Box
         container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 2, sm: 8, md: 12 }}
         padding={{ xs: 0 }}
+        sx={{ display: "flex" }}
       >
         {examCards.map((examCard, index) => {
           return (
-            <div>
+            <div style={{display:"flex"}}>
               {bookmark[index] === "T" && (
                 <Grid item xs={4} sm={4} md={4} key={index}>
                   <ExamCard cardData={examCard} cardId={index} />
@@ -285,7 +286,7 @@ const Book = () => {
             </div>
           );
         })}
-      </Grid>
+      </Box>
     </div>
   );
 };
@@ -506,7 +507,7 @@ const StickyHeadTable = () => {
   // Calendar Timeline
   return (
     <Paper sx={{ overflowX: "hidden", width: "100%" }}>
-      <TableContainer sx={{  maxWidth: 2000 }}>
+      <TableContainer sx={{ maxWidth: 2000 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
