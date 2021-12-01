@@ -94,9 +94,9 @@ function App() {
         <Route exact path="/reset-password/:email">
           <ResetPassword />
         </Route>
-        <Router exact path="/guruji">
+        <Route exact path="/guruji">
           <Guruji />
-        </Router>
+        </Route>
         <Route path="/*">
           <GoToHome />
         </Route>

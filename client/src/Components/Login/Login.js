@@ -112,7 +112,7 @@ const Login = () => {
   const handleForgetPassword = () => {
     if (!email.includes ('@')) {
       // inform to fill form
-      alert ('Please fill email for verification');
+      alert ('Please fill valid email for verification');
     } else {
       // backend call
       axios

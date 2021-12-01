@@ -130,7 +130,7 @@ router.post(`/get`, async (req, res) => {
                             roomName,
                             users,
                             messages: [
-                                { user: 'System', text: 'hey new bois' },
+                                { user: 'System', text: 'Welcome !!!' },
                             ],
                         },
                     ])

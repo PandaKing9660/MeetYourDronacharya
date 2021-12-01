@@ -17,7 +17,11 @@ import { GoogleLogin } from "react-google-login";
 import Icon from "./Icon";
 
 import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import "./login.css";
+
+toast.configure();
 
 const googleSuccess = async (res) => {
   const userData = res.profileObj;
@@ -66,7 +70,8 @@ const Signup = () => {
     const imageUrl = false;
     if (password !== confirmPassword) {
       // inform to fill form
-      alert("Please check password");
+      toast.error("Passwords dont match. Please enter same password in both fields.");
+
     } else {
       // backend call
       axios
@@ -84,7 +89,7 @@ const Signup = () => {
             );
             window.location = process.env.REACT_APP_FRONTEND_URL;
           } else {
-            alert("something wrong");
+            toast.error("Please enter the details properly in the fields.")
           }
         })
         .catch((err) => {

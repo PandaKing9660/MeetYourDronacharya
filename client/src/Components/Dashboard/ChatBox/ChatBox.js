@@ -130,7 +130,7 @@ const ChatBox = () => {
 
     return (
         <div>
-            <Navbar />
+            <Navbar noSearch={true} />
             <Grid
                 container
                 direction="row"
