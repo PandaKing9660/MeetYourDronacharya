@@ -265,7 +265,7 @@ const Book = () => {
       ],
     },
   ]);
-
+  var total = 0;
   return (
     <div>
       <Box
@@ -277,8 +277,9 @@ const Book = () => {
       >
         {examCards.map((examCard, index) => {
           return (
-            <div style={{display:"flex"}}>
+            <div style={{ display: "flex" }}>
               {bookmark[index] === "T" && (
+                total++,
                 <Grid item xs={4} sm={4} md={4} key={index}>
                   <ExamCard cardData={examCard} cardId={index} />
                 </Grid>
@@ -286,6 +287,7 @@ const Book = () => {
             </div>
           );
         })}
+        {!total ? <h3 style={{textAlign:"center"}}>No bookmarks yet!!</h3> : <div></div>}
       </Box>
     </div>
   );
