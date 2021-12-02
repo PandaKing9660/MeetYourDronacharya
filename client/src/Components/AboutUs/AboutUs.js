@@ -1,6 +1,6 @@
 import "./aboutus.css";
 import * as React from "react";
-import { Grid, Divider } from "@mui/material";
+import { Grid, Divider, Link } from "@mui/material";
 import NavBar from "../Home/Navbar/Navbar";
 
 import adi from "./Photos/adi.jpg";
@@ -126,6 +126,7 @@ const AboutTeam = () => {
               text="The one-liner of other three is written by me!!!"
             />
           </Grid>
+          <Link href="https://github.com/PandaKing9660/MeetYourDronacharya" underline="hover" marginLeft="20%">{'https://github.com/PandaKing9660/MeetYourDronacharya'}</Link>
         </Grid>
       </div>
     </div>

@@ -6,7 +6,7 @@ import { Typography } from '@mui/material';
 const GoToHome = () => {
   return (
     <div style={{margin:"3%"}}>
-      <Navbar/>
+      <Navbar noSearch={true}/>
       <Typography variant="h5" component="div">
         Woopsy, No URL Exists, <Link to="/">Go To Home</Link>
       </Typography>
