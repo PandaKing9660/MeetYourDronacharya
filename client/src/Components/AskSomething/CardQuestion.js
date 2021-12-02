@@ -41,8 +41,10 @@ const style = {
 };
 
 const CardQuestion = ({ quesData, showAnswer }) => {
+    // sanitize HTML code from XSS issues
     const sanitizer = dompurify.sanitize;
     const user = JSON.parse(localStorage.getItem('profile'));
+    
     const [likes, setLike] = useState(quesData?.liked?.length);
     const [dislikes, setDislike] = useState(quesData?.disliked?.length);
     const [userStatus, setUserStatus] = useState('none');

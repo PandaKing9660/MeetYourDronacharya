@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import { styled } from "@mui/material/styles";
 import axios from "axios";
-import dompurify from "dompurify";
 import {
   Tooltip,
   Collapse,
@@ -37,7 +36,6 @@ const ExpandMore = styled((props) => {
 
 //card for showing the details of exam
 const ExamCard = ({ cardData, cardId }) => {
-  const sanitizer = dompurify.sanitize;
 
   const user = JSON.parse(localStorage.getItem("profile"));
   const [isBookMarked, setisBookMarked] = useState(false);
@@ -89,7 +87,7 @@ const ExamCard = ({ cardData, cardId }) => {
   // To delete bookmark
   const DeleteBookmark = (userId, timelineNo) => {
     if (!user) {
-      toast.error("Please login to save bookmark");
+      toast.error("Please login to delete bookmark");
       return;
     }
     axios

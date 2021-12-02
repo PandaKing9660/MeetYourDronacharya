@@ -53,9 +53,6 @@ const MotivationPoint = () => {
 };
 
 function QuoteItem({ quotes }) {
-  const separateWords = (s) => s.replace(/[A-Z][a-z]+/g, "$& ").trim();
-  const formatDate = (s) =>
-    new Date(s).toLocaleDateString(undefined, { dateStyle: "long" });
 
   return (
     <Card sx={{ minWidth: 275 }}>

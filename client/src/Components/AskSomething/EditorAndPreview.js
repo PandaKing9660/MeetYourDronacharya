@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import dompurify from "dompurify";
 import axios from "axios";
 
 import { TextField, Grid, Box, Typography, Stack } from "@mui/material";
@@ -21,8 +20,6 @@ const subjects = [
 ];
 
 const EditorAndPreview = ({ option, question_id, edit }) => {
-  // sanitize HTML code from XSS issues
-  const sanitizer = dompurify.sanitize;
   // if edit is 1 them, it opens an edit modal with already written details
   // for editor state saving
   const editorRef = useRef(null);

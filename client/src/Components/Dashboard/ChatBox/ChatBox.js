@@ -4,7 +4,6 @@ import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import io from 'socket.io-client';
 import axios from 'axios';
 
-import queryString from 'query-string';
 import { useParams } from 'react-router-dom';
 
 import {
@@ -61,7 +60,6 @@ const ChatBox = () => {
         socket = io(`${process.env.REACT_APP_BACKEND_URL}`, {
             withCredentials: true,
             transports: ['websocket'],
-            // , 'polling', 'flashsocket'],
         });
 
         // emit the event on joining the room

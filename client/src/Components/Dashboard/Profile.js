@@ -12,7 +12,6 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import ChatBox from "./ChatBox/ChatBox";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
