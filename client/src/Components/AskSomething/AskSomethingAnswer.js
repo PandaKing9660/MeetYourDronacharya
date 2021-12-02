@@ -230,9 +230,18 @@ const AskSomethingAnswer = () => {
                     </div>
                   )
                 ) : (
-                  <Typography variant="h6" align="center">
-                    No Answers yet!!!
-                  </Typography>
+                  <div>
+                    <Button
+                        variant="contained"
+                        style={{ margin: "2%" }}
+                        onClick={handleSpamChange}
+                      >
+                        Answers
+                    </Button>
+                    <Typography variant="h6" align="center">
+                      No Answers yet!!!
+                    </Typography>
+                  </div>
                 )}
               </Grid>
             </Grid>

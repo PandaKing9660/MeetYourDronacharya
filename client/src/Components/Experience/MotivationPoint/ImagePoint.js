@@ -19,7 +19,8 @@ async function searchImage(q) {
       // required headers with api keys
       headers: {
         "x-rapidapi-host": "bing-image-search1.p.rapidapi.com",
-        "x-rapidapi-key": "afa990c4c7mshad324471ac88136p125e52jsne67d08a6be98",
+        // "x-rapidapi-key": "afa990c4c7mshad324471ac88136p125e52jsne67d08a6be98", // api 100% used up
+        "x-rapidapi-key": "b4d74cda85msh340e3842a48caf5p1b8cfejsn617337eb4d1d"
       },
     }
   );

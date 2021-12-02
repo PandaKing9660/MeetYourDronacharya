@@ -316,8 +316,8 @@ const Profile = ({ userData, handleOpen }) => {
               <Grid item sm={10}>
                 <Input
                   type="email"
-                  fullWidth="true"
-                  readOnly="true"
+                  fullwidth="true"
+                  readOnly={true}
                   defaultValue={userData.email}
                   placeholder="e-mail id"
                 />
@@ -327,7 +327,7 @@ const Profile = ({ userData, handleOpen }) => {
               </Grid>
               <Grid item sm={10}>
                 <Input
-                  fullWidth="true"
+                  fullwidth="true"
                   placeholder="linkedIn profile link"
                   value={linkedIn}
                   onChange={(e) => setLinkedIn(e.target.value)}
@@ -338,7 +338,7 @@ const Profile = ({ userData, handleOpen }) => {
               </Grid>
               <Grid item sm={10}>
                 <Input
-                  fullWidth="true"
+                  fullwidth="true"
                   placeholder="facebook profile link"
                   value={facebook}
                   onChange={(e) => setFacebook(e.target.value)}
@@ -349,7 +349,7 @@ const Profile = ({ userData, handleOpen }) => {
               </Grid>
               <Grid item sm={10}>
                 <Input
-                  fullWidth="true"
+                  fullwidth="true"
                   placeholder="instagram profile link"
                   value={instagram}
                   onChange={(e) => setInstagram(e.target.value)}
@@ -360,7 +360,7 @@ const Profile = ({ userData, handleOpen }) => {
               </Grid>
               <Grid item sm={10}>
                 <Input
-                  fullWidth="true"
+                  fullwidth="true"
                   placeholder="twitter profile link"
                   value={twitter}
                   onChange={(e) => setTwitter(e.target.value)}
@@ -371,7 +371,7 @@ const Profile = ({ userData, handleOpen }) => {
               </Grid>
               <Grid item sm={10}>
                 <Input
-                  fullWidth="true"
+                  fullwidth="true"
                   placeholder="github profile link"
                   value={github}
                   onChange={(e) => setGithub(e.target.value)}

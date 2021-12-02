@@ -107,7 +107,7 @@ const Home = () => {
                 size="large"
                 variant={buttonVariant.variant}
                 sx={{color: 'blue', background: 'white'}}
-                fullWidth="bool"
+                fullwidth="bool"
                 onClick={() => history.push ('/ask-something')}
               >
                 <QuestionAnswerIcon />
@@ -120,7 +120,7 @@ const Home = () => {
                 size="large"
                 variant={buttonVariant.variant}
                 sx={{color: 'blue', background: 'white'}}
-                fullWidth="bool"
+                fullwidth="bool"
                 onClick={() => history.push ('/experience')}
               >
                 <FlareIcon />
@@ -133,7 +133,7 @@ const Home = () => {
                 size="large"
                 variant={buttonVariant.variant}
                 sx={{color: 'blue', background: 'white'}}
-                fullWidth="bool"
+                fullwidth="bool"
                 onClick={() => history.push ('/study-material')}
               >
                 <MenuBookIcon />
@@ -146,7 +146,7 @@ const Home = () => {
                 size="large"
                 variant={buttonVariant.variant}
                 sx={{color: 'blue', background: 'white'}}
-                fullWidth="bool"
+                fullwidth="bool"
                 onClick={() => history.push ('/timeline')}
               >
                 <TimelineIcon />
@@ -159,7 +159,7 @@ const Home = () => {
                 size="large"
                 variant={buttonVariant.variant}
                 sx={{color: 'blue', background: 'white'}}
-                fullWidth="bool"
+                fullwidth="bool"
                 onClick={() => history.push ('/dashboard')}
               >
                 <AccountCircle />
@@ -172,7 +172,7 @@ const Home = () => {
                 size="large"
                 variant={buttonVariant.variant}
                 sx={{color: 'blue', background: 'white'}}
-                fullWidth="bool"
+                fullwidth="bool"
                 onClick={() => history.push ('/find-myself')}
               >
                 <ExploreIcon />
@@ -185,7 +185,7 @@ const Home = () => {
                 size="large"
                 variant={buttonVariant.variant}
                 sx={{color: 'blue', background: 'white'}}
-                fullWidth="bool"
+                fullwidth="bool"
                 onClick={() => history.push ('/about-us')}
               >
                 <PeopleIcon />

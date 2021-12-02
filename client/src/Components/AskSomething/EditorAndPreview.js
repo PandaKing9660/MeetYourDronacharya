@@ -197,7 +197,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
 
   // used to fetch the title,description,tags while edit mode
   useEffect(() => {
-    if (edit == "true" && option == "experience") {
+    if (edit === "true" && option === "experience") {
       axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/experience/fetchtitle`, {
           experienceId: question_id,
@@ -208,7 +208,7 @@ const EditorAndPreview = ({ option, question_id, edit }) => {
           setTags(res.data.tags);
         })
         .catch((err) => console.log(err));
-    } else if (edit == "true" && option == "answer") {
+    } else if (edit === "true" && option === "answer") {
       axios
         .post(
           `${process.env.REACT_APP_BACKEND_URL}/ask-something/answer/fetchtitle`,
