@@ -158,12 +158,12 @@ router.post ('/forget-password', async (req, res) => {
     // send mail with defined transport object
     transporter.sendMail (mailOptions, (error, info) => {
       if (error) {
-        res.send('Email not found')
+        res.send ('Email not found');
         return console.log (error);
       }
       console.log ('Message sent: %s', info.messageId);
       console.log ('Preview URL: %s', nodemailer.getTestMessageUrl (info));
- 
+
       res.render ('contact', {msg: 'Email has been sent'});
     });
   } catch (err) {

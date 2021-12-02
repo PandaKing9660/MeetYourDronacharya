@@ -84,7 +84,7 @@ export default function Footer () {
           <Grid item>
             <Typography gutterBottom variant="h6" component="div">
             {/* social media links */}
-              <Stack direction="row" spacing={1}>
+              <Stack direction="row" spacing={1} style={{padding: '3%'}}>
                 {socialLinks.map ((socialLink, index) => {
                   return (
                     <Chip
