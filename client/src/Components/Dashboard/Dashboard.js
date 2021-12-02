@@ -60,7 +60,6 @@ const Dashboard = () => {
   }, []);
 
   const handleEdit = () => {
-    console.log("Hello sire I am here");
   };
 
   return (

@@ -121,7 +121,7 @@ router.post ('/add', async (req, res) => {
     let user_email = '';
     let exp_len = 0;
     // finding the user who added the experience for his information
-
+    
     await user
       .findById (experience.by)
       .then (resp => {
@@ -142,7 +142,7 @@ router.post ('/add', async (req, res) => {
       name: user_name,
     };
     const is_spam = await checkSpam (comment);
-
+    console.log (user_image);
     // creating the experience using its schema
 
     const newExperience = await new Experience ({

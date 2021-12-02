@@ -105,7 +105,7 @@ const ChatBox = () => {
                 messages,
             })
             .then((res) => {
-                console.log('message try to save', res);
+                
             })
             .catch((err) => console.log('Chat save err'));
 

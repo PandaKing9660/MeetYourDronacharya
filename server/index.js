@@ -37,7 +37,6 @@ const io = socketio(server, {
 let roomName;
 // connect user to the room for chat
 io.on('connection', (socket) => {
-    console.log('New Connection on SocketIO');
 
     socket.on('join', async ({ idMe, idYou }, callback) => {
         const users = await getUser({
@@ -55,7 +54,6 @@ io.on('connection', (socket) => {
         if (users[0]._id < users[1]._id) roomName = users[0]._id + users[1]._id;
         else roomName = users[1]._id + users[0]._id;
 
-        console.log(roomName, 'rooomiieee');
         socket.join(roomName);
 
         // socket.emit('message', {

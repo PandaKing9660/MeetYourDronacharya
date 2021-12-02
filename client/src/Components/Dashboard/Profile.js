@@ -77,7 +77,6 @@ const Profile = ({ userData, handleOpen }) => {
         github: github ? github : "",
       })
       .then((res) => {
-        console.log("updated");
       })
       .catch((err) => console.log(err));
 
